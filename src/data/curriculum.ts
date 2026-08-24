@@ -75,6 +75,7 @@ const manifests: ManifestSeed[] = [
   { slug: "validate-before-go-live", title: "Validate Before Go-Live", topic: 7, pierObjectives: ["7.1", "7.4"], durationMinutes: 28, difficulty: "stewardship", interactionKinds: ["wsi-viewer", "validation-matrix"], apiSessions: [5], hasLocalPracticum: true, pilot: "digital-pathology" },
   { slug: "human-plus-algorithm", title: "Human + Algorithm", topic: 7, pierObjectives: ["7.3", "2.4"], durationMinutes: 25, difficulty: "stewardship", interactionKinds: ["threshold", "human-factors", "monitoring"], apiSessions: [5, 6], hasLocalPracticum: false },
   { slug: "build-the-new-test", title: "Build the New Test", topic: 8, pierObjectives: ["8.1", "8.2", "8.4"], durationMinutes: 28, difficulty: "stewardship", interactionKinds: ["test-build", "approval", "regression"], apiSessions: [3, 9], hasLocalPracticum: true },
+  { slug: "microbiology-informatics", title: "Clinical Microbiology Informatics", topic: 1, pierObjectives: ["1.1"], durationMinutes: 30, difficulty: "foundational", interactionKinds: [], apiSessions: [], hasLocalPracticum: false },
   { slug: "choose-and-govern-lis", title: "Choose and Govern the LIS", topic: 8, pierObjectives: ["8.3", "8.4"], durationMinutes: 28, difficulty: "stewardship", interactionKinds: ["requirements", "selection-matrix", "lifecycle"], apiSessions: [3, 9], hasLocalPracticum: true },
 ];
 
