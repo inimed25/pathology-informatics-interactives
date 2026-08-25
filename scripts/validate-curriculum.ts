@@ -40,10 +40,13 @@ if (manifest.slug !== "microbiology-informatics") {
   const sectionEnd = harrisonPlan.indexOf("Lesson slug: `", sectionStart + marker.length);
   const section = harrisonPlan.slice(sectionStart, sectionEnd < 0 ? undefined : sectionEnd);
   const plannedSessions = new Set([...section.matchAll(/Session (\d+)/g)].map((match) => Number(match[1])));
-  for (const session of manifest.apiSessions) {
+    for (const session of manifest.apiSessions) {
     if (!plannedSessions.has(session)) fail(`${manifest.slug} is missing API Session ${session} in the Harrison slide plan`);
   }
 }
+}
+
+const pilots = lessons.filter((lesson) => lesson.manifest.pilot);
 
 const pilots = lessons.filter((lesson) => lesson.manifest.pilot);
 if (pilots.length !== 4) fail(`Expected four pilot interaction patterns; found ${pilots.length}`);
