@@ -102,6 +102,43 @@ const cases: Record<string, CaseSeed> = {
   "human-plus-algorithm": { artifact: "Mitosis-assist evaluation", evidence: [["Sensitivity", "93%"], ["False marks", "38/slide", "warning"], ["Unassisted", "6.2 min"], ["Assisted", "8.1 min", "critical"], ["Negative-overlay misses", "+2", "critical"]], trace: [["Analysis", "Algorithm", "Candidates are ranked.", "The tool supports detection."], ["Overlay", "Pathologist", "False marks demand review.", "Threshold changes workload."], ["Decision", "Pathologist", "Negatives reassure.", "Behavior changes performance."], ["Monitoring", "Governance", "Only sensitivity is tracked.", "Workflow harm is invisible."]], diagnosis: ["What is the key finding?", "System performance includes human behavior", "Higher sensitivity is always better", "The algorithm should sign out"], repair: ["Choose the operating model.", "Tune threshold and monitor human-plus-model accuracy, workload, subgroups, and behavior", "Hide false positives", "Measure model accuracy once"], tests: [["High-grade", "Correctly supported", false], ["Low-mitosis", "Burden acceptable"], ["Negative overlay", "Does not bypass review", false], ["Drift", "Detected", false]] },
   "build-the-new-test": { artifact: "Multiplex assay dossier", evidence: [["Order name", "Resp panel extended", "warning"], ["Results", "Concatenated text", "critical"], ["Internal controls", "Clinician visible", "warning"], ["Environment", "Partial build"], ["Approval", "Technical only", "critical"]], trace: [["Request", "Clinical service", "Needs actionable organisms.", "Purpose defines the build."], ["Laboratory", "Pathologist", "Fields and interpretation are chosen.", "Meaning needs medical ownership."], ["LIS/interface", "Analyst", "Codes and fields are configured.", "Build must preserve the model."], ["EHR", "Clinician", "Long text obscures results.", "Display validation is required."]], diagnosis: ["What is highest risk?", "Clinical result model lacks end-to-end approval", "The name is abbreviated", "The assay is FDA authorized"], repair: ["Choose the process.", "Request, vet, build outside production, test, approve, train, deploy, and monitor", "Edit production directly", "Report one concatenated string"], tests: [["Positive organism", "Displays correctly", false], ["Multiple organisms", "Remain distinct", false], ["Internal control", "Follows visibility policy"], ["Negative", "Uses approved interpretation"], ["Downtime", "Has reconciliation", false]] },
   "choose-and-govern-lis": { artifact: "LIS selection matrix", evidence: [["Required workflows", "38"], ["Demo score", "92%", "positive"], ["Verified requirements", "61%", "warning"], ["Interface cost", "Excluded", "critical"], ["Exit plan", "None", "critical"]], trace: [["Requirements", "Laboratory", "Workflows become measurable needs.", "Selection starts before demos."], ["RFI", "Project team", "Market capability is screened.", "Candidates are narrowed."], ["RFP", "Vendors", "Responses map to requirements.", "Specificity enables comparison."], ["Lifecycle", "Governance", "Operation and retirement are planned.", "Purchase is one phase."]], diagnosis: ["Why is ranking unreliable?", "Demo enthusiasm replaced verified requirements", "The top score is below 100%", "An RFI was used"], repair: ["Choose the process.", "Use weighted requirements through selection, testing, operation, and retirement", "Choose the best demo", "Defer backup and exit planning"], tests: [["Workflow", "Scripted demonstration", false], ["Interface", "Cost and owner explicit", false], ["Go-live", "Testing and rollback", false], ["Operation", "Change control"], ["Retirement", "Records preserved", false]] },
+  "choose-and-govern-lis": { ...existing code... },
+
+  "microbiology-informatics": {
+    artifact: "Clinical microbiology informatics workflow",
+    evidence: [
+      ["Microbiology data", "Generated across the laboratory workflow", "positive"],
+      ["Genomic sequencing", "Produces large amounts of digital data", "warning"],
+      ["Bioinformatics", "Required to convert sequence data into interpretable information", "warning"],
+      ["Clinical question", "Should determine the analysis and reporting approach", "positive"]
+    ],
+    trace: [
+      ["Clinical laboratory", "Microbiologist", "Generates organism identification, susceptibility, molecular, and genomic data.", "The laboratory produces multiple data types that require integration."],
+      ["Sequencing", "Laboratory scientist", "Generates raw sequence data.", "Raw sequencing output is not yet a clinical result."],
+      ["Bioinformatics", "Bioinformatician", "Processes, compares, and annotates sequence data.", "Analysis converts raw data into interpretable genomic information."],
+      ["Clinical/public health interpretation", "Microbiology director", "Combines genomic findings with clinical and epidemiologic context.", "Genomic relatedness alone does not prove transmission."]
+    ],
+    diagnosis: [
+      "What is the key informatics principle?",
+      "The clinical question should determine how genomic data are analyzed and interpreted",
+      "The same WGS pipeline should be used for every clinical question",
+      "Generating sequence data is sufficient for clinical implementation"
+    ],
+    repair: [
+      "What is needed for successful implementation?",
+      "Integrate validated sequencing, bioinformatics, interpretation, reporting, governance, and workflow",
+      "Purchase a sequencing instrument and use default software",
+      "Store only the final report and discard all underlying data"
+    ],
+    tests: [
+      ["Outbreak investigation", "Pipeline supports isolate relatedness analysis", false],
+      ["Resistance analysis", "Relevant resistance genes or mutations can be assessed", false],
+      ["Reporting", "Results are translated into clinically meaningful information", false],
+      ["Governance", "Pipeline changes and interpretation are validated and monitored", false]
+    ]
+  },
+
+};
 };
 
 const feedbackFor = (_label: string, correct: boolean, repair = false) =>
