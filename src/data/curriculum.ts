@@ -81,6 +81,7 @@ const manifests: ManifestSeed[] = [
 { slug: "microbiology-decision-support", title: "Antimicrobial Decision Support and Expert Systems", topic: 9, pierObjectives: ["9.2"], durationMinutes: 25, difficulty: "applied", interactionKinds: [], apiSessions: [], hasLocalPracticum: false },
 { slug: "microbiology-interfaces-automation", title: "Instrument Interfaces and Laboratory Automation", topic: 9, pierObjectives: ["9.3"], durationMinutes: 25, difficulty: "applied", interactionKinds: [], apiSessions: [], hasLocalPracticum: false },
 { slug: "microbiology-genomics-bioinformatics", title: "Microbial Genomics and Bioinformatics", topic: 9, pierObjectives: ["9.4"], durationMinutes: 30, difficulty: "applied", interactionKinds: [], apiSessions: [], hasLocalPracticum: false },
+{ slug: "microbiology-digital-imaging-telemicrobiology", title: "Digital Imaging and Telemicrobiology", topic: 9, pierObjectives: ["9.5"], durationMinutes: 25, difficulty: "applied", interactionKinds: [], apiSessions: [], hasLocalPracticum: false },
 ];
 
 const cases: Record<string, CaseSeed> = {
@@ -256,6 +257,64 @@ const cases: Record<string, CaseSeed> = {
     ["Mapped organism", "Correct organism identity is preserved across systems", false],
     ["Susceptibility result", "Interpretation reaches the correct patient and organism", false],
     ["Interface failure", "The result enters a visible and recoverable exception workflow", false]
+  ]
+},
+  "microbiology-genomics-bioinformatics": {
+  artifact: "Microbial whole-genome sequencing outbreak investigation",
+
+  evidence: [
+    ["Sequencing", "Whole-genome sequencing completed for suspected outbreak isolates", "positive"],
+    ["Quality control", "Sequence quality varies across isolates", "warning"],
+    ["Bioinformatics pipeline", "Isolates are compared using a validated genomic workflow", "positive"],
+    ["Epidemiology", "Patient overlap and exposure data are incomplete", "warning"]
+  ],
+
+  trace: [
+    [
+      "Sequencer",
+      "Laboratory scientist",
+      "Generates raw sequence reads from microbial isolates.",
+      "Raw reads require quality assessment and bioinformatics processing before interpretation."
+    ],
+    [
+      "Bioinformatics pipeline",
+      "Bioinformatician",
+      "Processes sequence data and compares isolates.",
+      "Pipeline parameters, reference data, and analytical methods influence the resulting genomic relationships."
+    ],
+    [
+      "Genomic analysis",
+      "Microbiology laboratory",
+      "Identifies clusters of genetically similar isolates.",
+      "Genomic similarity can support but does not independently establish transmission."
+    ],
+    [
+      "Outbreak investigation",
+      "Infection prevention and public health",
+      "Combines genomic findings with patient locations, dates, and exposures.",
+      "Epidemiologic context is required to interpret whether genomic relationships are consistent with transmission."
+    ]
+  ],
+
+  diagnosis: [
+    "What is the main informatics concern when interpreting these results?",
+    "Genomic relationships depend on a validated analytical pipeline and must be interpreted with epidemiologic context",
+    "Whole-genome sequencing can directly prove transmission between patients",
+    "Raw sequence reads can be interpreted without bioinformatics processing"
+  ],
+
+  repair: [
+    "What is the best approach to the investigation?",
+    "Verify sequence quality, use a validated bioinformatics workflow, document analytical parameters, and integrate genomic findings with epidemiologic data",
+    "Classify every genetically similar isolate as direct transmission",
+    "Use whichever analysis pipeline produces the clearest cluster"
+  ],
+
+  tests: [
+    ["Sequence quality", "Each isolate meets defined quality criteria before comparison", false],
+    ["Pipeline", "Analysis uses validated and documented parameters", false],
+    ["Genomic cluster", "Relatedness is interpreted using an appropriate genomic method", false],
+    ["Epidemiology", "Patient and exposure information is considered alongside genomic findings", false]
   ]
 },
 };
