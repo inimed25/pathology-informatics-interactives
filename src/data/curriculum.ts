@@ -84,7 +84,6 @@ const manifests: ManifestSeed[] = [
 { slug: "microbiology-digital-imaging-telemicrobiology", title: "Digital Imaging and Telemicrobiology", topic: 9, pierObjectives: ["9.5"], durationMinutes: 25, difficulty: "applied", interactionKinds: [], apiSessions: [], hasLocalPracticum: false },
 { slug: "microbiology-public-health-surveillance", title: "Public Health Surveillance and Microbiology Data Exchange", topic: 9, pierObjectives: ["9.6"], durationMinutes: 25, difficulty: "applied", interactionKinds: [], apiSessions: [], hasLocalPracticum: false },
 ];
-];
 
 const cases: Record<string, CaseSeed> = {
   "steward-at-morning-huddle": { artifact: "High-sensitivity troponin go-live review", evidence: [["Analyzer to EHR", "Transmission tests passed", "positive"], ["Complete result report", "Interpretive comment is clipped in the EHR", "critical"], ["Proposed EHR alert", "Use of the result has not been reviewed by pathology", "warning"], ["Procedures and training", "Not complete", "critical"]], trace: [["Hospital IT", "IT analyst", "The network and shared systems are working.", "Hospital IT keeps the connection available but does not approve the result report."], ["LIS", "LIS analyst", "The new test and interface changes have passed technical testing.", "The LIS team performs the build; the laboratory reviews the complete result report."], ["Pathology informatics", "Pathology informaticist", "The order and result report are checked against practices used across the laboratory.", "Pathology informatics helps laboratory sections implement orders and result reports consistently."], ["Clinical informatics", "Clinical informaticist", "The result may be used with diagnoses and medications in an EHR alert.", "Clinical informatics helps make sure the EHR supports patient care and works with pathology on laboratory-related CDS."], ["Laboratory", "Pathologist and laboratory operations", "The report appearance, procedures, training, and go-live coverage are not all approved.", "The laboratory owns the complete result report and decides when the service is ready."]], diagnosis: ["Would you approve Monday's go-live?", "No; the report and laboratory operation are not ready", "Yes; the interface test passed", "Yes; clinical informatics can approve the report"], repair: ["What must be completed before go-live?", "Fix and validate the result report with laboratory approval, review the proposed CDS, and finish procedures and training", "Ask hospital IT to approve every item", "Let the EHR team take ownership of the result report"], tests: [["Complete result report", "Content and EHR appearance are approved by the laboratory", false], ["Interface", "Result transmission remains accurate"], ["CDS", "Laboratory meaning and clinical workflow are reviewed", false], ["Laboratory operation", "Procedures, training, staffing, and support are ready", false]] },
@@ -433,7 +432,8 @@ const cases: Record<string, CaseSeed> = {
     ["Specimen source", "Uses an agreed structured representation", false],
     ["Transmission", "Message reaches the intended public health system", false],
     ["Receiver interpretation", "Incoming data are correctly processed for surveillance", false]
-},
+    ]
+  },
 };
 
 const feedbackFor = (_label: string, correct: boolean, repair = false) =>
