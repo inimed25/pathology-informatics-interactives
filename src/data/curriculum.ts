@@ -377,6 +377,63 @@ const cases: Record<string, CaseSeed> = {
     ["Escalation", "Uncertain or inadequate images trigger direct review or additional imaging", false]
   ]
 },
+  "microbiology-public-health-surveillance": {
+  artifact: "Electronic microbiology report to public health",
+
+  evidence: [
+    ["Laboratory result", "Reportable organism identified and finalized in the LIS", "positive"],
+    ["Electronic transmission", "Public health system acknowledges receipt", "positive"],
+    ["Organism terminology", "Laboratory-specific organism code is transmitted", "warning"],
+    ["Specimen source", "Sent as unstructured free text", "warning"]
+  ],
+
+  trace: [
+    [
+      "Clinical microbiology laboratory",
+      "Medical technologist",
+      "Finalizes the organism identification and associated result.",
+      "The laboratory result is meaningful within the local LIS."
+    ],
+    [
+      "LIS reporting workflow",
+      "Laboratory informatics",
+      "Identifies the result as reportable and prepares data for transmission.",
+      "Reporting rules and mappings determine what information leaves the laboratory."
+    ],
+    [
+      "Electronic interface",
+      "Interface team",
+      "Transmits the report to the public health system.",
+      "Successful transport confirms receipt but not necessarily correct interpretation."
+    ],
+    [
+      "Public health surveillance system",
+      "Public health agency",
+      "Uses incoming laboratory data for surveillance and investigation.",
+      "Local codes or unstructured information may prevent automated interpretation."
+    ]
+  ],
+
+  diagnosis: [
+    "What is the main informatics problem?",
+    "The report was transmitted successfully, but local terminology and unstructured data may prevent semantic interoperability",
+    "The public health system failed because electronic reporting cannot support microbiology",
+    "An acknowledgment proves that every transmitted field was interpreted correctly"
+  ],
+
+  repair: [
+    "What is the best approach?",
+    "Map reportable data to agreed terminology and structured fields, validate receiver interpretation, and maintain the reporting workflow as requirements change",
+    "Continue sending local codes because the message is technically delivered",
+    "Convert the entire report into free text so humans can interpret it"
+  ],
+
+  tests: [
+    ["Reportable organism", "Maps to the expected public health concept", false],
+    ["Specimen source", "Uses an agreed structured representation", false],
+    ["Transmission", "Message reaches the intended public health system", false],
+    ["Receiver interpretation", "Incoming data are correctly processed for surveillance", false]
+},
 };
 
 const feedbackFor = (_label: string, correct: boolean, repair = false) =>
