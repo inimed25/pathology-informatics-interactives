@@ -79,7 +79,9 @@ const manifests: ManifestSeed[] = [
   { slug: "choose-and-govern-lis", title: "Choose and Govern the LIS", topic: 8, pierObjectives: ["8.3", "8.4"], durationMinutes: 28, difficulty: "stewardship", interactionKinds: ["requirements", "selection-matrix", "lifecycle"], apiSessions: [3, 9], hasLocalPracticum: true },
 { slug: "microbiology-informatics", title: "Clinical Microbiology Informatics", topic: 9, pierObjectives: ["9.1"], durationMinutes: 30, difficulty: "foundational", interactionKinds: [], apiSessions: [], hasLocalPracticum: false }, 
 { slug: "microbiology-decision-support", title: "Antimicrobial Decision Support and Expert Systems", topic: 9, pierObjectives: ["9.2"], durationMinutes: 25, difficulty: "applied", interactionKinds: [], apiSessions: [], hasLocalPracticum: false },
-{ slug: "microbiology-interfaces-automation", title: "Instrument Interfaces and Laboratory Automation", topic: 9, pierObjectives: ["9.3"], durationMinutes: 25, difficulty: "applied", interactionKinds: [], apiSessions: [], hasLocalPracticum: false },];
+{ slug: "microbiology-interfaces-automation", title: "Instrument Interfaces and Laboratory Automation", topic: 9, pierObjectives: ["9.3"], durationMinutes: 25, difficulty: "applied", interactionKinds: [], apiSessions: [], hasLocalPracticum: false },
+{ slug: "microbiology-genomics-bioinformatics", title: "Microbial Genomics and Bioinformatics", topic: 9, pierObjectives: ["9.4"], durationMinutes: 30, difficulty: "applied", interactionKinds: [], apiSessions: [], hasLocalPracticum: false },
+];
 
 const cases: Record<string, CaseSeed> = {
   "steward-at-morning-huddle": { artifact: "High-sensitivity troponin go-live review", evidence: [["Analyzer to EHR", "Transmission tests passed", "positive"], ["Complete result report", "Interpretive comment is clipped in the EHR", "critical"], ["Proposed EHR alert", "Use of the result has not been reviewed by pathology", "warning"], ["Procedures and training", "Not complete", "critical"]], trace: [["Hospital IT", "IT analyst", "The network and shared systems are working.", "Hospital IT keeps the connection available but does not approve the result report."], ["LIS", "LIS analyst", "The new test and interface changes have passed technical testing.", "The LIS team performs the build; the laboratory reviews the complete result report."], ["Pathology informatics", "Pathology informaticist", "The order and result report are checked against practices used across the laboratory.", "Pathology informatics helps laboratory sections implement orders and result reports consistently."], ["Clinical informatics", "Clinical informaticist", "The result may be used with diagnoses and medications in an EHR alert.", "Clinical informatics helps make sure the EHR supports patient care and works with pathology on laboratory-related CDS."], ["Laboratory", "Pathologist and laboratory operations", "The report appearance, procedures, training, and go-live coverage are not all approved.", "The laboratory owns the complete result report and decides when the service is ready."]], diagnosis: ["Would you approve Monday's go-live?", "No; the report and laboratory operation are not ready", "Yes; the interface test passed", "Yes; clinical informatics can approve the report"], repair: ["What must be completed before go-live?", "Fix and validate the result report with laboratory approval, review the proposed CDS, and finish procedures and training", "Ask hospital IT to approve every item", "Let the EHR team take ownership of the result report"], tests: [["Complete result report", "Content and EHR appearance are approved by the laboratory", false], ["Interface", "Result transmission remains accurate"], ["CDS", "Laboratory meaning and clinical workflow are reviewed", false], ["Laboratory operation", "Procedures, training, staffing, and support are ready", false]] },
@@ -196,6 +198,64 @@ const cases: Record<string, CaseSeed> = {
     ["Rule update", "Changes are validated before clinical use", false],
     ["Routine susceptible isolate", "The system does not generate an inappropriate resistance warning", false],
     ["Clinical report", "Interpretive output is transmitted accurately to the LIS/EHR", false]
+  ]
+},
+  "microbiology-interfaces-automation": {
+  artifact: "Automated microbiology instrument interface review",
+
+  evidence: [
+    ["Analyzer", "Identification and susceptibility results are generated automatically", "positive"],
+    ["Interface", "Results are transmitted electronically to the LIS", "positive"],
+    ["Result mapping", "One organism code is mapped incorrectly in the receiving system", "critical"],
+    ["Exception handling", "Failed transmissions require manual review", "warning"]
+  ],
+
+  trace: [
+    [
+      "Microbiology instrument",
+      "Medical technologist",
+      "Generates organism identification and susceptibility data.",
+      "Automation produces structured results that must retain their meaning downstream."
+    ],
+    [
+      "Middleware/interface",
+      "Laboratory informatics",
+      "Transforms and transmits instrument data.",
+      "Mapping and transformation rules can alter how results are represented."
+    ],
+    [
+      "LIS",
+      "Microbiology laboratory",
+      "Receives and stores the transmitted result.",
+      "Successful transmission does not guarantee that every field was interpreted correctly."
+    ],
+    [
+      "EHR",
+      "Clinical team",
+      "Displays the final microbiology report.",
+      "Interface errors can propagate into information used for patient care."
+    ]
+  ],
+
+  diagnosis: [
+    "What is the main informatics problem?",
+    "The interface transmits data successfully but does not preserve the meaning of every result",
+    "The microbiology analyzer cannot generate electronic results",
+    "All automated results require manual transcription"
+  ],
+
+  repair: [
+    "What is the best response before go-live?",
+    "Correct the mapping and validate representative results and exceptions across the complete instrument-to-EHR pathway",
+    "Confirm only that the interface connection is active",
+    "Allow the incorrect mapping and correct affected reports manually"
+  ],
+
+  tests: [
+    ["Common organism", "Identification is represented correctly downstream", false],
+    ["Mapped organism", "Correct organism identity is preserved across systems", false],
+    ["Susceptibility result", "Interpretation reaches the correct patient and organism", false],
+    ["Interface failure", "The result enters a visible and recoverable exception workflow", false]
   ]
 },
 };
