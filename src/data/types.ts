@@ -11,7 +11,7 @@ export type LessonManifest = {
   id: string;
   slug: string;
   title: string;
-  topic: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+  topic: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |9;
   pierObjectives: string[];
   durationMinutes: number;
   difficulty: Difficulty;
@@ -61,7 +61,7 @@ export type LessonDefinition = {
 };
 
 export type TopicDefinition = {
-  id: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+  id: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8| 9;
   slug: string;
   title: string;
   objectives: string[];
