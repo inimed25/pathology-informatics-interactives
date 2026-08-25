@@ -139,7 +139,64 @@ const cases: Record<string, CaseSeed> = {
       ["Governance", "Pipeline changes and interpretation are validated and monitored", false]
     ]
   },
+"microbiology-decision-support": {
+  artifact: "Antimicrobial susceptibility decision-support review",
 
+  evidence: [
+    ["Susceptibility result", "Organism-drug combinations generate categorical interpretations", "positive"],
+    ["Expert rule", "Certain resistance patterns trigger interpretive rules", "warning"],
+    ["Clinical context", "Laboratory data alone may not capture the full treatment context", "warning"],
+    ["Rule maintenance", "Rules require validation and updates when standards change", "critical"]
+  ],
+
+  trace: [
+    [
+      "AST instrument",
+      "Medical technologist",
+      "Generates antimicrobial susceptibility measurements and preliminary interpretations.",
+      "Instrument output becomes an input to downstream decision support."
+    ],
+    [
+      "Expert system",
+      "Microbiology laboratory",
+      "Applies predefined rules to susceptibility patterns.",
+      "Rules can help identify unusual or clinically important resistance phenotypes."
+    ],
+    [
+      "LIS",
+      "Laboratory informatics",
+      "Stores and transmits susceptibility results and interpretive comments.",
+      "Decision-support output must be represented accurately in the laboratory report."
+    ],
+    [
+      "Clinical team",
+      "Clinician",
+      "Uses the microbiology report alongside patient-specific information.",
+      "Laboratory decision support informs care but does not replace clinical judgment."
+    ]
+  ],
+
+  diagnosis: [
+    "What is the main informatics risk in this workflow?",
+    "An outdated or poorly validated expert rule can produce misleading antimicrobial interpretations",
+    "Expert systems eliminate the need for laboratory review",
+    "Susceptibility results do not require structured data"
+  ],
+
+  repair: [
+    "What is the best approach to governing the expert system?",
+    "Validate rules, assign ownership, update them when standards change, and monitor their downstream effects",
+    "Use the vendor defaults indefinitely",
+    "Disable interpretive comments and report only raw measurements"
+  ],
+
+  tests: [
+    ["Known resistance phenotype", "The expert rule produces the expected interpretation", false],
+    ["Rule update", "Changes are validated before clinical use", false],
+    ["Routine susceptible isolate", "The system does not generate an inappropriate resistance warning", false],
+    ["Clinical report", "Interpretive output is transmitted accurately to the LIS/EHR", false]
+  ]
+},
 };
 
 const feedbackFor = (_label: string, correct: boolean, repair = false) =>
