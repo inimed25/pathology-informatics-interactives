@@ -7,7 +7,7 @@ if (lessons.length !== 25) fail(`Expected 25 lessons; found ${lessons.length}`);
 
 const expected = new Set(topics.flatMap((topic) => topic.objectives));
 const covered = new Set(lessons.flatMap((lesson) => lesson.manifest.pierObjectives));
-if (expected.size !== 34) fail(`Expected 34 objective identifiers; found ${expected.size}`);
+if (expected.size !== 40) fail(`Expected 40 objective identifiers; found ${expected.size}`);
 for (const objective of expected) if (!covered.has(objective)) fail(`Objective ${objective} has no primary lesson`);
 for (const objective of covered) if (!expected.has(objective)) fail(`Unknown objective ${objective}`);
 
