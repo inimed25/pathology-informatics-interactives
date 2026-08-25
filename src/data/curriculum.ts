@@ -82,6 +82,8 @@ const manifests: ManifestSeed[] = [
 { slug: "microbiology-interfaces-automation", title: "Instrument Interfaces and Laboratory Automation", topic: 9, pierObjectives: ["9.3"], durationMinutes: 25, difficulty: "applied", interactionKinds: [], apiSessions: [], hasLocalPracticum: false },
 { slug: "microbiology-genomics-bioinformatics", title: "Microbial Genomics and Bioinformatics", topic: 9, pierObjectives: ["9.4"], durationMinutes: 30, difficulty: "applied", interactionKinds: [], apiSessions: [], hasLocalPracticum: false },
 { slug: "microbiology-digital-imaging-telemicrobiology", title: "Digital Imaging and Telemicrobiology", topic: 9, pierObjectives: ["9.5"], durationMinutes: 25, difficulty: "applied", interactionKinds: [], apiSessions: [], hasLocalPracticum: false },
+{ slug: "microbiology-public-health-surveillance", title: "Public Health Surveillance and Microbiology Data Exchange", topic: 9, pierObjectives: ["9.6"], durationMinutes: 25, difficulty: "applied", interactionKinds: [], apiSessions: [], hasLocalPracticum: false },
+];
 ];
 
 const cases: Record<string, CaseSeed> = {
@@ -315,6 +317,64 @@ const cases: Record<string, CaseSeed> = {
     ["Pipeline", "Analysis uses validated and documented parameters", false],
     ["Genomic cluster", "Relatedness is interpreted using an appropriate genomic method", false],
     ["Epidemiology", "Patient and exposure information is considered alongside genomic findings", false]
+  ]
+},
+  "microbiology-digital-imaging-telemicrobiology": {
+  artifact: "Remote microbiology image consultation",
+
+  evidence: [
+    ["Digital image", "Gram-stain image transmitted for remote consultation", "positive"],
+    ["Image quality", "Fine cellular detail is inconsistently visible", "warning"],
+    ["Remote display", "Display characteristics have not been validated", "critical"],
+    ["Clinical context", "Specimen source and preliminary culture findings are available", "positive"]
+  ],
+
+  trace: [
+    [
+      "Image acquisition",
+      "Medical technologist",
+      "Captures a representative microscopic field.",
+      "Focus, resolution, color, and field selection influence what information is available remotely."
+    ],
+    [
+      "Image transmission",
+      "Laboratory information system",
+      "Transfers the image and associated case information.",
+      "Successful transmission does not establish that the image is adequate for interpretation."
+    ],
+    [
+      "Remote workstation",
+      "Consulting microbiologist",
+      "Displays the image for remote review.",
+      "Display characteristics can affect visualization of diagnostically important features."
+    ],
+    [
+      "Clinical interpretation",
+      "Microbiology laboratory",
+      "Integrates the remote interpretation with specimen and culture information.",
+      "Digital images should be interpreted within the appropriate laboratory and clinical context."
+    ]
+  ],
+
+  diagnosis: [
+    "What is the main informatics concern?",
+    "The complete imaging pathway has not been validated for reliable remote interpretation",
+    "Any successfully transmitted image is adequate for diagnosis",
+    "Clinical context is unnecessary when reviewing microbiology images"
+  ],
+
+  repair: [
+    "What should be done before routine telemicrobiology use?",
+    "Validate representative image types, acquisition methods, transmission, displays, and escalation procedures",
+    "Validate only that the image file can be transmitted",
+    "Allow each remote reviewer to determine independently whether their display is adequate"
+  ],
+
+  tests: [
+    ["Gram stain", "Fine morphologic detail remains interpretable remotely", false],
+    ["Image acquisition", "Focus and representative field selection meet defined criteria", false],
+    ["Remote display", "Validated displays preserve necessary visual information", false],
+    ["Escalation", "Uncertain or inadequate images trigger direct review or additional imaging", false]
   ]
 },
 };
