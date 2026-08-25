@@ -48,7 +48,6 @@ if (manifest.slug !== "microbiology-informatics") {
 
 const pilots = lessons.filter((lesson) => lesson.manifest.pilot);
 
-const pilots = lessons.filter((lesson) => lesson.manifest.pilot);
 if (pilots.length !== 4) fail(`Expected four pilot interaction patterns; found ${pilots.length}`);
 
 console.log(`Validated ${lessons.length} lessons, ${covered.size}/${expected.size} objectives, ${pilots.length} pilot patterns, all required MDX files, and 23 Harrison slide plans.`);
