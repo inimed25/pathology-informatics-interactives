@@ -3,7 +3,7 @@ import { resolve } from "node:path";
 import { lessons, topics } from "../src/data/curriculum";
 
 const fail = (message: string): never => { throw new Error(message); };
-if (lessons.length !== 24) fail(`Expected 24 lessons; found ${lessons.length}`);
+if (lessons.length !== 25) fail(`Expected 25 lessons; found ${lessons.length}`);
 
 const expected = new Set(topics.flatMap((topic) => topic.objectives));
 const covered = new Set(lessons.flatMap((lesson) => lesson.manifest.pierObjectives));
