@@ -1,22 +1,31 @@
 :root {
-  color: #17312d;
-  background: #f4f1e8;
-  font-family: "Segoe UI", system-ui, sans-serif;
+  color: #26332f;
+  background: #f5f2ea;
+
+  font-family: Inter, "Segoe UI", system-ui, sans-serif;
   font-synthesis: none;
-  --ink: #17312d;
-  --muted: #60716c;
-  --paper: #fffdf7;
-  --cream: #f4f1e8;
-  --line: #d9d7cc;
-  --green: #176b5a;
-  --green-dark: #103f37;
-  --mint: #dbece5;
-  --gold: #e3b95e;
-  --gold-soft: #f5e9c8;
-  --red: #a63c35;
-  --red-soft: #f5ded9;
-  --blue: #356b83;
-  --blue-soft: #dceaf0;
+
+  --ink: #26332f;
+  --muted: #6d7771;
+
+  --paper: #fffdf8;
+  --cream: #f5f2ea;
+  --line: #d9ded8;
+
+  --green: #4f7568;
+  --green-dark: #2f5147;
+  --green-pale: #edf3ef;
+  --mint: #e3ece6;
+
+  --gold: #b78955;
+  --gold-soft: #f3e9db;
+
+  --red: #a65c50;
+  --red-soft: #f4e3df;
+
+  --blue: #667f86;
+  --blue-soft: #e3ecee;
+
   line-height: 1.55;
 }
 
