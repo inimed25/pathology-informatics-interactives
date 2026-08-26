@@ -203,10 +203,35 @@ h3 { line-height: 1.2; }
 .trace-panel aside { background: var(--mint); }
 .trace-panel aside strong { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; }
 
-.choice-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-.choice-grid button, .choice-stack button { padding: 22px; border: 1px solid #c8cec7; background: #fafaf6; color: var(--ink); cursor: pointer; text-align: left; }
-.choice-grid button { min-height: 170px; }
-.choice-grid button.selected, .choice-stack button.selected { border-color: var(--green); background: var(--mint); box-shadow: inset 0 0 0 1px var(--green); }
+.choice-grid button,
+.choice-stack button {
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: #fbfaf6;
+  color: var(--ink);
+  cursor: pointer;
+  text-align: left;
+  transition: border-color .18s ease, background .18s ease, transform .18s ease, box-shadow .18s ease;
+}
+
+.choice-grid button:hover,
+.choice-stack button:hover {
+  border-color: #9eb0a6;
+  background: var(--paper);
+  transform: translateY(-1px);
+}
+
+.choice-grid button {
+  min-height: 170px;
+}
+
+.choice-grid button.selected,
+.choice-stack button.selected {
+  border-color: var(--green);
+  background: var(--mint);
+  box-shadow: inset 0 0 0 1px var(--green), 0 6px 18px rgba(47, 81, 71, .08);
+}
 .choice-grid strong, .choice-grid small, .choice-stack strong, .choice-stack small { display: block; }
 .choice-grid small, .choice-stack small { margin-top: 9px; color: var(--muted); }
 .choice-marker { display: block; width: 16px; height: 16px; margin-bottom: 22px; border: 1px solid #7c8d88; border-radius: 50%; }
