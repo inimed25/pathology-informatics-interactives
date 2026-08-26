@@ -62,10 +62,46 @@ h3 { line-height: 1.2; }
 .hero-lede { max-width: 700px; font-size: clamp(1.15rem, 2vw, 1.45rem); color: #425853; }
 .eyebrow { margin-bottom: 10px; color: var(--green); font-family: ui-monospace, monospace; font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: .12em; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
-.primary-button, .secondary-button { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 12px 20px; border-radius: 7px; border: 1px solid var(--green-dark); font-weight: 700; text-decoration: none; cursor: pointer; }
-.primary-button { background: var(--green-dark); color: white; }
-.primary-button:disabled { opacity: .45; cursor: not-allowed; }
-.secondary-button { background: transparent; color: var(--green-dark); }
+.primary-button,
+.secondary-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 12px 22px;
+  border-radius: 12px;
+  border: 1px solid var(--green-dark);
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background .18s ease, transform .18s ease, box-shadow .18s ease;
+}
+
+.primary-button {
+  background: var(--green-dark);
+  color: white;
+  box-shadow: 0 6px 18px rgba(47, 81, 71, .14);
+}
+
+.primary-button:hover:not(:disabled) {
+  background: #253f38;
+  transform: translateY(-1px);
+  box-shadow: 0 9px 22px rgba(47, 81, 71, .18);
+}
+
+.primary-button:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+}
+
+.secondary-button {
+  background: transparent;
+  color: var(--green-dark);
+}
+
+.secondary-button:hover {
+  background: var(--green-pale);
+}
 .hero-card { padding: 34px; background: var(--green-dark); color: white; border-radius: 2px 40px 2px 2px; box-shadow: 0 30px 70px rgba(16,63,55,.19); }
 .hero-card > span { font-family: ui-monospace, monospace; font-size: 11px; text-transform: uppercase; letter-spacing: .13em; color: #a8d2c5; }
 .hero-card ol { margin: 28px 0; padding-left: 25px; }
