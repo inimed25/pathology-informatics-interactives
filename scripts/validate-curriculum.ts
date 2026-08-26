@@ -33,7 +33,7 @@ for (const lesson of lessons) {
   }
   if (manifest.hasLocalPracticum && !existsSync(resolve(folder, "practicum.mdx"))) fail(`${manifest.slug} is missing practicum.mdx`);
 
-if (manifest.slug !== "microbiology-informatics") {
+if (manifest.topic !== 9) {
   const marker = `Lesson slug: \`${manifest.slug}\``;
   const sectionStart = harrisonPlan.indexOf(marker);
   if (sectionStart < 0) fail(`${manifest.slug} is missing from the Harrison slide plan`);
