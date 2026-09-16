@@ -282,7 +282,7 @@ const cases: Record<string, CaseSeed> = {
           "Can the laboratory eliminate all manual review?"
         ],
         correctIndex: 0,
-        explanation: "Clinical microbiology informatics requires attention to the complete information lifecycle, including generation, transformation, transmission, interpretation, presentation, validation, and governance."
+      explanation: "The microbiology director helps ensure that laboratory information remains clinically accurate and meaningful as it moves through systems and reaches downstream users. Technical implementation may involve LIS, interface, and IT specialists, but microbiology expertise is essential for validating the clinical meaning of the workflow."
       }
     ]
   },
