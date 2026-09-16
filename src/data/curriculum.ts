@@ -83,11 +83,23 @@ const interfacesAutomationSources: SourceReference[] = [
     license: "U.S. government regulatory and interpretive guidance; source cited",
     use: "CLIA regulatory and interpretive framework for accurate, reliable, and timely transmission of patient-specific laboratory information to the final report destination.",
   },
-  {
+    {
     label: "College of American Pathologists — Interface Result Integrity",
     url: "https://www.cap.org/member-resources/clinical-informatics-resources/dont-forget-your-rules-when-harmonizing-laboratory-testing-across-multiple-sites",
     license: "Copyrighted accreditation guidance; cited, not reproduced",
     use: "CAP accreditation guidance addressing verification of accurate patient-result transmission before interface implementation and after changes that could affect result integrity.",
+  },
+  {
+    label: "Rhoads et al. — Clinical Microbiology Informatics",
+    url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC4187636/",
+    license: "Copyrighted peer-reviewed article; cited, not reproduced",
+    use: "Clinical microbiology informatics review describing MALDI-TOF identification as comparison of microbial mass spectra with spectral reference databases and discussing the importance of database quality for accurate organism identification.",
+  },
+  {
+    label: "FDA — Multiplex Nucleic Acid Assays for Identification of Microorganisms and Resistance Markers from Positive Blood Cultures",
+    url: "https://www.fda.gov/medical-devices/guidance-documents-medical-devices-and-radiation-emitting-products/multiplex-nucleic-acid-assay-identification-microorganisms-and-resistance-markers-positive-blood",
+    license: "U.S. government regulatory guidance; source cited",
+    use: "FDA guidance for multiplex positive-blood-culture molecular assays that detect microorganisms and antimicrobial resistance markers, including intended-use and interpretation limitations and the role of conventional culture and susceptibility testing.",
   },
 ];
 
