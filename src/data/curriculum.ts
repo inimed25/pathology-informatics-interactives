@@ -64,6 +64,32 @@ const antimicrobialDecisionSupportSources: SourceReference[] = [
   },
 ];
 
+const interfacesAutomationSources: SourceReference[] = [
+  {
+    label: "CLSI M67 — Verification of Laboratory Automation in Microbiology",
+    url: "https://clsi.org/shop/standards/m67/",
+    license: "Copyrighted standard; cited, not reproduced",
+    use: "Microbiology-specific guidance for verification and implementation of laboratory automation, including results transmission to the LIS, quality assurance, downtime, and verification after relevant changes.",
+  },
+  {
+    label: "CLSI AUTO16 — Next-Generation In Vitro Diagnostic Instrument Interface",
+    url: "https://clsi.org/shop/standards/auto16/",
+    license: "Copyrighted standard; cited, not reproduced",
+    use: "Technical framework for data exchange between in vitro diagnostic instruments, middleware, laboratory information systems, and other systems managing analytical workflows.",
+  },
+  {
+    label: "CMS — CLIA State Operations Manual, Appendix C",
+    url: "https://www.cms.gov/regulations-and-guidance/legislation/clia/downloads/app-c_survey-procedures-igs-for-labs-labs-svcs-final.pdf",
+    license: "U.S. government regulatory and interpretive guidance; source cited",
+    use: "CLIA regulatory and interpretive framework for accurate, reliable, and timely transmission of patient-specific laboratory information to the final report destination.",
+  },
+  {
+    label: "College of American Pathologists — Interface Result Integrity",
+    url: "https://www.cap.org/member-resources/clinical-informatics-resources/dont-forget-your-rules-when-harmonizing-laboratory-testing-across-multiple-sites",
+    license: "Copyrighted accreditation guidance; cited, not reproduced",
+    use: "CAP accreditation guidance addressing verification of accurate patient-result transmission before interface implementation and after changes that could affect result integrity.",
+  },
+];
 
 const microbialGenomicsSources: SourceReference[] = [
   {
@@ -191,7 +217,8 @@ hasLocalPracticum: false,
     difficulty: "applied",
     interactionKinds: [],
     apiSessions: [],
-    hasLocalPracticum: false,
+sources: interfacesAutomationSources,
+hasLocalPracticum: false,
   },
       {
     slug: "microbiology-genomics-bioinformatics",
@@ -538,7 +565,51 @@ const cases: Record<string, CaseSeed> = {
         ],
         correctIndex: 1,
         explanation: "Microbiology laboratory automation depends on coordinated physical and information workflows. Specimen identity, processing steps, incubation, imaging, interpretation, and downstream results must remain correctly associated as information moves through the system."
-      }
+     },
+{
+  question: "Which statement best distinguishes CLIA/CMS, CAP, and CLSI when evaluating a U.S. clinical laboratory informatics workflow?",
+  choices: [
+    "CLIA/CMS provides the federal regulatory framework, CAP provides accreditation requirements for CAP-accredited laboratories, and CLSI publishes professional standards and implementation guidance",
+    "CLIA, CAP, and CLSI are three names for the same federal regulatory program",
+    "CAP establishes federal law, while CMS publishes optional professional standards",
+    "CLSI accredits clinical laboratories on behalf of CMS"
+  ],
+  correctIndex: 0,
+  explanation: "These frameworks serve different roles. CLIA establishes the federal regulatory framework administered by CMS, CAP provides accreditation requirements for CAP-accredited laboratories, and CLSI develops professional standards and implementation guidance. They should not be treated as interchangeable."
+ },
+{
+  question: "A laboratory updates the reference database used by its MALDI-TOF identification system. Why can this be an informatics and quality-management issue even though the mass spectrometer hardware has not changed?",
+  choices: [
+    "Reference-database content and software can influence organism identification, so the effect of a significant change should be assessed within the laboratory's validated workflow",
+    "MALDI-TOF identification depends only on the mass spectrometer hardware",
+    "Reference databases affect billing but cannot affect organism identification",
+    "Any database update automatically requires replacement of the MALDI-TOF instrument"
+  ],
+  correctIndex: 0,
+  explanation: "MALDI-TOF identification depends on comparison of generated spectra with reference information and associated software. Database or software changes can therefore affect identification performance and should be evaluated according to their potential impact on the validated clinical workflow."
+},
+{
+  question: "After a validated microbiology interface is implemented, a software update changes an organism mapping table. Results continue transmitting without interface errors. What is the most appropriate laboratory response?",
+  choices: [
+    "Take no action because successful transmission proves that the mapping remains correct",
+    "Assess whether the change could affect result integrity and perform and document appropriate verification under the laboratory's change-control process",
+    "Repeat analytical identification testing on every previously tested organism",
+    "Disable the interface until the next annual inspection"
+  ],
+  correctIndex: 1,
+  explanation: "A configuration change can alter the meaning of transmitted information without causing a transmission failure. Changes that may affect result integrity should undergo an appropriate impact assessment, verification, and documentation within the laboratory's quality and change-control processes."
+},
+{
+  question: "A rapid multiplex blood-culture molecular panel detects an organism and a resistance gene. Which interpretation best reflects appropriate informatics and microbiology oversight?",
+  choices: [
+    "The resistance-gene result automatically replaces all phenotypic susceptibility testing and interpretation",
+    "The resistance marker should be represented and transmitted accurately, but its clinical meaning depends on the assay's validated targets and limitations and should not be interpreted beyond them",
+    "Detection of any resistance gene proves that every organism in the specimen carries that gene",
+    "Resistance-gene results should never be transmitted electronically because they are molecular rather than microbiologic data"
+  ],
+  correctIndex: 1,
+  explanation: "Rapid molecular panels can provide clinically important resistance-marker information, but interpretation must remain within the assay's validated intended use and limitations. Informatics systems must also preserve the relationship between organism findings, resistance markers, comments, and downstream reporting."
+}
     ]
   },
     "microbiology-genomics-bioinformatics": {
