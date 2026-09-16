@@ -11,7 +11,7 @@ export type LessonManifest = {
   id: string;
   slug: string;
   title: string;
-  topic: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |9;
+  topic: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
   pierObjectives: string[];
   durationMinutes: number;
   difficulty: Difficulty;
@@ -35,17 +35,12 @@ export type TraceStep = {
   implication: string;
 };
 
-export type Choice = {
+export type LessonQuestion = {
   id: string;
-  label: string;
-  correct?: boolean;
-  feedback: string;
-};
-
-export type ValidationCase = {
-  name: string;
-  note: string;
-  passingRepairs: string[];
+  question: string;
+  choices: string[];
+  correctIndex: number;
+  explanation: string;
 };
 
 export type LessonDefinition = {
@@ -53,15 +48,11 @@ export type LessonDefinition = {
   artifactTitle: string;
   evidence: EvidenceItem[];
   trace: TraceStep[];
-  decisionPrompt: string;
-  decisionChoices: Choice[];
-  repairPrompt: string;
-  repairChoices: Choice[];
-  validationCases: ValidationCase[];
+  questions: LessonQuestion[];
 };
 
 export type TopicDefinition = {
-  id: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8| 9;
+  id: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
   slug: string;
   title: string;
   objectives: string[];
