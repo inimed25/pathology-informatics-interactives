@@ -1,4 +1,4 @@
-import type { Choice, LessonDefinition, LessonManifest, SourceReference, TopicDefinition } from "./types";
+import type { LessonDefinition, LessonManifest, SourceReference, TopicDefinition } from "./types";
 
 export const PIER_URL = "https://www.apcprods.org/assets/docs/pier/R5/PIER_Essentials_R5.pdf";
 export const API_URL = "https://www.pathologyinformatics.org/teaching-slide-sets";
@@ -49,12 +49,46 @@ const microbialGenomicsSources: SourceReference[] = [
     use: "Canonical specifications and terminology for SAM/BAM and VCF/BCF genomic data formats.",
   },
 ];
-
-
-
-
-
-
+const digitalMicrobiologySources: SourceReference[] = [
+  {
+    label: "CLSI M67 — Verification of Laboratory Automation in Microbiology",
+    url: "https://clsi.org/shop/standards/m67/",
+    license: "Copyrighted standard; cited, not reproduced",
+    use: "Primary framework for verification and implementation of microbiology laboratory automation, plate imaging, digital plate reading, image-analysis software, LIS transmission, change verification, downtime, and postverification quality assurance.",
+  },
+  {
+    label: "Rhoads et al. — A review of the current state of digital plate reading of cultures in clinical microbiology",
+    url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC4466785/",
+    license: "Open-access article; CC BY",
+    use: "Background on digital plate reading, image acquisition, middleware, remote consultation, image storage, and workflow considerations.",
+  },
+  {
+    label: "Misra et al. — The Use of Machine Learning for Image Analysis Artificial Intelligence in Clinical Microbiology",
+    url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC10575257/",
+    license: "Open-access article; source cited",
+    use: "Clinical microbiology applications, implementation considerations, validation, and limitations of image-analysis artificial intelligence.",
+  },
+]; 
+const publicHealthSources: SourceReference[] = [
+  {
+    label: "CDC — Electronic Laboratory Reporting (ELR)",
+    url: "https://www.cdc.gov/electronic-lab-reporting/php/about/index.html",
+    license: "U.S. government educational resource; source cited",
+    use: "Current overview of electronic laboratory reporting, standardized electronic exchange, and the role of ELR in public-health surveillance and outbreak response.",
+  },
+  {
+    label: "CDC PHIN — Data Interchange Standards",
+    url: "https://www.cdc.gov/phin/php/standards/data-interchange.html",
+    license: "U.S. government technical documentation; source cited",
+    use: "Technical framework for electronic laboratory reporting to public health, including the published HL7 Version 2.5.1 ELR implementation guide.",
+  },
+  {
+    label: "APHL — Electronic Laboratory Reporting",
+    url: "https://aphl.org/focus-areas/informatics/reporting/ELR",
+    license: "Copyrighted educational resource; cited, not reproduced",
+    use: "ELR workflow, standardized messaging, terminology mapping, and use of HL7, LOINC, and SNOMED in laboratory-to-public-health data exchange.",
+  },
+];
 export const topics: TopicDefinition[] = [
   {
     id: 1,
@@ -128,18 +162,19 @@ const manifests: ManifestSeed[] = [
     sources: microbialGenomicsSources,
     hasLocalPracticum: false,
   },
-  {
-    slug: "microbiology-digital-imaging-telemicrobiology",
-   title: "Digital Microbiology and Emerging Technologies",
-    topic: 1,
-    pierObjectives: ["1.5"],
-    durationMinutes: 25,
-    difficulty: "applied",
-    interactionKinds: [],
-    apiSessions: [],
-    hasLocalPracticum: false,
-  },
-  {
+ {
+  slug: "microbiology-digital-imaging-telemicrobiology",
+  title: "Digital Microbiology and Emerging Technologies",
+  topic: 1,
+  pierObjectives: ["1.5"],
+  durationMinutes: 25,
+  difficulty: "applied",
+  interactionKinds: [],
+  apiSessions: [],
+  sources: digitalMicrobiologySources,
+  hasLocalPracticum: false,
+},
+  {   
     slug: "microbiology-public-health-surveillance",
     title: "Public Health Surveillance and Microbiology Data Exchange",
     topic: 1,
@@ -148,8 +183,10 @@ const manifests: ManifestSeed[] = [
     difficulty: "applied",
     interactionKinds: [],
     apiSessions: [],
+    sources: publicHealthSources,
     hasLocalPracticum: false,
   },
+    
 ];
 
 
@@ -612,157 +649,290 @@ const cases: Record<string, CaseSeed> = {
     ]
   },
 
-  "microbiology-digital-imaging-telemicrobiology": {
-  artifact: "Remote microbiology image consultation",
+    "microbiology-digital-imaging-telemicrobiology": {
+    artifact: "Digital microbiology imaging and analysis workflow",
 
-  evidence: [
-    ["Digital image", "Gram-stain image transmitted for remote consultation", "positive"],
-    ["Image quality", "Fine cellular detail is inconsistently visible", "warning"],
-    ["Remote display", "Display characteristics have not been validated", "critical"],
-    ["Clinical context", "Specimen source and preliminary culture findings are available", "positive"]
-  ],
+    evidence: [
+      [
+        "Digital imaging",
+        "Automated microbiology systems can acquire digital images of culture media for review and analysis",
+        "positive"
+      ],
+      [
+        "Image quality",
+        "Acquisition conditions and image quality influence what information is available for interpretation",
+        "warning"
+      ],
+      [
+        "Image analysis",
+        "Software or machine-learning tools may assist with tasks such as detecting or classifying growth, but performance depends on the validated intended use",
+        "critical"
+      ],
+      [
+        "Workflow integration",
+        "Images, analysis results, specimen identifiers, and downstream laboratory information must remain correctly associated",
+        "warning"
+      ]
+    ],
 
-  trace: [
-    [
-      "Image acquisition",
-      "Medical technologist",
-      "Captures a representative microscopic field.",
-      "Focus, resolution, color, and field selection influence what information is available remotely."
+    trace: [
+      [
+        "Specimen and culture",
+        "Clinical microbiology laboratory",
+        "Produces culture media or other visual material that may be incorporated into a digital workflow.",
+        "The digital system must preserve the relationship between the image and the correct specimen, culture, and laboratory workflow."
+      ],
+      [
+        "Image acquisition",
+        "Automation / imaging system",
+        "Captures digital images under defined acquisition conditions.",
+        "Image quality, timing, focus, illumination, and other acquisition characteristics can influence downstream interpretation."
+      ],
+      [
+        "Image analysis / digital review",
+        "Software and microbiology personnel",
+        "Images may be reviewed by humans or processed by validated image-analysis algorithms.",
+        "Algorithmic output should be interpreted according to its validated intended use rather than assumed to replace microbiology expertise."
+      ],
+      [
+        "LIS and downstream workflow",
+        "Laboratory informatics",
+        "Associates image-derived information with the appropriate laboratory record and communicates relevant results downstream.",
+        "Implementation should verify data association, result transmission, exception handling, and the complete intended workflow."
+      ]
     ],
-    [
-      "Image transmission",
-      "Laboratory information system",
-      "Transfers the image and associated case information.",
-      "Successful transmission does not establish that the image is adequate for interpretation."
-    ],
-    [
-      "Remote workstation",
-      "Consulting microbiologist",
-      "Displays the image for remote review.",
-      "Display characteristics can affect visualization of diagnostically important features."
-    ],
-    [
-      "Clinical interpretation",
-      "Microbiology laboratory",
-      "Integrates the remote interpretation with specimen and culture information.",
-      "Digital images should be interpreted within the appropriate laboratory and clinical context."
+
+    questions: [
+      {
+        question: "Why is digital plate imaging in clinical microbiology an informatics issue rather than simply a camera attached to an incubator?",
+        choices: [
+          "Because images, specimen identifiers, culture conditions, analysis results, and workflow states must remain correctly associated and usable across laboratory systems",
+          "Because digital imaging eliminates the need for an LIS",
+          "Because every culture image can automatically generate a final diagnosis",
+          "Because digital images cannot be reviewed by microbiology personnel"
+        ],
+        correctIndex: 0,
+        explanation: "Digital microbiology combines image acquisition with specimen tracking, software, workflow information, interpretation, and downstream data exchange. The information relationships are therefore as important as the imaging hardware."
+      },
+      {
+        question: "A laboratory can successfully transmit digital culture images to a remote workstation. What does successful transmission alone establish?",
+        choices: [
+          "That the images are diagnostically equivalent to direct review for every intended use",
+          "That the files can be transmitted, but not that acquisition, display, interpretation, and the complete workflow are adequate for the intended use",
+          "That remote reviewers no longer require clinical or laboratory context",
+          "That image-analysis software can be used without validation"
+        ],
+        correctIndex: 1,
+        explanation: "Technical transmission is only one component of a digital workflow. The laboratory must consider the intended use and verify the relevant acquisition, transmission, display, interpretation, and workflow components."
+      },
+      {
+        question: "An image-analysis algorithm was validated to identify plates with no visible growth under defined conditions. What is the safest informatics interpretation of that validation?",
+        choices: [
+          "The algorithm may now make any microbiology diagnosis from any image",
+          "The algorithm can replace all microbiology personnel",
+          "Its use should remain within the validated task, specimen or media conditions, workflow, and performance boundaries",
+          "The validation remains applicable after any software or imaging-system change without further assessment"
+        ],
+        correctIndex: 2,
+        explanation: "Validation supports a defined intended use. Performance for one image-analysis task does not automatically establish performance for different organisms, media, image conditions, decisions, or workflows."
+      },
+      {
+        question: "A software update changes the image-analysis algorithm used by an automated culture system. What should laboratory leadership do?",
+        choices: [
+          "Assume the update has no effect because the imaging hardware did not change",
+          "Delete all images collected before the update",
+          "Allow the vendor to determine clinical acceptability without local review",
+          "Assess the potential effect of the change and perform appropriate verification or change-control activities before relying on the updated workflow"
+        ],
+        correctIndex: 3,
+        explanation: "Software and algorithm changes can alter system performance. Laboratory governance should therefore assess their impact and determine the verification needed for the intended clinical workflow."
+      },
+      {
+        question: "What is an important potential advantage of retaining digital microbiology images?",
+        choices: [
+          "They can support retrospective review, consultation, quality assurance, education, or documentation when implemented appropriately",
+          "They guarantee that the original culture never needs to be examined",
+          "They eliminate image-storage and data-governance requirements",
+          "They automatically determine organism identification and susceptibility"
+        ],
+        correctIndex: 0,
+        explanation: "Stored images can support review and quality-related activities, but their usefulness depends on appropriate acquisition, storage, retrieval, context, and governance."
+      },
+      {
+        question: "Which statement best describes the role of artificial intelligence or machine learning in current digital microbiology workflows?",
+        choices: [
+          "Any model with high accuracy in a research paper can immediately be used for patient reporting",
+          "AI makes validation unnecessary because the model learns from new cases",
+          "AI is useful only for administrative tasks and cannot analyze microbiology images",
+          "AI can support defined image-analysis tasks, but clinical implementation requires validation, monitoring, workflow integration, and appropriate human oversight"
+        ],
+        correctIndex: 3,
+        explanation: "Machine-learning image analysis can support microbiology workflows, but performance must be established for the intended application and incorporated into an appropriately governed clinical process."
+      }
     ]
-  ],
+  },
+   "microbiology-public-health-surveillance": {
+    artifact: "Electronic laboratory reporting and public-health surveillance workflow",
 
-  diagnosis: [
-    "What is the main informatics concern?",
-    "The complete imaging pathway has not been validated for reliable remote interpretation",
-    "Any successfully transmitted image is adequate for diagnosis",
-    "Clinical context is unnecessary when reviewing microbiology images"
-  ],
-
-  repair: [
-    "What should be done before routine telemicrobiology use?",
-    "Validate representative image types, acquisition methods, transmission, displays, and escalation procedures",
-    "Validate only that the image file can be transmitted",
-    "Allow each remote reviewer to determine independently whether their display is adequate"
-  ],
-
-  tests: [
-    ["Gram stain", "Fine morphologic detail remains interpretable remotely", false],
-    ["Image acquisition", "Focus and representative field selection meet defined criteria", false],
-    ["Remote display", "Validated displays preserve necessary visual information", false],
-    ["Escalation", "Uncertain or inadequate images trigger direct review or additional imaging", false]
-  ]
-},
-  "microbiology-public-health-surveillance": {
-  artifact: "Electronic microbiology report to public health",
-
-  evidence: [
-    ["Laboratory result", "Reportable organism identified and finalized in the LIS", "positive"],
-    ["Electronic transmission", "Public health system acknowledges receipt", "positive"],
-    ["Organism terminology", "Laboratory-specific organism code is transmitted", "warning"],
-    ["Specimen source", "Sent as unstructured free text", "warning"]
-  ],
-
-  trace: [
-    [
-      "Clinical microbiology laboratory",
-      "Medical technologist",
-      "Finalizes the organism identification and associated result.",
-      "The laboratory result is meaningful within the local LIS."
+    evidence: [
+      [
+        "Laboratory result",
+        "A reportable microbiology result is finalized within the laboratory information system",
+        "positive"
+      ],
+      [
+        "Electronic laboratory reporting",
+        "Structured laboratory information can be transmitted electronically to public-health agencies for surveillance and response",
+        "positive"
+      ],
+      [
+        "Terminology",
+        "Standardized vocabularies support consistent interpretation of laboratory information across organizations",
+        "warning"
+      ],
+      [
+        "End-to-end interoperability",
+        "Successful message delivery does not by itself establish that the receiving system interpreted every transmitted data element correctly",
+        "critical"
+      ]
     ],
-    [
-      "LIS reporting workflow",
-      "Laboratory informatics",
-      "Identifies the result as reportable and prepares data for transmission.",
-      "Reporting rules and mappings determine what information leaves the laboratory."
+
+    trace: [
+      [
+        "Clinical microbiology laboratory",
+        "Medical technologist / microbiologist",
+        "Generates and finalizes microbiology results that may meet public-health reporting requirements.",
+        "Reporting requirements depend on the applicable jurisdiction and must be represented correctly in the laboratory workflow."
+      ],
+      [
+        "LIS reporting workflow",
+        "Laboratory informatics",
+        "Identifies reportable information and maps laboratory data into the structures and terminology needed for electronic reporting.",
+        "Local test, organism, specimen, and result concepts may require controlled mapping to standardized representations."
+      ],
+      [
+        "Electronic laboratory reporting interface",
+        "Laboratory and public-health informatics",
+        "Transmits structured laboratory information to the appropriate public-health system.",
+        "Message standards support transport and structure, but semantic accuracy also depends on correct coding and mapping."
+      ],
+      [
+        "Public-health surveillance system",
+        "Public-health agency",
+        "Receives laboratory data for surveillance, case investigation, outbreak detection, and other public-health activities.",
+        "End-to-end validation should assess whether transmitted information is received and interpreted as intended."
+      ]
     ],
-    [
-      "Electronic interface",
-      "Interface team",
-      "Transmits the report to the public health system.",
-      "Successful transport confirms receipt but not necessarily correct interpretation."
-    ],
-    [
-      "Public health surveillance system",
-      "Public health agency",
-      "Uses incoming laboratory data for surveillance and investigation.",
-      "Local codes or unstructured information may prevent automated interpretation."
-    ]
-  ],
 
-  diagnosis: [
-    "What is the main informatics problem?",
-    "The report was transmitted successfully, but local terminology and unstructured data may prevent semantic interoperability",
-    "The public health system failed because electronic reporting cannot support microbiology",
-    "An acknowledgment proves that every transmitted field was interpreted correctly"
-  ],
-
-  repair: [
-    "What is the best approach?",
-    "Map reportable data to agreed terminology and structured fields, validate receiver interpretation, and maintain the reporting workflow as requirements change",
-    "Continue sending local codes because the message is technically delivered",
-    "Convert the entire report into free text so humans can interpret it"
-  ],
-
-  tests: [
-    ["Reportable organism", "Maps to the expected public health concept", false],
-    ["Specimen source", "Uses an agreed structured representation", false],
-    ["Transmission", "Message reaches the intended public health system", false],
-    ["Receiver interpretation", "Incoming data are correctly processed for surveillance", false]
+    questions: [
+      {
+        question: "What is the primary purpose of electronic laboratory reporting (ELR) in a clinical microbiology workflow?",
+        choices: [
+          "Automatically transmit structured laboratory information to public-health agencies for surveillance and response",
+          "Replace the laboratory information system with a public-health database",
+          "Send every microbiology result directly to the CDC regardless of reporting requirements",
+          "Allow public-health agencies to control microbiology instruments remotely"
+        ],
+        correctIndex: 0,
+        explanation: "ELR supports automated electronic transmission of laboratory information to public-health agencies. Reporting destinations and requirements depend on the applicable public-health jurisdiction."
+      },
+      {
+        question: "A public-health system sends an acknowledgment indicating that an ELR message was received. What does that acknowledgment alone establish?",
+        choices: [
+          "Every laboratory concept in the message was interpreted correctly",
+          "The message reached the receiving workflow, but additional validation is needed to establish correct processing and interpretation of its contents",
+          "The patient automatically meets a national surveillance case definition",
+          "No terminology mapping is required"
+        ],
+        correctIndex: 1,
+        explanation: "Technical receipt and semantic interoperability are different. Successful delivery does not by itself prove that test, organism, specimen, result, and other concepts were interpreted as intended."
+      },
+      {
+        question: "Why are standardized terminologies such as LOINC and SNOMED CT important in electronic laboratory reporting?",
+        choices: [
+          "They encrypt laboratory messages during transmission",
+          "They determine which organisms will grow in culture",
+          "They help represent laboratory concepts consistently so receiving systems can interpret the transmitted information",
+          "They replace HL7 messaging standards"
+        ],
+        correctIndex: 2,
+        explanation: "Standardized terminology supports semantic interoperability by providing shared representations for laboratory concepts. Messaging standards and terminology standards serve complementary rather than interchangeable roles."
+      },
+      {
+        question: "A laboratory transmits a local organism code that is meaningful inside its LIS but unknown to the receiving public-health system. The message is delivered successfully. What is the main informatics problem?",
+        choices: [
+          "Analytical sensitivity failure",
+          "Specimen contamination",
+          "Network downtime",
+          "Semantic interoperability failure caused by inadequate terminology mapping"
+        ],
+        correctIndex: 3,
+        explanation: "The transport layer succeeded, but the receiving system may not understand the local code. Controlled terminology mapping is therefore necessary when local representations differ from those expected by the receiver."
+      },
+      {
+        question: "Which statement best distinguishes electronic laboratory reporting (ELR) from electronic case reporting (eCR)?",
+        choices: [
+          "ELR primarily communicates laboratory information to public health, whereas eCR automates transmission of reportable case information from electronic health records",
+          "ELR and eCR are two names for exactly the same workflow",
+          "ELR is used only for genomic sequencing, whereas eCR is used only for culture results",
+          "eCR replaces the need for laboratory reporting"
+        ],
+        correctIndex: 0,
+        explanation: "ELR and eCR are complementary public-health data-exchange workflows. ELR centers on laboratory information, while eCR automates case-report information from the electronic health record."
+      },
+      {
+        question: "Why should a laboratory avoid hard-coding public-health reporting logic and then leaving it unchanged indefinitely?",
+        choices: [
+          "Electronic reporting is intended to be temporary",
+          "Reporting requirements, terminology, implementation guidance, and receiving-system expectations can change and therefore require governance and maintenance",
+          "Public-health agencies cannot receive structured laboratory data",
+          "Every reporting rule must be manually recreated for each patient"
+        ],
+        correctIndex: 1,
+        explanation: "Public-health interfaces are maintained clinical information systems. Laboratories need ownership, change control, testing, and ongoing governance as reporting requirements and technical specifications evolve."
+      }
     ]
   },
 };
 
-const feedbackFor = (_label: string, correct: boolean, repair = false) =>
-  correct
-    ? repair ? "This fixes the problem and includes the checks needed before approval." : "This explains the findings at each step."
-    : repair ? "This does not fix the source of the problem or include enough validation." : "This does not explain all of the findings.";
-
-const toChoices = (labels: [string, string, string], repair = false): Choice[] => labels.map((label, index) => ({
-  id: index === 0 ? repair ? "validated" : "correct" : index === 1 ? "narrow" : "unsafe",
-  label,
-  correct: index === 0,
-  feedback: feedbackFor(label, index === 0, repair),
-}));
-
 export const lessons: LessonDefinition[] = manifests.map((manifest, index) => {
   const item = cases[manifest.slug];
-  if (!item) throw new Error(`Missing case data for ${manifest.slug}`);
+
+  if (!item) {
+    throw new Error(`Missing case data for ${manifest.slug}`);
+  }
+
   return {
-      manifest: {
+    manifest: {
       ...manifest,
       id: String(index + 1).padStart(2, "0"),
-     sources: [
-  pierSource,
-  ...(manifest.apiSessions.length > 0 ? [apiSource(manifest.apiSessions)] : []),
-  ...(manifest.sources ?? []),
-],
+      sources: [
+        pierSource,
+        ...(manifest.apiSessions.length > 0
+          ? [apiSource(manifest.apiSessions)]
+          : []),
+        ...(manifest.sources ?? []),
+      ],
     },
     artifactTitle: item.artifact,
-    evidence: item.evidence.map(([label, value, tone]) => ({ label, value, tone: tone ?? "neutral" })),
-    trace: item.trace.map(([system, role, sees, implication]) => ({ system, role, sees, implication })),
-    decisionPrompt: item.diagnosis[0],
-    decisionChoices: toChoices(item.diagnosis.slice(1) as [string, string, string]),
-    repairPrompt: item.repair[0],
-    repairChoices: toChoices(item.repair.slice(1) as [string, string, string], true),
-    validationCases: item.tests.map(([name, note, strict]) => ({ name, note, passingRepairs: strict === false ? ["validated"] : ["validated", "narrow"] })),
+    evidence: item.evidence.map(([label, value, tone]) => ({
+      label,
+      value,
+      tone: tone ?? "neutral",
+    })),
+    trace: item.trace.map(([system, role, sees, implication]) => ({
+      system,
+      role,
+      sees,
+      implication,
+    })),
+    questions: item.questions.map((question, questionIndex) => ({
+      id: `${manifest.slug}-q${questionIndex + 1}`,
+      question: question.question,
+      choices: [...question.choices],
+      correctIndex: question.correctIndex,
+      explanation: question.explanation,
+    })),
   };
 });
 
