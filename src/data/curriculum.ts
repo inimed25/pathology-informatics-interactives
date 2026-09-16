@@ -17,6 +17,27 @@ const apiSource = (sessions: number[]): SourceReference => ({
   use: "Foundational concepts and terminology, adapted with attribution.",
 });
 
+const microbiologyFoundationsSources: SourceReference[] = [
+  {
+    label: "CDC — Introduction to Laboratory Informatics Series",
+    url: "https://www.cdc.gov/lab-training/php/courses/introduction-lab-informatics.html",
+    license: "U.S. government educational resource; source cited",
+    use: "Foundational framework for laboratory informatics, including data relationships, data standards, information flow, LIS functionality, interoperability, and the life of a laboratory result.",
+  },
+  {
+    label: "LOINC Users' Guide — Microbiology",
+    url: "https://loinc.org/kb/users-guide/special-cases/microbiology",
+    license: "LOINC terminology documentation; source cited",
+    use: "Microbiology-specific guidance on representing culture observations, specimens, result status, organism results, and antimicrobial susceptibility information using standardized terminology.",
+  },
+  {
+    label: "Rhoads et al. — Clinical Microbiology Informatics",
+    url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC4187636/",
+    license: "Copyrighted peer-reviewed article; cited, not reproduced",
+    use: "Clinical microbiology-specific overview of laboratory information systems, interfaces, decision support, automation, electronic reporting, and other informatics applications.",
+  },
+];
+
 const microbialGenomicsSources: SourceReference[] = [
   {
     label: "CLSI MM24 — Molecular Methods for Genotyping and Strain Typing of Infectious Organisms",
@@ -97,14 +118,7 @@ export const topics: TopicDefinition[] = [
     objectives: ["1.1", "1.2", "1.3", "1.4", "1.5", "1.6"],
     summary:
       "Laboratory data, decision support, automation, genomics, digital technologies, and public health applications in clinical microbiology.",
-  },
-];
-type MCQSeed = {
-  question: string;
-  choices: [string, string, string, string];
-  correctIndex: number;
-  explanation: string;
-};
+
 
 type CaseSeed = {
   artifact: string;
@@ -126,6 +140,7 @@ const manifests: ManifestSeed[] = [
     difficulty: "foundational",
     interactionKinds: [],
     apiSessions: [],
+    sources: microbiologyFoundationsSources,
     hasLocalPracticum: false,
   },
   {
