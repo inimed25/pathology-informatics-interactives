@@ -37,6 +37,33 @@ const microbiologyFoundationsSources: SourceReference[] = [
     use: "Clinical microbiology-specific overview of laboratory information systems, interfaces, decision support, automation, electronic reporting, and other informatics applications.",
   },
 ];
+const antimicrobialDecisionSupportSources: SourceReference[] = [
+  {
+    label: "CLSI M100 — Performance Standards for Antimicrobial Susceptibility Testing",
+    url: "https://clsi.org/standards/products/microbiology/documents/m100/",
+    license: "Copyrighted standard; cited, not reproduced",
+    use: "Primary U.S.-oriented reference for antimicrobial susceptibility interpretive criteria, breakpoint terminology, and AST reporting considerations.",
+  },
+  {
+    label: "CLSI — Breakpoint Implementation Toolkit",
+    url: "https://clsi.org/meetings/ast/breakpoint-implementation-toolkit/",
+    license: "Copyrighted educational resource; cited, not reproduced",
+    use: "Implementation framework for reviewing, updating, validating, and documenting antimicrobial susceptibility breakpoints in clinical laboratory systems.",
+  },
+  {
+    label: "CLSI M39 — Analysis and Presentation of Cumulative Antimicrobial Susceptibility Test Data",
+    url: "https://clsi.org/standards/products/microbiology/documents/m39/",
+    license: "Copyrighted standard; cited, not reproduced",
+    use: "Framework for analysis and presentation of cumulative antimicrobial susceptibility data and antibiograms.",
+  },
+  {
+    label: "EUCAST — Expert Rules and Expected Phenotypes",
+    url: "https://www.eucast.org/expert_rules_and_expected_phenotypes",
+    license: "Copyrighted technical resource; cited, not reproduced",
+    use: "Supplemental framework for knowledge-based interpretation of antimicrobial susceptibility patterns, expected phenotypes, and expert-rule concepts.",
+  },
+];
+
 
 const microbialGenomicsSources: SourceReference[] = [
   {
@@ -151,8 +178,9 @@ const manifests: ManifestSeed[] = [
     durationMinutes: 25,
     difficulty: "applied",
     interactionKinds: [],
-    apiSessions: [],
-    hasLocalPracticum: false,
+apiSessions: [],
+sources: antimicrobialDecisionSupportSources,
+hasLocalPracticum: false,
   },
   {
     slug: "microbiology-interfaces-automation",
