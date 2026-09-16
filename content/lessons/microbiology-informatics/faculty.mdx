@@ -2,19 +2,49 @@
 
 ## Teaching Focus
 
-This lesson introduces clinical microbiology informatics as the integration of laboratory data, information systems, genomic sequencing, bioinformatics, and clinical or public health interpretation.
+This module introduces clinical microbibiology informatics through the lifecycle of laboratory information.
+
+The emphasis is not on learning a particular software system. Learners should understand how microbiology information is generated, structured, transmitted, represented, and used across laboratory and clinical systems.
+
+By the end of the module, learners should recognize that an analytically correct microbiology result can still produce an informatics failure if its identity, structure, context, or meaning is not preserved downstream.
 
 ## Key Teaching Points
 
-- Informatics is broader than software and includes people, data, and workflow.
-- Whole-genome sequencing generates data that require validated bioinformatics analysis and interpretation.
-- The clinical question should guide the genomic analysis strategy.
-- Genomic relatedness should be interpreted alongside epidemiologic and clinical context.
-- Successful implementation requires attention to validation, reporting, governance, and data management.
+- Clinical microbiology informatics includes data, systems, people, interfaces, and workflows.
+- Microbiology results may contain multiple related observations that evolve over time.
+- The LIS and EHR serve different roles within the laboratory information lifecycle.
+- Information may be transmitted successfully while its clinical meaning is lost or incorrectly represented.
+- Structured data and standardized terminology can support interoperability, analytics, decision support, and surveillance.
+- Informatics problems may occur even when the underlying microbiology testing is analytically correct.
+- Clinical microbiology directors contribute domain expertise to the design, validation, troubleshooting, and governance of laboratory information workflows.
+
+## Suggested Discussion Scenario
+
+A blood culture isolate is correctly identified in the laboratory system, but the organism appears incorrectly in the EHR.
+
+Ask learners:
+
+1. Would repeating the organism identification necessarily solve the problem?
+2. At what points in the information pathway could the error have occurred?
+3. What information would you compare between the instrument, LIS, interface, and EHR?
+4. Who would need to participate in the investigation?
+
+Use the scenario to reinforce the distinction between an **analytical laboratory problem** and an **information-management problem**.
 
 ## Discussion Prompts
 
 - Where does informatics already appear in routine microbiology workflows?
-- What parts of a WGS workflow require the most informatics support?
-- What should a clinical laboratory retain from a genomic sequencing analysis?
-- How should laboratories communicate uncertainty in genomic interpretation?
+- Why can microbiology results be more difficult to represent than a single numeric laboratory result?
+- What is the difference between successfully transmitting information and successfully preserving its meaning?
+- When should microbiology information be structured rather than represented only as free text?
+- What informatics responsibilities require clinical microbiology expertise even when technical implementation is performed by an IT or LIS team?
+
+## Faculty Emphasis
+
+Learners do not need to leave this introductory module knowing the technical details of HL7 messaging, terminology mapping, antimicrobial susceptibility rules, automation, or bioinformatics pipelines.
+
+Those topics are developed in later modules.
+
+The goal of Module 1.1 is to establish the conceptual framework learners will use throughout the curriculum:
+
+> **Follow the data, identify the systems, preserve the meaning, and understand the workflow.**
