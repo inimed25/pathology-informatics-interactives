@@ -1,9 +1,21 @@
 # Debrief
 
-Antimicrobial decision-support systems can help laboratories interpret susceptibility patterns consistently, but their recommendations depend on the rules and data that support them.
+Antimicrobial susceptibility testing illustrates why clinical microbiology informatics involves more than transmitting laboratory measurements.
 
-Expert rules may identify unusual resistance phenotypes, suppress inappropriate antimicrobial results, or generate interpretive comments. Because these rules can influence the final laboratory report, they should be treated as part of the validated clinical system.
+An MIC is an analytical measurement. Its categorical interpretation depends on the applicable interpretive criteria for the organism-antimicrobial combination. Therefore, the same MIC can be interpreted differently if the breakpoint criteria used by the laboratory change.
 
-Standards, breakpoints, resistance mechanisms, and laboratory practices change over time. Decision-support rules therefore require defined ownership, validation, version control, and ongoing maintenance.
+A useful way to troubleshoot AST information is to follow the result through the complete pathway:
 
-Automation can support microbiology expertise, but it does not eliminate the need for laboratory oversight. Unexpected patterns and rule conflicts should have clear pathways for review and resolution.
+1. **Measurement:** What susceptibility measurement did the AST method or instrument generate?
+2. **Interpretation:** Which breakpoint criteria were applied?
+3. **Rules:** Did an expert rule or laboratory policy flag, suppress, modify, or otherwise affect the result?
+4. **Representation:** Were the organism, antimicrobial, MIC, category, and associated information mapped correctly?
+5. **Reporting:** Did the LIS, interface, and EHR preserve the intended result downstream?
+
+This distinction is important because a correct MIC does not guarantee a correct final report. An outdated breakpoint, incorrect mapping, inappropriate expert rule, or downstream transformation can produce an informatics discrepancy even when the analytical measurement itself is correct.
+
+Antibiograms introduce another informatics challenge. Unlike an individual isolate's AST report, an antibiogram summarizes susceptibility data across a defined collection of isolates. The validity of that summary therefore depends not only on AST results but also on appropriate data selection, aggregation, and analysis.
+
+AST knowledge and configurations also change over time. Breakpoints, laboratory policies, software, mappings, and expert-system rules should therefore have defined ownership, validation, documentation, change control, and ongoing review.
+
+> **Central takeaway:** In AST informatics, always distinguish the measurement from the knowledge and rules used to interpret, transform, and report it.
