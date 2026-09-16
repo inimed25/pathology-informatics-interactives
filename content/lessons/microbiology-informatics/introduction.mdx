@@ -1,494 +1,288 @@
-# Clinical Microbiology Informatics
+# Foundations of Clinical Microbiology Informatics
 
-## Overview
+## Why Informatics Matters in Microbiology
 
-Clinical microbiology generates a large amount of information—from specimen collection and organism identification to antimicrobial susceptibility testing, molecular results, and public health reporting.
+Clinical microbiology produces information that must move through multiple people, instruments, software systems, and clinical workflows before it can influence patient care.
 
-As microbiology laboratories become increasingly automated and incorporate molecular and genomic technologies, the ability to manage, analyze, interpret, and communicate this information becomes increasingly important.
+A blood culture, for example, may generate information about:
 
-**Clinical microbiology informatics** can be thought of as the application of information, information technology, and informatics tools to solve problems in clinical microbiology and improve laboratory workflow, efficiency, reliability, and patient care.
+- specimen collection and status
+- microbial growth
+- organism identification
+- antimicrobial susceptibility
+- preliminary and final results
+- comments or interpretive information
 
-> **Think about it:** Informatics is not just the computer system. It also includes the people, processes, data, and workflows that surround that system.
+Managing that information is part of **clinical microbiology informatics**.
+
+Clinical microbiology informatics applies information systems, data standards, computational tools, and workflow design to help microbiology information remain accurate, interpretable, and useful as it moves through the laboratory and into clinical care.
+
+> **Key idea:** Informatics is not simply the computer system. It includes the data, people, processes, interfaces, rules, and systems surrounding laboratory information.
 
 ---
 
 ## Learning Objectives
 
-By the end of this lesson, you should be able to:
+By the end of this module, you should be able to:
 
-* Describe what is meant by clinical microbiology informatics.
-* Identify several ways informatics is incorporated into the microbiology laboratory.
-* Explain the difference between whole-genome sequencing (WGS) and metagenomic sequencing (MGS).
-* Describe how genomic data move through a bioinformatics workflow.
-* Identify potential clinical and public health applications of microbial WGS.
-* Recognize some of the informatics challenges associated with implementing genomic sequencing in the clinical laboratory.
-
----
-
-# 1. What Is Clinical Microbiology Informatics?
-
-Clinical microbiology informatics involves the use of information, software, databases, algorithms, and information systems to support the detection, identification, characterization, and reporting of clinically relevant microorganisms.
-
-However, informatics is not simply about technology.
-
-Consider three components:
-
-### Data
-
-Microbiology laboratories generate many different types of data:
-
-* Patient and specimen information
-* Organism identification
-* Antimicrobial susceptibility results
-* Molecular test results
-* Laboratory quality data
-* Genomic sequences
-* Public health surveillance data
-
-### People
-
-The information is used and interpreted by:
-
-* Medical technologists and laboratory scientists
-* Microbiologists
-* Pathologists
-* Clinicians
-* Infectious disease physicians
-* Epidemiologists
-* Informatics specialists
-* Bioinformaticians
-
-### Processes
-
-Information must move through workflows that allow the laboratory to:
-
-1. Generate data
-2. Validate data
-3. Analyze data
-4. Interpret data
-5. Communicate results
-6. Use the information to guide clinical or public health decisions
-
-**The goal of informatics is therefore not simply to generate more data. The goal is to turn data into useful information.**
+1. Describe the role of informatics in clinical microbiology.
+2. Explain why microbiology results can be more structurally complex than a single numeric laboratory result.
+3. Describe a simplified microbiology data lifecycle from the laboratory to the electronic health record.
+4. Distinguish the general roles of the laboratory information system and electronic health record.
+5. Explain why structured data and standardized terminology matter for interoperability.
+6. Recognize the microbiology director's role in governing laboratory information.
 
 ---
 
-# 2. Where Does Informatics Appear in Microbiology?
+## 1. Microbiology Results Are Data
 
-Informatics is already embedded in many routine microbiology workflows.
+Consider two laboratory results.
 
-Examples include:
+**Chemistry**
 
-* Laboratory information systems (LIS)
-* Instrument interfaces
-* Automated microbiology systems
-* Antimicrobial susceptibility testing
-* Clinical decision support
-* Expert systems
-* Electronic reporting
-* Public health reporting
-* Automated image analysis
-* Outbreak surveillance
-* Microbial genomic sequencing
+> Potassium: 4.1 mmol/L
 
-### Consider the following scenario
+**Microbiology**
 
-A blood culture becomes positive.
+> Blood culture  
+> Organism identified  
+> Antimicrobial susceptibility results  
+> Preliminary and final result status  
+> Interpretive comments
 
-The organism is identified by an automated instrument. The result is transmitted electronically to the laboratory information system. An antimicrobial susceptibility panel is performed, and the results are interpreted using laboratory rules. The final report is then transmitted to the electronic health record.
+Both are laboratory information, but their structure is different.
 
-**Question:**
+A microbiology result may contain multiple related observations that evolve over time.
 
-How many components of this workflow involve informatics?
+For example, a culture may progress from:
 
-**Answer:**
+    Specimen received
+          ↓
+    Culture in progress
+          ↓
+    Growth detected
+          ↓
+    Organism identified
+          ↓
+    Susceptibility testing
+          ↓
+    Final report
 
-Potentially all of them.
+Information generated at each stage must remain associated with the correct patient, specimen, organism, and test.
 
-The important point is that informatics can span the entire process rather than being limited to one piece of software.
-
----
-
-# 3. From Microbiology Data to Genomic Data
-
-One of the most rapidly developing areas of microbiology informatics is microbial genomic sequencing.
-
-### Whole-Genome Sequencing
-
-Whole-genome sequencing (WGS) uses high-throughput sequencing to analyze nucleic acid fragments from an organism, typically an isolated pathogen.
-
-WGS can provide information about:
-
-* Organism identification
-* Antimicrobial resistance genes or mutations
-* Virulence and toxin genes
-* Genetic relatedness between isolates
-* Epidemiologic relationships
-* Single-nucleotide polymorphisms (SNPs)
-* Multilocus sequence types (MLST)
-
-### Metagenomic Sequencing
-
-Metagenomic sequencing (MGS) is different.
-
-Rather than sequencing a single isolated organism, MGS analyzes nucleic acid directly from a clinical specimen or from an enriched sample.
-
-This can potentially allow detection and characterization of organisms that are difficult or impossible to culture.
-
-### Think about the distinction
-
-**WGS:**
-
-> "I have an organism. What can I learn about its genome?"
-
-**MGS:**
-
-> "I have a clinical specimen. What microorganisms or microbial genetic information are present?"
+This makes **data structure and relationships** especially important in microbiology.
 
 ---
 
-# 4. Case: A Possible Hospital Outbreak
+## 2. The Life of a Microbiology Result
 
-You are the microbiology fellow at a hospital.
+A useful way to understand laboratory informatics is to follow information through its lifecycle.
 
-Over several weeks, your laboratory identifies the same multidrug-resistant organism in multiple patients.
+Consider a simplified blood-culture workflow:
 
-Traditional microbiologic testing suggests that the isolates may be related.
+    Patient / specimen
+           ↓
+    Microbiology instrument or workflow
+           ↓
+    Laboratory information system (LIS)
+           ↓
+    Interface / electronic message
+           ↓
+    Electronic health record (EHR)
+           ↓
+    Clinical team
 
-The infection prevention team asks:
+> **Figure placeholder:** Original Figure 1 — The clinical microbiology data lifecycle.
 
-> **"Are these infections part of the same outbreak?"**
+The final figure will illustrate how microbiology information moves from the specimen and laboratory workflow through the LIS and interfaces to the EHR and clinical team.
 
-The laboratory decides to perform whole-genome sequencing.
+Each transition is an opportunity for information to be:
 
-### Question
+- correctly transmitted
+- delayed
+- transformed
+- mapped incorrectly
+- displayed incorrectly
+- or lost
 
-What information might WGS provide that could help investigate the outbreak?
-
-Choose the best answer:
-
-**A.** The patient's blood pressure
-
-**B.** Genetic differences between the isolates
-
-**C.** The patient's antimicrobial allergies
-
-**D.** Whether the patient had symptoms
-
-### Answer
-
-**B. Genetic differences between the isolates**
-
-WGS can identify genetic differences between isolates and can provide higher-resolution information about their relatedness. This can be useful for outbreak investigation and surveillance.
-
-However, genomic relatedness should not automatically be interpreted as proof of transmission. Epidemiologic and clinical information remain important.
+An informatics problem can therefore occur even when the microbiology testing itself was performed correctly.
 
 ---
 
-# 5. The Bioinformatics Pipeline
+## 3. LIS and EHR Are Not the Same System
 
-Sequencing does not produce a clinical answer by itself.
+The **laboratory information system (LIS)** supports laboratory operations and manages information associated with laboratory testing.
 
-Instead, sequencing generates large amounts of raw data that must be processed and interpreted.
+Depending on the local implementation, this may include information about:
 
-A simplified workflow might look like this:
+- orders
+- specimens
+- testing workflows
+- organism identification
+- susceptibility results
+- result status
+- verification
+- reporting
 
-```text
-Clinical isolate
-       ↓
-DNA extraction
-       ↓
-Sequencing
-       ↓
-Raw sequence data
-       ↓
-Quality control
-       ↓
-Alignment / assembly
-       ↓
-Variant identification
-       ↓
-Database comparison
-       ↓
-Annotation
-       ↓
-Clinical / epidemiologic interpretation
-       ↓
-Report
-```
+The **electronic health record (EHR)** serves a broader clinical role. It brings together information used by clinicians across many areas of patient care.
 
-Each step can introduce different technical and interpretive challenges.
+Laboratory results generated and managed within laboratory systems must therefore be transmitted so they can be appropriately represented in the EHR.
 
-### An important informatics principle
+This distinction becomes important when troubleshooting.
 
-**The clinical question should determine the analysis.**
+If an organism identification is correct in the laboratory system but appears incorrectly in the EHR, repeating the microbiology test may not solve the problem.
 
-For example:
-
-If the goal is to investigate an outbreak, identifying discriminatory genetic differences between isolates may be the most important analysis.
-
-If the goal is to characterize antimicrobial resistance, identifying resistance-associated genes or mutations may be more important.
-
-If the goal is to characterize a newly identified organism, genome assembly and broader genomic characterization may be more important.
-
-Therefore, there may not be a single "WGS pipeline."
-
-Different clinical questions may require different analytical workflows.
+The error may instead involve the information pathway between systems.
 
 ---
 
-# 6. You Are the Microbiology Informatics Director
+## 4. Moving Data Is Not the Same as Preserving Meaning
 
-Your laboratory has implemented bacterial WGS.
+Imagine that a microbiology laboratory uses the local code:
 
-The laboratory is now generating large amounts of genomic information.
+    ORG_247
 
-The laboratory director asks:
+to represent a particular organism.
 
-> **"What information should we actually keep?"**
+The laboratory system understands the code.
 
-Possible data include:
+The receiving system successfully receives the electronic message—but does not know what `ORG_247` means.
 
-* Raw sequencing reads
-* Quality-control metrics
-* Assembled genomes
-* Aligned sequences
-* Variant calls
-* Antimicrobial resistance markers
-* Virulence genes
-* Organism identification
-* Epidemiologic classifications
-* Final clinical reports
+Technically, the message arrived.
 
-### Think about it
+Semantically, the information failed.
 
-Should the laboratory store everything?
+This illustrates an important distinction:
 
-There isn't necessarily a single answer.
+**Syntactic interoperability** concerns whether systems can exchange information in an expected structure or format.
 
-Data storage involves considerations including:
+**Semantic interoperability** concerns whether the receiving system can preserve and interpret the meaning of that information.
 
-* Clinical usefulness
-* Future reanalysis
-* Storage capacity
-* Data security
-* Patient confidentiality
-* Regulatory requirements
-* Ability to reproduce an analysis
-* Public health needs
+Standardized terminologies can help systems represent laboratory concepts consistently.
 
-As genomic testing becomes more common, laboratories must develop sustainable approaches to data storage, backup, analysis, and sharing.
+For example, LOINC provides standardized identifiers for laboratory observations, including microbiology observations. Other terminology systems may be used for coded result concepts such as microorganisms.
+
+The important principle is not memorizing terminology systems.
+
+It is understanding that:
+
+> **Electronic exchange is successful only when the receiving system can correctly interpret the information being exchanged.**
 
 ---
 
-# 7. Informatics Is More Than the Pipeline
+## 5. Structured and Unstructured Information
 
-Imagine that your laboratory has purchased a state-of-the-art sequencing instrument.
+Laboratory information can be represented in different ways.
 
-You have:
+Consider:
 
-* A sequencer
-* Bioinformatics software
-* A laboratory information system
-* Databases
-* Computational infrastructure
+    Organism: Escherichia coli
 
-But no one has determined:
+stored in a defined organism field.
 
-* Who will validate the workflow
-* Who will maintain the pipeline
-* Who will interpret unexpected findings
-* How results will enter the LIS
-* How results will be reported
-* What data should be stored
-* How software updates will be validated
-* How clinicians should interpret the results
+Compare that with:
 
-### Question
+    Culture grew E. coli.
 
-Has the laboratory successfully implemented genomic informatics?
+stored only as free text.
 
-**Not necessarily.**
+Both may be understandable to a person.
 
-A successful informatics system requires integration of **technology, people, data, and workflow**.
+However, structured information is generally easier for computer systems to:
 
----
+- search
+- compare
+- validate
+- exchange
+- analyze
+- use in decision support
+- use for surveillance
 
-# 8. Clinical Microbiology Informatics and Public Health
+Free text remains useful when information cannot be adequately represented using structured fields.
 
-The value of microbiology informatics extends beyond an individual patient.
-
-Laboratory information can contribute to:
-
-* Outbreak detection
-* Antimicrobial resistance surveillance
-* Communicable disease reporting
-* Identification of emerging pathogens
-* Tracking of transmission
-* Regional and global surveillance
-
-Genomic data can potentially provide substantially greater resolution for identifying relationships between isolates and recognizing clusters.
-
-This creates an important connection:
-
-```text
-Patient
-   ↓
-Clinical microbiology laboratory
-   ↓
-Laboratory information system
-   ↓
-Genomic / epidemiologic data
-   ↓
-Hospital surveillance
-   ↓
-Public health surveillance
-   ↓
-Outbreak detection and response
-```
-
-The microbiology laboratory can therefore function as an important source of information for both **patient care and population health**.
+The informatics challenge is determining **which information should be structured, how it should be represented, and how its meaning should be preserved across systems.**
 
 ---
 
-# 9. The Informatics Challenge
+## 6. The Microbiology Director's Informatics Role
 
-The promise of microbial genomics is substantial, but implementing genomic testing in the clinical laboratory creates new problems.
+Clinical microbiology directors do not need to personally build every interface or write every software application.
 
-Consider the following:
+They do need to understand how information affects laboratory practice.
 
-### Data volume
+A director may need to help determine:
 
-Sequencing generates far more digital data than many traditional microbiology tests.
+- what information should be reported
+- how results should be represented
+- whether mappings preserve clinical meaning
+- how new interfaces or workflows should be validated
+- how errors should be investigated
+- how software or rule changes should be governed
+- whether information displayed to clinicians accurately reflects laboratory findings
 
-### Bioinformatics
+This requires collaboration with laboratory scientists, LIS teams, interface specialists, clinicians, infection prevention teams, public-health partners, and other informatics professionals.
 
-Laboratories need validated methods for processing, analyzing, and interpreting sequencing data.
+The director contributes something particularly important to that collaboration:
 
-### Expertise
-
-Implementation may require collaboration between microbiologists, bioinformaticians, clinicians, epidemiologists, and informatics specialists.
-
-### Standardization
-
-Different laboratories may use different software, databases, pipelines, and reporting approaches.
-
-### Interpretation
-
-A laboratory must determine which genomic findings are clinically meaningful.
-
-### Reporting
-
-The final report must translate complex genomic information into information that clinicians can actually use.
+**clinical microbiology expertise.**
 
 ---
 
-# 10. Putting It All Together
+## Putting It Together
 
-Return to our original outbreak scenario.
+Clinical microbiology informatics connects:
 
-You have:
+    DATA
+    What information are we generating?
 
-**Patient information**
+            +
 
-↓
+    SYSTEMS
+    Where is that information stored and transmitted?
 
-**Microbiology results**
+            +
 
-↓
+    MEANING
+    Does the information still mean the same thing downstream?
 
-**WGS data**
+            +
 
-↓
+    WORKFLOW
+    How will people and systems use it?
 
-**Bioinformatics analysis**
+            ↓
 
-↓
+    ACTIONABLE MICROBIOLOGY INFORMATION
 
-**Genomic relationships**
+Later modules will examine individual parts of this system in greater depth:
 
-↓
+- antimicrobial susceptibility and decision support
+- instrumentation, interfaces, and automation
+- microbial genomics and bioinformatics
+- digital microbiology
+- public-health reporting and surveillance
 
-**Epidemiologic interpretation**
+For now, remember the central principle:
 
-↓
-
-**Clinical/public health action**
-
-The informatics challenge is connecting all of these pieces.
-
-A successful clinical microbiology informatics system should help transform large amounts of laboratory data into **accurate, timely, clinically meaningful information.**
-
----
-
-# Knowledge Check
-
-### Question 1
-
-Which statement best describes clinical microbiology informatics?
-
-**A.** The use of computers to replace microbiology laboratory personnel
-
-**B.** The application of information, technology, people, and workflows to improve microbiology testing and communication
-
-**C.** The use of whole-genome sequencing to identify microorganisms
-
-**D.** The use of electronic medical records by infectious disease physicians
-
-**Answer: B**
+> **A microbiology result is not useful merely because it was generated. Its identity, context, relationships, and meaning must survive the journey from the laboratory to the people and systems that use it.**
 
 ---
 
-### Question 2
+## Key Takeaways
 
-Which statement best distinguishes WGS from MGS?
-
-**A.** WGS uses short reads while MGS uses long reads
-
-**B.** WGS is performed only for bacteria while MGS is performed only for viruses
-
-**C.** WGS generally analyzes an isolated pathogen, whereas MGS analyzes nucleic acids directly from a clinical specimen or enriched sample
-
-**D.** WGS is a laboratory test while MGS is a bioinformatics analysis
-
-**Answer: C**
-
----
-
-### Question 3
-
-A laboratory wants to use WGS for outbreak investigation. Which consideration is most important?
-
-**A.** Generating as much genomic data as possible
-
-**B.** Choosing the analysis based on the clinical and epidemiologic question
-
-**C.** Storing only the final report
-
-**D.** Eliminating the need for epidemiologic information
-
-**Answer: B**
-
----
-
-# Key Takeaways
-
-1. **Clinical microbiology informatics is broader than laboratory software.** It involves data, technology, people, and workflows.
-
-2. **Microbiology already relies heavily on informatics**, from LIS and instrument interfaces to decision support and public health reporting.
-
-3. **WGS and MGS generate new informatics challenges** because sequencing produces large amounts of complex data that require computational analysis and interpretation.
-
-4. **The clinical question should drive the bioinformatics analysis.** There is not necessarily one pipeline that is appropriate for every use case.
-
-5. **Genomic information becomes clinically useful only after it is analyzed, interpreted, and communicated effectively.**
-
-6. **Successful implementation requires multidisciplinary expertise**, including microbiology, bioinformatics, informatics, clinical medicine, and epidemiology.
+1. Clinical microbiology informatics includes data, systems, people, workflows, and information exchange.
+2. Microbiology results may contain multiple related observations that change over time.
+3. The LIS and EHR perform different roles within the information lifecycle.
+4. Successful electronic transmission does not guarantee that meaning has been preserved.
+5. Structured and standardized information supports interoperability, analytics, decision support, and surveillance.
+6. Clinical microbiology directors have an important role in governing how laboratory information is represented, validated, and communicated.
 
 ---
 
 ## Further Reading
 
-Rhoads DD, Sintchenko V, Rauch CA, Pantanowitz L. *Clinical Microbiology Informatics.* Clinical Microbiology Reviews. 2014;27(4):1025–1047. doi:10.1128/CMR.00049-14.
+Rhoads DD, Sintchenko V, Rauch CA, Pantanowitz L. Clinical microbiology informatics. *Clinical Microbiology Reviews*. 2014;27(4):1025-1047. doi:10.1128/CMR.00049-14.
 
-The review provides a broad overview of clinical microbiology informatics and discusses laboratory information systems, decision support, automation, genomic sequencing, bioinformatics challenges, data storage, and public health applications.
+Centers for Disease Control and Prevention. *Introduction to Laboratory Informatics Series*. Division of Laboratory Systems.
+
+Regenstrief Institute. *LOINC Users' Guide: Microbiology*.
