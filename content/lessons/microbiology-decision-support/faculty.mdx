@@ -2,20 +2,57 @@
 
 ## Teaching Focus
 
-This lesson introduces antimicrobial decision support and expert systems as informatics tools that assist with interpretation of antimicrobial susceptibility data.
+This module uses antimicrobial susceptibility testing (AST) to demonstrate how analytical measurements, interpretive knowledge, rules, and information systems interact.
+
+The central distinction learners should understand is that an AST measurement such as an MIC is not identical to its categorical interpretation.
+
+The module should remain focused on informatics rather than becoming a comprehensive review of antimicrobial susceptibility testing.
 
 ## Key Teaching Points
 
-- Expert systems apply predefined rules to antimicrobial susceptibility patterns.
-- Decision-support rules can identify unusual resistance phenotypes and support consistent reporting.
-- Automated interpretation does not eliminate the need for microbiology expertise and laboratory oversight.
-- Rules should have defined ownership and undergo validation before clinical implementation.
-- Changes in breakpoints, standards, resistance mechanisms, or laboratory practices may require rule updates.
-- Changes to expert systems should be documented, validated, and monitored for downstream effects.
+- An MIC is an analytical susceptibility measurement generated under defined testing conditions.
+- Breakpoints provide interpretive criteria used to translate susceptibility measurements into categorical interpretations for applicable organism-antimicrobial combinations.
+- Because interpretive criteria can change, the same analytical measurement may receive a different categorical interpretation after a breakpoint update.
+- Expert systems can apply defined knowledge-based rules to susceptibility data, but automated rules do not eliminate the need for microbiology expertise.
+- AST measurements, organisms, antimicrobials, interpretations, comments, and rules may pass through multiple systems before reaching the clinical report.
+- A correct analytical measurement can therefore become an incorrect downstream result through outdated criteria, incorrect mappings, inappropriate rules, or interface transformations.
+- Antibiograms aggregate susceptibility information across defined collections of isolates and introduce additional data-selection, aggregation, and analysis requirements.
+- Breakpoints, expert rules, mappings, and AST configurations require defined ownership, validation, documentation, change control, and ongoing review.
+
+## Suggested Discussion Scenario
+
+An AST instrument generates the expected MIC for an organism-antimicrobial combination, but the EHR displays an unexpected categorical interpretation.
+
+Ask learners:
+
+1. Does the correct MIC establish that the complete AST workflow is functioning correctly?
+2. Where in the workflow might the categorical interpretation have been generated?
+3. Which breakpoint criteria were applied?
+4. Could an expert rule, mapping, or interface transformation have modified the result?
+5. What information should be compared across the instrument, middleware, LIS, interface, and EHR?
+6. How would the laboratory determine whether a recent configuration or breakpoint change contributed to the discrepancy?
+
+Use the scenario to reinforce that AST troubleshooting should distinguish the **analytical measurement** from the **interpretive and information-processing layers** applied to it.
 
 ## Discussion Prompts
 
-- What types of susceptibility patterns are useful targets for expert-system rules?
-- Who should be responsible for maintaining antimicrobial decision-support rules?
-- What should happen when an expert-system interpretation conflicts with laboratory findings?
-- How should a laboratory validate a rule after susceptibility standards or breakpoints change?
+- Why is an MIC not equivalent to a susceptible or resistant interpretation?
+- What could happen if an instrument and LIS use different breakpoint configurations?
+- Which AST rules should require microbiology director oversight?
+- How should laboratories approach validation when breakpoints or expert-system configurations change?
+- What data-quality problems could affect an antibiogram even when individual AST results are analytically correct?
+- How can laboratories verify that susceptibility information displayed in the EHR matches the intended laboratory interpretation?
+
+## Faculty Emphasis
+
+Learners do not need to memorize specific breakpoint values in this module.
+
+Instead, they should understand where breakpoints and expert rules fit within the information pathway and why those configurations require governance.
+
+Avoid reproducing proprietary breakpoint tables or detailed copyrighted standards content in teaching materials. When specific current breakpoints are needed for discussion, consult the current applicable authoritative standard.
+
+The durable troubleshooting framework for this module is:
+
+> **Measurement → interpretation → rules → representation → reporting**
+
+When an AST result appears incorrect, learners should be able to follow that pathway and identify where the discrepancy may have arisen.
