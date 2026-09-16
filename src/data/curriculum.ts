@@ -371,7 +371,7 @@ const cases: Record<string, CaseSeed> = {
         question: "An isolate has an MIC of 2 µg/mL for an antimicrobial. What does the MIC represent?",
         choices: [
           "The probability that treatment will succeed in the patient",
-          "The lowest tested antimicrobial concentration that inhibits visible growth under defined test conditions",
+          "The lowest antimicrobial concentration that inhibits visible growth under defined test conditions",
           "The categorical interpretation assigned by the LIS",
           "The percentage of isolates susceptible to that antimicrobial"
         ],
