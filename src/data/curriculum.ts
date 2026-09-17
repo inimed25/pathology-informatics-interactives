@@ -22,7 +22,7 @@ const microbiologyFoundationsSources: SourceReference[] = [
     label: "CDC — Introduction to Laboratory Informatics Series",
     url: "https://www.cdc.gov/lab-training/php/courses/introduction-lab-informatics.html",
     license: "U.S. government educational resource; source cited",
-    use: "Foundational framework for laboratory informatics, including data relationships, data standards, information flow, LIS functionality, interoperability, and the life of a laboratory result.",
+    use: "Foundational framework for laboratory informatics, including data relationships, data standards, information flow, LIS functionality, interoperability, and the life of a specimen and laboratory result.",
   },
   {
     label: "LOINC Users' Guide — Microbiology",
