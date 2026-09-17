@@ -7,14 +7,14 @@ const pierSource: SourceReference = {
   label: "PIER Essentials Release 5",
   url: PIER_URL,
   license: "CC BY-NC-ND 4.0",
-  use: "Curriculum alignment only; cases and learner artifacts are original.",
+use: "Curriculum alignment and competency mapping only; educational text, cases, assessment questions, and figures are independently authored and are not adapted from or reproduced from PIER materials.",
 };
 
 const apiSource = (sessions: number[]): SourceReference => ({
   label: `API Pathology Informatics Introductory Course — session${sessions.length === 1 ? "" : "s"} ${sessions.join(", ")}`,
   url: API_URL,
   license: "CC BY 4.0",
-  use: "Foundational concepts and terminology, adapted with attribution.",
+use: "Curriculum alignment and topic identification only; educational text, cases, assessment questions, and figures are independently authored and supported by cited primary, authoritative, or peer-reviewed sources.",
 });
 
 const microbiologyFoundationsSources: SourceReference[] = [
@@ -187,11 +187,19 @@ const publicHealthSources: SourceReference[] = [
     use: "ELR workflow, standardized messaging, terminology mapping, and use of HL7, LOINC, and SNOMED in laboratory-to-public-health data exchange.",
   },  
   {
-    label: "CDC — Electronic Case Reporting (eCR)",
+      label: "CDC — Electronic Case Reporting (eCR)",
     url: "https://www.cdc.gov/ecr/php/about/",
     license: "U.S. government educational resource; source cited",
     use: "Definition and workflow of electronic case reporting, including automated exchange of case-report information between electronic health records and public-health agencies.",
   },
+];
+const comprehensiveCaseSources: SourceReference[] = [
+  ...microbiologyFoundationsSources,
+  ...antimicrobialDecisionSupportSources,
+  ...interfacesAutomationSources,
+  ...microbialGenomicsSources,
+  ...digitalMicrobiologySources,
+  ...publicHealthSources,
 ];
 export const topics: TopicDefinition[] = [
   {
@@ -295,7 +303,7 @@ hasLocalPracticum: false,
   difficulty: "applied",
   interactionKinds: [],
   apiSessions: [],
-  sources: [],
+  sources: comprehensiveCaseSources,
   hasLocalPracticum: false,
 },
 ];
