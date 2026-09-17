@@ -1,9 +1,15 @@
 # Debrief
 
-Microbial genomics is an information workflow, not simply a sequencing technology. The clinical meaning of genomic data depends on how raw sequence information is processed, analyzed, compared, and interpreted.
+Microbial genomics is an information workflow, not simply a sequencing technology. Raw sequence data become clinically meaningful only through a series of computational and interpretive steps, and the reliability of the final result depends on the integrity of that entire workflow.
 
-Different questions require different bioinformatics approaches. Detecting a resistance determinant, identifying a pathogen, and evaluating whether isolates are genetically related are distinct tasks and may require different analytical pipelines, reference databases, thresholds, and validation strategies.
+Different sequencing strategies answer different questions. Isolate whole-genome sequencing can characterize a cultured organism, broad-range targeted sequencing can support organism identification using conserved targets such as bacterial 16S rRNA or fungal ITS, and metagenomic sequencing can interrogate microbial nucleic acid within complex clinical specimens. Genomic epidemiology uses sequence information differently again by comparing organisms to evaluate relatedness, clusters, outbreaks, and surveillance patterns.
 
-Bioinformatics pipelines used for clinical purposes therefore require validation and ongoing quality oversight. Changes to software, databases, reference genomes, or analytical parameters can alter downstream results even when the underlying sequence data remain unchanged.
+These applications create different informatics challenges and should not be treated as interchangeable. The appropriate quality-control criteria, reference databases, algorithms, thresholds, controls, and validation strategy depend on the pipeline's intended use.
 
-Genomic findings must also be interpreted within appropriate clinical and epidemiologic context. Genetic similarity can support an outbreak investigation, for example, but genomic relatedness alone does not establish that transmission occurred between particular patients.
+Bioinformatics components are therefore part of the analytical workflow. Changes to software, databases, reference sequences, parameters, or thresholds can alter downstream results even when the underlying sequence data remain unchanged. Clinical implementation requires appropriate validation, documentation, quality oversight, and change control.
+
+Interpretation also extends beyond detecting a sequence or generating a computational result. Detection of microbial nucleic acid does not by itself establish clinical significance, and genomic similarity between isolates does not by itself establish direct transmission. Findings should be interpreted within the limitations of the validated method and the relevant microbiologic, clinical, and epidemiologic context.
+
+## Central Takeaway
+
+> **A clinical microbial genomics pipeline is not just a sequencing instrument followed by software. The computational workflow is part of the laboratory test and must be understood, validated, governed, and interpreted according to its intended use.**
