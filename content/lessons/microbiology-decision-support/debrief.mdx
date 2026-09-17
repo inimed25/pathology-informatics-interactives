@@ -1,21 +1,19 @@
 # Debrief
 
-Antimicrobial susceptibility testing illustrates why clinical microbiology informatics involves more than transmitting laboratory measurements.
+When an AST result looks wrong, repeating the analytical test is only one possible investigation.
 
-An MIC is an analytical measurement. Its categorical interpretation depends on the applicable interpretive criteria for the organism-antimicrobial combination. Therefore, the same MIC can be interpreted differently if the breakpoint criteria used by the laboratory change.
+A useful informatics approach is to trace the result through the complete pathway:
 
-A useful way to troubleshoot AST information is to follow the result through the complete pathway:
+1. **Measurement:** What susceptibility measurement did the AST method or instrument actually generate?
+2. **Interpretation:** Which breakpoint criteria were applied, and where was the categorical interpretation generated?
+3. **Rules:** Did an expert rule, expected-phenotype rule, reporting policy, or other decision logic affect the result? Where did that rule come from, and where is it implemented?
+4. **Representation:** Were the organism, antimicrobial, MIC, category, comments, and associated information represented and mapped correctly?
+5. **Reporting:** Did selective reporting, suppression, an interface transformation, or another downstream process change what the clinician ultimately saw?
 
-1. **Measurement:** What susceptibility measurement did the AST method or instrument generate?
-2. **Interpretation:** Which breakpoint criteria were applied?
-3. **Rules:** Did an expert rule or laboratory policy flag, suppress, modify, or otherwise affect the result?
-4. **Representation:** Were the organism, antimicrobial, MIC, category, and associated information mapped correctly?
-5. **Reporting:** Did the LIS, interface, and EHR preserve the intended result downstream?
+A correct MIC does not guarantee a correct final report. The analytical measurement may remain unchanged while breakpoints, expert rules, mappings, reporting policies, or downstream configurations change around it.
 
-This distinction is important because a correct MIC does not guarantee a correct final report. An outdated breakpoint, incorrect mapping, inappropriate expert rule, or downstream transformation can produce an informatics discrepancy even when the analytical measurement itself is correct.
+When a configuration changes, also ask **what depends on it**. A breakpoint update may require coordinated review of the AST system, expert rules, mappings, middleware or LIS configuration, reporting logic, and downstream decision support. Successful implementation in one component does not establish that the complete workflow is correct.
 
-Antibiograms introduce another informatics challenge. Unlike an individual isolate's AST report, an antibiogram summarizes susceptibility data across a defined collection of isolates. The validity of that summary therefore depends not only on AST results but also on appropriate data selection, aggregation, and analysis.
+For cumulative data such as an antibiogram, the question changes again. The laboratory must consider whether the underlying population, inclusion rules, duplicate-isolate handling, mappings, and extraction logic support the intended summary.
 
-AST knowledge and configurations also change over time. Breakpoints, laboratory policies, software, mappings, and expert-system rules should therefore have defined ownership, validation, documentation, change control, and ongoing review.
-
-> **Central takeaway:** In AST informatics, always distinguish the measurement from the knowledge and rules used to interpret, transform, and report it.
+> **Director-level mental model:** Separate the measurement from its interpretation, identify the rules and systems that act on it, and verify that the intended information survives the pathway to its clinical use. If the pathway is functioning as designed, determine whether the remaining discrepancy reflects analytical uncertainty, interpretive criteria, or a situation requiring microbiologic and clinical judgment rather than an informatics correction.
