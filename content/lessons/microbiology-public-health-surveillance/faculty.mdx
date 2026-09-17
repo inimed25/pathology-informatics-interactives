@@ -2,20 +2,32 @@
 
 ## Teaching Focus
 
-This lesson introduces the informatics role of the clinical microbiology laboratory in public health surveillance and electronic data exchange.
+This lesson introduces the clinical microbiology laboratory's role in public-health informatics, with emphasis on electronic laboratory reporting, interoperability, terminology, validation, and ongoing governance.
+
+The goal is not to teach learners how to construct HL7 messages. Instead, learners should understand the information pathway well enough to recognize how microbiology data can lose meaning between the laboratory and public-health systems and how laboratory leadership helps prevent those failures.
 
 ## Key Teaching Points
 
-- Clinical microbiology data can support surveillance, outbreak detection, antimicrobial resistance monitoring, and other public health activities.
-- Successful electronic transmission does not guarantee that the receiving system correctly understands the result.
-- Structured data and standardized terminology help preserve meaning across different laboratory and public health systems.
-- Patient, specimen, organism, test, and result information may all be important to downstream interpretation.
-- Reporting requirements and surveillance priorities can change over time, requiring maintenance of interfaces, mappings, and workflows.
-- Laboratories share responsibility for ensuring that electronically reported data remain accurate and meaningful.
+- Clinical microbiology data can support surveillance, case investigation, outbreak detection, antimicrobial-resistance monitoring, and other public-health activities.
+- Electronic laboratory reporting (ELR) supports automated exchange of laboratory information with public-health agencies.
+- Electronic case reporting (eCR) is a related but distinct workflow that supports automated exchange of reportable case information from electronic health records.
+- Messaging standards such as HL7 and terminology standards such as LOINC and SNOMED CT address complementary interoperability problems.
+- Successful message transmission or acknowledgment does not establish that the receiving system correctly interpreted every laboratory concept.
+- Local test, organism, specimen, and result codes may require controlled mapping to representations understood by receiving systems.
+- End-to-end validation should evaluate whether representative information reaches the intended destination and is processed and interpreted as expected.
+- Reporting requirements vary by jurisdiction and may change over time.
+- Reporting rules, terminology mappings, interfaces, and other workflow components therefore require defined ownership, maintenance, documentation, testing, and change control.
+- Laboratory leadership contributes microbiology expertise to ensure that electronically exchanged information retains its intended clinical meaning.
 
 ## Discussion Prompts
 
-- What information should accompany a microbiology result sent to a public health agency?
-- How could local organism or test terminology interfere with automated surveillance?
-- What is the difference between successfully transmitting a result and successfully communicating its meaning?
-- What should happen when public health reporting requirements change?
+- What information must remain associated with a microbiology result as it moves from the LIS to a public-health system?
+- How could an ELR message be technically successful but semantically incorrect?
+- What different problems are addressed by HL7 messaging standards and standardized terminologies such as LOINC or SNOMED CT?
+- What does a successful interface acknowledgment establish, and what does it not establish?
+- How do ELR and eCR differ, and how can their information be complementary?
+- What should a laboratory evaluate when a reporting requirement, terminology mapping, or receiving-system specification changes?
+
+## Teaching Principle
+
+> **Follow the information all the way to public health. Ask whether the correct data were selected, represented, transmitted, received, and interpreted with their intended meaning intact.**
