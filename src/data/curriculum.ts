@@ -134,6 +134,18 @@ const microbialGenomicsSources: SourceReference[] = [
     license: "Open technical specifications; source cited",
     use: "Canonical specifications and terminology for SAM/BAM and VCF/BCF genomic data formats.",
   },
+  {
+  label: "CLSI MM18 — Interpretive Criteria for Identification of Bacteria and Fungi by Targeted DNA Sequencing",
+  url: "https://clsi.org/shop/standards/mm18/",
+ license: "Copyrighted standard; cited, not reproduced",
+  use: "Broad-range bacterial 16S rRNA and fungal ITS sequencing, sequence quality, reference databases, interpretation, reporting, and limitations",
+},
+  {
+  label: "Chiu & Miller — Clinical Metagenomics",
+  url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC6858796/",
+  license: "Peer-reviewed open-access article; source cited",
+  use: "Clinical metagenomic sequencing workflow, host and background sequence, contamination, taxonomic classification, reference databases, clinical interpretation, validation, and bioinformatics quality management.",
+},
 ];
 const digitalMicrobiologySources: SourceReference[] = [
   {
@@ -761,6 +773,29 @@ const cases: Record<string, CaseSeed> = {
         correctIndex: 0,
         explanation: "Genomic relatedness can provide strong evidence during an outbreak investigation, but interpretation of transmission requires integration with epidemiologic context and the characteristics of the validated genomic method."
       },
+      {
+  question: "Which scenario best represents broad-range targeted sequencing in clinical microbiology?",
+  choices: [
+    "Sequencing a conserved microbial target such as bacterial 16S rRNA or fungal ITS to help identify an organism",
+    "Sequencing all available nucleic acid in a clinical specimen to identify potential microbial sequences",
+    "Comparing whole genomes from multiple isolates to assess genomic relatedness",
+    "Mapping susceptibility-test MICs to antimicrobial breakpoints"
+  ],
+  correctIndex: 0,
+  explanation: "Broad-range targeted sequencing uses conserved microbial targets, such as bacterial 16S rRNA or fungal ITS regions, to support organism identification. It differs from metagenomic sequencing, which can interrogate nucleic acid from many organisms in a complex specimen, and from isolate whole-genome sequencing used for genomic characterization or relatedness analysis."
+},
+      {
+  question: "Metagenomic NGS of a clinical specimen detects sequence reads assigned to a potential pathogen. What is the most appropriate interpretation?",
+  choices: [
+    "Detection of microbial sequence alone proves that the organism is causing the patient's disease",
+    "The finding should be interpreted using the validated pipeline, controls, background and contamination assessment, specimen type, and relevant clinical context",
+    "Any microbial sequence detected by mNGS should automatically be reported as a clinically significant pathogen",
+    "Taxonomic classification eliminates the need to consider reference-database quality"
+  ],
+  correctIndex: 1,
+  explanation: "Metagenomic sequencing can detect microbial nucleic acid in complex specimens, but detection alone does not establish clinical significance. Interpretation depends on the validated workflow and may require consideration of controls, background signal, contamination, reference-database performance, specimen type, and clinical context."
+},
+     
       {
         question: "Which responsibility most clearly belongs to microbiology leadership when implementing a clinical NGS pipeline?",
         choices: [
