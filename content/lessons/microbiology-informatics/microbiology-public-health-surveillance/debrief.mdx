@@ -1,9 +1,15 @@
 # Debrief
 
-Public health surveillance depends on more than successfully transmitting laboratory data. The receiving system must also be able to interpret the meaning of the information being exchanged.
+Public-health surveillance depends on more than successfully transmitting laboratory data. The appropriate information must reach the appropriate public-health system while preserving enough meaning and context to support surveillance, investigation, and response.
 
-Local test names, organism terminology, result formats, specimen descriptions, and reporting conventions may not have the same meaning outside the originating laboratory. Standardized terminology and structured data can help preserve meaning across systems and jurisdictions.
+Electronic laboratory reporting (ELR) can automate the exchange of structured laboratory information, but successful message delivery does not establish semantic correctness. Local test codes, organism terminology, specimen representations, result values, or reporting logic can be incorrect or misunderstood even when a message is technically received.
 
-Reporting workflows also require governance. Laboratories must determine which results are reportable, ensure required patient and specimen information accompanies the result, maintain mappings and interfaces, and update workflows as reporting requirements change.
+Messaging standards and terminology standards address complementary parts of this problem. Messaging standards such as HL7 support structured information exchange, while terminology systems such as LOINC and SNOMED CT can support consistent representation of laboratory concepts. Reliable interoperability depends on appropriate implementation and mapping of both.
 
-Reliable surveillance therefore depends on both technical interoperability and semantic interoperability: data must reach the correct destination while retaining enough meaning and context to support public health action.
+ELR also exists within a broader public-health information environment. Electronic case reporting (eCR) provides a related but distinct workflow for automated exchange of reportable case information from electronic health records. Understanding these different information pathways helps clarify how microbiology data contribute to surveillance.
+
+Public-health reporting workflows require ongoing governance. Reporting requirements, terminology, mappings, implementation guidance, interfaces, and receiving-system expectations can change over time. Laboratories therefore need appropriate validation, monitoring, documentation, and change control rather than treating electronic reporting as a one-time interface implementation.
+
+## Central Takeaway
+
+> **Public-health interoperability is successful not merely when a message is delivered, but when the appropriate laboratory information reaches the appropriate public-health system with its intended meaning preserved.**
