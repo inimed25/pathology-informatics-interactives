@@ -185,6 +185,12 @@ const publicHealthSources: SourceReference[] = [
     url: "https://aphl.org/focus-areas/informatics/reporting/ELR",
     license: "Copyrighted educational resource; cited, not reproduced",
     use: "ELR workflow, standardized messaging, terminology mapping, and use of HL7, LOINC, and SNOMED in laboratory-to-public-health data exchange.",
+  },  
+  {
+    label: "CDC — Electronic Case Reporting (eCR)",
+    url: "https://www.cdc.gov/ecr/php/about/",
+    license: "U.S. government educational resource; source cited",
+    use: "Definition and workflow of electronic case reporting, including automated exchange of case-report information between electronic health records and public-health agencies.",
   },
 ];
 export const topics: TopicDefinition[] = [
