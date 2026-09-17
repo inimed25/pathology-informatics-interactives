@@ -370,16 +370,16 @@ const cases: Record<string, CaseSeed> = {
         correctIndex: 1,
         explanation: "The LIS supports laboratory-specific workflows and result management, whereas the EHR integrates laboratory information with the broader patient record."
       },
-      {
-        question: "A microbiology result is transmitted successfully from the LIS to another system, but the receiving system assigns the organism to the wrong concept. What type of problem has occurred?",
+            {
+        question: "An identification instrument correctly identifies an isolate, but the organism uses a local instrument code that is mapped incorrectly in the interface. The LIS therefore displays a different organism even though the message transmitted successfully. What is the primary informatics problem?",
         choices: [
-          "Analytical sensitivity failure",
-          "Specimen collection failure",
-          "Semantic interoperability failure",
-          "Instrument calibration failure"
+          "The analytical identification failed because the instrument generated the wrong organism",
+          "The specimen-tracking workflow failed because the result was associated with the wrong patient",
+          "Semantic interoperability failed because the organism mapping did not preserve the intended concept",
+          "The interface transport failed because the electronic message did not reach the LIS"
         ],
         correctIndex: 2,
-        explanation: "Successful transport does not guarantee preservation of meaning. Semantic interoperability requires the receiving system to interpret the transmitted information as intended."
+        explanation: "The analytical identification and electronic transmission can both succeed while the downstream meaning is wrong. Instruments and receiving systems may use different organism identifiers, so mappings must preserve the intended organism concept across the information pathway."
       },
       {
         question: "Why is structured microbiology data valuable for downstream informatics applications?",
@@ -402,6 +402,17 @@ const cases: Record<string, CaseSeed> = {
         ],
         correctIndex: 0,
       explanation: "The microbiology director helps ensure that laboratory information remains clinically accurate and meaningful as it moves through systems and reaches downstream users. Technical implementation may involve LIS, interface, and IT specialists, but microbiology expertise is essential for validating the clinical meaning of the workflow."
+      },
+      {
+        question: "A blood-culture positivity dashboard shows a marked decrease immediately after an LIS interface change. The dashboard calculation is reproducible. What should be evaluated before concluding that positivity truly decreased?",
+        choices: [
+          "Compare the source population, record completeness, relevant mappings, and denominator before and after the interface change",
+          "Compare total culture volume alone, because a stable total would exclude an interface-related data problem",
+          "Review the organisms among positive cultures first, because a change in species distribution would establish whether the trend is real",
+          "Interpret the trend using the unchanged dashboard logic and evaluate interface integrity as a separate validation issue"
+        ],
+        correctIndex: 0,
+        explanation: "A technically correct calculation can still be misleading if the underlying population, completeness, mappings, provenance, or denominator changed. Data fitness should be verified before interpreting the observed difference as a true clinical or laboratory trend."
       }
     ]
   },
