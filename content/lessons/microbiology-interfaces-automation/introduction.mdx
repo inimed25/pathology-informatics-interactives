@@ -297,10 +297,71 @@ Therefore, laboratory automation is not only an engineering or hardware problem.
 It is also an informatics problem.
 
 ---
+### MALDI-TOF as an Informatics System
 
-## 8. Exceptions, Downtime & Change
+MALDI-TOF mass spectrometry illustrates how a microbiology instrument can depend on both analytical measurement and computational information resources.
 
-Automated workflows must account for situations in which the expected pathway fails.
+At a simplified level:
+
+    Microbial spectrum
+          ↓
+    Comparison with reference spectral database
+          ↓
+    Identification algorithm
+          ↓
+    Organism identification
+          ↓
+    LIS / clinical report
+
+The instrument does not determine an organism identification from the spectrum alone. Identification depends on comparison with a **reference spectral database** and the software or algorithm used to interpret that comparison.
+
+This creates several informatics considerations:
+
+- which organisms and spectra are represented in the reference database
+- database and software versions
+- identification thresholds or interpretive rules
+- representation of taxonomic specificity
+- mapping of instrument identifications into the LIS
+- verification after relevant database, software, or configuration changes
+
+A technically successful instrument-to-LIS interface therefore does not establish that a database or software change preserves the performance of the complete identification workflow.
+
+> **Informatics principle:** For database-dependent identification systems, the reference database and interpretive software are part of the clinical information pathway and should be considered when evaluating changes and result integrity.
+
+### Rapid Molecular Panels as an Informatics System
+
+Rapid multiplex molecular assays can produce several related pieces of information from a single test, such as organism detections and antimicrobial resistance markers.
+
+A simplified information pathway might look like:
+
+    Molecular assay
+          ↓
+    Organism detection + resistance marker
+          ↓
+    Instrument / software interpretation
+          ↓
+    LIS representation
+          ↓
+    Clinical report / decision support
+
+The informatics challenge is not simply transmitting a positive or negative result. The system must preserve the relationships among the **organism, detected marker, assay interpretation, and appropriate report context**.
+
+For example, detection of a resistance marker is a **genotypic finding**. Its clinical meaning depends on the assay's intended use and limitations, the organisms detected, and the relationship between the marker and the resistance phenotype. It should not automatically be treated as equivalent to complete phenotypic antimicrobial susceptibility testing.
+
+When implementing these assays, laboratories may need to consider:
+
+- how organisms and resistance markers are represented as structured results
+- how related findings remain associated with one another
+- how assay limitations or interpretive comments are reported
+- how results map into the LIS and EHR
+- whether downstream decision support or stewardship workflows use the result
+- how new assay targets, software versions, or reporting configurations are validated or verified
+
+> **Informatics principle:** A complex molecular result is more than a collection of positive and negative fields. Its clinical meaning depends on preserving the relationships and context among the findings as they move through the information pathway.
+
+## 8. Exceptions, Downtime, Recovery & Change
+
+Automated workflows must account for situations in which the expected information pathway is unavailable or behaves unexpectedly.
 
 Examples include:
 
@@ -313,14 +374,40 @@ Examples include:
 - software is upgraded
 - an interface configuration changes
 
-Laboratories need defined processes for recognizing and managing these exceptions.
+Laboratories need defined processes for recognizing these events, maintaining safe operations when possible, and recovering afterward.
 
-Changes to software, mappings, interfaces, automation modules, or workflow configurations should be assessed for their potential effect on the validated workflow.
+A useful way to think about downtime is as a sequence:
 
-Automation allows information to move quickly.
+    Downtime recognized
+           ↓
+    Downtime workflow activated
+           ↓
+    Degraded or manual operation
+           ↓
+    Technical service restored
+           ↓
+    Results and workflows reconciled
+           ↓
+    Normal operation confirmed
 
-That same speed means an incorrect configuration can also propagate errors quickly.
+The distinction between **restoration** and **reconciliation** is important.
 
+When an interface reconnects, there may still be:
+
+- results queued for transmission
+- results entered manually during downtime
+- missing or duplicate results
+- specimens or cultures whose electronic status does not match their physical workflow
+- corrected or preliminary results that require review
+- other instruments or workflows that depend on the same connection
+
+Therefore, successful reconnection does not by itself establish that the laboratory's information state is complete and correct.
+
+Recovery should include determining what occurred during the interruption, identifying information that may require reconciliation, and confirming that affected workflows are functioning as intended.
+
+Changes to software, mappings, interfaces, automation modules, or workflow configurations should likewise be assessed for their potential effect on the validated workflow. The scope of verification should reflect the components and downstream processes that could reasonably be affected.
+
+> **Informatics principle:** Recovery is not complete when the connection returns. It is complete when affected information and workflows have been appropriately reconciled and normal operation has been confirmed.
 ---
 
 ## Troubleshooting the Information Pathway
