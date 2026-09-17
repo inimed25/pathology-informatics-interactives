@@ -158,14 +158,46 @@ This illustrates an important distinction:
 
 > Did the information reach the receiving system?
 
-**Meaning**
+**Translation**
 
-> Did the receiving system represent the information correctly?
+> Did the receiving system translate the source code to the intended local concept?
 
-Mappings may be required for tests, organisms, antimicrobials, qualitative results, units, comments, result status, and other coded concepts.
+**Representation**
 
-A mapping error can propagate automatically across many results, making interface errors potentially high impact.
+> Was the intended concept stored and displayed with the appropriate meaning and specificity?
 
+Interfaces often depend on **translation or mapping tables** that associate codes used by one system with concepts recognized by another. These mappings may involve tests, organisms, antimicrobials, qualitative results, units, comments, result status, and other coded concepts.
+
+For example:
+
+    Instrument code
+        ORG_101
+           ↓
+    Interface translation table
+           ↓
+    LIS organism concept
+           ↓
+    Clinician-facing result
+
+An unmapped code may trigger an exception, fail to populate the expected structured field, or require manual review depending on the implementation. An incorrectly mapped code may be more difficult to detect because the message can transmit successfully while representing the wrong concept.
+
+Mapping changes should therefore be treated as **controlled configuration changes**. When a translation table is modified, the laboratory should determine what workflows depend on that mapping and verify that representative results are handled correctly downstream.
+
+### Connectivity Is Not the Same as Clinical Readiness
+
+It is useful to distinguish three related questions:
+
+1. **Connectivity:** Can the systems exchange the intended messages?
+2. **Result integrity:** Do the transmitted patient, specimen, test, organism, susceptibility, comment, status, and other result elements remain correct throughout the pathway?
+3. **Clinical readiness:** Has the complete test or workflow been appropriately validated or verified for its intended clinical use?
+
+These questions are related but are not interchangeable.
+
+For example, a new molecular assay may successfully transmit results from the instrument to the LIS and EHR. That establishes that the tested interface pathway can function, but it does not by itself establish that the assay's analytical performance, result interpretation, reporting rules, and complete clinical workflow are ready for patient testing.
+
+Similarly, validation evidence should match the **intended use and deployment scope**. Successful testing of one result type, instrument configuration, or workflow should not automatically be assumed to validate different configurations or untested workflows.
+
+> **Informatics principle:** “The message crossed the interface” is only one layer of evidence. Ask whether the complete report is correct and whether the evidence supports the workflow actually being deployed.
 ---
 
 ## 5. Interface Validation
