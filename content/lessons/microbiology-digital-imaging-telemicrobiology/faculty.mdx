@@ -2,20 +2,32 @@
 
 ## Teaching Focus
 
-This lesson introduces digital imaging and telemicrobiology as tools for remote review, consultation, education, and quality assurance in clinical microbiology.
+This lesson introduces digital microbiology as an informatics workflow involving image acquisition, laboratory automation, remote review, image-analysis software, artificial intelligence, and downstream information systems.
+
+The goal is not to teach learners how to develop imaging hardware or machine-learning models. Instead, learners should understand these technologies well enough to evaluate their intended use, validation, limitations, workflow integration, and ongoing governance.
 
 ## Key Teaching Points
 
-- Digital microbiology images can support remote interpretation and consultation.
-- Image quality depends on acquisition, focus, resolution, color representation, compression, and display characteristics.
-- Successful transmission does not guarantee that an image is diagnostically adequate.
-- Telemicrobiology workflows should be validated using representative specimen and image types.
-- Remote interpretation should preserve the laboratory and clinical context needed for microbiologic decision-making.
-- Laboratories should define escalation pathways when image quality is inadequate or remote interpretation is uncertain.
+- Digital microbiology images are laboratory data that must remain correctly associated with the patient, specimen, culture, and laboratory workflow.
+- Digital plate imaging can support automated workflows, remote review, consultation, quality assurance, education, and retrospective review.
+- Image quality depends on acquisition conditions such as timing, focus, illumination, resolution, and other characteristics relevant to the intended use.
+- Successful image transmission does not establish that the complete clinical workflow is appropriate for interpretation.
+- Image-analysis and artificial-intelligence tools should be evaluated for defined tasks and used within their validated performance boundaries.
+- Performance established for one task, culture medium, organism group, imaging condition, or workflow should not automatically be generalized to another.
+- Validation or verification should evaluate the complete intended workflow, including specimen association, image acquisition, analysis, review, result transmission, exceptions, and downstream integration as applicable.
+- Software and algorithm changes can affect clinical performance even when imaging hardware remains unchanged.
+- Digital systems require appropriate monitoring, documentation, quality oversight, and change control.
+- Human oversight remains important when algorithmic or digital outputs require microbiologic interpretation.
 
 ## Discussion Prompts
 
-- Which microbiology tasks are most suitable for remote image review?
-- What image-quality problems could change interpretation?
-- What should be included in validation of a telemicrobiology workflow?
-- When should a remote reviewer request direct examination of the original specimen or culture?
+- What information must remain associated with a digital culture image for that image to be clinically useful?
+- Why does successful transmission of an image not establish that a telemicrobiology workflow is valid?
+- How would you validate an algorithm designed to identify culture plates with no visible growth?
+- What could happen if an image-analysis algorithm were used outside the conditions in which its performance was established?
+- How could a software update change clinical performance without changing the imaging hardware?
+- When should a digital or algorithmic result be escalated for direct microbiologist review?
+
+## Teaching Principle
+
+> **Follow the image as laboratory data. Ask how it was acquired, what information remains associated with it, how software transforms or interprets it, how the workflow was validated, and what could cause the final result to become unreliable.**
