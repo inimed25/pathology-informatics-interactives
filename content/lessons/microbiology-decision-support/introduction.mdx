@@ -105,6 +105,12 @@ Depending on the validated system and laboratory policy, an expert rule may:
 
 Expert rules can improve consistency, but they do not eliminate the need for microbiology expertise.
 
+Expert rules may also incorporate knowledge about **expected phenotypes** for particular organism-antimicrobial combinations. These are susceptibility patterns that are expected based on established microbiologic knowledge and can help identify results that deserve additional review.
+
+For example, EUCAST identifies *Klebsiella pneumoniae* and ampicillin as an expected resistant phenotype. A susceptibility result that contradicts an expected phenotype should therefore prompt review rather than being accepted automatically.
+
+The term **intrinsic resistance** has historically been used for some of these organism-drug relationships and remains common in microbiology. EUCAST now uses the terminology **expected resistant phenotype** and **expected susceptible phenotype**, emphasizing the expected AST result rather than assuming a single underlying resistance mechanism.
+
 A rule can also create an error if it is:
 
 - outdated
@@ -112,6 +118,22 @@ A rule can also create an error if it is:
 - applied to the wrong organism or antimicrobial
 - mapped incorrectly between systems
 - changed without appropriate validation
+
+### Where Do AST Rules Come From?
+
+Not all AST logic comes from the same source.
+
+Some logic reflects **published susceptibility standards and microbiologic knowledge**, such as breakpoints and expected phenotypes. Some is implemented through **vendor-configured instrument or software rules**. Other decisions reflect **local laboratory and antimicrobial-stewardship policy**, such as which results are routinely reported, selectively reported, suppressed, or accompanied by comments.
+
+These layers should not be treated as interchangeable.
+
+For example, a local antibiogram can inform antimicrobial stewardship and empiric-treatment strategies, but it does not by itself redefine the breakpoint used to interpret an individual isolate's MIC.
+
+Similarly, an antimicrobial may be tested by the laboratory but intentionally not displayed on the routine clinical report because of a validated selective or cascade-reporting policy.
+
+> **Informatics principle:** A laboratory should know where an AST rule comes from, where it is implemented, who governs it, and how it changes the information ultimately presented to clinicians.
+
+This means that implementing a change may require coordinated updates across more than one component, such as the AST instrument, expert system, middleware, LIS, reporting rules, or downstream clinical decision support.
 
 ---
 
@@ -147,6 +169,44 @@ The investigation should also consider:
 - whether the LIS and EHR displayed the intended interpretation
 
 This is an example of an **informatics discrepancy** rather than necessarily an analytical AST failure.
+
+### AST Configuration as a Dependency Network
+
+The same principle applies when the laboratory intentionally changes its AST configuration.
+
+For example, implementing updated breakpoints may affect more than one location in the information pathway. Depending on the local architecture, the laboratory may need to evaluate:
+
+- breakpoint configuration in the AST system
+- expert rules and expected-phenotype logic
+- selective or cascade-reporting rules
+- organism and antimicrobial mappings
+- middleware or LIS configuration
+- comments or interpretive text
+- downstream clinical decision support
+
+A change can therefore be correct in one component while the overall workflow remains inconsistent.
+
+> **Informatics principle:** When one component of an AST workflow changes, identify the systems and rules that depend on it, then verify the affected pathway end to end.
+
+### AST and Clinical Decision Support
+
+Decision support does not have to mean a pop-up alert.
+
+In antimicrobial workflows, decision support may include:
+
+- selective or cascade reporting
+- interpretive comments
+- reflex or protocol-based actions
+- guidance presented with laboratory results
+- targeted alerts when a result requires timely attention
+
+The effectiveness of decision support depends not only on whether the underlying rule is technically correct, but also on **when, where, and to whom the information is presented**.
+
+A technically accurate alert may provide little value if it appears too often, reaches the wrong user, interrupts the wrong part of the workflow, or does not lead to an actionable decision.
+
+For this reason, clinical decision support should be treated as a **governed sociotechnical system**. Laboratories and clinical partners should define its intended purpose, monitor how it performs in practice, investigate unintended consequences, and modify or retire interventions that no longer provide the intended value.
+
+> **Informatics principle:** Effective decision support delivers appropriate information to the appropriate person at an actionable point in the workflow.
 
 ---
 
