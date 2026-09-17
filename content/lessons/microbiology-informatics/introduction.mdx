@@ -29,7 +29,7 @@ By the end of this module, you should be able to:
 2. Explain why microbiology results can be more structurally complex than a single numeric laboratory result.
 3. Describe a simplified microbiology data lifecycle from the laboratory to the electronic health record.
 4. Distinguish the general roles of the laboratory information system and electronic health record.
-5. Explain why structured data and standardized terminology matter for interoperability.
+5. Explain why structured data, data quality, mappings, and fit-for-purpose terminology matter for interoperability and downstream use.
 6. Recognize the microbiology director's role in governing laboratory information.
 
 ---
@@ -70,7 +70,7 @@ For example, a culture may progress from:
 
 Information generated at each stage must remain associated with the correct patient, specimen, organism, and test.
 
-This makes **data structure and relationships** especially important in microbiology.
+This makes **data structure and relationships** especially important in microbiology. Identification, tracking, and routing are related but distinct: information can be correctly identified yet still reach the wrong destination or workflow because of a configuration or mapping problem. Audit trails and other provenance information can help reconstruct where information traveled and how it changed.
 
 ---
 
@@ -158,9 +158,27 @@ This illustrates an important distinction:
 
 **Semantic interoperability** concerns whether the receiving system can preserve and interpret the meaning of that information.
 
-Standardized terminologies can help systems represent laboratory concepts consistently.
+### The microbiologist sees a name; the interface may rely on a code
 
-For example, LOINC provides standardized identifiers for laboratory observations, including microbiology observations. Other terminology systems may be used for coded result concepts such as microorganisms.
+An instrument, middleware application, LIS, and EHR do not necessarily use the same local identifiers or display labels for an organism. A laboratory professional may readily recognize labels such as `E. coli` and `Escherichia coli` as referring to the same organism, but an information system should not depend on human recognition of similar text strings.
+
+A simplified pathway might look like:
+
+    Instrument organism concept / local identifier
+                    ↓
+          Interface or middleware mapping
+                    ↓
+              LIS organism concept
+                    ↓
+                Displayed result
+
+The exact implementation varies by system. The important point is that **mappings connect representations used by different systems**. If a required mapping is absent, incorrect, or more or less specific than the source concept, the downstream result may require exception handling or may be represented incorrectly even though the organism identification itself was correct.
+
+This also matters when two labels are related but not equivalent. For example, a genus-level identification such as `Staphylococcus spp.` does not communicate the same specificity as a species-level identification. Informatics should preserve the level of identification actually established by the laboratory rather than infer greater specificity from a similar-looking name.
+
+For clinicians, this is not merely a coding problem. They act on the result that reaches the clinical record. A technically successful interface can therefore still create confusion or inappropriate assumptions if the downstream representation changes the meaning, specificity, status, or context of the laboratory finding.
+
+Standardized terminologies can help systems represent laboratory concepts consistently. For example, LOINC provides standardized identifiers for laboratory observations, including microbiology observations. Other terminology systems may be used for coded result concepts such as microorganisms. These systems serve different purposes and should not be treated as interchangeable dictionaries.
 
 The important principle is not memorizing terminology systems.
 
@@ -200,11 +218,31 @@ However, structured information is generally easier for computer systems to:
 
 Free text remains useful when information cannot be adequately represented using structured fields.
 
-The informatics challenge is determining **which information should be structured, how it should be represented, and how its meaning should be preserved across systems.**
+The informatics challenge is determining **which information should be structured, how it should be represented, and how its meaning should be preserved across systems.** The terminology or representation chosen should also be fit for its intended purpose and preserve the appropriate context and granularity.
 
 ---
 
-## 6. The Microbiology Director's Informatics Role
+## 6. Data Quality Comes Before the Calculation
+
+Informatics is not only about moving individual results. Laboratory data are also reused for dashboards, quality improvement, surveillance, decision support, and research.
+
+Before interpreting an analysis, ask whether the underlying data are fit for the question. Important considerations include:
+
+- **population:** which patients, specimens, sites, or workflows are represented?
+- **provenance:** where did the data originate and what transformations occurred?
+- **completeness:** are expected records or fields missing?
+- **denominator:** what population is actually being used to calculate the measure?
+- **meaning and mappings:** did codes, definitions, or system configurations change over time?
+
+A calculation can be technically correct and still support a misleading conclusion.
+
+For example, suppose a dashboard shows that blood-culture positivity decreased after an interface change. The percentage may be calculated correctly, but the apparent trend could still be misleading if a subset of cultures stopped reaching the dataset or a local code changed without an appropriate mapping update.
+
+> **Key idea:** Verify the fitness of the source data before interpreting the result of the calculation.
+
+---
+
+## 7. The Microbiology Director's Informatics Role
 
 Clinical microbiology directors do not need to personally build every interface or write every software application.
 
@@ -219,6 +257,7 @@ A director may need to help determine:
 - how errors should be investigated
 - how software or rule changes should be governed
 - whether information displayed to clinicians accurately reflects laboratory findings
+- whether data are sufficiently complete, interpretable, and fit for a proposed analytical or surveillance use
 
 This requires collaboration with laboratory scientists, LIS teams, interface specialists, clinicians, infection prevention teams, public-health partners, and other informatics professionals.
 
@@ -233,12 +272,12 @@ The director contributes something particularly important to that collaboration:
 Clinical microbiology informatics connects:
 
     DATA
-    What information are we generating?
+    What information are we generating, and is it fit for use?
 
             +
 
     SYSTEMS
-    Where is that information stored and transmitted?
+    Where is that information stored, mapped, and transmitted?
 
             +
 
@@ -274,8 +313,10 @@ For now, remember the central principle:
 2. Microbiology results may contain multiple related observations that change over time.
 3. The LIS and EHR perform different roles within the information lifecycle.
 4. Successful electronic transmission does not guarantee that meaning has been preserved.
-5. Structured and standardized information supports interoperability, analytics, decision support, and surveillance.
-6. Clinical microbiology directors have an important role in governing how laboratory information is represented, validated, and communicated.
+5. Instruments and downstream systems may use different identifiers or representations, so mappings must preserve the intended organism concept and level of specificity.
+6. Structured, standardized, and fit-for-purpose information supports interoperability, analytics, decision support, and surveillance.
+7. A technically correct calculation can still mislead when its population, provenance, completeness, denominator, mappings, or meaning are unsuitable for the question.
+8. Clinical microbiology directors have an important role in governing how laboratory information is represented, validated, communicated, and reused.
 
 ---
 
