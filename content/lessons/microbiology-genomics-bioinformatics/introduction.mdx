@@ -7,3 +7,131 @@ However, sequencing produces raw data rather than a directly interpretable clini
 The appropriate analytical approach depends on the question being asked. Identifying a resistance gene, characterizing an organism, and investigating whether isolates are genetically related may require different pipelines, databases, parameters, and interpretive thresholds.
 
 In this lesson, you will examine how sequencing data move through a bioinformatics workflow and how validation, quality control, and clinical or epidemiologic context affect genomic interpretation.
+
+## Different Sequencing Strategies, Different Informatics Questions
+
+“NGS” describes sequencing technology, but clinical microbiology can use sequencing in different ways. The bioinformatics workflow must match the question the laboratory is trying to answer.
+
+### Whole-Genome Sequencing of an Isolate
+
+Whole-genome sequencing (WGS) can characterize the genome of a cultured microbial isolate.
+
+Depending on the validated application, genomic information may be used for:
+
+- resistance or virulence-marker detection
+- strain or sequence typing
+- comparison of isolates
+- outbreak investigation and surveillance
+
+Because the analysis begins with an isolate, the computational problem is generally more constrained than sequencing all nucleic acid present directly in a complex clinical specimen.
+
+### Broad-Range Sequencing
+
+Broad-range approaches can use conserved genetic targets to detect and identify organisms without requiring a separate organism-specific assay for every possible pathogen.
+
+Examples include bacterial **16S rRNA gene sequencing** and fungal **ITS sequencing**.
+
+The resulting sequence must be compared with appropriate reference information to determine the most supported taxonomic identification.
+
+Important informatics considerations include:
+
+- sequence quality
+- reference-database content and curation
+- taxonomic resolution
+- similarity or identification thresholds
+- contamination
+- interpretation of ambiguous or closely related organisms
+
+A sequence match should therefore be interpreted within the capabilities and limitations of the validated assay and reference database.
+
+### Metagenomic Next-Generation Sequencing
+
+Metagenomic NGS (mNGS) can analyze nucleic acid from many organisms within a specimen without restricting analysis to a single predefined microbial target.
+
+This creates a substantially more complex informatics problem.
+
+A clinical specimen may contain:
+
+- pathogen-derived sequences
+- human nucleic acid
+- commensal or colonizing organisms
+- environmental or reagent contaminants
+- sequences that cannot be confidently classified
+
+The computational workflow may therefore need to perform host-read handling, quality filtering, taxonomic classification, database comparison, and other processing before microbial findings can be interpreted.
+
+Detection of microbial sequence does not automatically establish that the organism is causing disease.
+
+Controls, background signals, thresholds, database quality, specimen type, and clinical context can all influence interpretation.
+
+### Molecular and Genomic Epidemiology
+
+Sequencing can also be used to compare organisms rather than simply identify them.
+
+Genomic epidemiology may evaluate patterns of genomic similarity among isolates to support:
+
+- outbreak investigation
+- cluster detection
+- infection-prevention investigations
+- transmission hypotheses
+- public-health surveillance
+
+The computational approach may involve SNP-based comparisons, allele-based typing, phylogenetic analysis, or other validated methods depending on the organism and application.
+
+However, genomic relatedness is not synonymous with direct transmission.
+
+Genomic findings should be interpreted together with epidemiologic information and within the limitations of the validated analytical method.
+
+## Databases and Software Are Part of the Test
+
+Bioinformatics results depend on more than the underlying sequence data. A pipeline may also depend on reference genomes, databases, software versions, algorithms, parameters, and analytical thresholds.
+
+For example, changing a taxonomic reference database may affect organism identification, while changing a resistance database may affect which resistance determinants are detected.
+
+These components should therefore be treated as part of the analytical workflow. Changes that could affect results require appropriate evaluation, documentation, and change control.
+
+> **The same sequence data can produce different results when the computational tools, databases, or parameters used to analyze them change.**
+
+## Validation Includes the Computational Workflow
+
+Clinical validation should evaluate the bioinformatics pipeline for its **intended use**, not simply confirm that sequencing files can be generated or processed.
+
+Depending on the application, validation may need to challenge representative positive and negative samples, expected genomic findings, quality-control failures, contamination or mixed-organism scenarios, and other important analytical or computational failure modes.
+
+Different applications may require different performance characteristics and acceptance criteria. A pipeline validated for isolate WGS, for example, should not automatically be assumed valid for metagenomic sequencing or another genomic application.
+
+The laboratory should also have a process for evaluating changes to software, databases, parameters, or other components that could affect results.
+
+> **Validation should follow the information from sequence generation through the clinically meaningful output.**
+
+## The Microbiology Director's Role
+
+A clinical microbiology director does not need to personally write every bioinformatics algorithm or become a software engineer.
+
+The director should, however, understand enough of the workflow to evaluate:
+
+- the pipeline's intended use
+- major inputs and outputs
+- quality criteria and failure points
+- reference sequences and databases
+- important parameters and thresholds
+- validation and performance
+- interpretation and reporting
+- software and database changes
+- limitations of the final result
+
+The goal is not to know every computational detail. It is to understand the system well enough to recognize when a change, failure, or limitation could affect a clinical result.
+
+> **Can I understand and govern this pipeline well enough to ensure that its output is appropriate for clinical use?**
+
+## Key Takeaways
+
+- Sequencing data require computational processing before they become clinically meaningful information.
+- FASTQ, FASTA, SAM/BAM, and VCF represent different types of genomic information within a bioinformatics workflow.
+- Quality control, alignment, assembly, and downstream analysis should be appropriate for the pipeline's intended use.
+- Isolate WGS, broad-range sequencing, metagenomic sequencing, and genomic epidemiology answer different questions and create different informatics challenges.
+- Databases, software, parameters, and thresholds can influence pipeline output and require appropriate governance.
+- Bioinformatics validation should include the computational workflow, not only the sequencing instrument.
+- Genomic findings must be interpreted within the limitations of the validated method and the relevant clinical or epidemiologic context.
+
+> **Clinical microbiology bioinformatics is not simply what happens after sequencing. The computational pipeline is part of the laboratory test.**
