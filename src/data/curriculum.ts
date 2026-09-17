@@ -46,7 +46,7 @@ const antimicrobialDecisionSupportSources: SourceReference[] = [
   },
   {
     label: "CLSI — Breakpoint Implementation Toolkit",
-    url: "https://clsi.org/meetings/ast/breakpoint-implementation-toolkit/",
+    url: "https://clsi.org/resources/breakpoint-implementation-toolkit/",
     license: "Copyrighted educational resource; cited, not reproduced",
     use: "Implementation framework for reviewing, updating, validating, and documenting antimicrobial susceptibility breakpoints in clinical laboratory systems.",
   },
@@ -137,8 +137,8 @@ const microbialGenomicsSources: SourceReference[] = [
   {
   label: "CLSI MM18 — Interpretive Criteria for Identification of Bacteria and Fungi by Targeted DNA Sequencing",
   url: "https://clsi.org/shop/standards/mm18/",
- license: "Copyrighted standard; cited, not reproduced",
-  use: "Broad-range bacterial 16S rRNA and fungal ITS sequencing, sequence quality, reference databases, interpretation, reporting, and limitations",
+  license: "Copyrighted standard; cited, not reproduced",
+  use: "Sanger-based targeted sequencing of cultured bacterial and fungal isolates, including 16S rRNA and ITS targets, sequence quality, reference databases, interpretation, reporting, and limitations; cited for targeted-sequencing principles rather than NGS-specific guidance.",
 },
   {
   label: "Chiu & Miller — Clinical Metagenomics",
@@ -161,7 +161,7 @@ const digitalMicrobiologySources: SourceReference[] = [
     use: "Background on digital plate reading, image acquisition, middleware, remote consultation, image storage, and workflow considerations.",
   },
   {
-    label: "Misra et al. — The Use of Machine Learning for Image Analysis Artificial Intelligence in Clinical Microbiology",
+   label: "Burns et al. — The Use of Machine Learning for Image Analysis Artificial Intelligence in Clinical Microbiology",
     url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC10575257/",
     license: "Open-access article; source cited",
     use: "Clinical microbiology applications, implementation considerations, validation, and limitations of image-analysis artificial intelligence.",
@@ -198,7 +198,7 @@ export const topics: TopicDefinition[] = [
     id: 1,
     slug: "microbiology-informatics",
     title: "Clinical Microbiology Informatics",
-    objectives: ["1.1", "1.2", "1.3", "1.4", "1.5", "1.6"],
+objectives: ["1.1", "1.2", "1.3", "1.4", "1.5", "1.6", "1.7"],
     summary:
       "Laboratory data, decision support, automation, genomics, digital technologies, and public health applications in clinical microbiology.",
 
@@ -240,7 +240,7 @@ hasLocalPracticum: false,
   },
   {
     slug: "microbiology-interfaces-automation",
-    title: "Instrument Interfaces and Laboratory Automation",
+    title: "Instrumentation, Interfaces, and Laboratory Automation",
     topic: 1,
     pierObjectives: ["1.3"],
     durationMinutes: 25,
@@ -286,7 +286,18 @@ hasLocalPracticum: false,
     sources: publicHealthSources,
     hasLocalPracticum: false,
   },
-    
+    {
+  slug: "microbiology-comprehensive-cases",
+  title: "Comprehensive Clinical Microbiology Informatics Cases",
+  topic: 1,
+  pierObjectives: ["1.7"],
+  durationMinutes: 30,
+  difficulty: "applied",
+  interactionKinds: [],
+  apiSessions: [],
+  sources: [],
+  hasLocalPracticum: false,
+},
 ];
 
 
@@ -1060,6 +1071,31 @@ const cases: Record<string, CaseSeed> = {
       }
     ]
   },
+  
+
+  "microbiology-comprehensive-cases": {
+    artifact: "Integrated clinical microbiology informatics cases",
+
+    evidence: [
+      [
+        "Capstone",
+        "Integrated cases apply concepts across the clinical microbiology informatics curriculum",
+        "positive"
+      ]
+    ],
+
+    trace: [
+      [
+        "Clinical microbiology informatics workflow",
+        "Microbiology director",
+        "Integrates laboratory, informatics, quality, and clinical information across systems.",
+        "Capstone cases require application of concepts from multiple curriculum modules."
+      ]
+    ],
+
+    questions: []
+  },
+
 };
 
 export const lessons: LessonDefinition[] = manifests.map((manifest, index) => {
