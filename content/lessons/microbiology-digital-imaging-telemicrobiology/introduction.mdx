@@ -11,8 +11,11 @@ By the end of this lesson, you should be able to:
 - describe how digital imaging fits into a clinical microbiology information workflow
 - identify important informatics considerations for image acquisition, storage, transmission, and review
 - explain how automated image analysis and artificial intelligence can support defined microbiology tasks
+- distinguish technical or model performance from clinical utility within the complete laboratory workflow
+- recognize why algorithm performance may change when software, input data, laboratory materials, imaging conditions, or workflow conditions change
+- describe the role of exception handling, human oversight, and post-implementation monitoring in digital microbiology
 - distinguish technical image transmission from validation of a complete clinical workflow
-- recognize why software and algorithm changes require appropriate change control
+- recognize why software, algorithm, and workflow changes require appropriate change control
 - describe the microbiology director's role in validating and governing digital microbiology systems
 
 ## Digital Plate Imaging
@@ -84,6 +87,44 @@ Performance demonstrated for one task should not automatically be generalized to
 
 > **An algorithm should be used within the boundaries of the task and conditions for which its performance has been established.**
 
+### Model Performance Is Not the Same as Clinical Utility
+
+Strong technical performance does not by itself establish that an algorithm improves the clinical laboratory workflow.
+
+A system may perform well on measures such as accuracy, sensitivity, or specificity yet still create problems if its implementation increases unnecessary review, disrupts prioritization, increases workload, delays turnaround time, or fails to support the clinical purpose for which it was introduced.
+
+Clinical implementation should therefore consider both **how well the model performs its defined analytical task** and **how the model affects the workflow in which people use its output**.
+
+> **A good model metric does not automatically mean a good clinical workflow.**
+
+### Generalizability and Changing Inputs
+
+Algorithm performance depends on the data and conditions under which the system operates. Relevant factors in digital microbiology may include:
+
+- culture-medium type or manufacturer
+- specimen type and organism distribution
+- incubation conditions and image-acquisition timing
+- illumination, focus, resolution, and imaging hardware
+- local workflow and review practices
+
+Performance established with one combination of these conditions should not automatically be generalized to substantially different conditions without appropriate evaluation.
+
+This also matters after implementation. The algorithm's code may remain unchanged while the laboratory environment changes. A new culture-medium manufacturer, imaging configuration, specimen population, or workflow can change the inputs presented to the algorithm and potentially alter performance.
+
+Post-implementation monitoring can help identify such changes and determine whether investigation, additional verification, workflow modification, or other corrective action is appropriate.
+
+> **The algorithm may be unchanged while the system in which it operates has changed.**
+
+### Human Oversight and Exception Handling
+
+Automation should have defined pathways for situations in which an automated result should not simply proceed.
+
+For example, an image may fail quality requirements, contain an unexpected pattern, fall outside validated conditions, or produce an output that conflicts with relevant microbiologic evidence. Depending on the implementation, the system may need to hold automated interpretation, flag the case, route it for microbiologist review, or use another validated workflow.
+
+Human oversight does not necessarily mean that a person must redundantly review every automated result. It means that the workflow provides meaningful opportunities for human judgment where uncertainty, failure, disagreement, or conditions outside the established performance boundaries require it.
+
+Laboratories should also guard against **automation bias**—accepting a computational output simply because the system produced it. Human-algorithm discrepancies can be useful quality data when they reveal recurring failure modes, changes in the input population, or conditions that warrant reassessment.
+
 ## Validation of a Digital Workflow
 
 Validation or verification should reflect how the technology will actually be used.
@@ -103,6 +144,14 @@ Depending on the application, evaluation may need to consider:
 
 The goal is to determine whether the complete system performs appropriately for its intended clinical use.
 
+This distinction is especially important for AI-enabled workflows. **Algorithm validation and end-to-end workflow validation are related but not identical.** An image-analysis model may classify an image correctly while an error elsewhere in the information pathway associates that output with the wrong specimen, routes it incorrectly, or produces an inappropriate downstream result.
+
+A useful end-to-end view is:
+
+**Specimen/image identity → Image acquisition → Algorithm or human analysis → Result association → Interface/mapping → LIS → Downstream report or action**
+
+Validation and ongoing monitoring should therefore address the portions of this pathway that are relevant to the intended clinical use.
+
 ## Software and Algorithm Changes
 
 Digital microbiology systems may depend heavily on software.
@@ -120,6 +169,8 @@ An update could change:
 Therefore, unchanged imaging hardware does not necessarily mean that the analytical workflow is unchanged.
 
 Laboratories should assess whether a software or algorithm change could affect clinical performance and determine what verification, documentation, or other change-control activities are appropriate before relying on the updated system.
+
+Changes outside the software can matter as well. New culture media, altered imaging conditions, changes in specimen populations, or workflow modifications may change the data presented to an otherwise unchanged algorithm. Change control and performance monitoring should therefore consider the **system around the algorithm**, not only the algorithm's source code or version.
 
 ## Images as Laboratory Data
 
@@ -167,6 +218,11 @@ The central question is similar to other areas of laboratory informatics:
 - Image-analysis and AI tools should be used within their validated intended applications and limitations.
 - Software and algorithm changes can affect clinical performance even when imaging hardware remains unchanged.
 - Stored images can support review, consultation, quality assurance, education, and documentation.
+- Strong model performance does not by itself establish clinical utility; workflow effects such as workload, prioritization, errors, and turnaround time may also matter.
+- Performance established in one setting should not automatically be generalized to different media, specimen populations, imaging conditions, or workflows.
+- An unchanged algorithm can perform differently when its inputs or operating environment change, making post-implementation monitoring important.
+- Exception pathways and meaningful human oversight help manage image-quality failures, unexpected inputs, disagreement, and conditions outside validated boundaries.
+- Algorithm validation does not replace validation of the relevant end-to-end clinical information workflow.
 - Digital systems require validation, monitoring, workflow integration, and appropriate laboratory oversight.
 
 > **Digital microbiology is not simply converting a culture plate into a picture. It is creating a clinical information workflow around visual laboratory data.**
