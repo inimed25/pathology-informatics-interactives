@@ -269,12 +269,18 @@ function LessonPage({ slug }: { slug: string }) {
       )}
                           <GenericExperience lesson={lesson} onAttempt={setAttempted}/>
       {attempted ? (
-        <section className="mdx-content debrief-content" id="lesson-debrief">
-          {Debrief ? <Debrief/> : <p>Debrief content is missing.</p>}
-        </section>
+        <>
+          <section className="lesson-phase-heading" aria-label="Apply">
+            <span>06</span>
+            <div><p className="eyebrow">Apply</p><strong>Debrief the informatics reasoning</strong></div>
+          </section>
+          <section className="mdx-content debrief-content" id="lesson-debrief">
+            {Debrief ? <Debrief/> : <p>Debrief content is missing.</p>}
+          </section>
+        </>
       ) : (
         <section className="debrief-locked" aria-label="Debrief locked">
-          <span aria-hidden="true">03 → 04</span>
+          <span aria-hidden="true">05 → 06</span>
           <div>
             <strong>Answer a knowledge-check question to continue</strong>
             <p>Your debrief will open after you attempt a question.</p>
