@@ -1658,116 +1658,16 @@ em.scientific-name {
 }
 
 
-/* =========================================================
-   READING SYSTEM — dark editorial canvas, high contrast
-   ========================================================= */
-body { background:#0a1726; color:#eaf2f8; }
-.site-frame { background:#0a1726; }
-.lesson-main { color:#eaf2f8; }
-.lesson-main .breadcrumbs,
-.lesson-main .breadcrumbs a { color:#9bb0c2; }
-.lesson-meta { border-color:#294157; }
-.lesson-meta, .lesson-meta a { color:#b8c9d7; }
-.lesson-main .tag-row span { color:#c6d5e0; border-color:#40566a; background:#102338; }
 
-.lesson-phase-heading {
-  background:transparent !important;
-  border:0 !important;
-  border-bottom:1px solid #294157 !important;
-  border-radius:0 !important;
-  box-shadow:none !important;
-  padding:22px 0 16px !important;
-}
-.lesson-phase-heading strong { color:#f5f9fc; }
-.lesson-phase-heading > span { background:#15344e; color:#fff; }
 
-.lesson-reading-layout { color:#eaf2f8; }
-.mdx-content { max-width:900px; }
-.mdx-content h1,.mdx-content h2,.mdx-content h3 { color:#f7fbff; }
-.mdx-content p,.mdx-content li { color:#c9d7e3; font-size:1.08rem; line-height:1.82; }
-.mdx-content strong { color:#f1f6fa; }
-.mdx-content a { color:#79d4e7; }
-.mdx-content blockquote { border-color:#4bbbd2; }
-.mdx-content blockquote p { color:#e1edf4; }
-
-/* Ordinary lists are typography, not giant white cards. */
-.mdx-content ul,.mdx-content ol {
-  margin:22px 0 34px;
-  padding:0 0 0 28px;
-  background:transparent !important;
-  border:0 !important;
-  border-radius:0 !important;
-  box-shadow:none !important;
-}
-.mdx-content li { margin:10px 0; padding-left:6px; }
-.mdx-content li::marker { color:#53c7dc; }
-
-/* Chapter headers become editorial dividers instead of repeated bubbles. */
-.mdx-content h2 {
-  position:relative;
-  margin:78px 0 25px;
-  padding:24px 0 16px !important;
-  border:0 !important;
-  border-top:1px solid #294157 !important;
-  border-radius:0 !important;
-  background:transparent !important;
-  box-shadow:none !important;
-}
-.mdx-content h2::before {
-  content:"";
-  position:absolute; left:0; top:-1px; width:72px; height:2px;
-  background:linear-gradient(90deg,#d64de0,#3abbd9,#21ce9b);
-}
-
-/* Preserve light surfaces only where the learner must manipulate controls/data. */
-.lesson-section,.pilot-lab,.concept-figure { color:#dce8f1; }
-.section-heading h2,.concept-figure h3 { color:#f6f9fc; }
-.section-guidance,.figure-lede,.figure-note { color:#aebfce; }
-.evidence-explorer,.question-card .choice-grid button,.question-card .choice-stack button {
-  color:#17283d;
-}
-.question-card h3 { color:#eef5fa; }
-.question-card header { color:#9fb3c3; }
-.choice-grid button,.choice-stack button { background:#f8fbfd; }
-.feedback { color:#20374b; }
-
-/* Debrief: remove dark-on-dark inherited text. */
-.debrief-content {
-  max-width:none;
-  padding:clamp(34px,5vw,62px);
-  background:#102b43;
-  border:1px solid #294b65;
-}
+/* Light editorial readability polish */
+body,.site-frame { background:#f7f9fc; color:#101d2f; }
+.lesson-main { color:#101d2f; }
+.mdx-content p,.mdx-content li { color:#263b52; font-weight:400; }
+.mdx-content h1,.mdx-content h2,.mdx-content h3 { color:#091a31; }
+.lesson-phase-heading strong,.section-heading h2 { color:#0b1930; }
+.lesson-meta,.breadcrumbs { color:#52677c; }
+.debrief-content { background:#0b2942; }
 .debrief-content h1,.debrief-content h2,.debrief-content h3,
-.debrief-content p,.debrief-content li,.debrief-content strong { color:#f0f6fa !important; }
-.debrief-content a { color:#84dced !important; }
-.debrief-locked { background:#102338; border-color:#294157; color:#dce8f1; }
-.debrief-locked p { color:#aebfce; }
-
-/* Old conceptual-frame component is intentionally no longer rendered. */
-.lesson-lens,.data-journey { display:none !important; }
-
-@media(max-width:760px){
-  .mdx-content p,.mdx-content li{font-size:1rem}
-}
-
-
-/* Interface lesson visual companion */
-.interface-reading-figures{grid-column:1/-1;display:grid;gap:28px;margin:54px 0 78px}
-.interface-reading-figures figure{margin:0;padding:clamp(28px,4vw,48px);border:1px solid #294157;border-radius:18px;background:#0d2033;overflow:hidden}
-.interface-reading-figures figcaption{max-width:780px}
-.interface-reading-figures h2{margin:4px 0 12px;color:#f6fbff;font-size:clamp(1.8rem,3vw,2.7rem)}
-.interface-reading-figures figcaption>p:last-child{color:#afc2d1;line-height:1.7}
-.signal-path{display:grid;grid-template-columns:repeat(5,1fr);margin-top:38px;border-top:1px solid #36536a;border-bottom:1px solid #36536a}
-.signal-stage{position:relative;min-height:145px;padding:22px 18px;border-right:1px solid #294157}
-.signal-stage:last-child{border-right:0}.signal-stage span,.signal-stage strong,.signal-stage small{display:block}
-.signal-stage span{margin-bottom:30px;color:#55c8dc;font-size:10px;font-weight:700;letter-spacing:.12em}
-.signal-stage strong{color:#f3f8fb;font-size:.96rem}.signal-stage small{margin-top:7px;color:#8fa8ba;font-size:.75rem}
-.signal-stage i{position:absolute;right:-11px;top:65px;z-index:2;display:grid;width:22px;height:22px;place-items:center;border-radius:50%;background:#183a52;color:#65d4e5;font-style:normal;font-size:12px}
-.identity-chain{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-top:34px}
-.identity-chain div{position:relative;min-height:112px;padding:17px;border:1px solid #315069;background:#10283d}
-.identity-chain div:not(:last-child):after{content:"";position:absolute;right:-9px;top:50%;width:9px;border-top:2px solid #49bfd3}
-.identity-chain span,.identity-chain strong{display:block}.identity-chain span{color:#53c7dc;font-size:10px;letter-spacing:.1em}.identity-chain strong{margin-top:30px;color:#f2f7fa;font-size:.9rem}
-.failure-callout{display:grid;grid-template-columns:120px 1fr;gap:5px 24px;align-items:start;margin-top:20px;padding:22px 24px;border-left:3px solid #d45bdc;background:#15263a}
-.failure-callout span{grid-row:1/3;color:#e58aea;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}.failure-callout strong{color:#f5f8fb}.failure-callout p{margin:3px 0 0;color:#aebfce;font-size:.86rem}
-@media(max-width:850px){.signal-path{grid-template-columns:1fr}.signal-stage{min-height:auto;border-right:0;border-bottom:1px solid #294157}.signal-stage i{display:none}.identity-chain{grid-template-columns:1fr 1fr}.identity-chain div:not(:last-child):after{display:none}.failure-callout{grid-template-columns:1fr}.failure-callout span{grid-row:auto}}
+.debrief-content p,.debrief-content li,.debrief-content strong { color:#f3f8fb !important; }
+.debrief-content a { color:#86ddec !important; }
