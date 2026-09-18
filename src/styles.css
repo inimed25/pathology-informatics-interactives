@@ -678,3 +678,32 @@ h3 { line-height: 1.2; }
   .path-link { transform: rotate(90deg); }
   .recovery-phases, .recovery-status { grid-template-columns: 1fr; }
 }
+
+
+/* Digital microbiology: model performance, workflow utility, and oversight */
+.digital-workflow-explorer { max-width: 1050px; margin: 34px 0 54px; padding: 42px; border: 1px solid var(--line); border-radius: 20px; background: var(--paper); box-shadow: 0 14px 40px rgba(38,51,47,.055); }
+.digital-workflow-heading h3 { margin: 0 0 10px; font-size: 1.8rem; }
+.digital-workflow-heading > p:last-child { max-width: 780px; color: var(--muted); }
+.digital-pipeline { display: flex; align-items: center; justify-content: space-between; gap: 6px; margin: 28px 0 20px; padding: 20px; border: 1px solid var(--line); background: #f8f8f4; }
+.digital-pipeline-item { display: contents; }
+.digital-pipeline span { padding: 10px; border: 1px solid var(--line); background: var(--green-pale); font-size: .72rem; font-weight: 700; text-align: center; }
+.digital-pipeline span.attention { background: var(--gold-soft); border-color: var(--gold); }
+.digital-pipeline b { color: var(--green); }
+.digital-scenarios { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.digital-scenarios button { min-height: 66px; padding: 13px; border: 1px solid var(--line); background: #fafaf6; color: var(--ink); cursor: pointer; text-align: left; }
+.digital-scenarios button.active { border-color: var(--green); background: var(--mint); box-shadow: inset 0 0 0 1px var(--green); }
+.digital-readout { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 18px; border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+.digital-readout > div { min-height: 118px; padding: 18px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.digital-readout small { display: block; color: var(--muted); text-transform: uppercase; letter-spacing: .07em; }
+.digital-readout strong { display: block; margin-top: 10px; }
+.digital-explanation { margin-top: 18px; padding: 20px 22px; border-left: 4px solid var(--gold); background: var(--gold-soft); }
+.digital-explanation strong, .oversight-note strong { font-size: .78rem; text-transform: uppercase; letter-spacing: .07em; }
+.digital-explanation p, .oversight-note p { margin: 6px 0 0; }
+.oversight-note { margin-top: 14px; padding: 20px 22px; border-left: 4px solid var(--green); background: var(--green-pale); }
+@media (max-width: 760px) {
+  .digital-workflow-explorer { padding: 25px 18px; }
+  .digital-pipeline { flex-direction: column; }
+  .digital-pipeline-item { display: flex; flex-direction: column; align-items: center; }
+  .digital-pipeline b { transform: rotate(90deg); }
+  .digital-scenarios, .digital-readout { grid-template-columns: 1fr; }
+}
