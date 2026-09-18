@@ -18,20 +18,31 @@ const lenses: Record<string, Lens> = {
 };
 
 export function BiotechHeroVisual() {
+  const nodes = [
+    ["01", "Specimen", "identity"],
+    ["02", "Instrument", "signal"],
+    ["03", "LIS", "structure"],
+    ["04", "Interface", "exchange"],
+    ["05", "EHR", "display"],
+    ["06", "Analytics", "reuse"],
+    ["07", "Action", "meaning"],
+  ];
   return (
-    <div className="biotech-hero-visual" aria-hidden="true">
-      <div className="orbit orbit-a" />
-      <div className="orbit orbit-b" />
-      <div className="orbit orbit-c" />
-      <div className="hero-core">
-        <span>CMI</span>
-        <small>signal / system / meaning</small>
+    <figure className="biotech-hero-visual" aria-labelledby="hero-map-title">
+      <figcaption>
+        <p className="eyebrow">Clinical microbiology informatics</p>
+        <h2 id="hero-map-title">One result. Seven information checkpoints.</h2>
+        <p>A laboratory result becomes useful only when identity, structure, and meaning survive the systems that carry it.</p>
+      </figcaption>
+      <div className="hero-path" aria-label="Specimen information flows through instrument, LIS, interface, EHR, analytics, and clinical action">
+        {nodes.map(([n,title,note],i)=>(
+          <div className="hero-path-node" key={n}>
+            <span>{n}</span><strong>{title}</strong><small>{note}</small>
+            {i < nodes.length-1 && <i aria-hidden="true">→</i>}
+          </div>
+        ))}
       </div>
-      <span className="hero-node node-a">01</span>
-      <span className="hero-node node-b">04</span>
-      <span className="hero-node node-c">07</span>
-      <div className="spectral-path" />
-    </div>
+    </figure>
   );
 }
 
