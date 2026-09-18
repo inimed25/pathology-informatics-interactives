@@ -561,19 +561,19 @@ const cases: Record<string, CaseSeed> = {
   question: "What is a major advantage of a bidirectional interface between the LIS and a microbiology instrument?",
   choices: [
     "It allows orders and identifiers to move from the LIS to the instrument while results and other data can return to the LIS",
-    "It allows results to move from the instrument to the LIS but prevents information from being sent from the LIS to the instrument",
-    "It allows the LIS and instrument to exchange information without requiring defined mappings or interface configuration",
-    "It allows the instrument and LIS to maintain separate patient and specimen identifiers because information can move in both directions"
+    "It allows orders and results to move in both directions, so each system can maintain independent patient and specimen identifiers",
+    "It allows mappings maintained in the LIS to be applied by the instrument without corresponding interface configuration",
+    "It ensures that corrections entered in either system are automatically synchronized throughout the complete reporting pathway"
   ],
   correctIndex: 0,
   explanation: "Bidirectional communication supports information flow in both directions. For example, orders and patient or specimen identifiers may be transmitted from the LIS to the instrument, while results and other instrument-generated data return to the LIS. This can reduce manual transcription and support workflow efficiency, but bidirectionality does not eliminate the need for accurate identifiers, mappings, configuration, validation, or exception handling."
 },
      {
-  question: "What is the most appropriate approach when validating a new microbiology instrument interface?",
+  question: "Which validation plan provides the strongest evidence that a new microbiology instrument interface is ready for clinical use?",
   choices: [
     "Confirm that the instrument can connect to the network and that transmitted results can reach the EHR",
     "Test multiple representative positive and negative results and confirm that the expected values are transmitted",
-    "Rely on the vendor's interface testing because the interface has already been tested before local implementation and is designed to adapt to the laboratory's configuration",
+    "Use the vendor's interface test results and locally confirm one common result because the underlying interface design is shared across installations",
     "Verify representative orders, identifiers, results, mappings, exceptions, and downstream display across the intended end-to-end workflow"
   ],
   correctIndex: 3,
@@ -593,16 +593,16 @@ const cases: Record<string, CaseSeed> = {
      {
   question: "A laboratory introduces automated plate inoculation, incubation, transport, and digital imaging. Why is this also an informatics implementation rather than only a hardware implementation?",
   choices: [
-    "Automation mainly changes how specimens are physically processed, while the information workflow remains largely unchanged",
+    "The physical automation can be validated independently because specimen identity is established before plates enter the automated workflow",
     "Automated systems generate and exchange specimen, workflow, image, and status information that must remain correctly linked across the laboratory process",
-    "Automation becomes an informatics issue mainly when digital images are transmitted to another system",
-    "Automation is primarily an informatics issue because the LIS controls every physical step performed by the automated system"
+    "The implementation becomes an informatics workflow only if digital images are transmitted outside the automation system",
+    "The implementation becomes an informatics workflow only if the automation software is permitted to autoverify patient results"
   ],
   correctIndex: 1,
   explanation: "Laboratory automation connects physical specimen processing with information flow. Specimen identity, location, processing steps, incubation status, images, interpretations, and downstream results may be generated or updated across interconnected systems. These data must remain correctly associated with the physical specimen throughout the automated workflow."
 },
 {
-  question: "After a validated microbiology interface is implemented, a software update changes an organism mapping table. Results continue transmitting without interface errors. What is the most appropriate laboratory response?",
+  question: "After a validated microbiology interface is implemented, a software update changes an organism mapping table. Results continue transmitting without interface errors. How should the laboratory respond?",
   choices: [
     "Confirm that representative results still transmit successfully because continued transmission indicates that the interface remains valid",
     "Assess whether the mapping change could affect result integrity and perform appropriate representative verification under the laboratory's change-control process",
