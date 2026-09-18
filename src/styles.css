@@ -761,3 +761,25 @@ h3 { line-height: 1.2; }
   .digital-plate-demo { grid-template-columns: 1fr; }
   .culture-plate { margin: 0 auto; }
 }
+
+
+/* Original synthetic broth microdilution illustration */
+.mic-illustration { display: grid; grid-template-columns: 1fr 1.1fr; gap: 24px; align-items: center; margin: 26px 0 18px; padding: 22px; border: 1px solid var(--line); background: #f8f8f4; }
+.mic-illustration > div:first-child small { display: block; color: var(--muted); text-transform: uppercase; letter-spacing: .07em; }
+.mic-illustration > div:first-child strong { display: block; margin-top: 7px; font-size: 1.05rem; }
+.mic-illustration > div:first-child p { margin: 7px 0 0; color: var(--muted); }
+.mic-well-panel { padding: 18px; border: 1px solid var(--line); background: var(--paper); }
+.mic-wells { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; align-items: end; }
+.mic-well-wrap { text-align: center; }
+.mic-well-wrap small { display: block; margin-top: 6px; color: var(--muted); font-family: ui-monospace, monospace; }
+.mic-well { display: block; width: 100%; aspect-ratio: 1; border: 2px solid rgba(67,78,71,.25); border-radius: 50%; box-shadow: inset 0 4px 9px rgba(38,51,47,.08); }
+.mic-well.growth { background: radial-gradient(circle at 45% 45%, rgba(94,105,72,.8) 0 7%, rgba(161,166,115,.72) 8% 14%, rgba(218,210,150,.85) 15% 100%); }
+.mic-well.clear { background: radial-gradient(circle at 40% 35%, rgba(255,255,255,.95), rgba(234,229,190,.55) 72%); }
+.mic-marker { margin-top: 10px; margin-left: calc(50% + 3px); text-align: center; transform: translateX(-4%); }
+.mic-marker span, .mic-marker strong { display: block; }
+.mic-marker span { color: var(--red); font-size: 1.25rem; line-height: 1; }
+.mic-marker strong { font-size: .78rem; }
+@media (max-width: 760px) {
+  .mic-illustration { grid-template-columns: 1fr; }
+  .mic-wells { gap: 5px; }
+}
