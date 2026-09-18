@@ -110,6 +110,11 @@ For example, a message could reach the receiving system while containing:
 
 End-to-end validation should therefore evaluate the information as it is received and used, not simply confirm that a message left the laboratory.
 
+<div className="micro-visual ack-visual" role="img" aria-label="A technical acknowledgment confirms message receipt but does not by itself confirm correct semantic interpretation">
+ <div className="micro-visual-copy"><small>Acknowledgment ≠ interpretation</small><strong>“Received” is not the same as “understood correctly”</strong><span>An acknowledgment can establish a technical processing event while a test, organism, specimen, or result mapping is still wrong.</span></div>
+ <div className="ack-art"><span><b>message</b></span><i>→</i><span className="ack-ok"><b>ACK ✓</b><small>received</small></span><i>≠</i><span><b>meaning ✓?</b><small>validate</small></span></div>
+</div>
+
 ## ELR and eCR Are Related but Different
 
 Electronic laboratory reporting is one component of the broader public-health information environment.
@@ -151,6 +156,11 @@ Poor mappings, incomplete information, duplicate records, delayed reporting, or 
 ### Before Interpreting a Surveillance Signal, Check the Data Pipeline
 
 An apparent change in surveillance data does not necessarily represent a change in underlying disease occurrence.
+
+<div className="micro-visual surveillance-signal-visual" role="img" aria-label="A rise in surveillance counts can reflect a true epidemiologic change or a change in the data pipeline">
+ <div className="micro-visual-copy"><small>Signal interpretation</small><strong>A rising line has more than one possible cause</strong><span>Before calling an epidemiologic signal, check whether methods, mappings, reporting rules, completeness, or deduplication changed.</span></div>
+ <div className="signal-art"><div className="signal-chart"><i/><i/><i/><i/><i/></div><em>?</em><div><b>true change</b><b>pipeline change</b></div></div>
+</div>
 
 For example, an increase in a reported organism could reflect a true epidemiologic signal, but it could also follow changes in:
 
