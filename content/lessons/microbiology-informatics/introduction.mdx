@@ -149,6 +149,8 @@ The laboratory system understands the code.
 
 The receiving system successfully receives the electronic message—but does not know what `ORG_247` means.
 
+<div className="science-illustration mapping-image" role="img" aria-label="Organism concept translated across laboratory systems"><div className="science-copy"><small>Concept mapping</small><strong>Same organism, different representations</strong><span>The clinical concept must survive translation even when each system stores a different identifier.</span></div><div className="mapping-art"><span className="microbe-glyph"><i/><i/><i/><i/></span><b>ORG_247</b><em>⇢</em><span className="mapping-chip">ECOLI_LIS</span><em>⇢</em><strong><i>E. coli</i></strong></div></div>
+
 Technically, the message arrived.
 
 Semantically, the information failed.
@@ -236,6 +238,8 @@ Before interpreting an analysis, ask whether the underlying data are fit for the
 - **meaning and mappings:** did codes, definitions, or system configurations change over time?
 
 A calculation can be technically correct and still support a misleading conclusion.
+
+<div className="science-illustration provenance-image" role="img" aria-label="Incomplete source data changes a downstream chart"><div className="science-copy"><small>Data fitness</small><strong>A clean chart can begin with incomplete data</strong><span>Inspect what entered the dataset, what was transformed, and what may be missing before interpreting the output.</span></div><div className="provenance-art"><div><i/><i/><i/><i className="missing"/><i/><i/></div><em>→</em><span className="mini-chart"><b/><b/><b/><b/></span></div></div>
 
 For example, suppose a dashboard shows that blood-culture positivity decreased after an interface change. The percentage may be calculated correctly, but the apparent trend could still be misleading if a subset of cultures stopped reaching the dataset or a local code changed without an appropriate mapping update.
 
