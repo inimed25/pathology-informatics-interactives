@@ -30,19 +30,21 @@ export function ReadContextExplorer() {
 
       <div className="context-map">
         <div className="context-track chromosome">
-          <span className="context-label">Chromosome-like context</span>
-          <span className="context-repeat repeat-left">repeat</span>
-          <span className="context-gene">resistance gene</span>
-          <span className="context-repeat repeat-right">repeat</span>
+          <span className="context-label">Candidate chromosome-like mapping</span>
+          <span className="context-unique unique-left">unique A</span>
+          <span className="context-repeat repeat-left">shared repeat</span>
+          <span className="context-gene">gene-containing fragment</span>
+          <span className="context-repeat repeat-right">shared repeat</span>
         </div>
         <div className="context-track plasmid">
-          <span className="context-label">Plasmid-like context</span>
-          <span className="context-repeat repeat-left">repeat</span>
-          <span className="context-gene">resistance gene</span>
-          <span className="context-repeat repeat-right">repeat</span>
+          <span className="context-label">Candidate plasmid-like mapping</span>
+          <span className="context-repeat repeat-left">shared repeat</span>
+          <span className="context-gene">gene-containing fragment</span>
+          <span className="context-repeat repeat-right">shared repeat</span>
+          <span className="context-unique unique-right">unique B</span>
         </div>
 
-        <div className={`context-reads ${mode}`} aria-label={mode === "short" ? "Short reads overlapping repeated sequence and resistance gene" : "Long read spanning resistance gene and unique surrounding sequence"}>
+        <div className={`context-reads ${mode}`} aria-label={mode === "short" ? "Short reads compatible with more than one candidate genomic context" : "Long read spanning the gene-containing region into unique plasmid-like flanking sequence"}>
           {mode === "short" ? (
             <>
               <span style={{ left: "31%", width: "12%", top: 8 }} />
@@ -51,7 +53,7 @@ export function ReadContextExplorer() {
               <span style={{ left: "53%", width: "13%", top: 28 }} />
             </>
           ) : (
-            <span style={{ left: "24%", width: "52%", top: 16 }} />
+            <span className="resolved-long-read" style={{ left: "46%", width: "46%", top: 112 }} />
           )}
         </div>
       </div>
@@ -69,7 +71,8 @@ export function ReadContextExplorer() {
             A sufficiently informative long read can span the gene, repeated
             sequence, and unique flanking sequence. That linkage can help resolve
             whether the determinant belongs to a particular plasmid or
-            chromosomal context.
+            chromosomal context. In this synthetic view, the spanning read reaches
+            unique plasmid-like sequence and resolves that candidate location.
           </p>
         )}
       </div>
