@@ -23,6 +23,7 @@ for (const objective of expectedObjectives) {
 
 const ids = new Set<string>();
 const slugs = new Set<string>();
+const allQuestionIds = new Set<string>();
 let totalQuestions = 0;
 
 for (const lesson of lessons) {
@@ -42,7 +43,9 @@ for (const lesson of lessons) {
   const questionIds = new Set<string>();
   for (const question of lesson.questions) {
     if (questionIds.has(question.id)) fail(`${manifest.slug} has duplicate question id ${question.id}`);
+    if (allQuestionIds.has(question.id)) fail(`Duplicate question id ${question.id} across question banks`);
     questionIds.add(question.id);
+    allQuestionIds.add(question.id);
     if (question.choices.length !== 4) fail(`${question.id} must have four choices`);
     if (question.correctIndex < 0 || question.correctIndex >= question.choices.length) {
       fail(`${question.id} has an invalid correct answer index`);
@@ -60,6 +63,17 @@ for (const lesson of lessons) {
   for (const file of ["introduction.mdx", "debrief.mdx", "faculty.mdx"]) {
     if (!existsSync(resolve(folder, file))) fail(`${manifest.slug} is missing ${file}`);
   }
+
+  for (const source of manifest.sources) {
+    const parsedUrl = (() => {
+      try {
+        return new URL(source.url);
+      } catch {
+        return fail(`${manifest.slug} has an invalid source URL: ${source.url}`);
+      }
+    })();
+    if (parsedUrl.protocol !== "https:") fail(`${manifest.slug} source URL must use HTTPS: ${source.url}`);
+  }
 }
 
 if (totalQuestions !== 45) fail(`Expected 45 required questions; found ${totalQuestions}`);
@@ -69,6 +83,8 @@ if (supplementalQuestions.length !== 11) {
 const supplementalIds = new Set(supplementalQuestions.map((question) => question.id));
 if (supplementalIds.size !== supplementalQuestions.length) fail("Supplemental question IDs must be unique");
 for (const question of supplementalQuestions) {
+  if (allQuestionIds.has(question.id)) fail(`Duplicate question id ${question.id} across question banks`);
+  allQuestionIds.add(question.id);
   if (question.choices.length !== 4) fail(`${question.id} must have four choices`);
   if (question.correctIndex < 0 || question.correctIndex >= question.choices.length) {
     fail(`${question.id} has an invalid correct answer index`);

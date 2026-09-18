@@ -58,7 +58,7 @@ const antimicrobialDecisionSupportSources: SourceReference[] = [
   },
   {
     label: "EUCAST — Expert Rules and Expected Phenotypes",
-    url: "https://www.eucast.org/expert_rules_and_expected_phenotypes",
+    url: "https://www.eucast.org/bacteria/important-additional-information/",
     license: "Copyrighted technical resource; cited, not reproduced",
     use: "Supplemental framework for knowledge-based interpretation of antimicrobial susceptibility patterns, expected phenotypes, and expert-rule concepts.",
   },
