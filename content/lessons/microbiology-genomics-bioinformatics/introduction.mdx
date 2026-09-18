@@ -183,6 +183,11 @@ A **base-quality score** estimates confidence in an individual nucleotide call.
 
 FASTQ files commonly represent sequence reads together with per-base quality information.
 
+<div className="science-illustration fastq-illustration" role="img" aria-label="A FASTQ record pairs a nucleotide sequence with one quality value for each base">
+ <div className="science-copy"><small>FASTQ anatomy</small><strong>Sequence and base quality travel together</strong><span>A FASTQ record contains a read identifier, nucleotide sequence, separator, and a quality string with one encoded quality value per base.</span></div>
+ <div className="fastq-sheet"><code>@read_042</code><b>ACGTTGCAATGC</b><code>+</code><div className="quality-bars"><i/><i/><i/><i/><i/><i/><i/><i/><i/><i/><i/><i/></div><small>12 bases · 12 quality values</small></div>
+</div>
+
 Phred-style quality scores are logarithmically related to estimated error probability.
 
 For intuition:
@@ -333,6 +338,11 @@ Reference-based approaches can support:
 
 Reference choice is therefore an analytical decision rather than merely a software setting.
 
+<div className="science-illustration alignment-illustration" role="img" aria-label="Overlapping sequence reads are placed at positions along a reference and a mismatch is highlighted">
+ <div className="science-copy"><small>Reference alignment</small><strong>Reads gain coordinates relative to a reference</strong><span>Alignment asks where each read fits. Coverage, mismatches, gaps, and mapping confidence are interpreted in that reference coordinate system.</span></div>
+ <div className="alignment-stack"><div className="reference-line"><em>reference</em><b>ACGTTACGGTACCTGA</b></div><span className="align-r1">ACGTTACG</span><span className="align-r2">TTAC<span className="mismatch">A</span>GTAC</span><span className="align-r3">GGTACCTGA</span></div>
+</div>
+
 ### De novo assembly
 
 In **de novo assembly**, overlapping reads are computationally reconstructed into longer sequences without requiring placement onto a particular reference genome as the primary reconstruction strategy.
@@ -342,6 +352,11 @@ The resulting contiguous assembled sequences are called **contigs**.
 Our **K. pneumoniae** isolate might therefore be reconstructed into multiple contigs representing portions of its chromosome and other genomic elements.
 
 A draft assembly does not necessarily produce one perfectly reconstructed chromosome.
+
+<div className="science-illustration assembly-illustration" role="img" aria-label="Overlapping reads are connected into a longer assembled contig without first placing them on a reference">
+ <div className="science-copy"><small>De novo assembly</small><strong>Overlap is used to reconstruct longer sequence</strong><span>Assembly uses relationships among reads to build contigs. A draft microbial genome may contain multiple contigs rather than one complete chromosome.</span></div>
+ <div className="assembly-sketch"><div><i/><i/><i/><i/></div><b>overlap</b><span aria-label="assembled contig"/></div>
+</div>
 
 ---
 
@@ -516,8 +531,8 @@ SAM and BAM represent sequence alignment information.
 BAM is a binary representation of SAM commonly used to store reads together with information describing their alignment to a reference.
 
 <div className="science-illustration bam-image" role="img" aria-label="BAM conceptually stores aligned reads together with reference coordinates and alignment metadata">
- <div className="science-copy"><small>BAM</small><strong>Not raw sequence: aligned sequence evidence</strong><span>A BAM file represents reads in alignment context, including where they map and associated alignment information. It is a binary counterpart to SAM, not an image of the genome.</span></div>
- <div className="bam-art"><div className="bam-reference"><b>reference</b><i/></div><span style={{"--bam-x":"8%"} as React.CSSProperties}/><span style={{"--bam-x":"28%"} as React.CSSProperties}/><span style={{"--bam-x":"46%"} as React.CSSProperties}/><div className="bam-meta"><i/><i/><i/></div></div>
+ <div className="science-copy"><small>BAM</small><strong>Alignment-oriented sequence evidence</strong><span>BAM is the binary representation of SAM and can contain read sequence plus alignment-related fields; BAM files may also contain unaligned reads. In reference-based workflows, BAM commonly stores reads together with their mapping context.</span></div>
+ <div className="bam-art"><div className="bam-reference"><b>reference</b><i/></div><span className="bam-r1"/><span className="bam-r2"/><span className="bam-r3"/><div className="bam-meta"><i/><i/><i/></div></div>
 </div>
 
 Think:
@@ -865,6 +880,11 @@ Conceptually:
 | locus 4 | allele 2 | allele 2 |
 
 In this simplified example, the isolates differ at one of the four illustrated loci.
+
+<div className="science-illustration cgmlst-illustration" role="img" aria-label="Two isolates have allele calls across the same core loci and differ at one locus">
+ <div className="science-copy"><small>cgMLST</small><strong>Compare allele profiles across a defined core-locus scheme</strong><span>Each locus receives an allele identifier. Relatedness is summarized from differences across the shared scheme; the distance is an allele difference count, not a SNP count.</span></div>
+ <div className="allele-matrix"><div><em>A</em><i>4</i><i>8</i><i>12</i><i>2</i></div><div><em>B</em><i>4</i><i>8</i><i className="diff">13</i><i>2</i></div><small>1 allele difference across these 4 illustrated loci</small></div>
+</div>
 
 **Whole-genome multilocus sequence typing (wgMLST)** extends the same general gene-by-gene concept across a broader set of loci representing more of the organism's genomic diversity.
 
