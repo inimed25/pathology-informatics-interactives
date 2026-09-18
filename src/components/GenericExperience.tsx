@@ -33,7 +33,7 @@ export function GenericExperience({
         aria-labelledby="evidence-title"
       >
         <div className="section-heading">
-          <span className="section-number">01</span>
+          <span className="section-number">05</span>
           <div>
             <p className="eyebrow">Clinical artifact</p>
             <h2 id="evidence-title">Inspect the evidence</h2>
@@ -65,7 +65,7 @@ export function GenericExperience({
         aria-labelledby="trace-title"
       >
         <div className="section-heading">
-          <span className="section-number">02</span>
+          <span className="section-number">04</span>
           <div>
             <p className="eyebrow">Trace</p>
             <h2 id="trace-title">Follow it through the system</h2>
