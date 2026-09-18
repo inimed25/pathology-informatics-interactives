@@ -12,6 +12,7 @@ import { AntibiogramFigure } from "./components/AntibiogramFigure";
 import { LabEcosystemFigure } from "./components/LabEcosystemFigure";
 import { GenomicsConceptGallery } from "./components/GenomicsConceptGallery";
 import { SupplementalQuestionBank } from "./components/SupplementalQuestionBank";
+import { BiotechHeroVisual, GenomicsPrimer, LessonChapterRail, LessonLens } from "./components/BiotechVisuals";
 import { SiteChrome, href } from "./components/SiteChrome";
 import { lessonBySlug, lessons, topicBySlug, topics } from "./data/curriculum";
 import type { LessonDefinition } from "./data/types";
@@ -61,7 +62,9 @@ const routePath = () => {
           </div>
         </div>
 
-        <aside className="hero-card">
+        <aside className="hero-visual-column">
+          <BiotechHeroVisual />
+          <div className="hero-card">
           <span>Curriculum pathway</span>
           <ol>
             <li>Foundations of microbiology informatics</li>
@@ -76,6 +79,7 @@ const routePath = () => {
             Educational cases, questions, and figures are independently
             authored unless otherwise identified.
           </small>
+          </div>
         </aside>
       </section>
 
@@ -247,7 +251,12 @@ function LessonPage({ slug }: { slug: string }) {
         <span>01</span>
         <div><p className="eyebrow">Learn</p><strong>Build the concept</strong></div>
       </section>
-      <section className="mdx-content introduction-content">{Introduction ? <Introduction/> : <p>Introduction content is missing.</p>}</section>
+      <LessonLens slug={slug} />
+      {slug === "microbiology-genomics-bioinformatics" && <GenomicsPrimer />}
+      <div className="lesson-reading-layout">
+        <LessonChapterRail />
+        <section className="mdx-content introduction-content">{Introduction ? <Introduction/> : <p>Introduction content is missing.</p>}</section>
+      </div>
       <section className="lesson-phase-heading" aria-label="Explore">
         <span>02</span>
         <div><p className="eyebrow">Explore</p><strong>See the informatics concept in action</strong></div>

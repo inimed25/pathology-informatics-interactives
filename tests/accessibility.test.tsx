@@ -4,6 +4,7 @@ import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { GenericExperience } from "../src/components/GenericExperience";
 import { SupplementalQuestionBank } from "../src/components/SupplementalQuestionBank";
+import { BiotechHeroVisual, GenomicsPrimer, LessonLens } from "../src/components/BiotechVisuals";
 import { lessons } from "../src/data/curriculum";
 
 test("knowledge checks expose labeled semantic controls", () => {
@@ -42,4 +43,15 @@ test("the capstone is framed as the final integrated assessment", () => {
   const html = renderToStaticMarkup(<GenericExperience lesson={capstone} />);
   assert.match(html, /Final assessment/);
   assert.match(html, /Integrate your reasoning/);
+});
+
+test("biotech visual framing preserves useful accessible labels", () => {
+  const hero = renderToStaticMarkup(<BiotechHeroVisual />);
+  const lens = renderToStaticMarkup(<LessonLens slug="microbiology-genomics-bioinformatics" />);
+  const primer = renderToStaticMarkup(<GenomicsPrimer />);
+  assert.match(hero, /aria-hidden="true"/);
+  assert.match(lens, /aria-label="Lesson concept map"/);
+  assert.match(lens, /Sequence data become evidence/);
+  assert.match(primer, /aria-labelledby="genomics-primer-title"/);
+  assert.match(primer, /Four layers\. One governed result\./);
 });
