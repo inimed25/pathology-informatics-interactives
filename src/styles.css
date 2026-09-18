@@ -707,3 +707,37 @@ h3 { line-height: 1.2; }
   .digital-pipeline b { transform: rotate(90deg); }
   .digital-scenarios, .digital-readout { grid-template-columns: 1fr; }
 }
+
+
+/* Public health: transport, semantics, and surveillance */
+.public-health-explorer { max-width: 1050px; margin: 34px 0 54px; padding: 42px; border: 1px solid var(--line); border-radius: 20px; background: var(--paper); box-shadow: 0 14px 40px rgba(38,51,47,.055); }
+.public-health-heading h3 { margin: 0 0 10px; font-size: 1.8rem; }
+.public-health-heading > p:last-child { max-width: 780px; color: var(--muted); }
+.ph-path { display: flex; align-items: center; justify-content: space-between; gap: 6px; margin: 28px 0 20px; padding: 20px; border: 1px solid var(--line); background: #f8f8f4; }
+.ph-path-item { display: contents; }
+.ph-path span { padding: 10px; border: 1px solid var(--line); background: var(--green-pale); font-size: .72rem; font-weight: 700; text-align: center; }
+.ph-path span.attention { background: var(--red-soft); border-color: var(--red); }
+.ph-path b { color: var(--green); }
+.ph-scenarios { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.ph-scenarios button { min-height: 64px; padding: 13px; border: 1px solid var(--line); background: #fafaf6; color: var(--ink); cursor: pointer; text-align: left; }
+.ph-scenarios button.active { border-color: var(--green); background: var(--mint); box-shadow: inset 0 0 0 1px var(--green); }
+.ph-readout { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 18px; border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+.ph-readout > div { min-height: 118px; padding: 18px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.ph-readout small { display: block; color: var(--muted); text-transform: uppercase; letter-spacing: .07em; }
+.ph-readout strong { display: block; margin-top: 10px; }
+.ph-explanation { margin-top: 18px; padding: 20px 22px; border-left: 4px solid var(--gold); background: var(--gold-soft); }
+.ph-explanation strong { font-size: .78rem; text-transform: uppercase; letter-spacing: .07em; }
+.ph-explanation p { margin: 6px 0 0; }
+.ph-standard-note { display: grid; grid-template-columns: 1fr auto 1fr auto 1.2fr; gap: 12px; align-items: center; margin-top: 18px; padding: 18px; border: 1px solid var(--line); }
+.ph-standard-note span { padding: 12px; background: var(--green-pale); }
+.ph-standard-note strong, .ph-standard-note small { display: block; }
+.ph-standard-note small { margin-top: 4px; color: var(--muted); }
+.ph-standard-note b { color: var(--green); }
+@media (max-width: 760px) {
+  .public-health-explorer { padding: 25px 18px; }
+  .ph-path { flex-direction: column; }
+  .ph-path-item { display: flex; flex-direction: column; align-items: center; }
+  .ph-path b { transform: rotate(90deg); }
+  .ph-scenarios, .ph-readout, .ph-standard-note { grid-template-columns: 1fr; }
+  .ph-standard-note > b { transform: rotate(90deg); justify-self: center; }
+}
