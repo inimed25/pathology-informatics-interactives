@@ -360,9 +360,9 @@ const cases: Record<string, CaseSeed> = {
         question: "Why can clinical microbiology data be more difficult to represent than a single quantitative chemistry result?",
         choices: [
           "Microbiology results may contain multiple related observations that evolve during the laboratory workflow",
-          "Microbiology data are inherently unstructured because organism identifications and susceptibility results cannot be represented as discrete fields",
-          "Microbiology results are difficult mainly because each specimen produces a single observation that must be repeatedly overwritten",
-          "Microbiology data are difficult mainly because preliminary and final observations must be stored in separate information systems"
+          "Microbiology results are primarily more complex because preliminary findings should be stored as free text while final findings should be stored as discrete data",
+          "Microbiology results are primarily more complex because each stage of testing creates an independent observation that does not need to remain linked to earlier stages",
+          "Microbiology results are primarily more complex because preliminary and final findings must be maintained in separate information systems"
         ],
         correctIndex: 0,
         explanation: "Microbiology workflows can generate interconnected and evolving information such as specimen details, organism identification, susceptibility results, preliminary findings, and final interpretations."
@@ -370,10 +370,10 @@ const cases: Record<string, CaseSeed> = {
       {
         question: "Which statement best distinguishes the LIS from the EHR in a microbiology workflow?",
         choices: [
-          "The EHR performs organism identification while the LIS performs susceptibility testing",
+          "The LIS stores instrument-generated data, while the EHR applies the laboratory's interpretive rules before results are displayed",
           "The LIS manages laboratory workflow and results, while the EHR presents laboratory information within the broader clinical record",
-          "The LIS and EHR are different names for the same information system",
-          "The EHR replaces the need for laboratory middleware and interfaces"
+          "The LIS manages instrument connections, while the EHR manages specimen processing, verification, and laboratory result correction",
+          "The LIS manages results until transmission, after which the EHR becomes the authoritative system for correcting laboratory content"
         ],
         correctIndex: 1,
         explanation: "The LIS supports laboratory-specific workflows and result management, whereas the EHR integrates laboratory information with the broader patient record."
@@ -392,21 +392,21 @@ const cases: Record<string, CaseSeed> = {
       {
         question: "Why is structured microbiology data valuable for downstream informatics applications?",
         choices: [
-          "Structured data eliminate the need for microbiologist interpretation",
-          "Structured data guarantee that every interface is correctly configured",
-          "Structured data prevent laboratory results from changing after preliminary reporting",
+          "Structured data allow receiving systems to infer equivalent concepts reliably even when terminology mappings have not been defined",
+          "Structured data preserve meaning automatically when sending and receiving systems use fields with different definitions",
+          "Structured data make free text unnecessary for contextual or interpretive information that does not fit predefined fields",
           "Structured data allow information to be more reliably searched, exchanged, and used by computational systems"
         ],
         correctIndex: 3,
         explanation: "Structured representation supports consistent exchange and computational use of laboratory information, although terminology, mappings, interfaces, and governance still require validation."
       },
       {
-        question: "Which question best reflects the microbiology director's informatics responsibility when implementing a new electronic result workflow?",
+        question: "During implementation of a new electronic result workflow, which responsibility most clearly requires microbiology director oversight?",
         choices: [
           "Does the information retain its intended meaning and reach the appropriate users and systems throughout the workflow?",
-          "Does automation eliminate the need to define exception handling and human review?",
-          "Does the interface preserve only the final displayed text, even if relationships among specimen, organism, and susceptibility data are lost?",
-          "Does successful message transmission make downstream clinical validation unnecessary?"
+          "Confirming analytical performance while allowing the technical team to determine independently how results should be represented downstream",
+          "Approving local organism codes while leaving preservation of specimen-organism-susceptibility relationships to each receiving system",
+          "Confirming successful interface acknowledgments before go-live while delegating downstream display review and post-implementation monitoring"
         ],
         correctIndex: 0,
       explanation: "The microbiology director helps ensure that laboratory information remains clinically accurate and meaningful as it moves through systems and reaches downstream users. Technical implementation may involve LIS, interface, and IT specialists, but microbiology expertise is essential for validating the clinical meaning of the workflow."
