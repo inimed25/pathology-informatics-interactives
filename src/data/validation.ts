@@ -1,9 +1,17 @@
 import type { LessonDefinition } from "./types";
 
-export const validationResult = (lesson: LessonDefinition, repairId: string | null) => {
-  const cases = lesson.validationCases.map((testCase) => ({
-    ...testCase,
-    passed: Boolean(repairId && testCase.passingRepairs.includes(repairId)),
+export const validationResult = (
+  lesson: LessonDefinition,
+  answers: Record<string, number>,
+) => {
+  const questions = lesson.questions.map((question) => ({
+    id: question.id,
+    passed: answers[question.id] === question.correctIndex,
   }));
-  return { cases, passed: cases.filter((testCase) => testCase.passed).length, total: cases.length };
+
+  return {
+    passed: questions.filter((question) => question.passed).length,
+    total: questions.length,
+    questions,
+  };
 };

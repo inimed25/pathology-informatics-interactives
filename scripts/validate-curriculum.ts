@@ -1,53 +1,60 @@
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync } from "node:fs";
 import { resolve } from "node:path";
 import { lessons, topics } from "../src/data/curriculum";
 
-const fail = (message: string): never => { throw new Error(message); };
-if (lessons.length !== 29) fail(`Expected 29 lessons; found ${lessons.length}`);
+const fail = (message: string): never => {
+  throw new Error(message);
+};
 
-const expected = new Set(topics.flatMap((topic) => topic.objectives));
-const covered = new Set(lessons.flatMap((lesson) => lesson.manifest.pierObjectives));
-if (expected.size !== 40) fail(`Expected 40 objective identifiers; found ${expected.size}`);
-for (const objective of expected) if (!covered.has(objective)) fail(`Objective ${objective} has no primary lesson`);
-for (const objective of covered) if (!expected.has(objective)) fail(`Unknown objective ${objective}`);
+const expectedQuestionCounts = new Map([
+  ["1.1", 6], ["1.2", 5], ["1.3", 5], ["1.4", 8],
+  ["1.5", 5], ["1.6", 4], ["1.7", 12],
+]);
+
+if (topics.length !== 1) fail(`Expected one curriculum topic; found ${topics.length}`);
+if (lessons.length !== 7) fail(`Expected seven modules; found ${lessons.length}`);
+
+const expectedObjectives = new Set(topics.flatMap((topic) => topic.objectives));
+const coveredObjectives = new Set(lessons.flatMap((lesson) => lesson.manifest.pierObjectives));
+for (const objective of expectedObjectives) {
+  if (!coveredObjectives.has(objective)) fail(`Objective ${objective} has no primary module`);
+}
 
 const ids = new Set<string>();
 const slugs = new Set<string>();
-const harrisonPlan = readFileSync(resolve("content", "HARRISON-SLIDE-MAP.md"), "utf8");
-const plannedSlugs = [...harrisonPlan.matchAll(/Lesson slug: `([^`]+)`/g)].map((match) => match[1]);
-if (new Set(plannedSlugs).size !== 23) fail(`Expected 23 unique lesson entries in the Harrison slide plan; found ${new Set(plannedSlugs).size}`);
+let totalQuestions = 0;
+
 for (const lesson of lessons) {
   const { manifest } = lesson;
-  if (ids.has(manifest.id)) fail(`Duplicate lesson id ${manifest.id}`);
-  if (slugs.has(manifest.slug)) fail(`Duplicate lesson slug ${manifest.slug}`);
+  const objective = manifest.pierObjectives[0];
+  const expectedCount = expectedQuestionCounts.get(objective);
+  if (ids.has(manifest.id)) fail(`Duplicate module id ${manifest.id}`);
+  if (slugs.has(manifest.slug)) fail(`Duplicate module slug ${manifest.slug}`);
   ids.add(manifest.id);
   slugs.add(manifest.slug);
   if (!lesson.evidence.length || !lesson.trace.length) fail(`${manifest.slug} lacks evidence or trace data`);
-  if (lesson.decisionChoices.filter((choice) => choice.correct).length !== 1) fail(`${manifest.slug} must have one correct diagnosis`);
-  if (lesson.repairChoices.filter((choice) => choice.correct).length !== 1) fail(`${manifest.slug} must have one controlled repair`);
-  if (lesson.validationCases.length < 3) fail(`${manifest.slug} needs at least three validation cases`);
+  if (expectedCount === undefined) fail(`Unexpected objective ${objective}`);
+  if (lesson.questions.length !== expectedCount) {
+    fail(`${objective} should have ${expectedCount} questions; found ${lesson.questions.length}`);
+  }
 
+  const questionIds = new Set<string>();
+  for (const question of lesson.questions) {
+    if (questionIds.has(question.id)) fail(`${manifest.slug} has duplicate question id ${question.id}`);
+    questionIds.add(question.id);
+    if (question.choices.length !== 4) fail(`${question.id} must have four choices`);
+    if (question.correctIndex < 0 || question.correctIndex >= question.choices.length) {
+      fail(`${question.id} has an invalid correct answer index`);
+    }
+    if (!question.explanation.trim()) fail(`${question.id} lacks an explanation`);
+  }
+
+  totalQuestions += lesson.questions.length;
   const folder = resolve("content", "lessons", manifest.slug);
   for (const file of ["introduction.mdx", "debrief.mdx", "faculty.mdx"]) {
     if (!existsSync(resolve(folder, file))) fail(`${manifest.slug} is missing ${file}`);
   }
-  if (manifest.hasLocalPracticum && !existsSync(resolve(folder, "practicum.mdx"))) fail(`${manifest.slug} is missing practicum.mdx`);
-
-if (manifest.topic !== 9) {
-  const marker = `Lesson slug: \`${manifest.slug}\``;
-  const sectionStart = harrisonPlan.indexOf(marker);
-  if (sectionStart < 0) fail(`${manifest.slug} is missing from the Harrison slide plan`);
-  const sectionEnd = harrisonPlan.indexOf("Lesson slug: `", sectionStart + marker.length);
-  const section = harrisonPlan.slice(sectionStart, sectionEnd < 0 ? undefined : sectionEnd);
-  const plannedSessions = new Set([...section.matchAll(/Session (\d+)/g)].map((match) => Number(match[1])));
-    for (const session of manifest.apiSessions) {
-    if (!plannedSessions.has(session)) fail(`${manifest.slug} is missing API Session ${session} in the Harrison slide plan`);
-  }
-}
 }
 
-const pilots = lessons.filter((lesson) => lesson.manifest.pilot);
-
-if (pilots.length !== 4) fail(`Expected four pilot interaction patterns; found ${pilots.length}`);
-
-console.log(`Validated ${lessons.length} lessons, ${covered.size}/${expected.size} objectives, ${pilots.length} pilot patterns, all required MDX files, and 23 Harrison slide plans.`);
+if (totalQuestions !== 45) fail(`Expected 45 required questions; found ${totalQuestions}`);
+console.log(`Validated ${lessons.length} modules, ${coveredObjectives.size}/${expectedObjectives.size} objectives, and ${totalQuestions} required questions.`);
