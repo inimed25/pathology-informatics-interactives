@@ -57,4 +57,15 @@ for (const lesson of lessons) {
 }
 
 if (totalQuestions !== 45) fail(`Expected 45 required questions; found ${totalQuestions}`);
+
+const capstone = lessons.find((lesson) => lesson.manifest.pierObjectives.includes("1.7"));
+if (!capstone) throw new Error("Capstone module 1.7 is missing");
+const capstoneQuestions = capstone.questions;
+const capstoneAnswerDistribution = [0, 1, 2, 3].map(
+  (answerIndex) => capstoneQuestions.filter((question) => question.correctIndex === answerIndex).length,
+);
+if (capstoneAnswerDistribution.some((count) => count !== 3)) {
+  fail(`Capstone answer distribution should be 3/3/3/3; found ${capstoneAnswerDistribution.join("/")}`);
+}
+
 console.log(`Validated ${lessons.length} modules, ${coveredObjectives.size}/${expectedObjectives.size} objectives, and ${totalQuestions} required questions.`);

@@ -675,7 +675,7 @@ const cases: Record<string, CaseSeed> = {
 
     questions: [
       {
-        question: "An influenza A sequencing workflow produces high-quality reads across most of the viral genome. One genomic region has almost no usable reads, although the average sequencing depth across the genome is high. Which interpretation is most appropriate?",
+        question: "An influenza A sequencing workflow produces high-quality reads across most of the viral genome. One genomic region has almost no usable reads, although the average sequencing depth across the genome is high. What does this imply about coverage?",
         choices: [
           "The entire genome can be interpreted confidently because the average sequencing depth is high",
           "The poorly covered region may remain inadequately characterized despite high average depth elsewhere",
@@ -686,7 +686,7 @@ const cases: Record<string, CaseSeed> = {
         explanation: "Depth and breadth describe different aspects of coverage. Depth describes how many reads support a genomic position, while breadth describes how much of the intended genome or target has adequate coverage. High depth across well-covered regions cannot compensate for a region with little or no usable sequence. Therefore, conclusions about that poorly covered region may remain unsupported even when the overall average depth looks excellent."
       },
       {
-        question: "A sequencing read from a Klebsiella pneumoniae isolate has high base-quality scores, but the sequence is very similar to DNA found at several locations in the genome. What is the most appropriate interpretation?",
+        question: "A sequencing read from a Klebsiella pneumoniae isolate has high base-quality scores, but the sequence is very similar to DNA found at several locations in the genome. How should these quality measures be interpreted?",
         choices: [
           "The read can be placed confidently because high base quality also indicates high mapping quality",
           "The nucleotide calls may be reliable, but the genomic location may still be uncertain",
@@ -708,7 +708,7 @@ const cases: Record<string, CaseSeed> = {
         explanation: "Reference alignment asks where reads fit relative to a selected reference and is useful for analyses such as variant detection and comparison within a common coordinate system. De novo assembly instead reconstructs overlapping reads into contigs without requiring placement onto a particular reference as the primary reconstruction strategy. This can help characterize genomic content that is absent from the selected reference. Importantly, de novo assembly is not automatically more accurate or complete; its quality still depends on the sequencing data, assembly method, and intended use."
       },
       {
-        question: "WGS of a Klebsiella pneumoniae isolate detects a carbapenemase gene using high-quality short-read sequencing. The clinical team asks whether the gene is located on a plasmid that may facilitate its spread between bacteria. Which response is most appropriate?",
+        question: "WGS of a Klebsiella pneumoniae isolate detects a carbapenemase gene using high-quality short-read sequencing. The clinical team asks whether the gene is located on a plasmid that may facilitate its spread between bacteria. Which response best distinguishes gene detection from determination of genomic context?",
         choices: [
           "Detection of the gene establishes that it is plasmid-associated because resistance genes are generally carried on plasmids",
           "High sequencing depth is sufficient to determine whether the gene is located on a plasmid or chromosome",
@@ -719,12 +719,12 @@ const cases: Record<string, CaseSeed> = {
         explanation: "Detecting a resistance gene and determining where that gene resides are different analytical questions. Short reads may provide strong evidence that the gene is present while still being unable to resolve its surrounding genomic structure, particularly when repetitive sequences or mobile genetic elements complicate reconstruction. Longer reads or other appropriately validated approaches may provide the additional sequence context needed to link the gene confidently to a plasmid or chromosome. High depth alone does not solve this structural problem."
       },
       {
-        question: "Sequencing of an influenza A specimen identifies a nucleotide variant in 30% of the informative reads at a well-covered position. The remaining reads support the reference nucleotide. What is the most appropriate interpretation?",
+        question: "Sequencing of an influenza A specimen identifies a nucleotide variant in 30% of the informative reads at a well-covered position. The remaining reads support the reference nucleotide. What can be concluded from the VAF alone?",
         choices: [
-          "The patient definitely has two distinct influenza strains because any intermediate VAF proves a mixed infection",
-          "The variant should be ignored because clinically meaningful variants must have a VAF near 100%",
+          "The specimen contains two distinct influenza strains because an intermediate VAF is sufficient to establish a mixed infection",
+          "The variant is unlikely to represent a biological minority population because clinically meaningful variants should constitute most informative reads",
           "The 30% VAF indicates that a subset of the sequence reads supports the variant, but additional evidence is needed to determine whether this reflects a mixed population, within-host diversity, contamination, artifact, or another explanation",
-          "The consensus sequence must contain the variant because any VAF above 25% determines the consensus nucleotide"
+          "The consensus sequence should contain the variant because VAF values above 25% meet a general consensus threshold"
         ],
         correctIndex: 2,
         explanation: "VAF describes the proportion of informative reads supporting a variant; it does not by itself identify what biological population produced those reads. A 30% VAF means that approximately 30% of informative reads at that position support the variant. It could reflect a minority microbial population, within-host diversity, a mixed infection, contamination, or sequencing/alignment artifact. Even a high VAF does not by itself establish a new strain; strain or lineage interpretation generally depends on a broader pattern of genomic information. Additional quality data, controls, genomic context, and validated interpretive criteria are therefore needed."
@@ -741,7 +741,7 @@ const cases: Record<string, CaseSeed> = {
         explanation: "SNP-based analysis compares nucleotide-level differences across genomic positions included in a defined analysis. cgMLST instead compares allele assignments across a standardized set of core-genome loci. Thus, five SNPs and five allele differences are not equivalent measurements, even if they come from the same isolates. Reference or scheme selection, quality control, filtering, and other analytical choices can also influence the resulting comparison."
       },
       {
-        question: "During investigation of a possible hospital outbreak, WGS shows that two Klebsiella pneumoniae isolates are highly genetically related using the laboratory's validated genomic-analysis workflow. Which conclusion is most appropriate?",
+        question: "During investigation of a possible hospital outbreak, WGS shows that two Klebsiella pneumoniae isolates are highly genetically related using the laboratory's validated genomic-analysis workflow. What conclusion does this result support?",
         choices: [
           "The isolates' genomic similarity proves that Patient A transmitted the organism directly to Patient B",
           "The isolates' genomic similarity supports a recent shared ancestry or epidemiologic relationship, but genomic data alone do not establish direct transmission or its direction",
@@ -752,12 +752,12 @@ const cases: Record<string, CaseSeed> = {
         explanation: "High genomic relatedness can provide strong evidence that isolates are epidemiologically associated, but it does not by itself establish who infected whom or even that transmission occurred directly between those two patients. A shared source, unsampled intermediate patient, environmental reservoir, or other transmission pathway may produce closely related isolates. Interpretation therefore integrates genomic findings with timing, location, exposures, infection-control information, and other epidemiologic evidence. There is also no universal SNP or allele cutoff that can be applied across organisms and analytical methods to prove direct transmission."
       },
       {
-        question: "A laboratory updates the reference genome used in a validated SNP-based outbreak-analysis pipeline. The software runs successfully after the change and produces genomic-distance results for all isolates. What is the most appropriate next step?",
+        question: "A laboratory updates the reference genome used in a validated SNP-based outbreak-analysis pipeline. The software runs successfully after the change and produces genomic-distance results for all isolates. What should the laboratory do before clinical use?",
         choices: [
-          "No additional evaluation is needed because successful completion of the pipeline demonstrates that the results remain valid",
-          "Re-sequence every previously tested isolate because any reference change invalidates all prior sequencing data",
+          "Confirm that the updated pipeline completes successfully and that routine sequence-quality metrics remain within range",
+          "Reprocess representative read sets and confirm that the pipeline produces genomic distances without reviewing differences from the prior workflow",
           "Evaluate the effect of the reference change on variant calling, comparable genomic positions, genomic distances, and the laboratory's intended interpretation before using the updated workflow clinically",
-          "Use whichever reference produces the smallest SNP distances because it provides the greatest sensitivity for detecting outbreaks"
+          "Select the reference that yields the broadest comparable genome because maximizing included positions establishes clinical suitability"
         ],
         correctIndex: 2,
         explanation: "A computational pipeline completing without an error only demonstrates that it ran; it does not establish that the resulting analysis remains appropriate for its intended clinical or public-health use. Reference selection can influence read alignment, which positions are reliably comparable, variant calls, and ultimately calculated genomic distances. A meaningful reference or pipeline change therefore requires evaluation of its downstream analytical and interpretive effects before results are relied upon."
@@ -820,21 +820,21 @@ const cases: Record<string, CaseSeed> = {
 
     questions: [
       {
-        question: "A digital microbiology algorithm was validated to identify culture plates with no visible growth. Six months after implementation, performance worsens specifically for one type of culture medium after the laboratory changes to a different manufacturer. Which interpretation is most appropriate?",
+        question: "A digital microbiology algorithm was validated to identify culture plates with no visible growth. Six months after implementation, performance worsens specifically for one type of culture medium after the laboratory changes to a different manufacturer. What does this pattern suggest?",
         choices: [
-          "Once an AI model has been validated, changes in laboratory materials should not affect its performance unless the software itself changes",
+          "Because the software is unchanged, the laboratory should investigate imaging hardware before considering the change in culture medium",
           "Algorithm performance can depend on the data and environment in which it operates, so changes in inputs or workflow can affect performance and may require monitoring and reassessment",
-          "The problem primarily demonstrates that digital images should not be retained after interpretation",
-          "The laboratory should adjust the algorithm threshold until prior performance is restored, provided the software itself has not changed"
+          "The original validation remains sufficient because the performance change is limited to one medium and does not affect the overall dataset",
+          "The laboratory should restore prior performance by adjusting the decision threshold before determining whether the input distribution changed"
         ],
         correctIndex: 1,
         explanation: "Algorithm performance depends not only on the software itself but also on the data and workflow in which it operates. Relevant factors can include culture-medium type or manufacturer, incubation conditions, image-acquisition timing, illumination, focus, resolution, imaging hardware, organism distribution, specimen characteristics, and local workflow. Changes in these factors can shift the data presented to the algorithm even when its code has not changed. Post-implementation monitoring can identify performance changes and help determine whether investigation, verification, workflow modification, or other corrective action is needed."
       },
       {
-        question: "A digital microbiology algorithm identifies culture plates requiring additional review with 95% accuracy during validation. After implementation, microbiologists report that the system generates large numbers of unnecessary review flags during the busiest part of the day, slowing plate review and occasionally delaying attention to higher-priority cultures. Which interpretation is most appropriate?",
+        question: "A digital microbiology algorithm identifies culture plates requiring additional review with 95% accuracy during validation. After implementation, microbiologists report that the system generates large numbers of unnecessary review flags during the busiest part of the day, slowing plate review and occasionally delaying attention to higher-priority cultures. How should the laboratory evaluate this result?",
         choices: [
           "The algorithm remains clinically successful because 95% accuracy establishes adequate performance",
-          "The algorithm should be removed because any increase in microbiologist workload demonstrates failed validation",
+          "The laboratory should repeat the original accuracy study because workflow effects are adequately addressed once the model-performance result is reproduced",
           "Analytical or model performance is only part of implementation; the laboratory should also evaluate how the system affects workflow, workload, prioritization, errors, turnaround time, and its intended clinical purpose",
           "The laboratory should increase the algorithm's decision threshold until the number of alerts becomes acceptable, without additional evaluation"
         ],
@@ -842,12 +842,12 @@ const cases: Record<string, CaseSeed> = {
         explanation: "Strong model-performance metrics do not by themselves establish clinical utility. A digital system can perform its defined computational task well while still creating excessive workload, disrupting prioritization, delaying turnaround, or otherwise failing to support its intended clinical or operational purpose."
       },
       {
-        question: "A digital plate-reading system has been validated to automatically classify certain culture plates as having no visible growth. During routine use, the system encounters an image that does not meet its predefined image-quality requirements because part of the plate is obscured. What is the most appropriate system behavior?",
+        question: "A digital plate-reading system has been validated to automatically classify certain culture plates as having no visible growth. During routine use, the system encounters an image that does not meet its predefined image-quality requirements because part of the plate is obscured. How should the system handle this image?",
         choices: [
-          "Report no growth if the visible portion of the plate contains no colonies",
-          "Attempt classification anyway because a validated algorithm should always produce a result",
+          "Report no growth when the unobscured portion meets the algorithm's negative-growth criteria",
+          "Generate a classification but attach an image-quality warning for review after the result enters the reporting workflow",
           "Route the case through a defined exception pathway, such as human review, rather than forcing an automated classification outside acceptable input conditions",
-          "Permanently disable automated reporting because one image failed quality requirements"
+          "Repeat automated acquisition until the system produces a classification, regardless of whether the image-quality requirement is met"
         ],
         correctIndex: 2,
         explanation: "Automated workflows need defined exception pathways for cases in which the system cannot safely perform its intended task. Depending on the implementation, image-quality failures or unexpected inputs may trigger a hold, flag, repeat acquisition, human review, or another validated workflow. Human oversight can be concentrated where uncertainty, failure, or conditions outside established boundaries require judgment."
@@ -864,7 +864,7 @@ const cases: Record<string, CaseSeed> = {
         explanation: "An algorithm can perform its computational task correctly while the overall clinical system still produces an unsafe result. End-to-end implementation includes specimen and image identity, image acquisition, algorithmic analysis, result association, interfaces and mappings, the LIS, and downstream reporting or action. Validation therefore needs to support the complete intended workflow."
       },
       {
-        question: "A digital microbiology system flags a culture plate as likely no growth. During review, however, the microbiologist sees a subtle colony morphology that appears clinically significant and is not typical of the images on which the system was validated. What is the most appropriate response?",
+        question: "A digital microbiology system flags a culture plate as likely no growth. During review, however, the microbiologist sees a subtle colony morphology that appears clinically significant and is not typical of the images on which the system was validated. How should the discrepancy be handled?",
         choices: [
           "Accept the automated classification because the algorithm was validated for this task and isolated disagreements are expected within its measured error rate",
           "Override the automated result based on the microbiologist's interpretation, but treat the disagreement as an isolated case that does not require further review if the final report is corrected",
@@ -942,7 +942,7 @@ const cases: Record<string, CaseSeed> = {
         explanation: "Electronic laboratory reporting (ELR) communicates structured laboratory information to public-health agencies. Electronic case reporting (eCR) supports automated reporting of reportable case information from the EHR and can include clinical and demographic context. They are distinct but complementary workflows: the laboratory may contribute microbiologic evidence through ELR while eCR contributes broader case information."
       },
       {
-        question: "A laboratory correctly validates ELR for a newly reportable organism. A year later, the jurisdiction changes its reporting requirements so that only results meeting additional criteria should be automatically reported. The laboratory's ELR configuration is never updated, so it continues sending results according to the old rule. What is the most important informatics lesson?",
+        question: "A laboratory correctly validates ELR for a newly reportable organism. A year later, the jurisdiction changes its reporting requirements so that only results meeting additional criteria should be automatically reported. The laboratory's ELR configuration is never updated, so it continues sending results according to the old rule. What informatics principle does this illustrate?",
         choices: [
           "Once an ELR interface has been validated, reporting-rule changes are primarily the responsibility of the receiving public-health agency",
           "The interface should transmit every microbiology result so that public health can determine which results are reportable",
@@ -964,12 +964,12 @@ const cases: Record<string, CaseSeed> = {
         explanation: "Successful transmission and acknowledgment demonstrate important parts of the technical pathway, but end-to-end validation goes further. The laboratory should evaluate whether representative information reaches the intended destination with its meaning preserved, including relevant mappings, reporting logic, routing, receiving-system interpretation, and appropriate exception scenarios."
       },
       {
-        question: "A public-health surveillance system shows an apparent increase in infections caused by a particular organism. Before concluding that incidence has truly increased, the laboratory discovers that it recently changed its organism coding and several local organism codes were remapped. What is the most appropriate next step?",
+        question: "A public-health surveillance system shows an apparent increase in infections caused by a particular organism. Before concluding that incidence has truly increased, the laboratory discovers that it recently changed its organism coding and several local organism codes were remapped. What should be evaluated first?",
         choices: [
-          "Assume the increase is real because surveillance systems analyze only finalized laboratory results",
+          "Confirm that the underlying laboratory results were finalized, because final status establishes that the surveillance trend is independent of coding changes",
           "Investigate whether the mapping change altered how organisms are represented, counted, or grouped in the surveillance data before interpreting the apparent trend",
-          "Remove all results generated before the terminology change because historical data cannot be compared with current data",
-          "Replace organism terminology with free-text reporting so that future coding changes cannot affect surveillance"
+          "Recalculate the trend using only results generated after the terminology change, without reconciling the historical and current coding schemes",
+          "Compare the trend with clinical case counts before reviewing the mapping change, because agreement would validate the surveillance data"
         ],
         correctIndex: 1,
         explanation: "Surveillance depends on the quality and interpretability of its underlying data. Changes in mappings, terminology, reporting logic, completeness, duplicates, or other data-processing steps can create apparent changes in surveillance patterns even when the underlying epidemiology has not changed. A change in the data does not necessarily mean a change in the biology."
@@ -1082,7 +1082,7 @@ const cases: Record<string, CaseSeed> = {
   },
   {
     question:
-      "A validated microbial NGS pipeline for resistance-gene detection receives a reference-database and software update. When the laboratory reprocesses the same FASTQ files, several findings differ from the previous pipeline version. Which conclusion is most appropriate?",
+      "A validated microbial NGS pipeline for resistance-gene detection receives a reference-database and software update. When the laboratory reprocesses the same FASTQ files, several findings differ from the previous pipeline version. What does this result demonstrate about computational components?",
     choices: [
       "The updated results should supersede the original findings because newer databases generally contain more complete genomic information.",
       "Computational components can influence analytical output and should be governed as components of the validated clinical workflow.",
@@ -1108,7 +1108,7 @@ const cases: Record<string, CaseSeed> = {
   },
   {
     question:
-      "An automated culture system uses digital images and a validated algorithm to identify plates with no visible growth under specified conditions. Which implementation most appropriately reflects the validation evidence?",
+      "An automated culture system uses digital images and a validated algorithm to identify plates with no visible growth under specified conditions. Which proposed use remains within the validation evidence?",
     choices: [
       "Use the algorithm for negative-growth classification and closely related plate interpretations when image-acquisition parameters remain unchanged.",
       "Use it for the validated negative-growth task under the established media, imaging, workflow, and performance conditions.",
@@ -1121,7 +1121,7 @@ const cases: Record<string, CaseSeed> = {
   },
   {
     question:
-      "After implementation, the vendor releases a software update that modifies the image-analysis algorithm but does not change the imaging hardware. What is the most appropriate laboratory response?",
+      "After implementation, the vendor releases a software update that modifies the image-analysis algorithm but does not change the imaging hardware. How should the laboratory manage this update?",
     choices: [
       "Repeat the original validation protocol in full because any algorithm modification constitutes a new analytical system.",
       "Verify image acquisition and LIS transmission because those are the locally controlled portions of the workflow.",

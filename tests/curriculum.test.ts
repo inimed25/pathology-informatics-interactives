@@ -24,6 +24,17 @@ test("every question has four choices, one valid answer, and feedback", () => {
   }
 });
 
+test("the capstone has a balanced correct-answer distribution", () => {
+  const capstone = lessons.find((lesson) => lesson.manifest.pierObjectives.includes("1.7"));
+  assert.ok(capstone);
+  assert.deepEqual(
+    [0, 1, 2, 3].map(
+      (answerIndex) => capstone.questions.filter((question) => question.correctIndex === answerIndex).length,
+    ),
+    [3, 3, 3, 3],
+  );
+});
+
 test("question scoring recognizes correct and unanswered responses", () => {
   const lesson = lessons[0];
   const answers = Object.fromEntries(
