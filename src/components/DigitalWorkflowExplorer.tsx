@@ -49,6 +49,26 @@ export function DigitalWorkflowExplorer() {
         </p>
       </div>
 
+      <div className="digital-plate-demo" aria-label="Synthetic digital culture plate illustration">
+        <div className="culture-plate" aria-hidden="true">
+          <span className="colony colony-a" />
+          <span className="colony colony-b" />
+          <span className="colony colony-c" />
+          <span className="colony colony-d" />
+          <span className="colony colony-e" />
+          <span className="analysis-box" />
+        </div>
+        <div>
+          <small>Synthetic plate image</small>
+          <strong>Pixels become laboratory data only inside a governed workflow</strong>
+          <p>
+            The image must remain linked to the correct specimen and acquisition
+            conditions before an algorithmic output can safely contribute to a
+            downstream result.
+          </p>
+        </div>
+      </div>
+
       <div className="digital-pipeline" aria-label="Digital microbiology information pathway">
         {["Specimen / image identity", "Image acquisition", "Algorithm", "Result association", "LIS", "Clinical action"].map((item, index) => (
           <div className="digital-pipeline-item" key={item}>
