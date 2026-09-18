@@ -9,7 +9,7 @@ export function GenericExperience({
   onAttempt?: (attempted: boolean) => void;
 }) {
   const [activeTrace, setActiveTrace] = useState(0);
-  const [answers, setAnswers] = useState<Record<string, number>>({});
+  const [answers, setAnswers] = useState<Record<string, number>>({});\n  const [activeEvidence, setActiveEvidence] = useState(0);
   const answeredCount = Object.keys(answers).length;
   const score = lesson.questions.filter(
     (question) => answers[question.id] === question.correctIndex,
@@ -27,7 +27,7 @@ export function GenericExperience({
   };
 
   const reset = () => {
-    setActiveTrace(0);
+    setActiveTrace(0);\n    setActiveEvidence(0);
     setAnswers({});
     onAttempt?.(false);
   };
@@ -46,24 +46,29 @@ export function GenericExperience({
           </div>
         </div>
 
-        <article className="artifact-card">
-          <header>
-            <span>Synthetic educational artifact</span>
-            <strong>{lesson.artifactTitle}</strong>
-          </header>
-
-          <dl className="evidence-grid">
-            {lesson.evidence.map((item) => (
-              <div
-                className={`tone-${item.tone ?? "neutral"}`}
-                key={item.label}
-              >
-                <dt>{item.label}</dt>
-                <dd>{item.value}</dd>
-              </div>
-            ))}
-          </dl>
-        </article>
+        <div className="evidence-explorer">
+          <div className="evidence-explorer-head">
+            <div><span>Synthetic educational artifact</span><strong>{lesson.artifactTitle}</strong></div>
+            <p>Select each signal to inspect the workflow evidence.</p>
+          </div>
+          <div className="evidence-workbench">
+            <div className="evidence-rail" role="tablist" aria-label="Evidence signals">
+              {lesson.evidence.map((item,index) => (
+                <button type="button" role="tab" aria-selected={activeEvidence===index} className={activeEvidence===index?"active":""} onClick={()=>setActiveEvidence(index)} key={item.label}>
+                  <span>{String(index+1).padStart(2,"0")}</span><strong>{item.label}</strong>
+                </button>
+              ))}
+            </div>
+            <article className={`evidence-focus tone-${lesson.evidence[activeEvidence].tone ?? "neutral"}`} role="tabpanel" aria-live="polite">
+              <div className="evidence-orbit" aria-hidden="true"><i/><i/><i/></div>
+              <p className="eyebrow">Signal {String(activeEvidence+1).padStart(2,"0")}</p>
+              <h3>{lesson.evidence[activeEvidence].label}</h3>
+              <p className="evidence-value">{lesson.evidence[activeEvidence].value}</p>
+              <div className="evidence-position"><span style={{width:`${((activeEvidence+1)/lesson.evidence.length)*100}%`}} /></div>
+              <small>{activeEvidence+1} / {lesson.evidence.length}</small>
+            </article>
+          </div>
+        </div>
       </section>
 
       <section
