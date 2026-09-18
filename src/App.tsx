@@ -236,7 +236,15 @@ function LessonPage({ slug }: { slug: string }) {
           <a href={href(`faculty/${slug}/`)}>Faculty guide</a>
         </div>
       </header>
+      <section className="lesson-phase-heading" aria-label="Learn">
+        <span>01</span>
+        <div><p className="eyebrow">Learn</p><strong>Build the concept</strong></div>
+      </section>
       <section className="mdx-content introduction-content">{Introduction ? <Introduction/> : <p>Introduction content is missing.</p>}</section>
+      <section className="lesson-phase-heading" aria-label="Explore">
+        <span>02</span>
+        <div><p className="eyebrow">Explore</p><strong>See the informatics concept in action</strong></div>
+      </section>
       {slug === "microbiology-informatics" && <OrganismMappingFigure />}
       {slug === "microbiology-decision-support" && (
         <div className="lesson-visual-stack">
