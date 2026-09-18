@@ -66,6 +66,11 @@ Regardless of the architecture, information must remain associated with the corr
 
 A failure in any of these relationships can create an incorrect laboratory record even when the instrument itself performed correctly.
 
+<div className="micro-visual interface-mini-visual" role="img" aria-label="A result passes from instrument through middleware and LIS to the EHR with mapping checkpoints">
+  <div className="micro-visual-copy"><small>Interface pathway</small><strong>Transport is only one layer</strong><span>At each handoff, the message can arrive while a code, status, or concept is translated incorrectly.</span></div>
+  <div className="mini-path"><b>Instrument</b><i>→</i><b>Middleware</b><i>→</i><b>LIS</b><i>→</i><b>EHR</b></div>
+</div>
+
 ---
 
 ## 2. Interfaces Move Information Between Systems
