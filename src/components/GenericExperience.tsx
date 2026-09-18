@@ -41,7 +41,7 @@ export function GenericExperience({
         aria-labelledby="evidence-title"
       >
         <div className="section-heading">
-          <span className="section-number">05</span>
+          <span className="section-number">03</span>
           <div>
             <p className="eyebrow">Clinical artifact</p>
             <h2 id="evidence-title">Inspect the evidence</h2>
@@ -131,7 +131,7 @@ export function GenericExperience({
         aria-labelledby="questions-title"
       >
         <div className="section-heading">
-          <span className="section-number">03</span>
+          <span className="section-number">05</span>
           <div>
             <p className="eyebrow">{isCapstone ? "Final assessment" : "Knowledge check"}</p>
             <h2 id="questions-title">{isCapstone ? "Integrate your reasoning" : "Test your understanding"}</h2>
