@@ -122,3 +122,44 @@ export function GenomicsPrimer() {
     </section>
   );
 }
+
+
+export function InterfaceReadingFigures() {
+  const entities = ["Patient", "Specimen", "Test", "Isolate", "Organism", "Result"];
+  return (
+    <section className="interface-reading-figures" aria-label="Interface concepts visualized">
+      <figure className="signal-path-figure">
+        <figcaption>
+          <p className="eyebrow">Follow the information</p>
+          <h2>One result. Multiple handoffs.</h2>
+          <p>The clinical result is not a single object moving untouched. Each handoff must preserve identity, meaning, and status.</p>
+        </figcaption>
+        <div className="signal-path" aria-label="Order and specimen information flows through instrument, middleware, LIS, EHR, and clinical team">
+          {[
+            ["01","Order + specimen","identity enters"],
+            ["02","Instrument","measurement"],
+            ["03","Interface","transport + translation"],
+            ["04","LIS","laboratory record"],
+            ["05","EHR","clinical display"],
+          ].map(([n,title,note],i)=>(
+            <div className="signal-stage" key={n}>
+              <span>{n}</span><strong>{title}</strong><small>{note}</small>
+              {i < 4 && <i aria-hidden="true">→</i>}
+            </div>
+          ))}
+        </div>
+      </figure>
+      <figure className="identity-chain-figure">
+        <figcaption>
+          <p className="eyebrow">What must stay attached</p>
+          <h2>A correct measurement can still become a wrong record.</h2>
+          <p>Think of result integrity as a linked identity chain. Break one relationship and the downstream record can be wrong even when the instrument performed correctly.</p>
+        </figcaption>
+        <div className="identity-chain" aria-label="Patient, specimen, test, isolate, organism, and result relationships">
+          {entities.map((entity,i)=><div key={entity}><span>{String(i+1).padStart(2,"0")}</span><strong>{entity}</strong></div>)}
+        </div>
+        <div className="failure-callout"><span>Failure point</span><strong>Transport can succeed while meaning fails.</strong><p>That is why interface validation has to test the information pathway—not only connectivity.</p></div>
+      </figure>
+    </section>
+  );
+}
