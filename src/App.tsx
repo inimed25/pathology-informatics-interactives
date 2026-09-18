@@ -30,7 +30,7 @@ const routePath = () => {
       <section className="hub-hero">
         <div>
           <p className="eyebrow">
-            6 modules · Clinical Microbiology Informatics
+            7 lessons · Clinical Microbiology Informatics
           </p>
 
           <h1>Clinical Microbiology Informatics</h1>
@@ -47,12 +47,12 @@ const routePath = () => {
                 className="primary-button"
                 href={href(`lessons/${firstLesson.manifest.slug}/`)}
               >
-                Start module 1
+                Start lesson 1
               </a>
             )}
 
             <a className="secondary-button" href="#topics">
-              Browse all modules
+              Browse curriculum
             </a>
 
             <a className="secondary-button" href={href("supplemental-question-bank/")}>
@@ -70,6 +70,7 @@ const routePath = () => {
             <li>Microbial genomics and bioinformatics</li>
             <li>Digital microbiology and emerging technologies</li>
             <li>Public-health informatics and surveillance</li>
+            <li>Comprehensive clinical microbiology informatics cases</li>
           </ol>
           <small>
             Educational cases, questions, and figures are independently
@@ -80,12 +81,13 @@ const routePath = () => {
 
       <section className="catalog-section" id="topics">
         <div className="section-copy">
-          <p className="eyebrow">Curriculum modules</p>
-          <h2>Six connected areas of clinical microbiology informatics</h2>
+          <p className="eyebrow">Curriculum</p>
+          <h2>Seven connected lessons in clinical microbiology informatics</h2>
           <p>
             Progress from foundational data concepts to laboratory
             interfaces, antimicrobial susceptibility testing, microbial
-            genomics, digital workflows, and public-health surveillance.
+            genomics, digital workflows, public-health surveillance, and
+            comprehensive cases.
           </p>
         </div>
 
