@@ -1656,3 +1656,97 @@ em.scientific-name {
  .evidence-workbench{grid-template-columns:1fr}.evidence-rail{border-right:0}
  .evidence-focus{min-height:340px}
 }
+
+
+/* =========================================================
+   READING SYSTEM — dark editorial canvas, high contrast
+   ========================================================= */
+body { background:#0a1726; color:#eaf2f8; }
+.site-frame { background:#0a1726; }
+.lesson-main { color:#eaf2f8; }
+.lesson-main .breadcrumbs,
+.lesson-main .breadcrumbs a { color:#9bb0c2; }
+.lesson-meta { border-color:#294157; }
+.lesson-meta, .lesson-meta a { color:#b8c9d7; }
+.lesson-main .tag-row span { color:#c6d5e0; border-color:#40566a; background:#102338; }
+
+.lesson-phase-heading {
+  background:transparent !important;
+  border:0 !important;
+  border-bottom:1px solid #294157 !important;
+  border-radius:0 !important;
+  box-shadow:none !important;
+  padding:22px 0 16px !important;
+}
+.lesson-phase-heading strong { color:#f5f9fc; }
+.lesson-phase-heading > span { background:#15344e; color:#fff; }
+
+.lesson-reading-layout { color:#eaf2f8; }
+.mdx-content { max-width:900px; }
+.mdx-content h1,.mdx-content h2,.mdx-content h3 { color:#f7fbff; }
+.mdx-content p,.mdx-content li { color:#c9d7e3; font-size:1.08rem; line-height:1.82; }
+.mdx-content strong { color:#f1f6fa; }
+.mdx-content a { color:#79d4e7; }
+.mdx-content blockquote { border-color:#4bbbd2; }
+.mdx-content blockquote p { color:#e1edf4; }
+
+/* Ordinary lists are typography, not giant white cards. */
+.mdx-content ul,.mdx-content ol {
+  margin:22px 0 34px;
+  padding:0 0 0 28px;
+  background:transparent !important;
+  border:0 !important;
+  border-radius:0 !important;
+  box-shadow:none !important;
+}
+.mdx-content li { margin:10px 0; padding-left:6px; }
+.mdx-content li::marker { color:#53c7dc; }
+
+/* Chapter headers become editorial dividers instead of repeated bubbles. */
+.mdx-content h2 {
+  position:relative;
+  margin:78px 0 25px;
+  padding:24px 0 16px !important;
+  border:0 !important;
+  border-top:1px solid #294157 !important;
+  border-radius:0 !important;
+  background:transparent !important;
+  box-shadow:none !important;
+}
+.mdx-content h2::before {
+  content:"";
+  position:absolute; left:0; top:-1px; width:72px; height:2px;
+  background:linear-gradient(90deg,#d64de0,#3abbd9,#21ce9b);
+}
+
+/* Preserve light surfaces only where the learner must manipulate controls/data. */
+.lesson-section,.pilot-lab,.concept-figure { color:#dce8f1; }
+.section-heading h2,.concept-figure h3 { color:#f6f9fc; }
+.section-guidance,.figure-lede,.figure-note { color:#aebfce; }
+.evidence-explorer,.question-card .choice-grid button,.question-card .choice-stack button {
+  color:#17283d;
+}
+.question-card h3 { color:#eef5fa; }
+.question-card header { color:#9fb3c3; }
+.choice-grid button,.choice-stack button { background:#f8fbfd; }
+.feedback { color:#20374b; }
+
+/* Debrief: remove dark-on-dark inherited text. */
+.debrief-content {
+  max-width:none;
+  padding:clamp(34px,5vw,62px);
+  background:#102b43;
+  border:1px solid #294b65;
+}
+.debrief-content h1,.debrief-content h2,.debrief-content h3,
+.debrief-content p,.debrief-content li,.debrief-content strong { color:#f0f6fa !important; }
+.debrief-content a { color:#84dced !important; }
+.debrief-locked { background:#102338; border-color:#294157; color:#dce8f1; }
+.debrief-locked p { color:#aebfce; }
+
+/* Old conceptual-frame component is intentionally no longer rendered. */
+.lesson-lens,.data-journey { display:none !important; }
+
+@media(max-width:760px){
+  .mdx-content p,.mdx-content li{font-size:1rem}
+}
