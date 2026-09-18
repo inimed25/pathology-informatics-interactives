@@ -144,9 +144,13 @@ Long-read and short-read sequencing should not simply be viewed as “better” 
 The appropriate technology depends on the intended use.
 
 
-<div className="micro-visual read-visual" role="img" aria-label="Short reads cover a region in fragments while a long read spans the full genomic context">
-  <div className="micro-visual-copy"><small>Read structure</small><strong>Fragments versus context</strong><span>Short reads can provide strong local evidence; a long read can bridge repeats and connect a feature to its surrounding genomic context.</span></div>
-  <div className="read-sketch"><div><em>short reads</em><span></span><span></span><span></span><span></span></div><div><em>long read</em><b></b></div></div>
+<div className="micro-visual read-visual" role="img" aria-label="Short reads fragment genomic context while a long read spans a resistance gene and flanking sequence">
+  <div className="micro-visual-copy"><small>Read structure</small><strong>Can the read bridge the context?</strong><span>Both strategies can detect a resistance gene. The difference is whether individual reads span enough flanking sequence to connect that gene to its genomic neighborhood.</span></div>
+  <div className="read-sketch">
+    <div className="genome-context"><em>genomic region</em><i></i><b>AMR gene</b><i></i></div>
+    <div className="short-read-row"><em>short reads</em><span></span><span></span><span></span><span></span><small>gene detected · context fragmented</small></div>
+    <div className="long-read-row"><em>long read</em><b></b><small>one molecule bridges gene + flanking context</small></div>
+  </div>
 </div>
 
 ### Hybrid assembly
@@ -447,6 +451,11 @@ For our **K. pneumoniae** isolate, detecting two resistance determinants tells u
 Sequence information that links them to the same plasmid provides additional biological context.
 
 A director does not need to perform phasing algorithms personally, but should recognize when the biological interpretation depends on genomic context rather than simple presence or absence.
+
+<div className="micro-visual linkage-visual" role="img" aria-label="Phasing distinguishes two variants on the same molecule from variants on separate sequence backgrounds">
+  <div className="micro-visual-copy"><small>Phasing</small><strong>Same variants. Different biological relationship.</strong><span>Detecting A and B in a sample does not tell you whether they travel together. Reads that span both sites can establish linkage.</span></div>
+  <div className="linkage-sketch"><div><em>phased together</em><b>—— A ————— B ——</b><small>one sequence background</small></div><div><em>not linked by these reads</em><b>—— A ———</b><b>———— B ——</b><small>presence alone cannot establish linkage</small></div></div>
+</div>
 
 ---
 
