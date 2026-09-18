@@ -132,6 +132,11 @@ The exact responsibilities of middleware vary by implementation.
 
 For troubleshooting, it is important to know **which system performed which action**.
 
+<div className="science-illustration middleware-illustration" role="img" aria-label="Multiple laboratory instruments feed middleware which translates and routes results to the LIS and EHR">
+ <div className="science-copy"><small>Middleware architecture</small><strong>One layer can connect many instruments</strong><span>Middleware can route, transform, and apply workflow logic between instrument-specific outputs and the laboratory's information system.</span></div>
+ <div className="middleware-art"><div className="instrument-cluster"><span>AST</span><span>PCR</span><span>MALDI</span></div><i>→</i><b>Middleware<small>route · translate · rules</small></b><i>→</i><strong>LIS</strong><i>→</i><strong>EHR</strong></div>
+</div>
+
 If a result changed between the instrument and the EHR, the investigation should determine whether the change occurred in the instrument, middleware, LIS, interface, or downstream display.
 
 ---
