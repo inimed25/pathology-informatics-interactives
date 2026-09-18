@@ -900,70 +900,70 @@ const cases: Record<string, CaseSeed> = {
 
     questions: [
       {
-        question: "Why is digital plate imaging in clinical microbiology an informatics issue rather than simply a camera attached to an incubator?",
+        question: "A digital microbiology algorithm was validated to identify culture plates with no visible growth. Six months after implementation, performance worsens specifically for one type of culture medium after the laboratory changes to a different manufacturer. Which interpretation is most appropriate?",
         choices: [
-          "Because images, specimen identifiers, culture conditions, analysis results, and workflow states must remain correctly associated and usable across laboratory systems",
-          "Because digital imaging eliminates the need for an LIS",
-          "Because every culture image can automatically generate a final diagnosis",
-          "Because digital images cannot be reviewed by microbiology personnel"
-        ],
-        correctIndex: 0,
-        explanation: "Digital microbiology combines image acquisition with specimen tracking, software, workflow information, interpretation, and downstream data exchange. The information relationships are therefore as important as the imaging hardware."
-      },
-      {
-        question: "A laboratory can successfully transmit digital culture images to a remote workstation. What does successful transmission alone establish?",
-        choices: [
-          "That the images are diagnostically equivalent to direct review for every intended use",
-          "That the files can be transmitted, but not that acquisition, display, interpretation, and the complete workflow are adequate for the intended use",
-          "That remote reviewers no longer require clinical or laboratory context",
-          "That image-analysis software can be used without validation"
+          "Once an AI model has been validated, changes in laboratory materials should not affect its performance unless the software itself changes",
+          "Algorithm performance can depend on the data and environment in which it operates, so changes in inputs or workflow can affect performance and may require monitoring and reassessment",
+          "The problem primarily demonstrates that digital images should not be retained after interpretation",
+          "The laboratory should retrain the algorithm automatically whenever its performance changes"
         ],
         correctIndex: 1,
-        explanation: "Technical transmission is only one component of a digital workflow. The laboratory must consider the intended use and verify the relevant acquisition, transmission, display, interpretation, and workflow components."
+        explanation: "Algorithm performance depends not only on the software itself but also on the data and workflow in which it operates. Relevant factors can include culture-medium type or manufacturer, incubation conditions, image-acquisition timing, illumination, focus, resolution, imaging hardware, organism distribution, specimen characteristics, and local workflow. Changes in these factors can shift the data presented to the algorithm even when its code has not changed. Post-implementation monitoring can identify performance changes and help determine whether investigation, verification, workflow modification, or other corrective action is needed."
       },
       {
-        question: "An image-analysis algorithm was validated to identify plates with no visible growth under defined conditions. What is the safest informatics interpretation of that validation?",
+        question: "A digital microbiology algorithm identifies culture plates requiring additional review with 95% accuracy during validation. After implementation, microbiologists report that the system generates large numbers of unnecessary review flags during the busiest part of the day, slowing plate review and occasionally delaying attention to higher-priority cultures. Which interpretation is most appropriate?",
         choices: [
-          "The algorithm may now make any microbiology diagnosis from any image",
-          "The algorithm can replace all microbiology personnel",
-          "Its use should remain within the validated task, specimen or media conditions, workflow, and performance boundaries",
-          "The validation remains applicable after any software or imaging-system change without further assessment"
+          "The algorithm remains clinically successful because 95% accuracy establishes adequate performance",
+          "The algorithm should be removed because any increase in microbiologist workload demonstrates failed validation",
+          "Analytical or model performance is only part of implementation; the laboratory should also evaluate how the system affects workflow, workload, prioritization, errors, turnaround time, and its intended clinical purpose",
+          "The laboratory should increase the algorithm's decision threshold until the number of alerts becomes acceptable, without additional evaluation"
         ],
         correctIndex: 2,
-        explanation: "Validation supports a defined intended use. Performance for one image-analysis task does not automatically establish performance for different organisms, media, image conditions, decisions, or workflows."
+        explanation: "Strong model-performance metrics do not by themselves establish clinical utility. A digital system can perform its defined computational task well while still creating excessive workload, disrupting prioritization, delaying turnaround, or otherwise failing to support its intended clinical or operational purpose."
       },
       {
-        question: "A software update changes the image-analysis algorithm used by an automated culture system. What should laboratory leadership do?",
+        question: "A digital plate-reading system has been validated to automatically classify certain culture plates as having no visible growth. During routine use, the system encounters an image that does not meet its predefined image-quality requirements because part of the plate is obscured. What is the most appropriate system behavior?",
         choices: [
-          "Assume the update has no effect because the imaging hardware did not change",
-          "Delete all images collected before the update",
-          "Allow the vendor to determine clinical acceptability without local review",
-          "Assess the potential effect of the change and perform appropriate verification or change-control activities before relying on the updated workflow"
+          "Report no growth if the visible portion of the plate contains no colonies",
+          "Attempt classification anyway because a validated algorithm should always produce a result",
+          "Route the case through a defined exception pathway, such as human review, rather than forcing an automated classification outside acceptable input conditions",
+          "Permanently disable automated reporting because one image failed quality requirements"
         ],
-        correctIndex: 3,
-        explanation: "Software and algorithm changes can alter system performance. Laboratory governance should therefore assess their impact and determine the verification needed for the intended clinical workflow."
+        correctIndex: 2,
+        explanation: "Automated workflows need defined exception pathways for cases in which the system cannot safely perform its intended task. Depending on the implementation, image-quality failures or unexpected inputs may trigger a hold, flag, repeat acquisition, human review, or another validated workflow. Human oversight can be concentrated where uncertainty, failure, or conditions outside established boundaries require judgment."
       },
       {
-        question: "What is an important potential advantage of retaining digital microbiology images?",
+        question: "A laboratory validates an image-analysis algorithm for detecting visible growth on blood agar plates from respiratory cultures. Performance is excellent. The laboratory now wants to use the same algorithm to evaluate urine cultures on chromogenic agar. Which approach is most appropriate?",
         choices: [
-          "They can support retrospective review, consultation, quality assurance, education, or documentation when implemented appropriately",
-          "They guarantee that the original culture never needs to be examined",
-          "They eliminate image-storage and data-governance requirements",
-          "They automatically determine organism identification and susceptibility"
+          "Use the algorithm without additional evaluation because visible microbial growth is the same analytical task regardless of culture medium or specimen type",
+          "Evaluate performance for the new intended use because changes in specimen population, culture medium, visual characteristics, and workflow may affect algorithm performance",
+          "Use the algorithm as long as the same camera and imaging hardware are used",
+          "Use the algorithm if its original validation accuracy exceeded 90%"
         ],
-        correctIndex: 0,
-        explanation: "Stored images can support review and quality-related activities, but their usefulness depends on appropriate acquisition, storage, retrieval, context, and governance."
+        correctIndex: 1,
+        explanation: "Performance demonstrated in one setting should not automatically be generalized to another. Culture medium, specimen type, organism distribution, growth characteristics, image acquisition, and workflow can change the data presented to an image-analysis system. The laboratory should determine whether existing evidence supports the new intended use and perform additional evaluation when appropriate."
       },
       {
-        question: "Which statement best describes the role of artificial intelligence or machine learning in current digital microbiology workflows?",
+        question: "A laboratory has extensively validated an AI algorithm for classifying digital culture-plate images. After implementation, the algorithm correctly identifies a positive plate, but an interface mapping error associates its output with the wrong specimen record in the LIS. What does this scenario demonstrate?",
         choices: [
-          "Any model with high accuracy in a research paper can immediately be used for patient reporting",
-          "AI makes validation unnecessary because the model learns from new cases",
-          "AI is useful only for administrative tasks and cannot analyze microbiology images",
-          "AI can support defined image-analysis tasks, but clinical implementation requires validation, monitoring, workflow integration, and appropriate human oversight"
+          "The algorithm was inadequately trained because a properly trained model would detect the LIS error",
+          "Strong algorithm performance does not establish validity of the complete clinical workflow; specimen association, interfaces, mappings, result routing, and downstream reporting also require appropriate validation and monitoring",
+          "The laboratory should validate only the LIS because the algorithm produced the correct classification",
+          "Digital imaging should not be interfaced with an LIS when AI is involved"
         ],
-        correctIndex: 3,
-        explanation: "Machine-learning image analysis can support microbiology workflows, but performance must be established for the intended application and incorporated into an appropriately governed clinical process."
+        correctIndex: 1,
+        explanation: "An algorithm can perform its computational task correctly while the overall clinical system still produces an unsafe result. End-to-end implementation includes specimen and image identity, image acquisition, algorithmic analysis, result association, interfaces and mappings, the LIS, and downstream reporting or action. Validation therefore needs to support the complete intended workflow."
+      },
+      {
+        question: "A digital microbiology system flags a culture plate as likely no growth. During review, however, the microbiologist sees a subtle colony morphology that appears clinically significant and is not typical of the images on which the system was validated. What is the most appropriate response?",
+        choices: [
+          "Accept the automated classification because the algorithm was validated for this task and isolated disagreements are expected within its measured error rate",
+          "Override the automated result based on the microbiologist's interpretation, but treat the disagreement as an isolated case that does not require further review if the final report is corrected",
+          "Follow the defined review or escalation process, use appropriate human judgment to resolve the result, and capture the discrepancy for quality monitoring or investigation when appropriate",
+          "Withhold the result until the algorithm can be retrained to recognize the observed morphology"
+        ],
+        correctIndex: 2,
+        explanation: "Decision support should not create automation bias, in which users accept a computational output simply because the system produced it. Human oversight should provide a defined way to recognize, investigate, and appropriately override outputs that conflict with relevant microbiologic evidence or fall outside expected conditions. Capturing meaningful discrepancies can also reveal systematic failure modes, changing inputs, or conditions that warrant reassessment."
       }
     ]
   },
