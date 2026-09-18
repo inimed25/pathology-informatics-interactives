@@ -12,7 +12,7 @@ import { AntibiogramFigure } from "./components/AntibiogramFigure";
 import { LabEcosystemFigure } from "./components/LabEcosystemFigure";
 import { GenomicsConceptGallery } from "./components/GenomicsConceptGallery";
 import { SupplementalQuestionBank } from "./components/SupplementalQuestionBank";
-import { BiotechHeroVisual, DataJourneyIllustration, GenomicsPrimer, LessonChapterRail, LessonLens } from "./components/BiotechVisuals";
+import { BiotechHeroVisual, GenomicsPrimer, LessonChapterRail } from "./components/BiotechVisuals";
 import { SiteChrome, href } from "./components/SiteChrome";
 import { lessonBySlug, lessons, topicBySlug, topics } from "./data/curriculum";
 import type { LessonDefinition } from "./data/types";
@@ -251,11 +251,10 @@ function LessonPage({ slug }: { slug: string }) {
         <span>01</span>
         <div><p className="eyebrow">Learn</p><strong>Build the concept</strong></div>
       </section>
-      <LessonLens slug={slug} />
       {slug === "microbiology-genomics-bioinformatics" && <GenomicsPrimer />}
       <div className="lesson-reading-layout">
         <LessonChapterRail />
-        <section className="mdx-content introduction-content">{Introduction ? <Introduction/> : <p>Introduction content is missing.</p>}</section>\n        {slug === "microbiology-informatics" && <DataJourneyIllustration />}
+        <section className="mdx-content introduction-content">{Introduction ? <Introduction/> : <p>Introduction content is missing.</p>}</section>
       </div>
       <section className="lesson-phase-heading" aria-label="Explore">
         <span>02</span>
