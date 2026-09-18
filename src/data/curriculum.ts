@@ -560,115 +560,115 @@ const cases: Record<string, CaseSeed> = {
     ],
 
     questions: [
+     {
+  question: "What is the primary function of an electronic interface between a microbiology instrument and the LIS?",
+  choices: [
+    "Store the laboratory's complete microbiology record independently of the LIS",
+    "Exchange laboratory information electronically between systems",
+    "Apply all clinical interpretation to instrument-generated results before they reach the LIS",
+    "Standardize all local instrument codes automatically without laboratory-defined mappings"
+  ],
+  correctIndex: 1,
+  explanation: "An interface enables electronic exchange of information between systems. In microbiology, this may include orders, patient or specimen identifiers, organism identifications, susceptibility data, and other results. The interface may also participate in mapping or transformation, but successful transmission alone does not establish that the information was mapped, interpreted, or represented correctly downstream."
+},
+     {
+  question: "What is a major advantage of a bidirectional interface between the LIS and a microbiology instrument?",
+  choices: [
+    "It allows orders and identifiers to move from the LIS to the instrument while results and other data can return to the LIS",
+    "It allows results to move from the instrument to the LIS but prevents information from being sent from the LIS to the instrument",
+    "It allows the LIS and instrument to exchange information without requiring defined mappings or interface configuration",
+    "It allows the instrument and LIS to maintain separate patient and specimen identifiers because information can move in both directions"
+  ],
+  correctIndex: 0,
+  explanation: "Bidirectional communication supports information flow in both directions. For example, orders and patient or specimen identifiers may be transmitted from the LIS to the instrument, while results and other instrument-generated data return to the LIS. This can reduce manual transcription and support workflow efficiency, but bidirectionality does not eliminate the need for accurate identifiers, mappings, configuration, validation, or exception handling."
+},
       {
-        question: "What is the primary function of an electronic interface between a microbiology instrument and the LIS?",
-        choices: [
-          "Determine whether an organism is clinically significant",
-          "Exchange laboratory information electronically between systems",
-          "Replace the microbiology director",
-          "Determine antimicrobial breakpoints"
-        ],
-        correctIndex: 1,
-        explanation: "An interface enables electronic exchange of information between systems. In microbiology, this can include orders, specimen or isolate identifiers, organism identifications, susceptibility data, and other results."
-      },
-      {
-        question: "What is a major advantage of a bidirectional instrument interface?",
-        choices: [
-          "Information can move both from the LIS to the instrument and from the instrument back to the LIS",
-          "Every transmitted result can be released without review",
-          "The instrument no longer requires quality control",
-          "Local terminology no longer requires mapping"
-        ],
-        correctIndex: 0,
-        explanation: "Bidirectional communication allows information such as orders and identifiers to move toward the instrument while results and other data return electronically to the LIS, reducing reliance on manual transcription."
-      },
-      {
-        question: "An instrument correctly identifies an isolate as organism X, but the LIS displays organism Y after electronic transmission. The interface reports no transmission error. What is the most likely informatics problem?",
-        choices: [
-          "Failure of organism growth",
-          "Incorrect antimicrobial breakpoint",
-          "Incorrect mapping or transformation between systems",
-          "Failure of the mass spectrometer vacuum system"
-        ],
-        correctIndex: 2,
-        explanation: "Technical delivery of a message does not guarantee semantic correctness. An incorrect code mapping or transformation can cause the receiving system to represent a different organism even though transmission succeeded."
-      },
-      {
-        question: "What is the most appropriate approach when validating a new microbiology instrument interface?",
-        choices: [
-          "Confirm only that the instrument can connect to the network",
-          "Test only one common negative result",
-          "Assume the vendor's interface validation is sufficient for the local laboratory",
-          "Verify representative orders, identifiers, results, mappings, exceptions, and downstream display across the intended workflow"
-        ],
-        correctIndex: 3,
-        explanation: "Interface validation should assess whether information remains accurate and reliable throughout its intended use, including transmission, transformation, storage, retrieval, and downstream representation."
-      },
-      {
-        question: "Which statement best describes middleware in a clinical microbiology information architecture?",
-        choices: [
-          "It is always the legal medical record",
-          "It is software positioned between systems that can facilitate data exchange, workflow management, or rules-based processing",
-          "It is another name for the microbiology incubator",
-          "It eliminates the need for an LIS"
-        ],
-        correctIndex: 1,
-        explanation: "Middleware can connect instruments and information systems and may support workflow management, data transformation, or rules. Its exact role depends on the laboratory architecture."
-      },
-      {
-        question: "A laboratory introduces automated plate inoculation, incubation, transport, and digital imaging. Why is this also an informatics implementation rather than only a hardware implementation?",
-        choices: [
-          "Automation eliminates the need to track specimens",
-          "Automated systems generate and exchange specimen, workflow, image, and status information that must remain correctly linked across the laboratory process",
-          "Digital images cannot be stored electronically",
-          "Automation requires every culture result to be reported numerically"
-        ],
-        correctIndex: 1,
-        explanation: "Microbiology laboratory automation depends on coordinated physical and information workflows. Specimen identity, processing steps, incubation, imaging, interpretation, and downstream results must remain correctly associated as information moves through the system."
-     },
+  question: "A laboratory adds a new organism to an identification instrument's database. The instrument uses a new local organism code that has not previously been transmitted to the LIS. What is the most appropriate informatics step before routine clinical reporting?",
+  choices: [
+    "Allow the first patient result to determine whether the LIS can interpret the new code",
+    "Verify that the new code is appropriately mapped and test representative transmission and downstream representation through the intended workflow",
+    "Replace the local organism code with free text so that mapping is unnecessary",
+    "Confirm only that the interface connection remains online after the database update"
+  ],
+  correctIndex: 1,
+  explanation: "A new local code introduces a potential translation dependency between systems. Before routine reporting, the laboratory should establish the intended mapping and verify that representative results are transmitted, translated, stored, and displayed appropriately through the affected workflow."
+},
+     {
+  question: "What is the most appropriate approach when validating a new microbiology instrument interface?",
+  choices: [
+    "Confirm that the instrument can connect to the network and that transmitted results can reach the EHR",
+    "Test multiple representative positive and negative results and confirm that the expected values are transmitted",
+    "Rely on the vendor's interface testing because the interface has already been tested before local implementation and is designed to adapt to the laboratory's configuration",
+    "Verify representative orders, identifiers, results, mappings, exceptions, and downstream display across the intended end-to-end workflow"
+  ],
+  correctIndex: 3,
+  explanation: "Connectivity, successful transmission, and vendor testing can each provide useful information, but none alone establishes that the locally implemented clinical workflow is functioning correctly. Local interface validation should represent the intended use and verify relevant orders, identifiers, results, mappings, transformations, exceptions, and downstream representation because laboratory-specific configurations and system relationships can affect result integrity."
+},
+    {
+  question: "Which statement best describes middleware in a clinical microbiology information architecture?",
+  choices: [
+    "It is software used primarily to store the complete longitudinal patient record while the LIS manages only instrument communication",
+    "It is software positioned between systems that can facilitate data exchange, workflow management, transformation, or rules-based processing",
+    "It is a standardized interface protocol that determines how all microbiology instruments format and transmit results",
+    "It is software that replaces the LIS by directly managing instrument data and reporting all results to the EHR"
+  ],
+  correctIndex: 1,
+  explanation: "Middleware is software that operates between instruments and other information systems and may support functions such as routing, transformation, workflow management, rules, or data exchange. Its role is implementation-dependent: middleware is not itself a universal messaging standard, an EHR, or automatically a replacement for the LIS. Understanding the specific functions assigned to middleware is important when tracing data flow, validating interfaces, troubleshooting results, and planning downtime or change control."
+},
+     {
+  question: "A laboratory introduces automated plate inoculation, incubation, transport, and digital imaging. Why is this also an informatics implementation rather than only a hardware implementation?",
+  choices: [
+    "Automation mainly changes how specimens are physically processed, while the information workflow remains largely unchanged",
+    "Automated systems generate and exchange specimen, workflow, image, and status information that must remain correctly linked across the laboratory process",
+    "Automation becomes an informatics issue mainly when digital images are transmitted to another system",
+    "Automation is primarily an informatics issue because the LIS controls every physical step performed by the automated system"
+  ],
+  correctIndex: 1,
+  explanation: "Laboratory automation connects physical specimen processing with information flow. Specimen identity, location, processing steps, incubation status, images, interpretations, and downstream results may be generated or updated across interconnected systems. These data must remain correctly associated with the physical specimen throughout the automated workflow."
+},
 {
   question: "Which statement best distinguishes CLIA/CMS, CAP, and CLSI when evaluating a U.S. clinical laboratory informatics workflow?",
   choices: [
     "CLIA/CMS provides the federal regulatory framework, CAP provides accreditation requirements for CAP-accredited laboratories, and CLSI publishes professional standards and implementation guidance",
-    "CLIA, CAP, and CLSI are three names for the same federal regulatory program",
+    "CLIA/CMS and CAP both establish laboratory requirements, while CLSI primarily serves as the federal enforcement agency for technical standards",
     "CAP establishes federal law, while CMS publishes optional professional standards",
     "CLSI accredits clinical laboratories on behalf of CMS"
   ],
   correctIndex: 0,
   explanation: "These frameworks serve different roles. CLIA establishes the federal regulatory framework administered by CMS, CAP provides accreditation requirements for CAP-accredited laboratories, and CLSI develops professional standards and implementation guidance. They should not be treated as interchangeable."
- },
+},
 {
   question: "A laboratory updates the reference database used by its MALDI-TOF identification system. Why can this be an informatics and quality-management issue even though the mass spectrometer hardware has not changed?",
   choices: [
-    "Reference-database content and software can influence organism identification, so the effect of a significant change should be assessed within the laboratory's validated workflow",
-    "MALDI-TOF identification depends only on the mass spectrometer hardware",
-    "Reference databases affect billing but cannot affect organism identification",
-    "Any database update automatically requires replacement of the MALDI-TOF instrument"
+    "Reference-database content and software can influence organism identification, so the effect of the change should be assessed within the laboratory's validated workflow",
+    "The update primarily requires confirming that the new database installs successfully and that the instrument can access it",
+    "The update should be reviewed mainly for newly added organisms because identifications already represented in the previous database are not affected by database changes",
+    "The update primarily requires verification of the MALDI-TOF instrument's analytical hardware performance because the database does not alter the downstream identification workflow"
   ],
   correctIndex: 0,
-  explanation: "MALDI-TOF identification depends on comparison of generated spectra with reference information and associated software. Database or software changes can therefore affect identification performance and should be evaluated according to their potential impact on the validated clinical workflow."
+  explanation: "MALDI-TOF identification depends on comparison of generated spectra with reference information and associated software. A database change can therefore affect identification even when the physical instrument is unchanged. Successful installation or unchanged hardware performance alone does not establish that the updated system performs appropriately. The laboratory should assess the potential impact of the change and perform verification appropriate to the affected validated workflow."
 },
 {
   question: "After a validated microbiology interface is implemented, a software update changes an organism mapping table. Results continue transmitting without interface errors. What is the most appropriate laboratory response?",
   choices: [
-    "Take no action because successful transmission proves that the mapping remains correct",
-    "Assess whether the change could affect result integrity and perform and document appropriate verification under the laboratory's change-control process",
-    "Repeat analytical identification testing on every previously tested organism",
-    "Disable the interface until the next annual inspection"
+    "Confirm that representative results still transmit successfully because continued transmission indicates that the interface remains valid",
+    "Assess whether the mapping change could affect result integrity and perform appropriate representative verification under the laboratory's change-control process",
+    "Repeat the original analytical validation of the identification instrument because the organism terminology has changed",
+    "Review the new mapping table for accuracy and resume routine reporting without additional verification if no obvious configuration errors are found"
   ],
   correctIndex: 1,
-  explanation: "A configuration change can alter the meaning of transmitted information without causing a transmission failure. Changes that may affect result integrity should undergo an appropriate impact assessment, verification, and documentation within the laboratory's quality and change-control processes."
+  explanation: "A mapping change can affect the meaning of transmitted information even when the interface remains connected and results continue to move between systems. The laboratory should assess the scope and potential impact of the change and perform representative verification appropriate to that risk. Successful transmission, review of the mapping table, or repeating unrelated analytical validation alone would not establish that affected results remain correct throughout the reporting workflow."
 },
 {
   question: "A rapid multiplex blood-culture molecular panel detects an organism and a resistance gene. Which interpretation best reflects appropriate informatics and microbiology oversight?",
   choices: [
-    "The resistance-gene result automatically replaces all phenotypic susceptibility testing and interpretation",
+    "The resistance marker can be used to infer the organism's complete susceptibility profile when the detected mechanism is well characterized",
     "The resistance marker should be represented and transmitted accurately, but its clinical meaning depends on the assay's validated targets and limitations and should not be interpreted beyond them",
-    "Detection of any resistance gene proves that every organism in the specimen carries that gene",
-    "Resistance-gene results should never be transmitted electronically because they are molecular rather than microbiologic data"
+    "The organism identification and resistance marker can be transmitted independently without preserving their relationship because each finding is analytically valid on its own",
+    "The resistance marker can be transmitted without additional interpretive context if downstream clinical decision-support rules are configured to provide treatment guidance"
   ],
   correctIndex: 1,
-  explanation: "Rapid molecular panels can provide clinically important resistance-marker information, but interpretation must remain within the assay's validated intended use and limitations. Informatics systems must also preserve the relationship between organism findings, resistance markers, comments, and downstream reporting."
+  explanation: "Rapid molecular panels can provide clinically important resistance-marker information, but a detected marker does not establish a complete phenotypic susceptibility profile. Informatics systems should accurately represent the finding, preserve clinically meaningful relationships between the organism, resistance marker, and relevant context, and avoid relying on downstream decision support to compensate for incomplete or misleading result representation. Interpretation should remain within the assay's validated intended use and limitations."
 }
     ]
   },
