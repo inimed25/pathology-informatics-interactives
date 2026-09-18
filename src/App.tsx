@@ -305,7 +305,8 @@ function LessonPage({ slug }: { slug: string }) {
 
       <section className="lesson-references" aria-labelledby="lesson-references-title">
         <p className="eyebrow">References &amp; further reading</p>
-        <h2 id="lesson-references-title">Go to the source</h2>
+        <h2 id="lesson-references-title">Keep reading</h2>
+        <p className="reference-intro">Use the primary standards, guidance, and technical references behind this lesson to go deeper.</p>
         <div className="lesson-reference-grid">
           {lesson.manifest.sources.map((source) => (
             <article key={source.label}>
