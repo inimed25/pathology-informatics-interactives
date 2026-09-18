@@ -38,22 +38,37 @@ export function BiotechHeroVisual() {
 export function LessonLens({ slug }: { slug: string }) {
   const lens = lenses[slug] ?? lenses["microbiology-informatics"];
   return (
-    <section className={`lesson-lens lens-${lens.accent}`} aria-label="Lesson concept map">
-      <div className="lens-copy">
-        <p className="eyebrow">Visual orientation</p>
-        <h2>{lens.label}</h2>
-        <p>Use this signal path as a mental model while you move through the lesson.</p>
-      </div>
-      <div className="lens-map" aria-hidden="true">
-        <span className="lens-core">{lens.code}</span>
-        {lens.concepts.map((concept, index) => (
-          <div className={`lens-node lens-node-${index + 1}`} key={concept}>
-            <i>{String(index + 1).padStart(2, "0")}</i>
-            <strong>{concept}</strong>
-          </div>
-        ))}
-      </div>
+    <section className={`lesson-lens lens-${lens.accent}`} aria-label="Lesson orientation">
+      <p className="eyebrow">Conceptual frame</p>
+      <h2>{lens.label}</h2>
+      <p className="lens-summary">
+        {lens.concepts.join(" → ")}. Keep this relationship in mind as you work through the lesson.
+      </p>
     </section>
+  );
+}
+
+
+export function DataJourneyIllustration() {
+  const nodes = [
+    ["01", "Specimen", "identity + context"],
+    ["02", "Laboratory", "observation + interpretation"],
+    ["03", "Systems", "mapping + transmission"],
+    ["04", "Clinical use", "display + action"],
+  ];
+  return (
+    <figure className="data-journey" aria-labelledby="data-journey-title">
+      <figcaption>
+        <p className="eyebrow">Information has a journey</p>
+        <h2 id="data-journey-title">The result is only as reliable as the path that carries it.</h2>
+      </figcaption>
+      <div className="journey-visual" aria-label="Specimen to clinical action information pathway">
+        <div className="journey-signal" aria-hidden="true"><span/><span/><span/><span/><span/><span/><span/></div>
+        <div className="journey-nodes">
+          {nodes.map(([n,title,detail]) => <div key={n}><small>{n}</small><strong>{title}</strong><span>{detail}</span></div>)}
+        </div>
+      </div>
+    </figure>
   );
 }
 
