@@ -38,21 +38,12 @@ export function BiotechHeroVisual() {
 export function LessonLens({ slug }: { slug: string }) {
   const lens = lenses[slug] ?? lenses["microbiology-informatics"];
   return (
-    <section className={`lesson-lens lens-${lens.accent}`} aria-label="Lesson concept map">
-      <div className="lens-copy">
-        <p className="eyebrow">Visual orientation</p>
-        <h2>{lens.label}</h2>
-        <p>Use this signal path as a mental model while you move through the lesson.</p>
-      </div>
-      <div className="lens-map" aria-hidden="true">
-        <span className="lens-core">{lens.code}</span>
-        {lens.concepts.map((concept, index) => (
-          <div className={`lens-node lens-node-${index + 1}`} key={concept}>
-            <i>{String(index + 1).padStart(2, "0")}</i>
-            <strong>{concept}</strong>
-          </div>
-        ))}
-      </div>
+    <section className={`lesson-lens lens-${lens.accent}`} aria-label="Lesson orientation">
+      <p className="eyebrow">Conceptual frame</p>
+      <h2>{lens.label}</h2>
+      <p className="lens-summary">
+        {lens.concepts.join(" → ")}. Keep this relationship in mind as you work through the lesson.
+      </p>
     </section>
   );
 }
