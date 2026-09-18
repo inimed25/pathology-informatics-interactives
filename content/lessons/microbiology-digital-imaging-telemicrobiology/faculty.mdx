@@ -13,21 +13,82 @@ The goal is not to teach learners how to develop imaging hardware or machine-lea
 - Image quality depends on acquisition conditions such as timing, focus, illumination, resolution, and other characteristics relevant to the intended use.
 - Successful image transmission does not establish that the complete clinical workflow is appropriate for interpretation.
 - Image-analysis and artificial-intelligence tools should be evaluated for defined tasks and used within their validated performance boundaries.
-- Performance established for one task, culture medium, organism group, imaging condition, or workflow should not automatically be generalized to another.
+- **Model performance is not the same as clinical utility.** Strong accuracy, sensitivity, specificity, or other technical metrics do not independently establish that implementation improves the intended laboratory workflow. Consider workload, prioritization, errors, turnaround time, and the clinical or operational purpose of the system.
+- Performance established for one task, culture medium, organism group, imaging condition, specimen population, or workflow should not automatically be generalized to another.
+- An algorithm may remain unchanged while its **inputs or operating environment change**. Culture-medium changes, specimen mix, organism distribution, incubation or acquisition conditions, imaging hardware, and workflow changes may alter performance and should be considered in post-implementation monitoring.
 - Validation or verification should evaluate the complete intended workflow, including specimen association, image acquisition, analysis, review, result transmission, exceptions, and downstream integration as applicable.
-- Software and algorithm changes can affect clinical performance even when imaging hardware remains unchanged.
-- Digital systems require appropriate monitoring, documentation, quality oversight, and change control.
-- Human oversight remains important when algorithmic or digital outputs require microbiologic interpretation.
+- **Algorithm validation is not identical to end-to-end workflow validation.** A model can classify an image correctly while a specimen-association, interface, mapping, routing, or downstream-reporting error produces an incorrect clinical result.
+- Automated workflows should have defined **exception and escalation pathways** for inadequate image quality, unexpected inputs, results outside validated conditions, system failures, or meaningful human-algorithm disagreement.
+- Human oversight should be meaningful rather than merely redundant. Depending on the intended use, human review can be concentrated where uncertainty, exceptions, or microbiologic judgment require it.
+- Watch for **automation bias**: users should not accept a computational output solely because a validated system produced it. Disagreements can also provide useful quality-monitoring information when they reveal recurring failure modes or changing inputs.
+- Software and algorithm changes can affect clinical performance even when imaging hardware remains unchanged; changes elsewhere in the laboratory environment may matter as well.
+- Digital systems require appropriate post-implementation monitoring, documentation, quality oversight, and change control.
 
 ## Discussion Prompts
 
 - What information must remain associated with a digital culture image for that image to be clinically useful?
 - Why does successful transmission of an image not establish that a telemicrobiology workflow is valid?
 - How would you validate an algorithm designed to identify culture plates with no visible growth?
+- Could an algorithm with excellent accuracy still make the laboratory workflow worse? What outcomes beyond model accuracy would you examine?
 - What could happen if an image-analysis algorithm were used outside the conditions in which its performance was established?
-- How could a software update change clinical performance without changing the imaging hardware?
+- How could changing culture media, specimen populations, imaging conditions, or workflow affect performance even if the algorithm itself did not change?
+- What is the difference between validating the image-analysis algorithm and validating the end-to-end clinical workflow?
 - When should a digital or algorithmic result be escalated for direct microbiologist review?
+- How should the laboratory use repeated disagreements between microbiologists and an automated system as quality-monitoring information?
+
+## Common Learner Misconceptions
+
+**“The model has high accuracy, so the implementation must be clinically useful.”**
+
+→ Separate technical/model performance from effects on workload, prioritization, turnaround time, errors, and the intended clinical purpose.
+
+**“The algorithm did not change, so its performance should not change.”**
+
+→ Ask whether the culture media, specimen population, organism distribution, image-acquisition conditions, hardware, or workflow changed.
+
+**“If the algorithm was validated, the complete clinical workflow is validated.”**
+
+→ Follow the output through specimen association, interfaces, mappings, the LIS, and downstream reporting or action.
+
+**“Human oversight means a microbiologist must repeat every automated decision.”**
+
+→ Focus human review where exceptions, uncertainty, disagreement, or conditions outside validated boundaries require judgment.
+
+**“A validated automated result should generally be trusted over a conflicting human observation.”**
+
+→ Discuss automation bias, escalation pathways, and how discrepancies can become quality-monitoring data.
+
+## Suggested Teaching Scenario
+
+Use a digital plate-reading algorithm validated to identify plates likely to have no visible growth. After implementation, introduce three developments:
+
+1. review flags increase workload during busy periods
+2. performance worsens after a culture-medium manufacturer changes
+3. an obscured image receives an automated classification rather than being routed for review
+
+Ask learners to distinguish which problem involves **clinical utility**, which suggests a possible **change in inputs or operating environment**, and which reveals inadequate **exception handling**.
+
+Then add a fourth event: the algorithm correctly classifies a positive image, but an interface mapping error associates the output with the wrong specimen in the LIS.
+
+Use this to reinforce:
+
+> **A correct algorithmic output can still become an incorrect clinical result if the surrounding information workflow fails.**
+
+## Faculty Emphasis
+
+Learners do **not** need to leave this lesson able to develop a machine-learning model or describe specific AI architectures.
+
+They **should** leave able to ask:
+
+- What task is being automated?
+- Under what conditions was performance established?
+- Does model performance translate into useful clinical workflow performance?
+- What changes could alter the data presented to the algorithm?
+- How will the laboratory detect performance degradation?
+- What triggers an exception or human escalation?
+- Can users appropriately investigate or override an automated result?
+- Does the result remain associated with the correct specimen through downstream systems?
 
 ## Teaching Principle
 
-> **Follow the image as laboratory data. Ask how it was acquired, what information remains associated with it, how software transforms or interprets it, how the workflow was validated, and what could cause the final result to become unreliable.**
+> **Follow the image as laboratory data. Ask how it was acquired, what information remains associated with it, how software transforms or interprets it, how the workflow was validated, how performance is monitored over time, and what could cause a technically correct output to become an unreliable clinical result.**
