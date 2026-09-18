@@ -406,12 +406,12 @@ const cases: Record<string, CaseSeed> = {
       {
         question: "A blood-culture positivity dashboard shows a marked decrease immediately after an LIS interface change. The dashboard calculation is reproducible. What should be evaluated before concluding that positivity truly decreased?",
         choices: [
-          "Compare the source population, record completeness, relevant mappings, and denominator before and after the interface change",
           "Compare total culture volume alone, because a stable total would exclude an interface-related data problem",
           "Review the organisms among positive cultures first, because a change in species distribution would establish whether the trend is real",
-          "Interpret the trend using the unchanged dashboard logic and evaluate interface integrity as a separate validation issue"
+          "Interpret the trend using the unchanged dashboard logic and evaluate interface integrity as a separate validation issue",
+          "Compare the source population, record completeness, relevant mappings, and denominator before and after the interface change"
         ],
-        correctIndex: 0,
+        correctIndex: 3,
         explanation: "A technically correct calculation can still be misleading if the underlying population, completeness, mappings, provenance, or denominator changed. Data fitness should be verified before interpreting the observed difference as a true clinical or laboratory trend."
       }
     ]
@@ -458,11 +458,11 @@ const cases: Record<string, CaseSeed> = {
         question: "Why is it important for an AST information system to distinguish an MIC from its categorical susceptibility interpretation?",
         choices: [
           "Because MICs are used only for research, while categories are used clinically",
-          "Because the MIC is an analytical measurement, while the categorical interpretation depends on applicable interpretive criteria that may change",
           "Because categorical interpretations are generated independently of the organism and antimicrobial",
-          "Because an LIS should store either the MIC or the categorical interpretation, but not both"
+          "Because an LIS should store either the MIC or the categorical interpretation, but not both",
+          "Because the MIC is an analytical measurement, while the categorical interpretation depends on applicable interpretive criteria that may change"
         ],
-        correctIndex: 1,
+        correctIndex: 3,
         explanation: "The MIC is the analytical susceptibility measurement, while the categorical interpretation depends on the applicable interpretive criteria. Keeping these concepts distinct is important because interpretation can change when breakpoints or other relevant criteria are updated even when the measured MIC does not."
       },
       {
@@ -513,11 +513,11 @@ const cases: Record<string, CaseSeed> = {
         question: "Why must AST expert rules and breakpoint configurations be actively governed rather than left indefinitely at vendor defaults?",
         choices: [
           "Vendor software cannot store MIC values",
-          "Interpretive standards and laboratory policies can change, and outdated logic may produce inappropriate susceptibility reporting",
           "Every AST result should be manually entered into the EHR",
-          "Expert rules are used only for billing"
+          "Expert rules are used only for billing",
+          "Interpretive standards and laboratory policies can change, and outdated logic may produce inappropriate susceptibility reporting"
         ],
-        correctIndex: 1,
+        correctIndex: 3,
         explanation: "AST interpretation is dependent on maintained rules and standards. Laboratories need defined ownership, validation, change control, and monitoring so updates do not create unintended downstream reporting errors."
       }
     ]
