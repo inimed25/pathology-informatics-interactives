@@ -525,3 +525,48 @@ h3 { line-height: 1.2; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
 }
+
+
+/* Microbial genomics: depth, breadth, and uniformity explorer */
+.coverage-explorer {
+  max-width: 1050px;
+  margin: 34px 0 54px;
+  padding: 42px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--paper);
+  box-shadow: 0 14px 40px rgba(38, 51, 47, .055);
+}
+.coverage-explorer-heading { display: grid; grid-template-columns: 1fr auto; gap: 28px; align-items: start; }
+.coverage-explorer-heading h3 { margin: 0 0 10px; font-size: 1.8rem; }
+.coverage-explorer-heading p:not(.eyebrow) { max-width: 700px; margin: 0; color: var(--muted); }
+.coverage-threshold { padding: 12px 15px; border: 1px solid var(--line); background: var(--green-pale); font-size: .82rem; }
+.coverage-scenarios { display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; margin: 30px 0 22px; }
+.coverage-scenarios button { min-height: 94px; padding: 15px; border: 1px solid var(--line); background: #fafaf6; color: var(--ink); cursor: pointer; text-align: left; }
+.coverage-scenarios button.active { border-color: var(--green); background: var(--mint); box-shadow: inset 0 0 0 1px var(--green); }
+.coverage-scenarios strong, .coverage-scenarios small { display: block; }
+.coverage-scenarios small { margin-top: 6px; color: var(--muted); }
+.coverage-plot { padding: 22px; border: 1px solid var(--line); background: #f8f8f4; }
+.coverage-read-field { position: relative; height: 170px; overflow: hidden; border-bottom: 1px dashed #aeb8b2; background: linear-gradient(to right, rgba(79,117,104,.055) 1px, transparent 1px); background-size: 10% 100%; }
+.coverage-read { position: absolute; height: 10px; border-radius: 6px; background: var(--blue); opacity: .78; }
+.coverage-cursor { position: absolute; top: 0; bottom: 0; width: 2px; background: var(--red); pointer-events: none; }
+.coverage-reference { display: grid; grid-template-columns: auto 1fr 34px; gap: 12px; align-items: center; margin-top: 13px; color: var(--muted); font-family: ui-monospace, monospace; font-size: 10px; }
+.coverage-reference div { height: 8px; background: var(--green-dark); }
+.coverage-reference span:last-child { color: var(--red); font-weight: 700; }
+.coverage-position-control { display: grid; grid-template-columns: auto 1fr; gap: 16px; align-items: center; margin-top: 18px; font-size: .82rem; font-weight: 700; }
+.coverage-position-control input { width: 100%; accent-color: var(--green); }
+.coverage-metrics { display: grid; grid-template-columns: repeat(4, 1fr); margin: 20px 0 0; border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+.coverage-metrics > div { min-height: 128px; padding: 18px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.coverage-metrics dt { color: var(--muted); font-size: 10px; text-transform: uppercase; letter-spacing: .07em; }
+.coverage-metrics dd { margin: 10px 0 5px; font-family: ui-monospace, monospace; font-size: 1.45rem; font-weight: 700; }
+.coverage-metrics small { color: var(--muted); font-size: .75rem; }
+.coverage-takeaway { margin-top: 20px; padding: 18px 20px; border-left: 4px solid var(--gold); background: var(--gold-soft); }
+.coverage-takeaway strong { font-size: .78rem; text-transform: uppercase; letter-spacing: .07em; }
+.coverage-takeaway p { margin: 5px 0 0; }
+
+@media (max-width: 760px) {
+  .coverage-explorer { padding: 25px 18px; }
+  .coverage-explorer-heading { grid-template-columns: 1fr; }
+  .coverage-scenarios, .coverage-metrics { grid-template-columns: 1fr; }
+  .coverage-position-control { grid-template-columns: 1fr; }
+}
