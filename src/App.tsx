@@ -12,7 +12,7 @@ import { AntibiogramFigure } from "./components/AntibiogramFigure";
 import { LabEcosystemFigure } from "./components/LabEcosystemFigure";
 import { GenomicsConceptGallery } from "./components/GenomicsConceptGallery";
 import { SupplementalQuestionBank } from "./components/SupplementalQuestionBank";
-import { BiotechHeroVisual, GenomicsPrimer, LessonChapterRail, LessonLens } from "./components/BiotechVisuals";
+import { BiotechHeroVisual, DataJourneyIllustration, GenomicsPrimer, LessonChapterRail, LessonLens } from "./components/BiotechVisuals";
 import { SiteChrome, href } from "./components/SiteChrome";
 import { lessonBySlug, lessons, topicBySlug, topics } from "./data/curriculum";
 import type { LessonDefinition } from "./data/types";
@@ -255,7 +255,7 @@ function LessonPage({ slug }: { slug: string }) {
       {slug === "microbiology-genomics-bioinformatics" && <GenomicsPrimer />}
       <div className="lesson-reading-layout">
         <LessonChapterRail />
-        <section className="mdx-content introduction-content">{Introduction ? <Introduction/> : <p>Introduction content is missing.</p>}</section>
+        <section className="mdx-content introduction-content">{Introduction ? <Introduction/> : <p>Introduction content is missing.</p>}</section>\n        {slug === "microbiology-informatics" && <DataJourneyIllustration />}
       </div>
       <section className="lesson-phase-heading" aria-label="Explore">
         <span>02</span>
