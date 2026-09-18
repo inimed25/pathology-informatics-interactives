@@ -741,3 +741,23 @@ h3 { line-height: 1.2; }
   .ph-scenarios, .ph-readout, .ph-standard-note { grid-template-columns: 1fr; }
   .ph-standard-note > b { transform: rotate(90deg); justify-self: center; }
 }
+
+
+/* Original synthetic culture-plate illustration for digital microbiology */
+.digital-plate-demo { display: grid; grid-template-columns: 190px 1fr; gap: 24px; align-items: center; margin: 26px 0 18px; padding: 22px; border: 1px solid var(--line); background: #f8f8f4; }
+.digital-plate-demo > div:last-child small { display: block; color: var(--muted); text-transform: uppercase; letter-spacing: .07em; }
+.digital-plate-demo > div:last-child strong { display: block; margin-top: 7px; font-size: 1.05rem; }
+.digital-plate-demo > div:last-child p { margin: 7px 0 0; color: var(--muted); }
+.culture-plate { position: relative; width: 168px; aspect-ratio: 1; border: 9px solid rgba(118,104,66,.22); border-radius: 50%; background: radial-gradient(circle at 42% 38%, #fffbe7 0 8%, #f2e5ae 42%, #ddca82 100%); box-shadow: inset 0 0 0 2px rgba(255,255,255,.7), 0 8px 18px rgba(38,51,47,.09); overflow: hidden; }
+.culture-plate::after { content: ""; position: absolute; inset: 7px; border: 1px solid rgba(108,89,46,.18); border-radius: 50%; }
+.colony { position: absolute; z-index: 2; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #fff 0 8%, #e9dfc6 25%, #b6a47a 100%); box-shadow: 0 1px 3px rgba(40,35,24,.25); }
+.colony-a { width: 20px; height: 20px; left: 31px; top: 44px; }
+.colony-b { width: 14px; height: 14px; left: 89px; top: 30px; }
+.colony-c { width: 25px; height: 25px; left: 101px; top: 91px; }
+.colony-d { width: 11px; height: 11px; left: 58px; top: 108px; }
+.colony-e { width: 16px; height: 16px; left: 72px; top: 70px; }
+.analysis-box { position: absolute; z-index: 3; width: 40px; height: 40px; left: 94px; top: 84px; border: 2px solid var(--red); border-radius: 5px; box-shadow: 0 0 0 2px rgba(255,255,255,.45); }
+@media (max-width: 760px) {
+  .digital-plate-demo { grid-template-columns: 1fr; }
+  .culture-plate { margin: 0 auto; }
+}
