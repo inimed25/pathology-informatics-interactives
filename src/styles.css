@@ -913,3 +913,31 @@ footer { border-top:1px solid var(--line); }
 .next-lesson-link:hover { border-color:#aabbb3; box-shadow:var(--shadow-md); }
 .next-lesson-link:hover span { transform:translateX(3px); }
 @media(max-width:760px){.lesson-end-nav{grid-template-columns:1fr}.lesson-end-nav>a{justify-content:flex-start}.lesson-end-nav .next-lesson-link{order:-1}}
+
+
+/* Final responsive + interaction QA */
+button { touch-action:manipulation; }
+.trace-tabs button,.gallery-tabs button,.recovery-phases button,.digital-scenarios button,.ph-scenarios button { min-height:44px; }
+@media(max-width:980px){
+ .topic-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .hub-hero{grid-template-columns:1fr;gap:42px}.hero-card{max-width:680px}
+ .lesson-section{padding:40px}.concept-figure,.breakpoint-explorer,.recovery-explorer,.digital-workflow-explorer,.public-health-explorer{padding:32px}
+}
+@media(max-width:760px){
+ h1{font-size:clamp(2.7rem,13vw,4.2rem)} h2{font-size:clamp(1.8rem,9vw,2.7rem)}
+ .topbar{padding:12px 18px;align-items:flex-start;gap:12px}.topbar nav{flex-wrap:wrap;justify-content:flex-end}
+ .topic-grid{grid-template-columns:1fr}.topic-card{min-height:auto}
+ .lesson-main,.inner-main{padding-left:16px;padding-right:16px}
+ .lesson-meta{align-items:flex-start;flex-direction:column}.lesson-section{padding:26px 18px}
+ .section-heading{gap:12px}.section-guidance{margin-left:0}
+ .trace-panel{grid-template-columns:1fr}.trace-panel>div,.trace-panel aside{padding:24px 18px}
+ .choice-grid{grid-template-columns:1fr!important}.choice-grid button{min-height:auto}
+ .debrief-content{padding:30px 20px}
+ .mapping-stage,.isolate-card,.population-card{min-width:0}
+}
+@media(max-width:480px){
+ .brand small{display:none}.brand strong{max-width:150px;line-height:1.2}.topbar nav{font-size:11px;gap:10px}
+ .hub-hero{padding-left:18px;padding-right:18px}.hero-actions>a{width:100%}
+ .concept-figure,.breakpoint-explorer,.recovery-explorer,.digital-workflow-explorer,.public-health-explorer{padding:22px 14px}
+ .gallery-canvas{padding:16px}.vaf-stack{grid-template-columns:repeat(5,1fr)}
+}
