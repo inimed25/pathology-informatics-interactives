@@ -352,9 +352,9 @@ const cases: Record<string, CaseSeed> = {
         question: "Why can clinical microbiology data be more difficult to represent than a single quantitative chemistry result?",
         choices: [
           "Microbiology results may contain multiple related observations that evolve during the laboratory workflow",
-          "Microbiology results cannot be stored electronically",
-          "All microbiology testing produces only narrative free text",
-          "Microbiology instruments do not generate structured data"
+          "Microbiology data are inherently unstructured because organism identifications and susceptibility results cannot be represented as discrete fields",
+          "Microbiology results are difficult mainly because each specimen produces a single observation that must be repeatedly overwritten",
+          "Microbiology data are difficult mainly because preliminary and final observations must be stored in separate information systems"
         ],
         correctIndex: 0,
         explanation: "Microbiology workflows can generate interconnected and evolving information such as specimen details, organism identification, susceptibility results, preliminary findings, and final interpretations."
@@ -396,9 +396,9 @@ const cases: Record<string, CaseSeed> = {
         question: "Which question best reflects the microbiology director's informatics responsibility when implementing a new electronic result workflow?",
         choices: [
           "Does the information retain its intended meaning and reach the appropriate users and systems throughout the workflow?",
-          "Can the instrument generate a result without any human involvement?",
-          "Can every microbiology result be converted into a single numeric value?",
-          "Can the laboratory eliminate all manual review?"
+          "Does automation eliminate the need to define exception handling and human review?",
+          "Does the interface preserve only the final displayed text, even if relationships among specimen, organism, and susceptibility data are lost?",
+          "Does successful message transmission make downstream clinical validation unnecessary?"
         ],
         correctIndex: 0,
       explanation: "The microbiology director helps ensure that laboratory information remains clinically accurate and meaningful as it moves through systems and reaches downstream users. Technical implementation may involve LIS, interface, and IT specialists, but microbiology expertise is essential for validating the clinical meaning of the workflow."
@@ -512,9 +512,9 @@ const cases: Record<string, CaseSeed> = {
       {
         question: "Why must AST expert rules and breakpoint configurations be actively governed rather than left indefinitely at vendor defaults?",
         choices: [
-          "Vendor software cannot store MIC values",
-          "Every AST result should be manually entered into the EHR",
-          "Expert rules are used only for billing",
+          "Vendor-provided rules are acceptable indefinitely as long as the underlying MIC measurements remain unchanged",
+          "Laboratories should avoid updating interpretive logic after implementation because changes reduce longitudinal consistency",
+          "A vendor update alone is sufficient evidence that local organism-drug reporting remains appropriate",
           "Interpretive standards and laboratory policies can change, and outdated logic may produce inappropriate susceptibility reporting"
         ],
         correctIndex: 3,
@@ -905,7 +905,7 @@ const cases: Record<string, CaseSeed> = {
           "Once an AI model has been validated, changes in laboratory materials should not affect its performance unless the software itself changes",
           "Algorithm performance can depend on the data and environment in which it operates, so changes in inputs or workflow can affect performance and may require monitoring and reassessment",
           "The problem primarily demonstrates that digital images should not be retained after interpretation",
-          "The laboratory should retrain the algorithm automatically whenever its performance changes"
+          "The laboratory should adjust the algorithm threshold until prior performance is restored, provided the software itself has not changed"
         ],
         correctIndex: 1,
         explanation: "Algorithm performance depends not only on the software itself but also on the data and workflow in which it operates. Relevant factors can include culture-medium type or manufacturer, incubation conditions, image-acquisition timing, illumination, focus, resolution, imaging hardware, organism distribution, specimen characteristics, and local workflow. Changes in these factors can shift the data presented to the algorithm even when its code has not changed. Post-implementation monitoring can identify performance changes and help determine whether investigation, verification, workflow modification, or other corrective action is needed."
@@ -949,7 +949,7 @@ const cases: Record<string, CaseSeed> = {
           "The algorithm was inadequately trained because a properly trained model would detect the LIS error",
           "Strong algorithm performance does not establish validity of the complete clinical workflow; specimen association, interfaces, mappings, result routing, and downstream reporting also require appropriate validation and monitoring",
           "The laboratory should validate only the LIS because the algorithm produced the correct classification",
-          "Digital imaging should not be interfaced with an LIS when AI is involved"
+          "End-to-end validation is unnecessary when both the algorithm and LIS have been validated separately"
         ],
         correctIndex: 1,
         explanation: "An algorithm can perform its computational task correctly while the overall clinical system still produces an unsafe result. End-to-end implementation includes specimen and image identity, image acquisition, algorithmic analysis, result association, interfaces and mappings, the LIS, and downstream reporting or action. Validation therefore needs to support the complete intended workflow."
