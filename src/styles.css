@@ -1972,3 +1972,13 @@ body,.site-frame { background:#f7f9fc; color:#101d2f; }
 .mapping-image .concept-map-flow>em{justify-self:center}
 @media(max-width:1050px){.mapping-image{grid-template-columns:1fr}.mapping-image .concept-map-flow{grid-template-columns:minmax(100px,1.08fr) 22px repeat(3,minmax(92px,1fr))}}
 @media(max-width:700px){.mapping-image .concept-map-flow{grid-template-columns:1fr}.mapping-image .concept-map-flow>em{transform:rotate(90deg);justify-self:center}}
+
+
+/* Concept mapping desktop containment: reserve enough width for the final display-name card */
+@media(min-width:1051px){
+  .mapping-image{grid-template-columns:minmax(0,.78fr) minmax(0,1.62fr)}
+  .mapping-image .concept-map-flow{grid-template-columns:minmax(96px,1.05fr) 18px repeat(3,minmax(84px,1fr));gap:5px;padding:12px}
+  .mapping-image .organism-anchor,.mapping-image .map-code{padding:7px}
+  .mapping-image .map-code small{font-size:.42rem}
+  .mapping-image .map-code b{font-size:.56rem}
+}
