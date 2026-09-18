@@ -1022,70 +1022,70 @@ const cases: Record<string, CaseSeed> = {
 
     questions: [
       {
-        question: "What is the primary purpose of electronic laboratory reporting (ELR) in a clinical microbiology workflow?",
+        question: "A laboratory begins electronically reporting a new molecular test to the state health department. Interface monitoring shows that the HL7 messages are transmitted successfully and acknowledgments are returned. Several weeks later, the health department discovers that positive results have been categorized under the wrong laboratory test because the laboratory's local test code was mapped incorrectly. What is the best interpretation?",
         choices: [
-          "Automatically transmit structured laboratory information to public-health agencies for surveillance and response",
-          "Replace the laboratory information system with a public-health database",
-          "Send every microbiology result directly to the CDC regardless of reporting requirements",
-          "Allow public-health agencies to control microbiology instruments remotely"
-        ],
-        correctIndex: 0,
-        explanation: "ELR supports automated electronic transmission of laboratory information to public-health agencies. Reporting destinations and requirements depend on the applicable public-health jurisdiction."
-      },
-      {
-        question: "A public-health system sends an acknowledgment indicating that an ELR message was received. What does that acknowledgment alone establish?",
-        choices: [
-          "Every laboratory concept in the message was interpreted correctly",
-          "The message reached the receiving workflow, but additional validation is needed to establish correct processing and interpretation of its contents",
-          "The patient automatically meets a national surveillance case definition",
-          "No terminology mapping is required"
+          "The interface functioned correctly, so the problem is primarily a public-health surveillance error",
+          "Successful message transmission and acknowledgment demonstrate technical exchange, but they do not establish semantic interoperability; the local-to-standard mapping failed to preserve the intended meaning",
+          "HL7 should have prevented the incorrect mapping because messaging standards define the clinical meaning of every laboratory result",
+          "The laboratory should stop using local test codes because interoperability requires the LIS to store only standardized terminology"
         ],
         correctIndex: 1,
-        explanation: "Technical receipt and semantic interoperability are different. Successful delivery does not by itself prove that test, organism, specimen, result, and other concepts were interpreted as intended."
+        explanation: "HL7 (Health Level Seven) is a family of standards used to structure and exchange healthcare information between systems. Successful transmission of an HL7 message and receipt of an acknowledgment can demonstrate that information moved through the technical interface, but they do not by themselves prove that the clinical concepts were represented correctly. Here, the local test code was mapped to the wrong concept, so the message successfully transported the wrong meaning. This illustrates the distinction between technical message exchange and semantic interoperability."
       },
       {
-        question: "Why are standardized terminologies such as LOINC and SNOMED CT important in electronic laboratory reporting?",
+        question: "A patient has a laboratory-confirmed infection that is reportable to public health. The microbiology laboratory electronically sends the organism and test result to the health department. Separately, information from the patient's EHR, including relevant clinical and demographic information, is electronically submitted as part of case reporting. Which statement best describes these workflows?",
         choices: [
-          "They encrypt laboratory messages during transmission",
-          "They determine which organisms will grow in culture",
-          "They help represent laboratory concepts consistently so receiving systems can interpret the transmitted information",
-          "They replace HL7 messaging standards"
+          "Both are ELR because any electronic information sent to public health is considered laboratory reporting",
+          "The laboratory-result transmission is ELR, while automated transmission of reportable case information from the EHR is eCR; the two can provide complementary information to public health",
+          "ELR and eCR are competing standards, so a health department generally uses one or the other",
+          "eCR is the process by which the laboratory converts local test codes into LOINC codes before sending an ELR message"
+        ],
+        correctIndex: 1,
+        explanation: "Electronic laboratory reporting (ELR) communicates structured laboratory information to public-health agencies. Electronic case reporting (eCR) supports automated reporting of reportable case information from the EHR and can include clinical and demographic context. They are distinct but complementary workflows: the laboratory may contribute microbiologic evidence through ELR while eCR contributes broader case information."
+      },
+      {
+        question: "A laboratory correctly validates ELR for a newly reportable organism. A year later, the jurisdiction changes its reporting requirements so that only results meeting additional criteria should be automatically reported. The laboratory's ELR configuration is never updated, so it continues sending results according to the old rule. What is the most important informatics lesson?",
+        choices: [
+          "Once an ELR interface has been validated, reporting-rule changes are primarily the responsibility of the receiving public-health agency",
+          "The interface should transmit every microbiology result so that public health can determine which results are reportable",
+          "Reporting logic is a governed component of the information system; changes in jurisdictional requirements may require review, configuration changes, testing, documentation, and ongoing monitoring",
+          "Standard terminology such as LOINC automatically updates a laboratory's jurisdiction-specific reporting rules"
         ],
         correctIndex: 2,
-        explanation: "Standardized terminology supports semantic interoperability by providing shared representations for laboratory concepts. Messaging standards and terminology standards serve complementary rather than interchangeable roles."
+        explanation: "ELR depends not only on transporting and correctly representing results but also on determining what should be reported, under which conditions, and to which destination. Reporting requirements can vary by jurisdiction and change over time, so previously correct automation can become incorrect if reporting logic is not maintained."
       },
       {
-        question: "A laboratory transmits a local organism code that is meaningful inside its LIS but unknown to the receiving public-health system. The message is delivered successfully. What is the main informatics problem?",
+        question: "A laboratory is validating ELR for a new molecular assay. Test messages leave the LIS successfully, pass through the interface, and receive acknowledgments from the public-health system. The laboratory therefore concludes that ELR validation is complete. What important step is still missing?",
         choices: [
-          "Analytical sensitivity failure",
-          "Specimen contamination",
-          "Network downtime",
-          "Semantic interoperability failure caused by inadequate terminology mapping"
-        ],
-        correctIndex: 3,
-        explanation: "The transport layer succeeded, but the receiving system may not understand the local code. Controlled terminology mapping is therefore necessary when local representations differ from those expected by the receiver."
-      },
-      {
-        question: "Which statement best distinguishes electronic laboratory reporting (ELR) from electronic case reporting (eCR)?",
-        choices: [
-          "ELR primarily communicates laboratory information to public health, whereas eCR automates transmission of reportable case information from electronic health records",
-          "ELR and eCR are two names for exactly the same workflow",
-          "ELR is used only for genomic sequencing, whereas eCR is used only for culture results",
-          "eCR replaces the need for laboratory reporting"
+          "Confirming that the receiving public-health system receives and interprets representative patient, specimen, test, organism or result, and other required information as intended",
+          "Replacing all local LIS codes with standardized terminology before the assay can be reported",
+          "Confirming that every reportable result is also transmitted through eCR",
+          "Demonstrating that the public-health agency uses the laboratory result to initiate an investigation"
         ],
         correctIndex: 0,
-        explanation: "ELR and eCR are complementary public-health data-exchange workflows. ELR centers on laboratory information, while eCR automates case-report information from the electronic health record."
+        explanation: "Successful transmission and acknowledgment demonstrate important parts of the technical pathway, but end-to-end validation goes further. The laboratory should evaluate whether representative information reaches the intended destination with its meaning preserved, including relevant mappings, reporting logic, routing, receiving-system interpretation, and appropriate exception scenarios."
       },
       {
-        question: "Why should a laboratory avoid hard-coding public-health reporting logic and then leaving it unchanged indefinitely?",
+        question: "A public-health surveillance system shows an apparent increase in infections caused by a particular organism. Before concluding that incidence has truly increased, the laboratory discovers that it recently changed its organism coding and several local organism codes were remapped. What is the most appropriate next step?",
         choices: [
-          "Electronic reporting is intended to be temporary",
-          "Reporting requirements, terminology, implementation guidance, and receiving-system expectations can change and therefore require governance and maintenance",
-          "Public-health agencies cannot receive structured laboratory data",
-          "Every reporting rule must be manually recreated for each patient"
+          "Assume the increase is real because surveillance systems analyze only finalized laboratory results",
+          "Investigate whether the mapping change altered how organisms are represented, counted, or grouped in the surveillance data before interpreting the apparent trend",
+          "Remove all results generated before the terminology change because historical data cannot be compared with current data",
+          "Replace organism terminology with free-text reporting so that future coding changes cannot affect surveillance"
         ],
         correctIndex: 1,
-        explanation: "Public-health interfaces are maintained clinical information systems. Laboratories need ownership, change control, testing, and ongoing governance as reporting requirements and technical specifications evolve."
+        explanation: "Surveillance depends on the quality and interpretability of its underlying data. Changes in mappings, terminology, reporting logic, completeness, duplicates, or other data-processing steps can create apparent changes in surveillance patterns even when the underlying epidemiology has not changed. A change in the data does not necessarily mean a change in the biology."
+      },
+      {
+        question: "Public health identifies several bacterial isolates with highly similar whole-genome sequencing results collected over a short period. The isolates are flagged as potentially related. What is the most appropriate interpretation?",
+        choices: [
+          "Genomic similarity proves that direct transmission occurred between the affected patients",
+          "Genomic similarity is useful evidence for identifying potentially related cases, but it should be interpreted alongside epidemiologic, temporal, geographic, and other relevant information",
+          "Genomic data should not be incorporated into surveillance because sequencing methods can change over time",
+          "Once isolates meet a genomic relatedness threshold, traditional epidemiologic investigation is generally unnecessary"
+        ],
+        correctIndex: 1,
+        explanation: "Genomic information can contribute to surveillance and outbreak investigation, but genomic relatedness is one component of the evidence, not proof of direct transmission. Interpretation should integrate genomic findings with relevant epidemiologic, temporal, geographic, exposure, and other contextual information."
       }
     ]
   },
