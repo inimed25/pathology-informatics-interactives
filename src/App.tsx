@@ -2,6 +2,7 @@ import { useState } from "react";
 import { lessonContent } from "./content";
 import { GenericExperience } from "./components/GenericExperience";
 import { CoverageExplorer } from "./components/CoverageExplorer";
+import { ReadContextExplorer } from "./components/ReadContextExplorer";
 import { PilotLab } from "./components/PilotLabs";
 import { SiteChrome, href } from "./components/SiteChrome";
 import { lessonBySlug, lessons, topicBySlug, topics } from "./data/curriculum";
@@ -229,7 +230,12 @@ function LessonPage({ slug }: { slug: string }) {
         </div>
       </header>
       <section className="mdx-content introduction-content">{Introduction ? <Introduction/> : <p>Introduction content is missing.</p>}</section>
-      {slug === "microbiology-genomics-bioinformatics" && <CoverageExplorer />}
+      {slug === "microbiology-genomics-bioinformatics" && (
+        <div className="genomics-concept-labs">
+          <ReadContextExplorer />
+          <CoverageExplorer />
+        </div>
+      )}
       <PilotLab kind={lesson.manifest.pilot}/>
                           <GenericExperience lesson={lesson} onAttempt={setAttempted}/>
       {attempted ? (
