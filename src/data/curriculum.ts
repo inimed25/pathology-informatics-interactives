@@ -455,15 +455,15 @@ const cases: Record<string, CaseSeed> = {
 
     questions: [
       {
-        question: "An isolate has an MIC of 2 µg/mL for an antimicrobial. What does the MIC represent?",
+        question: "Why is it important for an AST information system to distinguish an MIC from its categorical susceptibility interpretation?",
         choices: [
-          "The probability that treatment will succeed in the patient",
-          "The lowest antimicrobial concentration that inhibits visible growth under defined test conditions",
-          "The categorical interpretation assigned by the LIS",
-          "The percentage of isolates susceptible to that antimicrobial"
+          "Because MICs are used only for research, while categories are used clinically",
+          "Because the MIC is an analytical measurement, while the categorical interpretation depends on applicable interpretive criteria that may change",
+          "Because categorical interpretations are generated independently of the organism and antimicrobial",
+          "Because an LIS should store either the MIC or the categorical interpretation, but not both"
         ],
         correctIndex: 1,
-        explanation: "The MIC is an in vitro susceptibility measurement. A susceptible, intermediate, susceptible-dose dependent, or resistant category is an interpretation applied using appropriate breakpoint criteria."
+        explanation: "The MIC is the analytical susceptibility measurement, while the categorical interpretation depends on the applicable interpretive criteria. Keeping these concepts distinct is important because interpretation can change when breakpoints or other relevant criteria are updated even when the measured MIC does not."
       },
       {
         question: "A laboratory updates an antimicrobial breakpoint. The measured MIC for a stored organism-drug example remains unchanged, but its categorical interpretation changes. What best explains this?",
@@ -499,15 +499,15 @@ const cases: Record<string, CaseSeed> = {
         explanation: "A correct analytical measurement can still produce an incorrect downstream report if interpretive criteria, expert rules, mappings, or interface transformations are wrong or outdated."
       },
       {
-        question: "Which statement best distinguishes an antibiogram from an individual isolate's AST report?",
+        question: "A laboratory is building an automated antibiogram from LIS data. Individual AST results are accurate, but the resulting susceptibility summary appears inconsistent with prior reports. Which issue is most important to evaluate?",
         choices: [
-          "An antibiogram summarizes susceptibility patterns across a defined collection of isolates, whereas an AST report describes results for an individual isolate",
-          "An antibiogram is another name for an MIC",
-          "An antibiogram determines the breakpoint used by the AST instrument",
-          "An antibiogram contains only resistant organisms"
+          "Whether the source population, duplicate-isolate handling, inclusion rules, organism/antimicrobial mappings, and extraction logic are appropriate",
+          "Whether every isolate included in the dataset has exactly the same MIC",
+          "Whether the antibiogram uses different breakpoints from those used for individual patient results",
+          "Whether clinicians can see every individual isolate included in the calculation"
         ],
         correctIndex: 0,
-        explanation: "An antibiogram aggregates susceptibility results across isolates to summarize local susceptibility patterns. It is conceptually different from the AST result generated for an individual isolate."
+        explanation: "An automated antibiogram depends on more than accurate individual AST results. The source population, inclusion and duplicate-isolate rules, mappings, and extraction logic must support the intended cumulative susceptibility summary."
       },
       {
         question: "Why must AST expert rules and breakpoint configurations be actively governed rather than left indefinitely at vendor defaults?",
