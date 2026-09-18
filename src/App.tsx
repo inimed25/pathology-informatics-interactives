@@ -5,6 +5,7 @@ import { CoverageExplorer } from "./components/CoverageExplorer";
 import { ReadContextExplorer } from "./components/ReadContextExplorer";
 import { BreakpointExplorer } from "./components/BreakpointExplorer";
 import { InterfaceRecoveryExplorer } from "./components/InterfaceRecoveryExplorer";
+import { DigitalWorkflowExplorer } from "./components/DigitalWorkflowExplorer";
 import { PilotLab } from "./components/PilotLabs";
 import { SiteChrome, href } from "./components/SiteChrome";
 import { lessonBySlug, lessons, topicBySlug, topics } from "./data/curriculum";
@@ -234,6 +235,7 @@ function LessonPage({ slug }: { slug: string }) {
       <section className="mdx-content introduction-content">{Introduction ? <Introduction/> : <p>Introduction content is missing.</p>}</section>
       {slug === "microbiology-decision-support" && <BreakpointExplorer />}
       {slug === "microbiology-interfaces-automation" && <InterfaceRecoveryExplorer />}
+      {slug === "microbiology-digital-imaging-telemicrobiology" && <DigitalWorkflowExplorer />}
       {slug === "microbiology-genomics-bioinformatics" && (
         <div className="genomics-concept-labs">
           <ReadContextExplorer />
