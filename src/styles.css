@@ -860,3 +860,42 @@ h3 { line-height: 1.2; }
 .lesson-phase-heading .eyebrow { margin:0 0 2px; }
 .lesson-phase-heading strong { font-size:1rem; }
 @media(max-width:760px){.lesson-phase-heading{margin-top:26px}}
+
+
+/* Professional visual system — restrained clinical/editorial polish */
+:root {
+  --surface-elevated: #fffefa;
+  --shadow-sm: 0 1px 2px rgba(24,45,39,.04), 0 8px 24px rgba(24,45,39,.045);
+  --shadow-md: 0 2px 4px rgba(24,45,39,.04), 0 18px 48px rgba(24,45,39,.075);
+}
+body { background: linear-gradient(180deg,#f7f5ef 0,#f5f2ea 420px); text-rendering: optimizeLegibility; }
+.topbar { min-height:72px; background:rgba(250,248,242,.92); border-bottom-color:rgba(38,51,47,.11); box-shadow:0 1px 0 rgba(255,255,255,.65); }
+.brand-mark { width:40px; height:40px; border-radius:10px; font-size:10px; letter-spacing:.06em; }
+.brand strong { font-size:13px; letter-spacing:.005em; }
+.brand small { margin-top:1px; font-size:9px; letter-spacing:.14em; }
+.topbar nav { gap:30px; font-size:12px; letter-spacing:.02em; }
+.hub-hero { min-height:650px; background: radial-gradient(circle at 82% 16%,rgba(183,137,85,.12),transparent 24%), linear-gradient(120deg,#f8f6f0 0 62%,#e9efeb 62%); border-bottom:1px solid var(--line); }
+.hub-hero h1 { max-width:950px; font-size:clamp(3.6rem,7vw,6.8rem); }
+.hero-card { border-radius:18px; box-shadow:0 24px 60px rgba(25,55,47,.15); }
+.topic-grid { gap:14px; border:0; }
+.topic-card { border:1px solid var(--line); border-radius:14px; background:rgba(255,254,250,.72); box-shadow:var(--shadow-sm); }
+.topic-card:hover { transform:translateY(-3px); box-shadow:var(--shadow-md); border-color:#bec9c3; }
+.lesson-section,.concept-figure,.breakpoint-explorer,.recovery-explorer,.digital-workflow-explorer,.public-health-explorer { border-radius:14px; box-shadow:var(--shadow-sm); }
+.lesson-section { background:var(--surface-elevated); }
+.choice-grid button,.choice-stack button,.role-assignment-card,.perspective-card,.go-live-choice label { border-radius:10px; }
+.debrief-content { border-radius:14px; box-shadow:var(--shadow-md); }
+.primary-button,.secondary-button { border-radius:9px; }
+.lesson-phase-heading>span,.section-number { border-radius:9px; }
+.lesson-phase-heading>span { background:var(--green-dark); }
+.mdx-content { max-width:880px; }
+.mdx-content p,.mdx-content li { line-height:1.72; }
+.mdx-content h2 { letter-spacing:-.025em; }
+footer { border-top:1px solid var(--line); }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior:auto; }
+  *,*::before,*::after { transition-duration:.01ms !important; animation-duration:.01ms !important; animation-iteration-count:1 !important; }
+}
+@media(max-width:760px){
+ .topbar{position:static}.topbar nav{gap:14px}.brand strong{max-width:190px}
+ .hub-hero{min-height:auto}.topic-grid{gap:10px}
+}
