@@ -515,6 +515,11 @@ SAM and BAM represent sequence alignment information.
 
 BAM is a binary representation of SAM commonly used to store reads together with information describing their alignment to a reference.
 
+<div className="science-illustration bam-image" role="img" aria-label="BAM conceptually stores aligned reads together with reference coordinates and alignment metadata">
+ <div className="science-copy"><small>BAM</small><strong>Not raw sequence: aligned sequence evidence</strong><span>A BAM file represents reads in alignment context, including where they map and associated alignment information. It is a binary counterpart to SAM, not an image of the genome.</span></div>
+ <div className="bam-art"><div className="bam-reference"><b>reference</b><i/></div><span style={{"--bam-x":"8%"} as React.CSSProperties}/><span style={{"--bam-x":"28%"} as React.CSSProperties}/><span style={{"--bam-x":"46%"} as React.CSSProperties}/><div className="bam-meta"><i/><i/><i/></div></div>
+</div>
+
 Think:
 
 **Where did the reads map?**
