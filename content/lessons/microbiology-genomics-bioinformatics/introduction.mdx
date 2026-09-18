@@ -47,6 +47,12 @@ A laboratory might sequence:
 
 These approaches answer different questions.
 
+
+<div className="micro-visual target-visual" role="img" aria-label="Conserved 16S ribosomal RNA target illustrated within a bacterial gene region">
+  <div className="micro-visual-copy"><small>Broad-range identification</small><strong>Conserved target → informative sequence</strong><span>16S rRNA sequencing interrogates a shared bacterial target; discriminatory sequence within the tested region supports taxonomic identification.</span></div>
+  <div className="gene-track"><i></i><b>16S rRNA</b><i></i></div>
+</div>
+
 ### How are targets selected?
 
 Sequencing may be relatively untargeted, or particular sequences may be enriched before sequencing.
@@ -136,6 +142,12 @@ That distinction may matter when investigating how resistance is spreading.
 Long-read and short-read sequencing should not simply be viewed as “better” and “worse.” Their performance characteristics, workflows, costs, and computational requirements differ.
 
 The appropriate technology depends on the intended use.
+
+
+<div className="micro-visual read-visual" role="img" aria-label="Short reads cover a region in fragments while a long read spans the full genomic context">
+  <div className="micro-visual-copy"><small>Read structure</small><strong>Fragments versus context</strong><span>Short reads can provide strong local evidence; a long read can bridge repeats and connect a feature to its surrounding genomic context.</span></div>
+  <div className="read-sketch"><div><em>short reads</em><span></span><span></span><span></span><span></span></div><div><em>long read</em><b></b></div></div>
+</div>
 
 ### Hybrid assembly
 
@@ -1030,6 +1042,12 @@ It is to understand the system well enough to recognize when a computational ass
 * Contigs and metrics such as N50 describe aspects of assembly but do not independently establish assembly accuracy.
 * Variant calls and consensus sequences are computational products created using sequence evidence and defined analytical rules.
 * VAF, mixtures, and phasing can provide information about microbial populations and genomic context.
+
+
+<div className="micro-visual phase-visual" role="img" aria-label="Variant allele fraction and phasing illustrated with two sequence populations">
+  <div className="micro-visual-copy"><small>Mixtures + phasing</small><strong>Frequency is not linkage</strong><span>VAF estimates how often a variant is observed among informative reads. Phasing asks whether features occur together on the same sequence background.</span></div>
+  <div className="phase-sketch"><div><span>A</span><span>A</span><span>A</span><span className="alt">G</span><span className="alt">G</span></div><p>VAF ≈ 40%</p><div className="haplotypes"><b>—●————●—</b><b>—○————○—</b></div></div>
+</div>
 * FASTQ, FASTA, SAM/BAM, and VCF represent different kinds or stages of genomic information.
 * Isolate WGS, broad-range sequencing, targeted sequencing, mNGS, and genomic epidemiology answer different microbiologic questions.
 * Validation characteristics such as LoD, sensitivity, specificity, and reproducibility should be evaluated in relation to the pipeline's intended use rather than treated as generic properties of sequencing.
