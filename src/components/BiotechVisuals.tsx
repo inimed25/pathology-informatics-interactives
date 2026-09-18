@@ -19,19 +19,19 @@ const lenses: Record<string, Lens> = {
 
 export function BiotechHeroVisual() {
   return (
-    <figure className="biotech-hero-visual hero-dna-visual" role="img" aria-label="Abstract biotechnology illustration with a DNA helix and layered molecular orbits">
-      <div className="dna-art" aria-hidden="true">
-        <div className="molecular-orbit orbit-a"></div>
-        <div className="molecular-orbit orbit-b"></div>
-        <div className="molecular-orbit orbit-c"></div>
-        <div className="dna-helix">
-          {Array.from({ length: 13 }).map((_, index) => <span key={index} style={{"--i": index} as React.CSSProperties}><i/><b/><em/></span>)}
-        </div>
-        <div className="signal-sweep sweep-a"></div>
-        <div className="signal-sweep sweep-b"></div>
-        <i className="molecule-dot dot-a"></i><i className="molecule-dot dot-b"></i><i className="molecule-dot dot-c"></i>
+    <div className="biotech-hero-visual" aria-hidden="true">
+      <div className="orbit orbit-a" />
+      <div className="orbit orbit-b" />
+      <div className="orbit orbit-c" />
+      <div className="hero-core">
+        <span>CMI</span>
+        <small>signal / system / meaning</small>
       </div>
-    </figure>
+      <span className="hero-node node-a">01</span>
+      <span className="hero-node node-b">04</span>
+      <span className="hero-node node-c">07</span>
+      <div className="spectral-path" />
+    </div>
   );
 }
 
