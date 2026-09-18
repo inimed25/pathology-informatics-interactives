@@ -238,7 +238,16 @@ An individual AST report describes susceptibility information for a particular i
 
 An **antibiogram** summarizes susceptibility patterns across a defined collection of isolates.
 
-<div className="science-illustration antibiogram-image" role="img" aria-label="Many isolate results aggregate into a cumulative antibiogram"><div className="science-copy"><small>Aggregation</small><strong>Many isolates become one population summary</strong><span>Inclusion rules, deduplication, organism identity, and antimicrobial mappings shape the cumulative percentage.</span></div><div className="aggregate-art"><div><i/><i/><i/><i/><i/><i/><i/><i/></div><em>→</em><span><b/><b/><b/><b/></span></div></div>
+<div className="science-illustration antibiogram-image" role="img" aria-label="Qualifying isolate results pass through inclusion and deduplication rules before becoming cumulative susceptibility percentages">
+  <div className="science-copy"><small>Aggregation</small><strong>An antibiogram is a governed population summary</strong><span>The percentage is not a simple pile of results. Eligibility, duplicate-isolate handling, organism identity, antimicrobial mapping, and the analysis period determine what enters the denominator.</span></div>
+  <div className="aggregation-flow">
+    <div className="isolate-set"><small>ISOLATE RESULTS</small><span><i/><i/><i/><i/><i/><i/></span></div>
+    <em>→</em>
+    <div className="aggregation-rules"><small>APPLY RULES</small><b>eligible isolates</b><b>deduplication</b><b>defined period</b></div>
+    <em>→</em>
+    <div className="summary-bars"><small>CUMULATIVE % SUSCEPTIBLE</small><span><i style={{height:"72%"}}/><i style={{height:"48%"}}/><i style={{height:"86%"}}/></span></div>
+  </div>
+</div>
 
 These serve different purposes.
 
