@@ -785,21 +785,129 @@ Genomic epidemiology may evaluate genomic similarity among isolates to support:
 * transmission hypotheses
 * public-health surveillance
 
-CDC's Advanced Molecular Detection program explicitly integrates pathogen sequencing, bioinformatics, and epidemiologic information for infectious-disease investigation and surveillance.
+But how does a bioinformatics system actually decide whether two isolates are genomically similar?
 
-Return again to our **K. pneumoniae** isolate.
+### From Whole-Genome Sequence to Genomic Relatedness
 
-Suppose several patients have highly similar isolates.
+Whole-genome sequencing provides far more sequence information for comparison than a targeted assay designed to interrogate one or a small number of predefined targets.
+
+A genomic comparison workflow can use that broader sequence information to characterize differences among isolates.
+
+Two important approaches are **SNP-based analysis** and **allele-based typing**.
+
+### SNP-Based Analysis
+
+A **single-nucleotide polymorphism (SNP)** is a difference at an individual nucleotide position.
+
+Conceptually, a SNP-based comparison asks:
+
+> **Across the genomic positions that can be reliably compared, how many high-confidence nucleotide differences separate these isolates?**
+
+Imagine two *Klebsiella pneumoniae* isolates.
+
+At one comparable position:
+
+**Isolate A:** A T C **G** A A T C
+
+**Isolate B:** A T C **A** A A T C
+
+The isolates differ by one nucleotide at that illustrated position.
+
+A real SNP-based workflow evaluates many genomic positions and applies defined quality criteria, filters, reference choices, and analytical rules before calculating genomic differences.
+
+Therefore, a reported SNP distance is not simply a count of every apparent difference in the raw sequencing reads.
+
+> **Genomic distance is a computational result produced within a defined analytical framework.**
+
+### cgMLST and wgMLST
+
+Another approach compares isolates **gene by gene** rather than primarily comparing individual nucleotide positions.
+
+In **multilocus sequence typing**, different sequence versions of defined loci can be assigned allele identifiers.
+
+**Core-genome multilocus sequence typing (cgMLST)** compares allele assignments across a standardized set of loci representing the core genome of the organism or group being analyzed.
+
+Conceptually:
+
+| Locus | Isolate A | Isolate B |
+| --- | --- | --- |
+| locus 1 | allele 4 | allele 4 |
+| locus 2 | allele 8 | allele 8 |
+| locus 3 | allele 12 | allele 13 |
+| locus 4 | allele 2 | allele 2 |
+
+In this simplified example, the isolates differ at one of the four illustrated loci.
+
+**Whole-genome multilocus sequence typing (wgMLST)** extends the same general gene-by-gene concept across a broader set of loci representing more of the organism's genomic diversity.
+
+The important distinction for this lesson is:
+
+> **SNP-based analysis compares nucleotide-level differences within the defined analysis.**
+
+> **cgMLST and wgMLST compare allele assignments across defined sets of genomic loci.**
+
+These approaches represent genomic differences differently, so their distance values should not be treated as interchangeable.
+
+### What Does “Closely Related” Mean?
+
+Suppose our *K. pneumoniae* isolates differ by relatively few genomic features under a validated comparison workflow.
+
+That may indicate that they are highly genomically similar.
+
+Another isolate with substantially more genomic differences may be more genetically distinct under that same analytical framework.
+
+However, there is no single universal number of SNP or allele differences that defines relatedness for every microorganism and every application.
+
+Interpretation can depend on factors such as:
+
+* the organism being studied
+* the genomic comparison method
+* the reference genome or typing scheme
+* which genomic positions or loci were eligible for comparison
+* sequence quality and coverage
+* analytical filters and thresholds
+* expected genomic diversity
+* the time and setting of the investigation
+* the validated interpretation framework
+
+This is another reason that reference resources, typing schemes, software versions, parameters, and thresholds are part of the informatics workflow.
+
+### Genomic Relatedness Is Not the Same as Transmission
+
+Return again to our **K. pneumoniae** isolates.
+
+Suppose several patients have isolates that are highly similar using a validated genomic comparison method.
 
 That finding may support an outbreak investigation.
 
-But genomic similarity alone does not establish that patient A directly transmitted the organism to patient B.
+It does not independently establish that patient A directly transmitted the organism to patient B.
 
-Epidemiologic information—time, location, exposures, patient movement, and other evidence—remains important.
+Epidemiologic information such as collection dates, patient locations, healthcare exposures, patient movement, and other potential links remains important.
 
-> **Genomic relatedness is not synonymous with direct transmission.**
+Genomics therefore contributes another layer of evidence:
+
+**sequence data**
+
+↓
+
+**validated genomic comparison**
+
+↓
+
+**estimated genomic relatedness**
+
+↓
+
+**integration with epidemiologic information**
+
+↓
+
+**outbreak or transmission interpretation**
+
+> **Genomic relatedness can support a transmission hypothesis, but genomic similarity is not synonymous with direct transmission.**
 
 ---
+
 
 ## Databases, References, and Software Are Part of the Test
 
@@ -810,6 +918,7 @@ A pipeline may depend on:
 * reference genomes
 * taxonomic databases
 * resistance or virulence databases
+* typing schemes
 * software versions
 * algorithms
 * parameters
@@ -823,13 +932,15 @@ For example:
 
 **K. pneumoniae WGS:** changing a resistance database may alter which resistance determinants are recognized.
 
+**Genomic relatedness:** changing a reference genome, typing scheme, analytical filter, or threshold may alter which genomic differences are included in a comparison or how relatedness is represented.
+
 **Influenza sequencing:** changing a reference or analytical configuration may alter alignment or downstream variant representation.
 
 **16S identification:** changing the reference database may alter which organisms are considered the best-supported matches.
 
 **mNGS:** changing the taxonomic database, filtering rules, or reporting threshold may alter which organisms are detected or reported.
 
-NCBI itself periodically updates prokaryotic reference genomes as new assemblies become available and as taxonomic or quality information changes.
+NCBI periodically updates prokaryotic reference genomes as new assemblies become available and as taxonomic or quality information changes.
 
 The same underlying sequence data can therefore produce different downstream outputs when computational dependencies change.
 
@@ -838,13 +949,13 @@ For reproducibility, a laboratory may need to preserve sufficient **computationa
 Depending on the workflow, this may include:
 
 * reference accession and version
-* database version
+* database or typing-scheme version
 * software or pipeline version
 * parameters and thresholds
 * QC results
 * analytical configuration
 
-> **The pipeline is not just code. Its references, databases, parameters, thresholds, and versions are part of the analytical system.**
+> **The pipeline is not just code. Its references, databases, typing schemes, parameters, thresholds, and versions are part of the analytical system.**
 
 ---
 
