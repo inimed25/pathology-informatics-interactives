@@ -19,24 +19,18 @@ const lenses: Record<string, Lens> = {
 
 export function BiotechHeroVisual() {
   return (
-    <figure className="biotech-hero-visual hero-orbit-visual" aria-labelledby="hero-map-title">
-      <figcaption className="hero-orbit-copy">
-        <p className="eyebrow">Clinical microbiology informatics</p>
-        <h2 id="hero-map-title">From biological signal to clinical meaning.</h2>
-        <p>Clinical microbiology informatics connects the specimen, laboratory systems, structured data, and the decision that follows.</p>
-      </figcaption>
-      <div className="hero-orbit-art" aria-label="Illustrated microbiology information ecosystem">
-        <div className="hero-orbit-ring ring-one" aria-hidden="true"></div>
-        <div className="hero-orbit-ring ring-two" aria-hidden="true"></div>
-        <div className="hero-orbit-ring ring-three" aria-hidden="true"></div>
-        <div className="hero-orbit-core"><strong>CMI</strong><small>signal / system / meaning</small></div>
-        <span className="orbit-node node-specimen"><i>01</i><b>Specimen</b></span>
-        <span className="orbit-node node-lab"><i>02</i><b>Laboratory</b></span>
-        <span className="orbit-node node-data"><i>03</i><b>Data</b></span>
-        <span className="orbit-node node-action"><i>04</i><b>Action</b></span>
-        <div className="hero-signal-ribbon" aria-hidden="true"></div>
+    <figure className="biotech-hero-visual hero-dna-visual" role="img" aria-label="Abstract biotechnology illustration with a DNA helix and layered molecular orbits">
+      <div className="dna-art" aria-hidden="true">
+        <div className="molecular-orbit orbit-a"></div>
+        <div className="molecular-orbit orbit-b"></div>
+        <div className="molecular-orbit orbit-c"></div>
+        <div className="dna-helix">
+          {Array.from({ length: 13 }).map((_, index) => <span key={index} style={{"--i": index} as React.CSSProperties}><i/><b/><em/></span>)}
+        </div>
+        <div className="signal-sweep sweep-a"></div>
+        <div className="signal-sweep sweep-b"></div>
+        <i className="molecule-dot dot-a"></i><i className="molecule-dot dot-b"></i><i className="molecule-dot dot-c"></i>
       </div>
-      <div className="hero-orbit-legend"><span><b>01</b> identity</span><span><b>02</b> measurement</span><span><b>03</b> representation</span><span><b>04</b> interpretation</span></div>
     </figure>
   );
 }
