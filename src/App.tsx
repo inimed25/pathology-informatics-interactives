@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { lessonContent } from "./content";
 import { GenericExperience } from "./components/GenericExperience";
+import { CoverageExplorer } from "./components/CoverageExplorer";
 import { PilotLab } from "./components/PilotLabs";
 import { SiteChrome, href } from "./components/SiteChrome";
 import { lessonBySlug, lessons, topicBySlug, topics } from "./data/curriculum";
@@ -228,6 +229,7 @@ function LessonPage({ slug }: { slug: string }) {
         </div>
       </header>
       <section className="mdx-content introduction-content">{Introduction ? <Introduction/> : <p>Introduction content is missing.</p>}</section>
+      {slug === "microbiology-genomics-bioinformatics" && <CoverageExplorer />}
       <PilotLab kind={lesson.manifest.pilot}/>
                           <GenericExperience lesson={lesson} onAttempt={setAttempted}/>
       {attempted ? (
