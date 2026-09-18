@@ -1962,3 +1962,13 @@ body,.site-frame { background:#f7f9fc; color:#101d2f; }
 .candidate-output .detected-image i:nth-child(1){left:18px;top:20px}.candidate-output .detected-image i:nth-child(2){left:46px;top:29px}.candidate-output .detected-image i:nth-child(3){left:30px;top:50px}.candidate-output .detected-image i:nth-child(4){left:53px;top:54px}
 .candidate-output .detected-image b{position:absolute;width:18px;height:18px;border:2px solid #17384e;border-radius:4px;background:transparent;box-sizing:border-box}
 .candidate-output .detected-image b:nth-of-type(1){left:13px;top:15px}.candidate-output .detected-image b:nth-of-type(2){left:41px;top:24px}.candidate-output .detected-image b:nth-of-type(3){left:48px;top:49px}
+
+
+/* Concept mapping: contain the complete identifier sequence within the figure */
+.mapping-image{grid-template-columns:minmax(0,.9fr) minmax(0,1.35fr)}
+.mapping-image .concept-map-flow{grid-template-columns:minmax(100px,1.08fr) 22px repeat(3,minmax(92px,1fr));gap:6px;padding:14px;min-width:0;width:100%;box-sizing:border-box;overflow:hidden}
+.mapping-image .organism-anchor,.mapping-image .map-code{min-width:0;padding:8px}
+.mapping-image .map-code b{overflow-wrap:anywhere}
+.mapping-image .concept-map-flow>em{justify-self:center}
+@media(max-width:1050px){.mapping-image{grid-template-columns:1fr}.mapping-image .concept-map-flow{grid-template-columns:minmax(100px,1.08fr) 22px repeat(3,minmax(92px,1fr))}}
+@media(max-width:700px){.mapping-image .concept-map-flow{grid-template-columns:1fr}.mapping-image .concept-map-flow>em{transform:rotate(90deg);justify-self:center}}
