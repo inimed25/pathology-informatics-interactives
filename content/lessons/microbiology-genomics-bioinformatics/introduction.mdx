@@ -1,137 +1,933 @@
 # Microbial Genomics and Bioinformatics
 
-Genomic sequencing can provide detailed information about microorganisms, including organism identification, antimicrobial resistance determinants, genetic relatedness, and potential outbreak relationships.
+Genomic sequencing can provide detailed information about microorganisms, including organism identification, antimicrobial resistance determinants, genomic context, genetic relatedness, and potential outbreak relationships.
 
-However, sequencing produces raw data rather than a directly interpretable clinical result. Bioinformatics workflows are required to assess sequence quality, process reads, compare sequences, identify genomic features, and translate those findings into useful information.
+However, sequencing does not directly produce a clinical answer. It produces sequence data that must pass through computational workflows before they can be interpreted.
 
-The appropriate analytical approach depends on the question being asked. Identifying a resistance gene, characterizing an organism, and investigating whether isolates are genetically related may require different pipelines, databases, parameters, and interpretive thresholds.
+Those workflows may assess read quality, align reads to reference sequences, assemble genomes, identify organisms or genomic features, call variants, compare isolates, and translate computational findings into clinically or epidemiologically meaningful information.
 
-In this lesson, you will examine how sequencing data move through a bioinformatics workflow and how validation, quality control, and clinical or epidemiologic context affect genomic interpretation.
+The appropriate workflow depends on the question being asked. Identifying a resistance gene, reconstructing a bacterial genome, identifying an organism directly from a clinical specimen, and determining whether isolates are genetically related may require different sequencing strategies, reference resources, algorithms, parameters, quality criteria, and interpretive thresholds.
 
-## Different Sequencing Strategies, Different Informatics Questions
+Throughout this lesson, several recurring examples will help connect these concepts to microbiology:
 
-“NGS” describes sequencing technology, but clinical microbiology can use sequencing in different ways. The bioinformatics workflow must match the question the laboratory is trying to answer.
+* a **Klebsiella pneumoniae isolate** undergoing whole-genome sequencing for antimicrobial resistance and genomic relatedness
+* an **influenza A virus** undergoing sequencing and reference-based analysis
+* a **difficult-to-identify bacterium** undergoing broad-range 16S rRNA gene sequencing
+* a **cerebrospinal fluid specimen** undergoing metagenomic sequencing for pathogen detection
 
-### Whole-Genome Sequencing of an Isolate
+> **Clinical microbial genomics is both a laboratory and an informatics discipline. The computational pipeline is part of the test.**
 
-Whole-genome sequencing (WGS) can characterize the genome of a cultured microbial isolate.
+## Learning Objectives
 
-Depending on the validated application, genomic information may be used for:
+By the end of this lesson, you should be able to:
 
-- resistance or virulence-marker detection
-- strain or sequence typing
-- comparison of isolates
-- outbreak investigation and surveillance
+1. Trace microbial genomic information from sequence generation through quality control, computational analysis, and interpretation.
+2. Explain how read length, base quality, depth, breadth, uniformity, and mapping quality affect confidence in sequencing results.
+3. Distinguish reference alignment from de novo assembly and recognize the roles of reference genomes, contigs, and assembly metrics.
+4. Explain the basic concepts of variant calling, consensus sequences, variant allele fraction, mixtures, and genomic context.
+5. Distinguish isolate WGS, broad-range sequencing, targeted enrichment, metagenomic sequencing, and genomic epidemiology.
+6. Recognize how short-read and long-read sequencing create different analytical opportunities and limitations.
+7. Explain why databases, reference sequences, software versions, parameters, thresholds, and coordinate conventions are governed components of a clinical bioinformatics pipeline.
+8. Apply validation, quality-control, contamination-control, and change-management principles to clinical microbial genomics.
 
-Because the analysis begins with an isolate, the computational problem is generally more constrained than sequencing all nucleic acid present directly in a complex clinical specimen.
+---
 
-### Broad-Range Sequencing
+## Sequencing Involves Several Different Choices
 
-Broad-range approaches can use conserved genetic targets to detect and identify organisms without requiring a separate organism-specific assay for every possible pathogen.
+“NGS” is sometimes used as if it describes a single workflow. In practice, several separate decisions determine what data are generated and how those data should be analyzed.
+
+### What are we sequencing?
+
+A laboratory might sequence:
+
+* most or all of the genome of a cultured isolate
+* a conserved microbial target such as the bacterial 16S rRNA gene
+* a selected group of genes or genomic regions
+* microbial nucleic acid directly from a complex clinical specimen
+
+These approaches answer different questions.
+
+### How are targets selected?
+
+Sequencing may be relatively untargeted, or particular sequences may be enriched before sequencing.
+
+**Amplicon sequencing** uses primers and amplification to enrich defined targets.
+
+**Hybrid-capture sequencing** uses complementary nucleic-acid probes, sometimes called baits, to capture selected sequences before sequencing.
+
+Both are targeted strategies, but they enrich sequences differently.
+
+A targeted approach also creates an important interpretive limitation:
+
+> **Failure to detect a sequence does not establish its biological absence if the assay was not designed or able to interrogate that sequence adequately.**
+
+### How are the molecules read?
+
+Sequencing platforms can also generate reads with different lengths and performance characteristics.
+
+This is a separate choice from whether the assay is whole-genome, targeted, or metagenomic.
+
+### How are the reads analyzed?
+
+After sequencing, reads may undergo:
+
+* reference alignment
+* de novo assembly
+* hybrid assembly
+* variant calling
+* taxonomic classification
+* gene or feature detection
+* typing or relatedness analysis
+
+These are computational strategies rather than sequencing technologies.
+
+Keeping these different axes separate helps avoid common conceptual confusion.
+
+For example:
+
+**hybrid capture** is a laboratory enrichment strategy.
+
+**hybrid assembly** is a computational strategy that combines complementary sequencing data.
+
+---
+
+## What Does the Sequencer Actually Produce?
+
+A **read** is a sequence generated from an individual nucleic-acid molecule or fragment during sequencing.
+
+The reads are computational evidence from which downstream genomic conclusions are constructed.
+
+### Short-read sequencing
+
+Short-read platforms generate large numbers of relatively short sequence reads.
+
+These reads can provide highly accurate sequence information and are widely used for microbial genomic applications.
+
+However, reconstructing a genome from many short fragments can become difficult when sequences are repetitive or when the genomic structure cannot be uniquely resolved from short reads alone.
+
+Imagine our **Klebsiella pneumoniae** isolate contains a resistance gene.
+
+Short reads may readily demonstrate that the gene is present.
+
+A more difficult question may be:
+
+**Where is that gene located?**
+
+If similar sequences surround the gene on a chromosome and a plasmid, short fragments may not provide enough information to reconstruct the genomic context confidently.
+
+### Long-read sequencing
+
+Long-read technologies generate substantially longer sequence reads.
+
+Longer reads can span genomic regions that may be difficult to reconstruct from short reads alone.
+
+In microbial genomics, this can help with:
+
+* resolving repetitive regions
+* improving genome assembly
+* reconstructing plasmids
+* characterizing structural variation
+* determining the genomic context of resistance or virulence determinants
+
+Returning to our **K. pneumoniae** example, a long read might span the resistance gene and surrounding plasmid sequence, helping establish that the gene resides on a particular mobile genetic element.
+
+That distinction may matter when investigating how resistance is spreading.
+
+Long-read and short-read sequencing should not simply be viewed as “better” and “worse.” Their performance characteristics, workflows, costs, and computational requirements differ.
+
+The appropriate technology depends on the intended use.
+
+### Hybrid assembly
+
+Some workflows combine short- and long-read information.
+
+A **hybrid assembly** uses complementary sequencing data—commonly short and long reads—to improve genome reconstruction.
+
+Again:
+
+> **Hybrid capture selects targets before sequencing. Hybrid assembly combines sequencing information computationally.**
+
+---
+
+## How Good Are the Reads?
+
+Generating reads does not mean every nucleotide or genomic region is equally reliable.
+
+Several related but distinct quality concepts help describe the data.
+
+### Read length
+
+**Read length** is the number of bases represented in a sequencing read.
+
+Read length can influence alignment, assembly, resolution of repetitive regions, plasmid reconstruction, structural-variant analysis, and other downstream analyses.
+
+### Base quality
+
+A **base-quality score** estimates confidence in an individual nucleotide call.
+
+FASTQ files commonly represent sequence reads together with per-base quality information.
+
+Phred-style quality scores are logarithmically related to estimated error probability.
+
+For intuition:
+
+* Q20 corresponds to approximately a 1% predicted base-call error probability.
+* Q30 corresponds to approximately a 0.1% predicted base-call error probability.
+
+But confidently reading a nucleotide and confidently knowing **where that read belongs** are different problems.
+
+### Mapping quality
+
+**Mapping quality** describes confidence in the placement of a read relative to a reference.
+
+Consider a read from our **K. pneumoniae** isolate that contains high-confidence nucleotide calls.
+
+If nearly identical sequence occurs at several locations, the bases themselves may be reliable while the genomic location remains uncertain.
+
+> **Base quality asks: “How confident are we that this nucleotide was read correctly?”**
+
+> **Mapping quality asks: “How confident are we that this read belongs here?”**
+
+---
+
+## Depth, Breadth, and Uniformity of Coverage
+
+**Coverage** is often discussed as though it were a single concept, but several different characteristics matter.
+
+### Depth
+
+**Depth of coverage** describes how many sequencing reads overlap a genomic position.
+
+If approximately 100 reads overlap a position, that position has roughly **100× depth**.
+
+Greater depth can provide more evidence supporting a sequence call, but high depth alone does not guarantee a valid result.
+
+### Breadth
+
+**Breadth of coverage** describes how much of the intended target or genome has adequate sequence coverage.
+
+Suppose our influenza sequencing run produces very high coverage across most of the viral genome but essentially no usable reads across one region.
+
+The **average depth** might still look excellent.
+
+Yet the **breadth of adequate coverage** is incomplete.
+
+A variant located in that missing region could not be assessed reliably.
+
+> **High average depth does not guarantee that every clinically important region has been adequately interrogated.**
+
+### Uniformity
+
+**Uniformity of coverage** describes how evenly sequencing coverage is distributed across the intended target.
+
+Poor uniformity can leave some regions represented by many reads and others by very few.
+
+### Duplicate reads
+
+Some datasets contain multiple reads derived from the same original DNA fragment or amplification event.
+
+Duplicates can increase apparent depth without necessarily providing the same amount of independent information as distinct molecules.
+
+Their importance depends on the assay and library-preparation strategy.
+
+### GC bias
+
+Genomic regions with different GC content may not be represented equally during library preparation or sequencing.
+
+This can contribute to uneven coverage.
+
+These examples illustrate why a single summary number rarely captures every important dimension of sequencing quality.
+
+---
+
+## Paired-End Reads
+
+Some short-read workflows sequence both ends of the same DNA fragment.
+
+These are called **paired-end reads**.
+
+Because the two reads originate from the same fragment, their expected relationship provides additional information that can assist alignment and assembly.
+
+The approximate fragment length separating the paired reads is related to the **insert size** or fragment size.
+
+Unexpected spacing or orientation can sometimes provide information about structural differences or problematic alignments.
+
+A microbiology director does not need to memorize every library-preparation parameter, but should understand why paired reads contain contextual information that unrelated reads do not.
+
+---
+
+## Reference Genomes Are Analytical Dependencies
+
+Many genomic analyses compare sequencing reads with a **reference genome**.
+
+A reference genome provides an assembled sequence and coordinate framework against which other sequences can be compared.
+
+However, a reference is not an abstract universal genome for an entire microbial species.
+
+Different strains may differ in:
+
+* genes
+* insertions and deletions
+* mobile genetic elements
+* plasmids
+* repetitive regions
+* other genomic content
+
+Reference choice can therefore influence:
+
+* read alignment
+* variant detection
+* genomic coordinates
+* which genomic regions can be compared
+* apparent genomic distance
+* downstream interpretation
+
+Resources such as NCBI RefSeq provide curated microbial reference sequences and designate reference assemblies using defined quality and taxonomic criteria.
+
+Those resources can change as better assemblies become available, taxonomy changes, or quality concerns are identified.
+
+For reproducibility, it may therefore be important to preserve not merely an organism name but the specific reference accession and relevant version used by the analysis.
+
+> **A genomic coordinate has meaning only in relation to the reference against which it is defined.**
+
+---
+
+## Reference Alignment Versus De Novo Assembly
+
+Two major computational approaches are **reference alignment** and **de novo assembly**.
+
+### Reference alignment
+
+In a reference-based workflow, sequencing reads are mapped to a selected reference sequence.
+
+Conceptually:
+
+**reads → reference genome → aligned positions**
+
+Imagine sequencing an **influenza A virus**.
+
+Reads may be aligned against an appropriate reference so the pipeline can determine where the reads map, identify differences from the reference, evaluate coverage, and generate downstream sequence information.
+
+Reference-based approaches can support:
+
+* variant analysis
+* consensus generation
+* comparison using a common coordinate framework
+* other reference-dependent analyses
+
+Reference choice is therefore an analytical decision rather than merely a software setting.
+
+### De novo assembly
+
+In **de novo assembly**, overlapping reads are computationally reconstructed into longer sequences without requiring placement onto a particular reference genome as the primary reconstruction strategy.
+
+The resulting contiguous assembled sequences are called **contigs**.
+
+Our **K. pneumoniae** isolate might therefore be reconstructed into multiple contigs representing portions of its chromosome and other genomic elements.
+
+A draft assembly does not necessarily produce one perfectly reconstructed chromosome.
+
+---
+
+## How Do We Judge an Assembly?
+
+Assembly quality cannot be summarized by one number.
+
+### Contigs
+
+A **contig** is a contiguous sequence reconstructed from overlapping sequence information.
+
+More fragmented assemblies generally contain more contigs, while more contiguous assemblies contain fewer, longer sequences.
+
+But longer does not automatically mean correct.
+
+### N50
+
+**N50** is a commonly used summary of assembly contiguity.
+
+Conceptually, it describes a sequence length such that at least half of the total assembly length is contained in contigs of that length or longer.
+
+A larger N50 may indicate greater assembly contiguity.
+
+However:
+
+> **A higher N50 does not automatically mean a more accurate or clinically appropriate assembly.**
+
+An incorrect assembly can still contain long contigs.
+
+Assembly evaluation may therefore consider multiple characteristics, including expected genome size, completeness, contamination, coverage, correctness, and intended use.
+
+---
+
+## From Reads to Variants and Consensus Sequences
+
+After alignment or assembly, pipelines may identify genomic differences or create representative sequences.
+
+### Variant calling
+
+**Variant calling** is the computational process of determining whether an observed sequence difference represents a true genomic variant rather than sequencing, alignment, or other analytical error.
+
+A variant caller may consider information such as:
+
+* depth
+* base quality
+* mapping quality
+* read support
+* local sequence context
+* validated analytical thresholds
+
+Consider our influenza example.
+
+If many high-quality reads consistently support a nucleotide difference from the reference, the pipeline may identify that position as a variant.
+
+A few low-quality reads supporting a difference in a poorly covered region may provide much weaker evidence.
+
+### Variant allele fraction
+
+The **variant allele fraction (VAF)** describes the proportion of informative reads at a position that support a particular variant.
+
+For example, if 80 of 100 informative reads support a variant, the observed VAF is approximately 80%.
+
+In microbial sequencing, an intermediate or low-frequency variant can have several possible explanations, including:
+
+* a mixed microbial population
+* within-host diversity
+* contamination
+* sequencing or alignment artifact
+* a biologically meaningful subpopulation
+
+The number alone does not determine which explanation is correct.
+
+### Consensus sequence
+
+A **consensus sequence** represents a sequence generated by applying defined computational rules across the available sequence information.
+
+For our influenza specimen, the consensus genome might represent the predominant supported nucleotide at each adequately characterized position.
+
+But the consensus does not necessarily represent every viral genome present in the specimen.
+
+A minority population may therefore be obscured by a consensus sequence.
+
+> **A consensus genome is a computational representation, not a literal copy of every molecule in the specimen.**
+
+---
+
+## Phasing and Genomic Context
+
+Sometimes the question is not merely whether two genomic features are present.
+
+The question is whether they occur on the **same physical sequence or genomic background**.
+
+This concept is called **phasing**.
+
+Longer reads can sometimes span multiple variants or genomic features, providing information about their linkage.
+
+In microbial genomics, related concepts may help when evaluating:
+
+* mixed populations
+* strain variation
+* linked mutations
+* plasmids and mobile genetic elements
+* the genomic context of resistance determinants
+
+For our **K. pneumoniae** isolate, detecting two resistance determinants tells us they exist somewhere in the sequencing data.
+
+Sequence information that links them to the same plasmid provides additional biological context.
+
+A director does not need to perform phasing algorithms personally, but should recognize when the biological interpretation depends on genomic context rather than simple presence or absence.
+
+---
+
+## Small Computational Errors Can Become Biological Errors
+
+Genomic positions may be represented using different coordinate conventions.
+
+Some computational tools or formats count positions beginning with **0**, while others count beginning with **1**.
+
+Incorrect conversion between these systems can shift a genomic position by one nucleotide—an **off-by-one error**.
+
+A computational system might successfully transfer:
+
+**reference + position + allele**
+
+while still assigning the wrong biological position if the sending and receiving systems interpret coordinates differently.
+
+This is a genomic version of a broader informatics principle:
+
+> **Successful data transfer does not guarantee preservation of biological meaning.**
+
+Reference identity, reference version, and coordinate convention should therefore be defined when genomic positions are transformed or exchanged.
+
+---
+
+## Sequence Files Represent Different Information
+
+A microbiology director does not need to memorize every genomic file specification.
+
+It is useful, however, to understand what major file types represent.
+
+### FASTQ
+
+FASTQ commonly represents sequence reads together with associated per-base quality information.
+
+Think:
+
+**What did the sequencer read, and how confident was it in the individual base calls?**
+
+### FASTA
+
+FASTA represents nucleotide or protein sequences without FASTQ's per-base quality structure.
+
+FASTA may represent:
+
+* reference sequences
+* assembled contigs
+* consensus sequences
+* genes
+* proteins
+
+### SAM and BAM
+
+SAM and BAM represent sequence alignment information.
+
+BAM is a binary representation of SAM commonly used to store reads together with information describing their alignment to a reference.
+
+Think:
+
+**Where did the reads map?**
+
+### VCF
+
+VCF represents sequence variants and associated information.
+
+Think:
+
+**What differences did the analysis identify?**
+
+A simplified reference-based workflow might therefore look like:
+
+**FASTQ → QC → alignment → SAM/BAM → variant calling → VCF**
+
+An assembly-oriented workflow might instead look like:
+
+**FASTQ → QC → assembly → contigs → FASTA**
+
+These are conceptual examples rather than universal pipelines.
+
+---
+
+## Different Microbiology Questions Require Different Sequencing Strategies
+
+Now we can apply these concepts to several common microbial genomic applications.
+
+### Isolate Whole-Genome Sequencing
+
+Whole-genome sequencing can characterize most or all of the genome of a cultured microbial isolate. WGS is an application of sequencing rather than a synonym for NGS.
+
+Depending on the validated application, WGS may support:
+
+* resistance or virulence-marker detection
+* strain or sequence typing
+* genome assembly
+* plasmid or mobile-element characterization
+* comparison of isolates
+* outbreak investigation
+* surveillance
+
+Return to our **K. pneumoniae** isolate.
+
+A WGS workflow might ask several progressively different questions:
+
+**Is a carbapenemase gene present?**
+
+↓
+
+**What sequence surrounds that gene?**
+
+↓
+
+**Is it located on a plasmid or chromosome?**
+
+↓
+
+**How similar is this isolate to other K. pneumoniae isolates from the hospital?**
+
+The same sequencing dataset may therefore support several analyses, but each conclusion depends on an appropriate and validated computational workflow.
+
+### Broad-Range Targeted Sequencing
+
+Broad-range sequencing can use conserved microbial targets to identify organisms without requiring a separate organism-specific assay for every possible pathogen.
 
 Examples include bacterial **16S rRNA gene sequencing** and fungal **ITS sequencing**.
 
-The resulting sequence must be compared with appropriate reference information to determine the most supported taxonomic identification.
+Imagine a cultured bacterium that cannot be confidently identified by routine methods.
 
-Important informatics considerations include:
+The laboratory sequences part of its 16S rRNA gene and compares that sequence against reference information.
 
-- sequence quality
-- reference-database content and curation
-- taxonomic resolution
-- similarity or identification thresholds
-- contamination
-- interpretation of ambiguous or closely related organisms
+Suppose the best database matches include two closely related species with nearly indistinguishable sequence across the region tested.
 
-A sequence match should therefore be interpreted within the capabilities and limitations of the validated assay and reference database.
+The correct lesson is not simply:
+
+**“The database found a species.”**
+
+Instead, the laboratory must ask whether the sequence, target, database, and validated interpretive criteria actually support species-level identification.
+
+Relevant considerations include:
+
+* sequence quality
+* target selection
+* reference-database quality
+* taxonomic resolution
+* similarity or identification criteria
+* closely related organisms
+* contamination
+* reporting limitations
+
+CLSI MM18 addresses these kinds of interpretive and reporting considerations for Sanger-based broad-range 16S/ITS identification of cultured bacteria and fungi.
+
+> **The precision of the reported identification should not exceed the discriminatory ability of the validated method.**
+
+### Targeted Sequencing Panels and Hybrid Capture
+
+Other assays may interrogate a defined collection of microbial genes or genomic regions.
+
+Hybrid-capture panels use complementary probes to enrich selected sequences before sequencing.
+
+Interpretation therefore depends partly on what the assay was designed to capture.
+
+For example, imagine a sequencing panel designed to interrogate a collection of antimicrobial-resistance determinants.
+
+Failure to detect a resistance gene might mean the gene is truly absent.
+
+But other possibilities must be considered:
+
+* the gene or variant was outside the assay's target design
+* sequence diversity reduced capture or alignment
+* coverage was inadequate
+* the target was present below the assay's validated detection capability
+* computational criteria prevented a call
+
+Those possibilities are not equivalent.
 
 ### Metagenomic Next-Generation Sequencing
 
-Metagenomic NGS (mNGS) can analyze nucleic acid from many organisms within a specimen without restricting analysis to a single predefined microbial target.
+Metagenomic NGS can analyze nucleic acid from many organisms in a specimen without restricting analysis to one predefined microbial target.
 
-This creates a substantially more complex informatics problem.
+Imagine sequencing a **cerebrospinal fluid specimen** from a patient with suspected infectious meningitis or encephalitis.
 
-A clinical specimen may contain:
+The sequencing data may contain:
 
-- pathogen-derived sequences
-- human nucleic acid
-- commensal or colonizing organisms
-- environmental or reagent contaminants
-- sequences that cannot be confidently classified
+* abundant human sequence
+* sequence from a true pathogen
+* environmental or reagent-associated microbial sequence
+* commensal or background organisms
+* sequences that cannot be classified confidently
 
-The computational workflow may therefore need to perform host-read handling, quality filtering, taxonomic classification, database comparison, and other processing before microbial findings can be interpreted.
+The computational workflow may therefore need to perform host-read handling, quality filtering, taxonomic classification, database comparison, background assessment, and other processing before findings can be interpreted.
 
-Detection of microbial sequence does not automatically establish that the organism is causing disease.
+Suppose the pipeline detects several reads assigned to a microorganism.
 
-Controls, background signals, thresholds, database quality, specimen type, and clinical context can all influence interpretation.
+That does **not**, by itself, answer:
 
-### Molecular and Genomic Epidemiology
+**Is the organism truly present?**
 
-Sequencing can also be used to compare organisms rather than simply identify them.
+or
 
-Genomic epidemiology may evaluate patterns of genomic similarity among isolates to support:
+**Is it causing the patient's disease?**
 
-- outbreak investigation
-- cluster detection
-- infection-prevention investigations
-- transmission hypotheses
-- public-health surveillance
+Controls, background signal, taxonomic specificity, abundance, specimen type, database quality, and clinical context may all matter.
 
-The computational approach may involve SNP-based comparisons, allele-based typing, phylogenetic analysis, or other validated methods depending on the organism and application.
+> **Sequence detection, biological presence, and clinical significance are related—but they are not synonymous.**
 
-However, genomic relatedness is not synonymous with direct transmission.
+---
 
-Genomic findings should be interpreted together with epidemiologic information and within the limitations of the validated analytical method.
+## Contamination, Carryover, and Controls
 
-## Databases and Software Are Part of the Test
+The ability to detect small quantities of nucleic acid creates both opportunities and risks.
 
-Bioinformatics results depend on more than the underlying sequence data. A pipeline may also depend on reference genomes, databases, software versions, algorithms, parameters, and analytical thresholds.
+Unwanted sequence can arise from:
 
-For example, changing a taxonomic reference database may affect organism identification, while changing a resistance database may affect which resistance determinants are detected.
+* specimen contamination
+* environmental or reagent-derived nucleic acid
+* carryover
+* sample cross-contamination
+* misassignment of reads between indexed libraries
+* contamination within reference databases
 
-These components should therefore be treated as part of the analytical workflow. Changes that could affect results require appropriate evaluation, documentation, and change control.
+Depending on the sequencing workflow, phenomena such as **index hopping** or other forms of sample misassignment can contribute sequence reads to the wrong sample.
 
-> **The same sequence data can produce different results when the computational tools, databases, or parameters used to analyze them change.**
+Controls are therefore part of the informatics story, not merely the wet-laboratory workflow.
+
+Depending on the assay, control strategies may include:
+
+* negative controls
+* positive controls
+* extraction controls
+* internal controls
+* other process-specific controls
+
+The pipeline must appropriately represent and evaluate those controls.
+
+> **Detecting sequence is not the same as establishing that the sequence originated from a clinically meaningful organism in the patient specimen.**
+
+---
+
+## Validation: Can the Pipeline Reliably Answer Its Intended Question?
+
+Clinical validation should evaluate the bioinformatics workflow for its **intended use**, not simply demonstrate that sequencing files can be generated.
+
+Relevant performance characteristics may include, depending on the application:
+
+* limit of detection
+* sensitivity
+* specificity
+* precision or reproducibility
+* accuracy or agreement
+* quantitative performance when the assay makes quantitative claims
+
+The important informatics lesson is not to memorize a list of validation statistics.
+
+It is to recognize that sequencing performance can depend on **what is being measured and under what conditions**.
+
+For example, performance may vary with:
+
+* organism or genomic target
+* sequence diversity
+* genomic region
+* sequencing depth and breadth
+* microbial burden
+* specimen background
+* mixed populations
+* computational thresholds
+* reference or database content
+
+An excellent overall performance estimate can therefore obscure an important failure mode affecting a particular organism, genomic region, variant type, or specimen condition.
+
+### Limit of detection
+
+The **limit of detection (LoD)** addresses the lowest amount, concentration, or frequency of an analyte that the validated assay can reliably detect under defined conditions.
+
+For sequencing, the relevant analyte might be:
+
+* an organism
+* a resistance gene
+* a genomic variant
+* a minority microbial population
+
+The definition should match the assay's intended claim.
+
+**Limit of quantitation (LoQ)** becomes relevant when an assay is intended to provide a quantitative result. It should not automatically be treated as a requirement for every sequencing application.
+
+---
+
+## Interpreting Positive and Negative Genomic Results
+
+A sequencing result should be interpreted within what the assay and pipeline were validated to conclude.
+
+### A positive result
+
+A detected microbial sequence, gene, or variant may prompt questions such as:
+
+* Is the sequence evidence of adequate quality?
+* Is there sufficient depth and breadth?
+* Did relevant controls behave appropriately?
+* Could contamination or background explain the finding?
+* Is the taxonomic or genomic assignment sufficiently specific?
+* Does the finding meet validated reporting criteria?
+* What biological or clinical conclusion does the finding actually support?
+
+For example:
+
+**blaKPC detected in our K. pneumoniae isolate**
+
+is not necessarily the same statement as:
+
+**blaKPC is located on a transmissible plasmid**
+
+The second conclusion requires additional genomic evidence.
+
+Similarly:
+
+**viral sequence detected in CSF**
+
+is not automatically equivalent to:
+
+**this virus caused the patient's neurologic disease.**
+
+### A negative result
+
+A negative result also requires context.
+
+Before interpreting “not detected,” relevant questions may include:
+
+* Was the target within the assay's intended detection space?
+* Was sequencing quality adequate?
+* Was the relevant region adequately covered?
+* Was microbial burden potentially below the LoD?
+* Could sequence diversity affect capture, alignment, or classification?
+* Was the target represented appropriately in the reference database?
+* Did specimen background reduce effective microbial sequencing?
+* Did relevant controls perform appropriately?
+
+> **“Not detected” means that the assay did not detect the target under the conditions and limitations of the validated workflow. It does not necessarily prove biological absence.**
+
+---
+
+## Molecular and Genomic Epidemiology
+
+Sequencing can also be used to compare microorganisms rather than simply identify them.
+
+Genomic epidemiology may evaluate genomic similarity among isolates to support:
+
+* outbreak investigation
+* cluster detection
+* infection-prevention investigations
+* transmission hypotheses
+* public-health surveillance
+
+CDC's Advanced Molecular Detection program explicitly integrates pathogen sequencing, bioinformatics, and epidemiologic information for infectious-disease investigation and surveillance.
+
+Return again to our **K. pneumoniae** isolate.
+
+Suppose several patients have highly similar isolates.
+
+That finding may support an outbreak investigation.
+
+But genomic similarity alone does not establish that patient A directly transmitted the organism to patient B.
+
+Epidemiologic information—time, location, exposures, patient movement, and other evidence—remains important.
+
+> **Genomic relatedness is not synonymous with direct transmission.**
+
+---
+
+## Databases, References, and Software Are Part of the Test
+
+Bioinformatics results depend on more than the underlying sequence data.
+
+A pipeline may depend on:
+
+* reference genomes
+* taxonomic databases
+* resistance or virulence databases
+* software versions
+* algorithms
+* parameters
+* quality thresholds
+* reporting thresholds
+* coordinate conventions
+
+Changing one of these components can alter the result.
+
+For example:
+
+**K. pneumoniae WGS:** changing a resistance database may alter which resistance determinants are recognized.
+
+**Influenza sequencing:** changing a reference or analytical configuration may alter alignment or downstream variant representation.
+
+**16S identification:** changing the reference database may alter which organisms are considered the best-supported matches.
+
+**mNGS:** changing the taxonomic database, filtering rules, or reporting threshold may alter which organisms are detected or reported.
+
+NCBI itself periodically updates prokaryotic reference genomes as new assemblies become available and as taxonomic or quality information changes.
+
+The same underlying sequence data can therefore produce different downstream outputs when computational dependencies change.
+
+For reproducibility, a laboratory may need to preserve sufficient **computational provenance** to determine how a result was produced.
+
+Depending on the workflow, this may include:
+
+* reference accession and version
+* database version
+* software or pipeline version
+* parameters and thresholds
+* QC results
+* analytical configuration
+
+> **The pipeline is not just code. Its references, databases, parameters, thresholds, and versions are part of the analytical system.**
+
+---
 
 ## Validation Includes the Computational Workflow
 
-Clinical validation should evaluate the bioinformatics pipeline for its **intended use**, not simply confirm that sequencing files can be generated or processed.
+Validation should follow information from sequence generation through the clinically meaningful output.
 
-Depending on the application, validation may need to challenge representative positive and negative samples, expected genomic findings, quality-control failures, contamination or mixed-organism scenarios, and other important analytical or computational failure modes.
+Depending on the application, validation may need to challenge:
 
-Different applications may require different performance characteristics and acceptance criteria. A pipeline validated for isolate WGS, for example, should not automatically be assumed valid for metagenomic sequencing or another genomic application.
+* representative positive and negative specimens
+* relevant organisms, genes, or variants
+* important genomic regions
+* low-abundance or low-frequency findings
+* mixed populations
+* contamination
+* quality-control failures
+* reference and database behavior
+* computational thresholds
+* expected failure modes
+* final result generation
 
-The laboratory should also have a process for evaluating changes to software, databases, parameters, or other components that could affect results.
+Validation evidence should match the intended scope.
 
-> **Validation should follow the information from sequence generation through the clinically meaningful output.**
+A pipeline validated for isolate WGS should not automatically be assumed valid for mNGS.
+
+A workflow validated for one organism, specimen type, sequencing strategy, target space, or analytical purpose should not automatically be assumed valid outside that scope.
+
+Software, database, parameter, reference, or workflow changes that could affect results should undergo appropriate impact assessment and change control.
+
+> **Validation should follow the information from sequence generation through the clinically meaningful result.**
+
+---
 
 ## The Microbiology Director's Role
 
-A clinical microbiology director does not need to personally write every bioinformatics algorithm or become a software engineer.
+A clinical microbiology director does not need to personally write every bioinformatics algorithm or become the pipeline's software engineer.
 
-The director should, however, understand enough of the workflow to evaluate:
+The director should understand enough of the workflow to ask:
 
-- the pipeline's intended use
-- major inputs and outputs
-- quality criteria and failure points
-- reference sequences and databases
-- important parameters and thresholds
-- validation and performance
-- interpretation and reporting
-- software and database changes
-- limitations of the final result
+* What clinical or public-health question is this pipeline intended to answer?
+* What enters the pipeline?
+* What comes out?
+* What QC criteria determine whether the data are acceptable?
+* What reference sequences and databases are being used?
+* How are reads aligned or genomes assembled?
+* How are organisms, genes, or variants called?
+* What thresholds affect those calls?
+* How are mixtures, contamination, and ambiguous findings handled?
+* What are the assay's important performance limitations?
+* What happens when a database, reference, software version, or parameter changes?
+* Can the computational analysis be reproduced?
+* What evidence supports the interpretation being reported?
 
-The goal is not to know every computational detail. It is to understand the system well enough to recognize when a change, failure, or limitation could affect a clinical result.
+The goal is not to know every computational implementation detail.
+
+It is to understand the system well enough to recognize when a computational assumption, change, failure, or limitation could alter a clinical result.
 
 > **Can I understand and govern this pipeline well enough to ensure that its output is appropriate for clinical use?**
 
+---
+
 ## Key Takeaways
 
-- Sequencing data require computational processing before they become clinically meaningful information.
-- FASTQ, FASTA, SAM/BAM, and VCF represent different types of genomic information within a bioinformatics workflow.
-- Quality control, alignment, assembly, and downstream analysis should be appropriate for the pipeline's intended use.
-- Isolate WGS, broad-range sequencing, metagenomic sequencing, and genomic epidemiology answer different questions and create different informatics challenges.
-- Databases, software, parameters, and thresholds can influence pipeline output and require appropriate governance.
-- Bioinformatics validation should include the computational workflow, not only the sequencing instrument.
-- Genomic findings must be interpreted within the limitations of the validated method and the relevant clinical or epidemiologic context.
+* Sequencing produces data that require computational processing before becoming clinically meaningful information.
+* Sequencing strategy, target enrichment, read technology, and bioinformatics analysis are separate choices that should match the intended application.
+* Short and long reads provide different kinds of genomic information; long reads can be particularly useful for resolving genomic context, repeats, plasmids, and structural features.
+* Base quality and mapping quality answer different questions about sequence confidence.
+* Depth, breadth, and uniformity describe different aspects of sequencing coverage.
+* High average depth does not guarantee that every important genomic region is adequately covered.
+* Reference choice can influence alignment, variant detection, genomic comparison, and interpretation.
+* Reference alignment and de novo assembly answer different computational questions.
+* Contigs and metrics such as N50 describe aspects of assembly but do not independently establish assembly accuracy.
+* Variant calls and consensus sequences are computational products created using sequence evidence and defined analytical rules.
+* VAF, mixtures, and phasing can provide information about microbial populations and genomic context.
+* FASTQ, FASTA, SAM/BAM, and VCF represent different kinds or stages of genomic information.
+* Isolate WGS, broad-range sequencing, targeted sequencing, mNGS, and genomic epidemiology answer different microbiologic questions.
+* Validation characteristics such as LoD, sensitivity, specificity, and reproducibility should be evaluated in relation to the pipeline's intended use rather than treated as generic properties of sequencing.
+* Positive and negative genomic results must be interpreted within the assay's quality, coverage, detection, database, and reporting limitations.
+* Detection of microbial sequence does not automatically establish clinical significance.
+* Contamination, carryover, sample misassignment, and controls are important components of microbial genomic analysis.
+* References, databases, software, parameters, thresholds, and coordinate conventions are governed components of the analytical workflow.
+* Computational provenance and versioning support reproducibility and change control.
+* Genomic relatedness can support epidemiologic investigation but does not independently establish direct transmission.
+* Bioinformatics validation should include the computational workflow, not only the sequencing instrument.
 
 > **Clinical microbiology bioinformatics is not simply what happens after sequencing. The computational pipeline is part of the laboratory test.**
