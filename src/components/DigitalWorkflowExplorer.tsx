@@ -83,7 +83,7 @@ export function DigitalWorkflowExplorer() {
         ))}
       </div>
 
-      <div className="digital-scenarios" role="group" aria-label="Digital microbiology scenario">
+      <div className="interaction-prompt"><span aria-hidden="true">↳</span><div><strong>Try a scenario</strong><p>Select a condition below. The workflow will update to show where attention shifts and why.</p></div></div>\n\n      <div className="digital-scenarios" role="group" aria-label="Digital microbiology scenario">
         {(Object.keys(scenarios) as Scenario[]).map((key) => (
           <button type="button" key={key} className={scenario === key ? "active" : ""} aria-pressed={scenario === key} onClick={() => setScenario(key)}>
             <strong>{scenarios[key].label}</strong>
