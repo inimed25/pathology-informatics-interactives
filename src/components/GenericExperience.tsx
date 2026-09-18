@@ -97,7 +97,7 @@ export function GenericExperience({
           ))}
         </div>
 
-        <article className="trace-panel" role="tabpanel">
+        <article className="trace-panel" role="tabpanel" aria-live="polite">
           <div>
             <p className="eyebrow">
               {lesson.trace[activeTrace].role}
@@ -168,6 +168,7 @@ export function GenericExperience({
                         onClick={() =>
                           answerQuestion(question.id, choiceIndex)
                         }
+                        aria-describedby={answered ? `${question.id}-feedback` : undefined}
                       >
                         <span className="choice-marker" />
                         <strong>{choice}</strong>
@@ -178,10 +179,12 @@ export function GenericExperience({
 
                 {answered && (
                   <div
+                    id={`${question.id}-feedback`}
                     className={`feedback ${
                       correct ? "correct" : "incorrect"
                     }`}
                     role="status"
+                    aria-live="polite"
                   >
                     <strong>
                       {correct ? "Correct." : "Not quite."}
