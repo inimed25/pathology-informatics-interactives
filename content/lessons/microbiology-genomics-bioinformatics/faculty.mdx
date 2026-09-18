@@ -2,32 +2,421 @@
 
 ## Teaching Focus
 
-This lesson introduces microbial genomics as a clinical informatics workflow. The goal is not to teach learners to become bioinformatics programmers, but to help them understand a sequencing pipeline well enough to evaluate its intended use, major inputs and outputs, validation, limitations, interpretation, and ongoing governance.
+This lesson introduces microbial genomics as a **clinical informatics workflow**.
+
+The goal is not to teach learners to become bioinformatics programmers. Learners should instead understand a sequencing pipeline well enough to evaluate:
+
+- what biological or clinical question the pipeline is intended to answer
+- what sequence data enter the computational workflow
+- how those data are transformed
+- what quality metrics support the result
+- what references, databases, algorithms, and thresholds influence the output
+- what conclusions the validated workflow can and cannot support
+- how changes to computational components should be governed
 
 Emphasize that **NGS describes a sequencing technology, not a single clinical application or bioinformatics workflow**.
 
+A useful recurring question is:
+
+> **What evidence does the sequence data actually support, and what additional assumptions or computational steps are required to reach the reported conclusion?**
+
+---
+
 ## Key Teaching Points
 
-- Raw sequence data are not themselves a clinical result.
-- FASTQ, FASTA, SAM/BAM, and VCF represent different types of information that may appear at different stages of a genomic workflow.
-- Quality control, reference alignment, de novo assembly, and downstream analyses should be selected and validated according to the pipeline's intended use.
-- Isolate whole-genome sequencing, broad-range targeted sequencing, metagenomic sequencing, and genomic epidemiology answer different questions and create different informatics challenges.
-- Broad-range sequencing approaches such as bacterial 16S rRNA or fungal ITS sequencing depend on sequence quality, appropriate reference databases, taxonomic resolution, and validated interpretation criteria.
-- Metagenomic NGS can detect microbial nucleic acid within complex specimens, but microbial sequence detection does not automatically establish clinical significance.
-- Software versions, reference sequences, databases, algorithms, parameters, and thresholds are components of the analytical workflow and may influence results.
-- Pipeline validation should evaluate the computational workflow for its intended use rather than simply demonstrate that sequencing files can be generated.
-- Genomic relatedness can support outbreak and surveillance investigations, but genomic similarity alone does not establish direct transmission.
-- Changes to software, databases, parameters, or other computational components require appropriate impact assessment, documentation, and change control.
+### 1. Separate the Major Choices in a Sequencing Workflow
+
+Learners commonly collapse several different concepts into “NGS.”
+
+Help them distinguish:
+
+**What is being sequenced?**
+- whole microbial genome
+- conserved microbial target
+- selected genes or genomic regions
+- nucleic acid from a complex specimen
+
+**How are targets selected?**
+- amplicon enrichment
+- hybrid capture
+- relatively untargeted approaches
+
+**What type of reads are generated?**
+- short reads
+- long reads
+
+**What happens computationally?**
+- reference alignment
+- de novo assembly
+- hybrid assembly
+- variant calling
+- taxonomic classification
+- gene or feature detection
+- typing or relatedness analysis
+
+These choices represent different dimensions of the workflow and should not be treated as interchangeable.
+
+---
+
+### 2. Teach Quality Metrics as Questions, Not Vocabulary
+
+Rather than asking learners to memorize definitions, connect each metric to the question it answers.
+
+- **Base quality:** Was this nucleotide likely read correctly?
+- **Mapping quality:** Was this read likely placed at the correct reference location?
+- **Depth:** How many reads support this genomic position?
+- **Breadth:** How much of the intended target or genome was adequately interrogated?
+- **Uniformity:** How evenly was coverage distributed?
+
+A particularly useful misconception to challenge is:
+
+> **High average depth does not guarantee adequate coverage of every clinically important region.**
+
+If a learner says that a sequencing run is reliable because it has “high coverage,” ask what they mean by **coverage**.
+
+---
+
+### 3. Distinguish Detection From Genomic Context
+
+Use the recurring *Klebsiella pneumoniae* example.
+
+A pipeline may confidently establish:
+
+> **A resistance gene is present.**
+
+That conclusion does not automatically establish:
+
+> **The resistance gene is located on a particular plasmid.**
+
+Determining genomic context may require sequence information capable of resolving the surrounding region.
+
+This creates a natural opportunity to discuss why long reads can be useful for resolving repetitive regions, plasmids, mobile genetic elements, structural features, and other genomic contexts that may be difficult to reconstruct using short reads alone.
+
+Avoid teaching:
+
+> **Long reads are better than short reads.**
+
+Instead teach:
+
+> **Read characteristics should match the analytical question.**
+
+---
+
+### 4. Keep Hybrid Capture and Hybrid Assembly Distinct
+
+These terms sound similar but describe different parts of the workflow.
+
+**Hybrid capture** is a laboratory target-enrichment strategy using complementary probes.
+
+**Hybrid assembly** is a computational strategy that combines complementary sequencing information, commonly short and long reads.
+
+This distinction is a useful check that learners understand the difference between:
+
+**what material enters sequencing**
+
+and
+
+**what happens computationally after sequencing.**
+
+---
+
+### 5. Reference Alignment and De Novo Assembly Answer Different Questions
+
+**Reference alignment** places reads relative to a selected reference sequence.
+
+**De novo assembly** reconstructs longer sequences from overlapping reads without using a reference genome as the primary reconstruction framework.
+
+Use the influenza example for reference-based analysis and the *K. pneumoniae* example for bacterial genome assembly.
+
+Emphasize that reference choice itself is an analytical decision.
+
+A reference genome provides both sequence information and a coordinate framework. Changing the reference can therefore affect alignment, variant representation, genomic coordinates, and downstream interpretation.
+
+---
+
+### 6. Assembly Metrics Require Context
+
+Learners should recognize:
+
+- a **contig** as a continuous reconstructed sequence
+- **N50** as a measure of assembly contiguity
+
+Do not encourage learners to interpret N50 as an overall score of genome quality.
+
+A higher N50 does not independently establish that an assembly is more accurate or clinically appropriate.
+
+Instead, assembly quality should be considered in relation to the intended use and other relevant characteristics.
+
+---
+
+### 7. Variant Calls and Consensus Sequences Are Computational Products
+
+Variant calling involves determining whether sequence evidence supports a genomic difference.
+
+Learners should recognize that this determination may depend on:
+
+- depth
+- base quality
+- mapping quality
+- read support
+- local sequence context
+- analytical thresholds
+
+A **variant allele fraction (VAF)** describes the proportion of informative reads supporting a variant.
+
+In microbial sequencing, an intermediate or low-frequency VAF may reflect several possibilities, including a mixed population, within-host diversity, contamination, artifact, or a biologically meaningful subpopulation.
+
+The VAF alone does not establish which explanation is correct.
+
+Similarly, a **consensus sequence** is a computational representation generated using defined rules. It should not automatically be interpreted as representing every microbial genome present in the specimen.
+
+---
+
+### 8. File Formats Represent Stages of Information
+
+Learners do not need to memorize file specifications.
+
+They should understand the conceptual progression:
+
+**FASTQ**
+→ reads and per-base quality information
+
+**SAM/BAM**
+→ alignment information
+
+**VCF**
+→ variant information
+
+**FASTA**
+→ sequence representation, such as a reference, contig, or consensus sequence
+
+A useful simplified reference-based workflow is:
+
+> **FASTQ → QC → alignment → SAM/BAM → variant calling → VCF**
+
+An assembly-oriented workflow might instead include:
+
+> **FASTQ → QC → assembly → contigs → FASTA**
+
+These are conceptual examples rather than universal pipelines.
+
+---
+
+## Application-Specific Teaching
+
+### Isolate Whole-Genome Sequencing
+
+Use *K. pneumoniae* to ask progressively different questions:
+
+1. Is a resistance determinant present?
+2. What sequence surrounds it?
+3. Is its genomic context resolved?
+4. How similar is the isolate to other isolates?
+
+The purpose is to show that increasingly specific biological claims require appropriate genomic evidence and analysis.
+
+### Broad-Range Sequencing
+
+Use a difficult bacterial identification based on 16S rRNA gene sequencing.
+
+Ask:
+
+> **If the best database matches include two closely related species, does the laboratory necessarily have enough information to report one species?**
+
+Emphasize sequence quality, reference-database quality, taxonomic resolution, validated interpretation criteria, and reporting limitations.
+
+### Metagenomic NGS
+
+Use a CSF specimen containing a small amount of sequence assigned to a potential pathogen.
+
+Ask learners whether:
+
+> **sequence detected**
+
+necessarily means:
+
+> **organism truly present**
+
+or:
+
+> **organism caused the patient's disease**
+
+It does not.
+
+Controls, background signal, taxonomic specificity, abundance, specimen type, database quality, assay limitations, and clinical context may influence interpretation.
+
+### Genomic Epidemiology
+
+Present several highly similar *K. pneumoniae* isolates.
+
+Ask:
+
+> **Does genomic similarity establish direct patient-to-patient transmission?**
+
+No.
+
+Genomic information should be integrated with relevant epidemiologic evidence.
+
+---
+
+## Computational Provenance and Change Control
+
+One of the most important informatics concepts in this lesson is that the same underlying sequence data can produce different downstream results when computational dependencies change.
+
+Ask learners to imagine that the FASTQ files remain unchanged while the laboratory updates:
+
+- a reference sequence
+- a resistance database
+- a taxonomic database
+- pipeline software
+- a parameter
+- an analytical threshold
+
+Then ask:
+
+> **Could the reported result change?**
+
+Potentially, yes.
+
+This is why computational provenance may need to preserve information such as:
+
+- reference accession and version
+- database version
+- software or pipeline version
+- relevant parameters and thresholds
+- QC results
+- analytical configuration
+
+Changes that could affect clinical results should undergo appropriate evaluation, documentation, and change control.
+
+---
+
+## Validation Discussion
+
+Pipeline validation should evaluate the **intended clinical workflow**, not merely demonstrate that sequencing files can be generated.
+
+Depending on intended use, relevant characteristics may include:
+
+- limit of detection
+- sensitivity
+- specificity
+- reproducibility
+- relevant genomic regions or targets
+- low-abundance or low-frequency findings
+- mixed populations
+- contamination
+- expected failure modes
+- computational thresholds
+- final result generation
+
+Do not turn this section into a general diagnostic-statistics lesson.
+
+Instead emphasize:
+
+> **Performance characteristics belong to a defined intended use.**
+
+Sequencing performance may differ by organism, genomic region, sequence diversity, microbial burden, specimen background, coverage, or computational threshold.
+
+Validation evidence should therefore support the actual claim the laboratory intends to report.
+
+---
+
+## Common Learner Misconceptions
+
+Watch for these statements:
+
+**“High depth means the whole genome was well covered.”**
+
+→ Ask the learner to distinguish depth from breadth and uniformity.
+
+**“A high-quality base must also be mapped correctly.”**
+
+→ Distinguish base quality from mapping quality.
+
+**“A higher N50 means the assembly is more accurate.”**
+
+→ N50 describes contiguity, not overall correctness.
+
+**“Long-read sequencing is better than short-read sequencing.”**
+
+→ Return to intended use and the biological question.
+
+**“Hybrid capture and hybrid assembly are basically the same thing.”**
+
+→ Separate laboratory target enrichment from computational assembly.
+
+**“If the resistance gene is detected, we know which plasmid carries it.”**
+
+→ Separate presence from genomic context.
+
+**“A consensus sequence represents everything in the specimen.”**
+
+→ Discuss mixtures and minority populations.
+
+**“If mNGS detects microbial reads, that organism caused the infection.”**
+
+→ Separate sequence detection from biological presence and clinical significance.
+
+**“If two isolates are genomically similar, one patient transmitted the organism to the other.”**
+
+→ Integrate epidemiologic evidence.
+
+**“If the FASTQ files did not change, the final result cannot change.”**
+
+→ Discuss databases, references, algorithms, parameters, thresholds, and versioning.
+
+---
+
+## Suggested Teaching Scenario
+
+A *Klebsiella pneumoniae* isolate undergoes WGS.
+
+The pipeline detects a resistance determinant with strong sequence support.
+
+Ask learners sequentially:
+
+1. What can we conclude from detection alone?
+2. What additional evidence would be needed to determine genomic context?
+3. Would high average depth guarantee adequate interrogation of every relevant region?
+4. How might short- versus long-read data affect the question?
+5. What information should be preserved so the analysis can be reproduced?
+6. What happens if the resistance database changes?
+7. If another patient's isolate is highly genomically similar, what additional information is needed before making a transmission inference?
+
+The goal is not to obtain one final answer.
+
+The goal is to teach learners to **define the claim, identify the evidence supporting it, and recognize the computational assumptions between the two.**
+
+---
 
 ## Discussion Prompts
 
-- How would the informatics workflow differ among isolate whole-genome sequencing, broad-range bacterial 16S rRNA sequencing, and metagenomic sequencing of a clinical specimen?
-- Which components of a microbial genomics pipeline should be included when validating the complete workflow?
-- How could changing a reference or resistance database alter a result without changing the underlying sequence data?
-- If metagenomic sequencing detects sequence assigned to a potential pathogen, what additional information should be considered before determining its clinical significance?
-- Why does genomic similarity alone not prove transmission between patients?
-- Which parts of a bioinformatics pipeline should a microbiology director understand even if the director does not personally write the software?
+- How would the informatics workflow differ among isolate WGS, broad-range 16S rRNA sequencing, and mNGS of a clinical specimen?
+- Why might excellent average sequencing depth coexist with an inadequately characterized genomic region?
+- When might long-read information change what a laboratory can conclude from a microbial genome?
+- How could changing a reference or resistance database alter a result without changing the underlying reads?
+- What is the difference between detecting a resistance gene and establishing its genomic context?
+- If mNGS detects sequence assigned to a potential pathogen, what additional information should be considered before determining clinical significance?
+- Why does genomic similarity alone not prove direct transmission?
+- Which components of a bioinformatics workflow should a microbiology director understand even if the director does not personally write the software?
+
+---
+
+## Faculty Emphasis
+
+Learners do **not** need to leave this lesson able to:
+
+- program a bioinformatics pipeline
+- memorize command-line tools
+- memorize specific aligners or variant callers
+- calculate N50 by hand
+- memorize platform-specific read lengths
+- memorize universal coverage thresholds
+
+They **should** leave able to follow sequence information through a computational workflow and recognize when a quality issue, analytical assumption, database change, or interpretive leap could alter a clinical conclusion.
+
+---
 
 ## Teaching Principle
 
-> **Follow the sequence data from generation to interpretation. At each step, ask what transformed the information, what could change the result, how that component was validated, and whether the final interpretation remains within the pipeline's intended use.**
+> **Follow the sequence data from generation to interpretation. At each step, ask what transformed the information, what evidence supports the resulting claim, what could change the result, and whether the interpretation remains within the validated intended use.**
