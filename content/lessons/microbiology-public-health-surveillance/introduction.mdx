@@ -9,7 +9,8 @@ For these data to be useful across institutions and jurisdictions, information m
 By the end of this lesson, you should be able to:
 
 - describe the role of electronic laboratory reporting (ELR) in public-health surveillance
-- distinguish message transmission from semantic interoperability
+- distinguish technical message exchange from semantic interoperability
+- explain why successful message transmission or acknowledgment does not by itself establish correct interpretation
 - explain the complementary roles of messaging standards and standardized terminology
 - describe how LOINC and SNOMED CT can support standardized representation of laboratory information
 - distinguish electronic laboratory reporting (ELR) from electronic case reporting (eCR)
@@ -51,7 +52,7 @@ The laboratory must ensure that:
 
 Electronic reporting requires systems to agree on both **how information is exchanged** and **what the information means**.
 
-Messaging standards such as **HL7** can define structures used to exchange clinical information between systems.
+Messaging standards such as **HL7 (Health Level Seven)** provide frameworks for structuring and exchanging healthcare information between systems. Learners do not need to construct HL7 messages for this lesson; the important concept is that message structure and transport are distinct from the clinical meaning carried within the message.
 
 Terminology standards address a different problem: representing clinical concepts consistently.
 
@@ -127,9 +128,28 @@ Once laboratory information reaches public-health systems, it can contribute to 
 
 Genomic information can also contribute to public-health surveillance and outbreak investigation, linking this module to the microbial genomics concepts introduced earlier in the curriculum.
 
+Genomic similarity can help identify isolates or cases that may warrant investigation, but genomic relatedness should not be treated as proof of direct transmission. Interpretation may also require epidemiologic, temporal, geographic, and other relevant context.
+
 The value of these systems depends on the quality and interpretability of the underlying data.
 
 Poor mappings, incomplete information, duplicate records, delayed reporting, or incorrect reporting logic can reduce the usefulness of surveillance even when the laboratory's analytical result itself was correct.
+
+### Before Interpreting a Surveillance Signal, Check the Data Pipeline
+
+An apparent change in surveillance data does not necessarily represent a change in underlying disease occurrence.
+
+For example, an increase in a reported organism could reflect a true epidemiologic signal, but it could also follow changes in:
+
+- organism or test mappings
+- laboratory methods or test availability
+- reporting rules
+- inclusion or deduplication logic
+- data completeness
+- interface or receiving-system behavior
+
+A useful informatics habit is therefore to ask whether something changed in the laboratory or information pipeline before interpreting a new pattern as biological or epidemiologic.
+
+> **A change in the data does not necessarily mean a change in the biology.**
 
 ## Validation of Public-Health Data Exchange
 
@@ -192,9 +212,12 @@ This work often requires collaboration among microbiology, laboratory informatic
 - Clinical microbiology data can support public-health surveillance, investigation, and response.
 - ELR enables structured electronic transmission of laboratory information to public-health agencies.
 - Messaging standards and terminology standards solve different but complementary interoperability problems.
-- Successful message transmission does not guarantee preservation of meaning.
+- Successful message transmission or acknowledgment does not guarantee preservation of meaning.
+- HL7-style message exchange and terminology mapping address different layers of interoperability.
 - ELR and eCR are related but distinct public-health data-exchange workflows.
 - End-to-end validation should evaluate whether information is received and interpreted as intended.
+- Surveillance trends should be interpreted with awareness of changes in mappings, reporting logic, laboratory workflows, and other data-pipeline factors.
+- Genomic relatedness can support public-health investigation but does not by itself prove direct transmission.
 - Reporting requirements, mappings, terminology, and interfaces require ongoing governance and change control.
 - Microbiology leadership plays an important role in preserving the clinical and microbiologic meaning of information used by public-health systems.
 
