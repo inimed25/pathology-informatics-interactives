@@ -852,3 +852,11 @@ h3 { line-height: 1.2; }
 .context-unique { position:absolute; z-index:2; padding:4px 7px; border:1px dashed var(--green); background:var(--green-pale); font-size:.68rem; font-weight:700; }
 .context-unique.unique-left { left:8%; }.context-unique.unique-right { right:8%; }
 .context-reads.long .resolved-long-read { background:var(--green); box-shadow:0 0 0 2px rgba(255,255,255,.7); }
+
+
+/* Learner pathway: explicit Learn → Explore hierarchy */
+.lesson-phase-heading { max-width:1050px; display:flex; align-items:center; gap:14px; margin:34px 0 14px; padding-top:20px; border-top:1px solid var(--line); }
+.lesson-phase-heading>span { display:grid; place-items:center; width:38px; height:38px; flex:0 0 38px; border-radius:50%; background:var(--green); color:var(--paper); font-family:ui-monospace,monospace; font-size:.76rem; font-weight:800; }
+.lesson-phase-heading .eyebrow { margin:0 0 2px; }
+.lesson-phase-heading strong { font-size:1rem; }
+@media(max-width:760px){.lesson-phase-heading{margin-top:26px}}
