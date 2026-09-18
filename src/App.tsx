@@ -303,6 +303,19 @@ function LessonPage({ slug }: { slug: string }) {
         </section>
       )}
 
+      <section className="lesson-references" aria-labelledby="lesson-references-title">
+        <p className="eyebrow">References &amp; further reading</p>
+        <h2 id="lesson-references-title">Go to the source</h2>
+        <div className="lesson-reference-grid">
+          {lesson.manifest.sources.map((source) => (
+            <article key={source.label}>
+              <h3><a href={source.url} target="_blank" rel="noreferrer">{source.label} ↗</a></h3>
+              <p>{source.use}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
       <nav className="lesson-end-nav" aria-label="Lesson navigation">
         <a href={href(`topics/${topic.slug}/`)}>← Back to Module {topic.id}</a>
         {(() => {
