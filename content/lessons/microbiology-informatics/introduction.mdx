@@ -174,9 +174,15 @@ This illustrates an important distinction:
 
 **Semantic interoperability** concerns whether the receiving system can preserve and interpret the meaning of that information.
 
-<div className="micro-visual syntax-semantics-visual" role="img" aria-label="Syntactic interoperability preserves message structure while semantic interoperability preserves the meaning of the result">
+<div className="micro-visual syntax-semantics-visual" role="img" aria-label="Usable interoperability requires both valid message structure and preserved clinical meaning">
  <div className="micro-visual-copy"><small>Two layers</small><strong>Structure can survive while meaning fails</strong><span>Syntactic interoperability asks whether the message is exchanged in the expected form; semantic interoperability asks whether the receiving system interprets the intended concept.</span></div>
- <div className="two-layer-art"><span><b>{ }</b><small>structure</small></span><i>+</i><span><b>≡</b><small>meaning</small></span><em>→</em><strong>usable data</strong></div>
+ <div className="interop-flow">
+   <div><small>SYNTACTIC · STRUCTURE</small><b>Message arrives correctly</b><span>expected format · required fields · valid syntax</span></div>
+   <em>+</em>
+   <div><small>SEMANTIC · MEANING</small><b>Concept is understood correctly</b><span>appropriate mapping · intended clinical meaning</span></div>
+   <em>→</em>
+   <strong>Usable data</strong>
+ </div>
 </div>
 
 ### The microbiologist sees a name; the interface may rely on a code
