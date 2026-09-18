@@ -733,115 +733,114 @@ const cases: Record<string, CaseSeed> = {
 
     questions: [
       {
-        question: "A laboratory receives FASTQ files from a sequencing run. What information should the microbiology director understand these files to contain?",
+        question: "An influenza A sequencing workflow produces high-quality reads across most of the viral genome. One genomic region has almost no usable reads, although the average sequencing depth across the genome is high. Which interpretation is most appropriate?",
         choices: [
-          "Only a final list of clinically significant variants",
-          "Sequence reads together with associated per-base quality information",
-          "Only assembled microbial chromosomes",
-          "Only antimicrobial resistance interpretations"
+          "The entire genome can be interpreted confidently because the average sequencing depth is high",
+          "The poorly covered region may remain inadequately characterized despite high average depth elsewhere",
+          "The finding primarily indicates poor mapping quality across the entire genome",
+          "High average depth compensates for inadequate breadth of coverage"
         ],
         correctIndex: 1,
-        explanation: "FASTQ represents sequencing reads and associated quality information. It is an upstream data format rather than a final clinical interpretation."
+        explanation: "Depth and breadth describe different aspects of coverage. Depth describes how many reads support a genomic position, while breadth describes how much of the intended genome or target has adequate coverage. High depth across well-covered regions cannot compensate for a region with little or no usable sequence. Therefore, conclusions about that poorly covered region may remain unsupported even when the overall average depth looks excellent."
       },
       {
-        question: "Which statement best distinguishes reference alignment from de novo assembly in a microbial sequencing workflow?",
+        question: "A sequencing read from a Klebsiella pneumoniae isolate has high base-quality scores, but the sequence is very similar to DNA found at several locations in the genome. What is the most appropriate interpretation?",
         choices: [
-          "Reference alignment places reads relative to a reference sequence, whereas de novo assembly reconstructs longer sequences from reads without requiring that same mapping strategy",
-          "Reference alignment produces FASTQ files, whereas assembly produces raw instrument signals",
-          "Assembly can only be used for human genomes",
-          "The two terms describe identical computational processes"
-        ],
-        correctIndex: 0,
-        explanation: "Reference-based workflows determine how reads relate to a selected reference, while de novo assembly reconstructs longer contiguous sequences from the reads. The appropriate approach depends on the intended microbial analysis."
-      },
-      {
-        question: "A pipeline produces a BAM file after mapping microbial sequence reads to a reference genome. What does the BAM file primarily represent?",
-        choices: [
-          "A compressed representation of sequence alignment information",
-          "A hospital antibiogram",
-          "A final clinical microbiology report",
-          "A database of antimicrobial breakpoints"
-        ],
-        correctIndex: 0,
-        explanation: "BAM is the binary compressed representation of the SAM alignment format and can store reads and information about their alignment to reference sequences."
-      },
-      {
-        question: "A microbial variant-calling workflow produces a VCF file. What is the most useful conceptual interpretation of this file for a microbiology director?",
-        choices: [
-          "It is a structured representation of sequence variants identified relative to a reference or analysis framework",
-          "It contains the original unprocessed sequencing reads",
-          "It is the instrument maintenance log",
-          "It automatically establishes the clinical significance of every detected variant"
-        ],
-        correctIndex: 0,
-        explanation: "VCF is a structured format for representing sequence variation. A variant call still requires appropriate analytical validation and biological or clinical interpretation."
-      },
-      {
-        question: "During validation of a new microbial NGS pipeline, which approach best evaluates the bioinformatics component?",
-        choices: [
-          "Confirm only that the sequencing instrument successfully exports files",
-          "Evaluate representative positive, negative, challenging, and relevant variant or organism scenarios across the complete pipeline using predefined acceptance criteria",
-          "Validate only the graphical appearance of the final report",
-          "Accept the pipeline because the software vendor has already tested it"
+          "The read can be placed confidently because high base quality also indicates high mapping quality",
+          "The nucleotide calls may be reliable, but the genomic location may still be uncertain",
+          "The read should be excluded because sequence occurring at multiple locations necessarily indicates contamination",
+          "The read demonstrates that all matching genomic locations contain the same sequence"
         ],
         correctIndex: 1,
-        explanation: "Clinical implementation requires validation of the workflow for its intended use. The bioinformatics component should be challenged with representative data and predefined acceptance criteria rather than assuming successful file generation establishes analytical validity."
+        explanation: "Base quality and mapping quality answer different questions. Base quality estimates confidence that individual nucleotides were read correctly. Mapping quality reflects confidence that a read has been assigned to the correct location relative to a reference. A read can therefore contain highly reliable nucleotide calls while still being difficult to place uniquely when similar or repetitive sequences occur at multiple genomic locations."
       },
       {
-        question: "A validated resistance-gene pipeline is updated to a substantially newer reference database. Why should the laboratory treat this as an informatics governance event?",
+        question: "A laboratory is analyzing WGS data from a Klebsiella pneumoniae isolate. The team wants to determine whether the isolate contains genomic content that may not be represented in the selected reference genome, including potentially novel plasmid-associated sequence. Which approach is most directly suited to that question?",
         choices: [
-          "Database content can alter which genomic features are recognized or interpreted, so the effect of the change should be assessed under laboratory change-control procedures",
-          "Reference databases never affect analytical output",
-          "Only sequencing hardware changes require review",
-          "Database updates automatically invalidate every previous patient result"
+          "Reference alignment, because all reads must first match the reference before novel sequence can be identified",
+          "Increasing sequencing depth, because sufficient depth eliminates dependence on the reference",
+          "De novo assembly, because reads can be reconstructed into longer sequences without using a particular reference as the primary reconstruction framework",
+          "Variant calling against the reference, because VCF represents all genomic content"
+        ],
+        correctIndex: 2,
+        explanation: "Reference alignment asks where reads fit relative to a selected reference and is useful for analyses such as variant detection and comparison within a common coordinate system. De novo assembly instead reconstructs overlapping reads into contigs without requiring placement onto a particular reference as the primary reconstruction strategy. This can help characterize genomic content that is absent from the selected reference. Importantly, de novo assembly is not automatically more accurate or complete; its quality still depends on the sequencing data, assembly method, and intended use."
+      },
+      {
+        question: "WGS of a Klebsiella pneumoniae isolate detects a carbapenemase gene using high-quality short-read sequencing. The clinical team asks whether the gene is located on a plasmid that may facilitate its spread between bacteria. Which response is most appropriate?",
+        choices: [
+          "Detection of the gene establishes that it is plasmid-associated because resistance genes are generally carried on plasmids",
+          "High sequencing depth is sufficient to determine whether the gene is located on a plasmid or chromosome",
+          "The gene should be considered chromosomal unless plasmid DNA was separately extracted before sequencing",
+          "Gene detection establishes that the sequence is present, but determining its genomic context may require additional evidence capable of linking the gene to surrounding sequence"
+        ],
+        correctIndex: 3,
+        explanation: "Detecting a resistance gene and determining where that gene resides are different analytical questions. Short reads may provide strong evidence that the gene is present while still being unable to resolve its surrounding genomic structure, particularly when repetitive sequences or mobile genetic elements complicate reconstruction. Longer reads or other appropriately validated approaches may provide the additional sequence context needed to link the gene confidently to a plasmid or chromosome. High depth alone does not solve this structural problem."
+      },
+      {
+        question: "A laboratory is evaluating two proposed changes to a microbial sequencing workflow. Change 1 uses complementary probes to enrich selected antimicrobial-resistance genes before sequencing. Change 2 combines short- and long-read sequencing data computationally to improve reconstruction of a bacterial genome. Which description is correct?",
+        choices: [
+          "Change 1 is hybrid assembly, while Change 2 is hybrid capture",
+          "Both changes are forms of hybrid capture because they combine different sources of genomic information",
+          "Change 1 is hybrid capture, while Change 2 is hybrid assembly",
+          "Both changes are forms of hybrid assembly because they ultimately produce sequence data"
+        ],
+        correctIndex: 2,
+        explanation: "Hybrid capture and hybrid assembly occur at different stages of the workflow. Hybrid capture is a laboratory enrichment strategy that uses complementary probes to select particular sequences before sequencing. Hybrid assembly is a computational strategy that combines complementary sequencing data, commonly short and long reads, to improve genome reconstruction after sequencing data have been generated. Similar names therefore describe fundamentally different parts of the sequencing workflow."
+      },
+      {
+        question: "Sequencing of an influenza A specimen identifies a nucleotide variant in 30% of the informative reads at a well-covered position. The remaining reads support the reference nucleotide. What is the most appropriate interpretation?",
+        choices: [
+          "The patient definitely has two distinct influenza strains because any intermediate VAF proves a mixed infection",
+          "The variant should be ignored because clinically meaningful variants must have a VAF near 100%",
+          "The 30% VAF indicates that a subset of the sequence reads supports the variant, but additional evidence is needed to determine whether this reflects a mixed population, within-host diversity, contamination, artifact, or another explanation",
+          "The consensus sequence must contain the variant because any VAF above 25% determines the consensus nucleotide"
+        ],
+        correctIndex: 2,
+        explanation: "VAF describes the proportion of informative reads supporting a variant; it does not by itself identify what biological population produced those reads. A 30% VAF means that approximately 30% of informative reads at that position support the variant. It could reflect a minority microbial population, within-host diversity, a mixed infection, contamination, or sequencing/alignment artifact. Even a high VAF does not by itself establish a new strain; strain or lineage interpretation generally depends on a broader pattern of genomic information. Additional quality data, controls, genomic context, and validated interpretive criteria are therefore needed."
+      },
+      {
+        question: "A laboratory compares Klebsiella pneumoniae isolates during a possible hospital outbreak. One validated workflow reports the number of high-confidence nucleotide differences across comparable genomic positions. Another assigns sequence variants to a standardized set of core-genome loci and compares the resulting allele profiles. Which statement best describes these approaches?",
+        choices: [
+          "The first is SNP-based analysis, while the second is cgMLST. Their reported distances represent genomic differences differently and should not be treated as interchangeable",
+          "Both are SNP-based analyses because every genomic comparison ultimately measures individual nucleotide differences",
+          "The first is cgMLST, while the second is wgMLST because both evaluate multiple genomic locations",
+          "The methods should produce numerically equivalent distances when applied to the same isolates"
         ],
         correctIndex: 0,
-        explanation: "Bioinformatics pipelines depend on controlled computational components such as databases, software, parameters, and thresholds. Changes can affect results and therefore require documented assessment appropriate to their potential impact."
+        explanation: "SNP-based analysis compares nucleotide-level differences across genomic positions included in a defined analysis. cgMLST instead compares allele assignments across a standardized set of core-genome loci. Thus, five SNPs and five allele differences are not equivalent measurements, even if they come from the same isolates. Reference or scheme selection, quality control, filtering, and other analytical choices can also influence the resulting comparison."
       },
       {
-        question: "Two patient isolates are highly similar by a validated genomic relatedness pipeline. What is the most appropriate interpretation?",
+        question: "During investigation of a possible hospital outbreak, WGS shows that two Klebsiella pneumoniae isolates are highly genetically related using the laboratory's validated genomic-analysis workflow. Which conclusion is most appropriate?",
         choices: [
-          "The genomic finding supports relatedness, but transmission conclusions should incorporate epidemiologic and other relevant context",
-          "Whole-genome similarity proves direct patient-to-patient transmission",
-          "The isolates must have been collected on the same day",
-          "Epidemiologic information is unnecessary once sequencing has been performed"
-        ],
-        correctIndex: 0,
-        explanation: "Genomic relatedness can provide strong evidence during an outbreak investigation, but interpretation of transmission requires integration with epidemiologic context and the characteristics of the validated genomic method."
-      },
-      {
-  question: "Which scenario best represents broad-range targeted sequencing in clinical microbiology?",
-  choices: [
-    "Sequencing a conserved microbial target such as bacterial 16S rRNA or fungal ITS to help identify an organism",
-    "Sequencing all available nucleic acid in a clinical specimen to identify potential microbial sequences",
-    "Comparing whole genomes from multiple isolates to assess genomic relatedness",
-    "Mapping susceptibility-test MICs to antimicrobial breakpoints"
-  ],
-  correctIndex: 0,
-  explanation: "Broad-range targeted sequencing uses conserved microbial targets, such as bacterial 16S rRNA or fungal ITS regions, to support organism identification. It differs from metagenomic sequencing, which can interrogate nucleic acid from many organisms in a complex specimen, and from isolate whole-genome sequencing used for genomic characterization or relatedness analysis."
-},
-      {
-  question: "Metagenomic NGS of a clinical specimen detects sequence reads assigned to a potential pathogen. What is the most appropriate interpretation?",
-  choices: [
-    "Detection of microbial sequence alone proves that the organism is causing the patient's disease",
-    "The finding should be interpreted using the validated pipeline, controls, background and contamination assessment, specimen type, and relevant clinical context",
-    "Any microbial sequence detected by mNGS should automatically be reported as a clinically significant pathogen",
-    "Taxonomic classification eliminates the need to consider reference-database quality"
-  ],
-  correctIndex: 1,
-  explanation: "Metagenomic sequencing can detect microbial nucleic acid in complex specimens, but detection alone does not establish clinical significance. Interpretation depends on the validated workflow and may require consideration of controls, background signal, contamination, reference-database performance, specimen type, and clinical context."
-},
-     
-      {
-        question: "Which responsibility most clearly belongs to microbiology leadership when implementing a clinical NGS pipeline?",
-        choices: [
-          "Personally writing every software component in the pipeline",
-          "Understanding the pipeline's intended use, inputs, outputs, quality criteria, limitations, validation, reporting logic, and change-control process",
-          "Memorizing the source code of every bioinformatics tool",
-          "Delegating all computational decisions without laboratory oversight"
+          "The isolates' genomic similarity proves that Patient A transmitted the organism directly to Patient B",
+          "The isolates' genomic similarity supports a recent shared ancestry or epidemiologic relationship, but genomic data alone do not establish direct transmission or its direction",
+          "The isolates must have been acquired during the same hospitalization because highly related isolates cannot circulate outside the hospital",
+          "Direct transmission can be established once the genomic distance falls below any published SNP or allele threshold"
         ],
         correctIndex: 1,
-        explanation: "A microbiology director does not need to function as the pipeline's software engineer, but should be able to understand and govern the analytical workflow sufficiently to evaluate validation, limitations, changes, failures, and clinical interpretation."
+        explanation: "High genomic relatedness can provide strong evidence that isolates are epidemiologically associated, but it does not by itself establish who infected whom or even that transmission occurred directly between those two patients. A shared source, unsampled intermediate patient, environmental reservoir, or other transmission pathway may produce closely related isolates. Interpretation therefore integrates genomic findings with timing, location, exposures, infection-control information, and other epidemiologic evidence. There is also no universal SNP or allele cutoff that can be applied across organisms and analytical methods to prove direct transmission."
+      },
+      {
+        question: "A laboratory updates the reference genome used in a validated SNP-based outbreak-analysis pipeline. The software runs successfully after the change and produces genomic-distance results for all isolates. What is the most appropriate next step?",
+        choices: [
+          "No additional evaluation is needed because successful completion of the pipeline demonstrates that the results remain valid",
+          "Re-sequence every previously tested isolate because any reference change invalidates all prior sequencing data",
+          "Evaluate the effect of the reference change on variant calling, comparable genomic positions, genomic distances, and the laboratory's intended interpretation before using the updated workflow clinically",
+          "Use whichever reference produces the smallest SNP distances because it provides the greatest sensitivity for detecting outbreaks"
+        ],
+        correctIndex: 2,
+        explanation: "A computational pipeline completing without an error only demonstrates that it ran; it does not establish that the resulting analysis remains appropriate for its intended clinical or public-health use. Reference selection can influence read alignment, which positions are reliably comparable, variant calls, and ultimately calculated genomic distances. A meaningful reference or pipeline change therefore requires evaluation of its downstream analytical and interpretive effects before results are relied upon."
+      },
+      {
+        question: "A clinical microbial-genomics pipeline identifies antimicrobial-resistance genes using a curated reference database. A new database release adds resistance determinants and revises several existing annotations. What is the most appropriate approach before implementing the new version for clinical testing?",
+        choices: [
+          "Update immediately because a newer database version is inherently more accurate than the version currently in use",
+          "Keep the original database indefinitely because changing a database makes longitudinal results impossible to interpret",
+          "Install the update once the software confirms that the new database loads without errors",
+          "Treat the database update as a controlled change: document the version, assess changes relevant to the laboratory's intended use, evaluate their effect on representative results and interpretation, and retain appropriate provenance"
+        ],
+        correctIndex: 3,
+        explanation: "A reference database is part of the analytical system, not merely background information. Changing its contents can alter which genes or variants are detected, how they are annotated, and potentially how results are interpreted. A technically successful update therefore does not by itself establish continued clinical validity. The laboratory should maintain version provenance and evaluate the effect of meaningful database changes within the validated intended use of the workflow."
       }
     ]
   },
