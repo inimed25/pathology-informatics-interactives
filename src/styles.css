@@ -783,3 +783,67 @@ h3 { line-height: 1.2; }
   .mic-illustration { grid-template-columns: 1fr; }
   .mic-wells { gap: 5px; }
 }
+
+
+/* Shared original teaching figures */
+.lesson-visual-stack, .genomics-concept-labs { display: grid; gap: 24px; }
+.concept-figure { max-width: 1050px; margin: 34px 0 54px; padding: 38px; border: 1px solid var(--line); border-radius: 20px; background: var(--paper); box-shadow: 0 14px 40px rgba(38,51,47,.055); }
+.concept-figure h3 { margin: 0 0 10px; font-size: 1.65rem; }
+.figure-lede { max-width: 780px; color: var(--muted); }
+.figure-callout { margin-top: 20px; padding: 17px 19px; border-left: 4px solid var(--green); background: var(--green-pale); }
+.mapping-stages { display: grid; grid-template-columns: repeat(5,1fr); gap: 8px; margin-top: 24px; }
+.mapping-stage { position: relative; min-height: 150px; padding: 16px; border: 1px solid var(--line); background: #fafaf6; }
+.mapping-stage small,.mapping-stage strong,.mapping-stage span { display:block; }
+.mapping-stage small { color:var(--muted); text-transform:uppercase; letter-spacing:.05em; }
+.mapping-stage strong { margin:12px 0 7px; overflow-wrap:anywhere; }
+.mapping-stage span { color:var(--muted); font-size:.78rem; }
+.mapping-stage b { position:absolute; right:-10px; top:48%; z-index:2; color:var(--green); }
+.antibiogram-compare { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:24px; }
+.isolate-card,.population-card { padding:22px; border:1px solid var(--line); background:#fafaf6; }
+.isolate-card small,.population-card>small { color:var(--muted); text-transform:uppercase; letter-spacing:.06em; }
+.isolate-card strong { display:block; margin:16px 0; font-size:1.1rem; }
+.mini-antibiogram { display:grid; gap:6px; margin:13px 0; }
+.mini-antibiogram div { display:flex; justify-content:space-between; gap:10px; padding:8px 10px; background:var(--green-pale); font-size:.8rem; }
+.ecosystem-map { display:grid; grid-template-columns:1.15fr auto 1.25fr auto 1fr auto .7fr; gap:10px; align-items:center; margin-top:24px; }
+.instrument-bank { display:grid; grid-template-columns:1fr 1fr; gap:7px; }
+.instrument-bank span,.ecosystem-hub,.ecosystem-end { padding:13px; border:1px solid var(--line); background:#fafaf6; }
+.instrument-bank span { font-size:.75rem; font-weight:700; text-align:center; }
+.ecosystem-hub small,.ecosystem-hub strong,.ecosystem-hub span,.ecosystem-end strong,.ecosystem-end span { display:block; }
+.ecosystem-hub small { color:var(--muted); text-transform:uppercase; letter-spacing:.05em; }
+.ecosystem-hub strong { margin:7px 0; }
+.ecosystem-hub span,.ecosystem-end span { color:var(--muted); font-size:.76rem; }
+.ecosystem-map>b { color:var(--green); }
+.gallery-tabs { display:grid; grid-template-columns:repeat(5,1fr); gap:7px; margin:22px 0 14px; }
+.gallery-tabs button { padding:12px 8px; border:1px solid var(--line); background:#fafaf6; color:var(--ink); cursor:pointer; }
+.gallery-tabs button.active { border-color:var(--green); background:var(--mint); box-shadow:inset 0 0 0 1px var(--green); }
+.gallery-canvas { min-height:245px; padding:24px; border:1px solid var(--line); background:#f8f8f4; }
+.gallery-canvas>p { margin:20px 0 0; color:var(--muted); }
+.fragment { display:flex; align-items:center; margin:45px auto; max-width:720px; height:42px; background:#e8dfbc; }
+.fragment span { padding:12px 18px; background:var(--green-pale); font-weight:700; }
+.fragment i { flex:1; text-align:center; color:var(--muted); font-size:.8rem; }
+.assembly-grid,.typing-grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+.assembly-grid>div,.typing-grid>div { position:relative; min-height:150px; padding:17px; border:1px solid var(--line); background:var(--paper); }
+.assembly-grid small,.typing-grid small { color:var(--muted); text-transform:uppercase; letter-spacing:.05em; }
+.reference-line { margin-top:35px; padding:8px; background:#ddd3ad; text-align:center; font-size:.75rem; }
+.assembly-grid .read { position:absolute; height:9px; background:var(--green); border-radius:5px; }
+.assembly-grid .r1 { width:35%; left:18%; top:72px; }.assembly-grid .r2 { width:32%; left:43%; top:90px; }.assembly-grid .r3 { width:27%; left:57%; top:108px; }
+.loose-reads { display:grid; gap:7px; margin:20px 0 13px; }
+.loose-reads span { width:46%; height:9px; background:var(--green); border-radius:5px; }
+.loose-reads span:nth-child(2){margin-left:18%;}.loose-reads span:nth-child(3){margin-left:35%;}.loose-reads span:nth-child(4){margin-left:50%;}
+.contig { padding:8px; background:var(--green-pale); text-align:center; font-size:.78rem; }
+.vaf-stack { display:grid; grid-template-columns:repeat(10,1fr); gap:7px; max-width:700px; margin:42px auto; }
+.vaf-stack span { padding:16px 4px; border:1px solid var(--line); background:var(--green-pale); text-align:center; font-weight:800; }
+.vaf-stack span.alt { background:var(--gold-soft); border-color:var(--gold); }
+.sequence-row { margin-top:15px; padding:10px; background:#f1eddb; font-family:ui-monospace,monospace; letter-spacing:.08em; }
+.sequence-row b { padding:2px 5px; background:var(--gold-soft); }
+.typing-grid>div>span { display:block; margin-top:14px; color:var(--muted); font-size:.8rem; }
+.alleles { display:grid; gap:7px; margin-top:15px; }.alleles b { padding:9px; background:var(--green-pale); font-size:.8rem; }
+.file-pipeline { display:flex; align-items:center; justify-content:center; gap:10px; margin:45px auto; }
+.file-pipeline>span { padding:14px; border:1px solid var(--line); background:var(--paper); text-align:center; }
+.file-pipeline>span b,.file-pipeline>span small { display:block; }.file-pipeline>span small { margin-top:4px; color:var(--muted); }
+.file-pipeline>b { color:var(--green); }
+@media(max-width:760px){
+ .concept-figure{padding:25px 18px}.mapping-stages,.antibiogram-compare,.assembly-grid,.typing-grid,.gallery-tabs{grid-template-columns:1fr}
+ .mapping-stage b{right:50%;top:auto;bottom:-14px;transform:rotate(90deg)}.ecosystem-map{grid-template-columns:1fr}.ecosystem-map>b{transform:rotate(90deg);justify-self:center}
+ .file-pipeline{flex-direction:column}.file-pipeline>b{transform:rotate(90deg)}.vaf-stack{grid-template-columns:repeat(5,1fr)}
+}
