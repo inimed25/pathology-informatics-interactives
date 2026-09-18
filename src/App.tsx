@@ -288,9 +288,26 @@ function LessonPage({ slug }: { slug: string }) {
         </section>
       )}
 
-      <nav className="lesson-end-nav">
+      <nav className="lesson-end-nav" aria-label="Lesson navigation">
         <a href={href(`topics/${topic.slug}/`)}>← Back to Module {topic.id}</a>
-        <a href={href(`faculty/${slug}/`)}>Open faculty guide →</a>
+        {(() => {
+          const index = lessons.findIndex((item) => item.manifest.slug === slug);
+          const nextLesson = index >= 0 ? lessons[index + 1] : undefined;
+          return nextLesson ? (
+            <a className="next-lesson-link" href={href(`lessons/${nextLesson.manifest.slug}/`)}>
+              <small>Continue curriculum</small>
+              <strong>Lesson {nextLesson.manifest.id} · {nextLesson.manifest.title}</strong>
+              <span aria-hidden="true">→</span>
+            </a>
+          ) : (
+            <a className="next-lesson-link" href={href()}>
+              <small>Curriculum complete</small>
+              <strong>Return to curriculum overview</strong>
+              <span aria-hidden="true">→</span>
+            </a>
+          );
+        })()}
+        <a href={href(`faculty/${slug}/`)}>Faculty guide →</a>
       </nav>
     </main>
   );
