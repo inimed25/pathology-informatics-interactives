@@ -249,13 +249,23 @@ Controls, background signal, taxonomic specificity, abundance, specimen type, da
 
 Present several highly similar *K. pneumoniae* isolates.
 
+First distinguish common comparison frameworks:
+
+- **SNP-based analysis** counts high-confidence nucleotide differences across genomic positions included in a defined analysis.
+- **cgMLST** compares allele assignments across a standardized set of core-genome loci.
+- **wgMLST** extends the gene-by-gene approach across a broader set of loci.
+
+Emphasize that a SNP distance and an allele distance are different measurements and should not be treated as numerically interchangeable. Their interpretation also depends on the organism, reference or typing scheme, sequence quality, callable positions or loci, filtering, and the validated analytical framework.
+
+Avoid teaching a universal SNP or allele cutoff for transmission. Thresholds are organism-, method-, and context-dependent.
+
 Ask:
 
 > **Does genomic similarity establish direct patient-to-patient transmission?**
 
 No.
 
-Genomic information should be integrated with relevant epidemiologic evidence.
+Genomic information can support a hypothesis of relatedness or shared ancestry, but it should be integrated with relevant epidemiologic evidence. Similar isolates may still reflect a shared source, unsampled intermediates, environmental reservoirs, or other transmission pathways, and sequence data alone generally do not establish transmission direction.
 
 ---
 
@@ -361,6 +371,14 @@ Watch for these statements:
 
 → Integrate epidemiologic evidence.
 
+**“Five SNPs and five cgMLST allele differences mean the same thing.”**
+
+→ SNP-based and allele-based methods represent genomic differences differently; do not treat their distances as interchangeable.
+
+**“There is one SNP or allele cutoff that proves transmission.”**
+
+→ Interpretation depends on the organism, analytical method, reference or typing scheme, quality and filtering rules, and epidemiologic context.
+
 **“If the FASTQ files did not change, the final result cannot change.”**
 
 → Discuss databases, references, algorithms, parameters, thresholds, and versioning.
@@ -397,6 +415,8 @@ The goal is to teach learners to **define the claim, identify the evidence suppo
 - How could changing a reference or resistance database alter a result without changing the underlying reads?
 - What is the difference between detecting a resistance gene and establishing its genomic context?
 - If mNGS detects sequence assigned to a potential pathogen, what additional information should be considered before determining clinical significance?
+- How do SNP-based relatedness analysis and cgMLST/wgMLST represent genomic differences differently?
+- Why should SNP and allele distances not be treated as interchangeable or interpreted using a universal cutoff?
 - Why does genomic similarity alone not prove direct transmission?
 - Which components of a bioinformatics workflow should a microbiology director understand even if the director does not personally write the software?
 
