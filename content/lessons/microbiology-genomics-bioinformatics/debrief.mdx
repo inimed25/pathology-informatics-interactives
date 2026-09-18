@@ -1,15 +1,201 @@
 # Debrief
 
-Microbial genomics is an information workflow, not simply a sequencing technology. Raw sequence data become clinically meaningful only through a series of computational and interpretive steps, and the reliability of the final result depends on the integrity of that entire workflow.
+## Case: The Resistance Gene Is There — But What Does That Mean?
 
-Different sequencing strategies answer different questions. Isolate whole-genome sequencing can characterize a cultured organism, broad-range targeted sequencing can support organism identification using conserved targets such as bacterial 16S rRNA or fungal ITS, and metagenomic sequencing can interrogate microbial nucleic acid within complex clinical specimens. Genomic epidemiology uses sequence information differently again by comparing organisms to evaluate relatedness, clusters, outbreaks, and surveillance patterns.
+Your laboratory performs whole-genome sequencing on a **Klebsiella pneumoniae** isolate as part of a validated microbial genomics workflow.
 
-These applications create different informatics challenges and should not be treated as interchangeable. The appropriate quality-control criteria, reference databases, algorithms, thresholds, controls, and validation strategy depend on the pipeline's intended use.
+The bioinformatics pipeline detects a carbapenemase gene. The sequencing run passes its overall quality metrics, and the resistance determinant is supported by high-quality sequence data.
 
-Bioinformatics components are therefore part of the analytical workflow. Changes to software, databases, reference sequences, parameters, or thresholds can alter downstream results even when the underlying sequence data remain unchanged. Clinical implementation requires appropriate validation, documentation, quality oversight, and change control.
+At first glance, the result appears straightforward:
 
-Interpretation also extends beyond detecting a sequence or generating a computational result. Detection of microbial nucleic acid does not by itself establish clinical significance, and genomic similarity between isolates does not by itself establish direct transmission. Findings should be interpreted within the limitations of the validated method and the relevant microbiologic, clinical, and epidemiologic context.
+> **The resistance gene was detected.**
+
+But several additional questions arise.
+
+The infection-prevention team wants to know whether the gene is located on a plasmid that might be shared among related or unrelated organisms.
+
+The laboratory also wants to compare this isolate with several recent *K. pneumoniae* isolates from the hospital.
+
+Finally, a software and resistance-database update is scheduled for the following month.
+
+### Question 1: What Has the Pipeline Actually Established?
+
+Detection of the resistance gene supports its presence within the limits of the validated workflow.
+
+It does **not automatically establish**:
+
+- where the gene is located
+- whether it is chromosomal or plasmid-associated
+- which mobile genetic element surrounds it
+- whether another isolate contains the gene in the same genomic context
+- whether two patients are epidemiologically linked
+
+Each additional conclusion requires appropriate sequence information, computational analysis, and interpretation.
+
+This distinction is important because genomic testing can generate increasingly specific conclusions from the same underlying data.
+
+> **Detection, genomic context, genomic relatedness, and transmission are different claims.**
+
+---
+
+## Question 2: Why Might Read Structure Matter?
+
+Suppose short-read sequencing confidently detects the resistance gene, but repetitive sequence surrounding the gene prevents the assembly from establishing whether it is located on a plasmid or chromosome.
+
+The analytical problem is no longer simply:
+
+> **Is the gene present?**
+
+It is:
+
+> **Can the available sequence information resolve the genomic context surrounding the gene?**
+
+Long reads may provide additional information because a single read can potentially span the resistance determinant and surrounding genomic sequence.
+
+A workflow combining complementary short- and long-read information might also use **hybrid assembly**.
+
+This illustrates an important principle:
+
+> **The sequencing and computational strategy should be appropriate for the biological question being asked.**
+
+---
+
+## Question 3: Does Excellent Average Coverage Settle the Question?
+
+Not necessarily.
+
+Imagine that the isolate has very high average sequencing depth, but an important genomic region has little or no usable coverage.
+
+The overall sequencing run may appear strong while that particular region remains poorly characterized.
+
+This is why **depth**, **breadth**, and **uniformity** should not be treated as interchangeable.
+
+A director evaluating the result should ask not only:
+
+> **How much sequencing did we generate?**
+
+but also:
+
+> **Did we generate adequate information across the regions needed to support this particular conclusion?**
+
+---
+
+## Question 4: What Happens When the Pipeline Changes?
+
+Now suppose the resistance database is updated.
+
+The raw FASTQ files from the isolate have not changed.
+
+However, reanalysis produces a different annotation for one resistance determinant.
+
+This does not necessarily mean that either sequencing run failed.
+
+The difference may result from a change in the computational knowledge used to interpret the same sequence data.
+
+Relevant questions include:
+
+- What database version was used originally?
+- What changed in the new version?
+- Does the change affect a clinically reported result?
+- Was the updated component evaluated before implementation?
+- Can the laboratory reproduce how the original result was generated?
+- Does the change require revalidation or another form of documented impact assessment?
+
+This is why reference sequences, databases, software, parameters, and thresholds are governed components of the analytical system.
+
+> **Computational provenance helps explain not only what the result was, but how that result was produced.**
+
+---
+
+## Question 5: The Isolates Are Genomically Similar. Did Transmission Occur?
+
+Suppose the analysis shows that several *K. pneumoniae* isolates are highly genomically similar.
+
+That finding may support an outbreak or infection-prevention investigation.
+
+It does not independently establish direct patient-to-patient transmission.
+
+Interpretation may also require information about:
+
+- collection dates
+- patient locations
+- healthcare exposures
+- epidemiologic links
+- organism-specific genomic diversity
+- the validated relatedness method
+
+The genomic result therefore contributes evidence to an epidemiologic investigation rather than replacing it.
+
+> **Genomic similarity supports a relationship hypothesis; epidemiologic context helps determine what that relationship means.**
+
+---
+
+## Director-Level Reasoning
+
+When reviewing a microbial genomics workflow, the central question is not:
+
+> **Do I understand every line of code?**
+
+Instead, ask:
+
+**What question is the pipeline supposed to answer?**
+
+↓
+
+**What sequence evidence supports that answer?**
+
+↓
+
+**Are the data adequate for that specific conclusion?**
+
+↓
+
+**What reference, database, software, parameters, and thresholds transformed the data into the result?**
+
+↓
+
+**What alternative explanations or limitations matter?**
+
+↓
+
+**Has the complete workflow been validated for the claim being reported?**
+
+That reasoning applies whether the laboratory is detecting a resistance gene, identifying an organism, reconstructing a genome, analyzing a mixed specimen, or comparing isolates.
+
+---
+
+## Quick Reference: Genomics Vocabulary
+
+| Term | Quick mental model |
+| --- | --- |
+| **Read** | One sequence generated from a nucleic-acid molecule or fragment |
+| **Read length** | How many bases are represented in a read |
+| **Base quality** | How confident are we that this base was read correctly? |
+| **Mapping quality** | How confident are we that this read was placed at the correct reference location? |
+| **Depth** | How many reads cover a genomic position? |
+| **Breadth** | How much of the intended target or genome has adequate coverage? |
+| **Uniformity** | How evenly is coverage distributed? |
+| **Paired-end reads** | Reads generated from both ends of the same fragment |
+| **Reference genome** | Sequence and coordinate framework used for comparison |
+| **Alignment** | Place sequence reads relative to a reference |
+| **De novo assembly** | Reconstruct longer sequences from reads without using a reference as the primary reconstruction framework |
+| **Contig** | Continuous sequence reconstructed during assembly |
+| **N50** | Summary of assembly contiguity; higher does not automatically mean more accurate |
+| **Variant calling** | Determine whether sequence evidence supports a genomic difference |
+| **VAF** | Fraction of informative reads supporting a variant |
+| **Consensus sequence** | Representative sequence generated using defined computational rules |
+| **Phasing** | Determine whether variants or features occur on the same sequence background |
+| **FASTQ** | Sequence reads plus per-base quality information |
+| **FASTA** | Nucleotide or protein sequence representation |
+| **SAM/BAM** | Sequence alignment information |
+| **VCF** | Variant information |
+| **LoD** | Lowest level at which the validated assay can reliably detect its intended analyte |
+| **Hybrid capture** | Target enrichment using complementary probes before sequencing |
+| **Hybrid assembly** | Computational reconstruction using complementary sequencing data, commonly short and long reads |
+| **mNGS** | Sequencing of nucleic acid from many potential organisms within a complex specimen without restricting analysis to one predefined microbial target |
+
+---
 
 ## Central Takeaway
 
-> **A clinical microbial genomics pipeline is not just a sequencing instrument followed by software. The computational workflow is part of the laboratory test and must be understood, validated, governed, and interpreted according to its intended use.**
+> **A microbial genomic result is not determined by sequence data alone. The clinical conclusion emerges from the sequence evidence, its quality and coverage, the computational workflow, reference resources, analytical rules, validation, and the context in which the result is interpreted.**
