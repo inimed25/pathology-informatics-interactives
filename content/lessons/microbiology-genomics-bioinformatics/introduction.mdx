@@ -278,6 +278,11 @@ The approximate fragment length separating the paired reads is related to the **
 
 Unexpected spacing or orientation can sometimes provide information about structural differences or problematic alignments.
 
+<div className="micro-visual paired-context-visual" role="img" aria-label="Paired-end reads come from opposite ends of the same DNA fragment with an expected orientation and separation">
+ <div className="micro-visual-copy"><small>Paired-end context</small><strong>Two reads share a fragment relationship</strong><span>The pair carries orientation and spacing information that two unrelated reads do not.</span></div>
+ <div className="paired-context-art"><span>read 1 →</span><i>same DNA fragment / insert</i><span>← read 2</span></div>
+</div>
+
 A microbiology director does not need to memorize every library-preparation parameter, but should understand why paired reads contain contextual information that unrelated reads do not.
 
 ---
@@ -423,6 +428,11 @@ A few low-quality reads supporting a difference in a poorly covered region may p
 The **variant allele fraction (VAF)** describes the proportion of informative reads at a position that support a particular variant.
 
 For example, if 80 of 100 informative reads support a variant, the observed VAF is approximately 80%.
+
+<div className="micro-visual vaf-visual" role="img" aria-label="Eight of ten illustrative reads support a variant, representing an 80 percent variant allele fraction">
+ <div className="micro-visual-copy"><small>Variant allele fraction</small><strong>VAF is a proportion of informative read evidence</strong><span>Here, 8 of 10 illustrative reads support the variant: 80% VAF. The fraction alone does not identify the biological cause.</span></div>
+ <div className="vaf-art"><div><i className="variant"/><i className="variant"/><i className="variant"/><i className="variant"/><i className="variant"/><i className="variant"/><i className="variant"/><i className="variant"/><i className="reference"/><i className="reference"/></div><b>8 / 10 = 80%</b></div>
+</div>
 
 In microbial sequencing, an intermediate or low-frequency variant can have several possible explanations, including:
 
@@ -716,6 +726,11 @@ Depending on the sequencing workflow, phenomena such as **index hopping** or oth
 
 Controls are therefore part of the informatics story, not merely the wet-laboratory workflow.
 
+<div className="micro-visual control-context-visual" role="img" aria-label="Sample sequence findings are interpreted alongside positive negative and process controls">
+ <div className="micro-visual-copy"><small>Control context</small><strong>A sample signal is interpreted beside its controls</strong><span>Control results help distinguish expected assay behavior from contamination, process failure, or background signal.</span></div>
+ <div className="control-context-art"><span><b>sample</b><i>signal</i></span><span><b>negative</b><i>background?</i></span><span><b>positive</b><i>process works?</i></span></div>
+</div>
+
 Depending on the assay, control strategies may include:
 
 * negative controls
@@ -920,6 +935,11 @@ That may indicate that they are highly genomically similar.
 Another isolate with substantially more genomic differences may be more genetically distinct under that same analytical framework.
 
 However, there is no single universal number of SNP or allele differences that defines relatedness for every microorganism and every application.
+
+<div className="micro-visual relatedness-context-visual" role="img" aria-label="Genomic distance is interpreted within organism method quality time place and epidemiologic context rather than by a universal cutoff">
+ <div className="micro-visual-copy"><small>Relatedness</small><strong>Distance needs an interpretive frame</strong><span>A SNP or allele distance becomes meaningful only within the organism, analytical method, quality criteria, validated framework, and epidemiologic context.</span></div>
+ <div className="relatedness-art"><span>A</span><i>genomic distance</i><span>B</span><div><b>organism</b><b>method</b><b>quality</b><b>context</b></div></div>
+</div>
 
 Interpretation can depend on factors such as:
 
