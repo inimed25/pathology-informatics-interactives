@@ -154,7 +154,15 @@ The laboratory system understands the code.
 
 The receiving system successfully receives the electronic message—but does not know what `ORG_247` means.
 
-<div className="science-illustration mapping-image" role="img" aria-label="Organism concept translated across laboratory systems"><div className="science-copy"><small>Concept mapping</small><strong>Same organism, different representations</strong><span>The clinical concept must survive translation even when each system stores a different identifier.</span></div><div className="mapping-art"><span className="microbe-glyph"><i/><i/><i/><i/></span><b>ORG_247</b><em>⇢</em><span className="mapping-chip">ECOLI_LIS</span><em>⇢</em><strong><i>E. coli</i></strong></div></div>
+<div className="science-illustration mapping-image" role="img" aria-label="Different system identifiers map to the same Escherichia coli concept">
+  <div className="science-copy"><small>Concept mapping</small><strong>Same organism, different representations</strong><span>The clinical concept must survive translation even when each system stores a different identifier.</span></div>
+  <div className="concept-map-flow">
+    <div className="organism-anchor"><span className="clean-bacterium"/><b><i>Escherichia coli</i></b><small>same organism</small></div><em>→</em>
+    <div className="map-code"><small>INTERNAL ID</small><b>ORG_247</b></div>
+    <div className="map-code"><small>LIS CODE</small><b>ECOLI_LIS</b></div>
+    <div className="map-code"><small>DISPLAY NAME</small><b><i>E. coli</i></b></div>
+  </div>
+</div>
 
 Technically, the message arrived.
 
