@@ -1917,3 +1917,10 @@ body,.site-frame { background:#f7f9fc; color:#101d2f; }
 .mapping-art .microbe-glyph{justify-self:center}.mapping-art>b,.mapping-art>.mapping-chip,.mapping-art>strong{width:100%;max-width:none!important;min-width:0!important;padding:9px 7px!important;white-space:nowrap!important}
 .mapping-art em{justify-self:center}
 @media(max-width:800px){.plate-camera-art{grid-template-columns:1fr!important}.plate-camera-art>em{transform:rotate(90deg)}.mapping-art{grid-template-columns:1fr!important}.mapping-art em{transform:rotate(90deg)}}
+
+
+/* Breakpoint figure: make fixed measurement vs changing interpretation visually explicit */
+.breakpoint-compare{display:grid;grid-template-columns:130px 1fr;gap:18px;align-items:center;min-height:150px;padding:16px;border-radius:11px;background:#eef8fb}
+.fixed-mic{padding:16px 12px;border:1px solid #bfd6e1;border-radius:10px;background:#fff;text-align:center}.fixed-mic small,.fixed-mic b,.fixed-mic em{display:block}.fixed-mic small{color:#6c8192;font-size:.5rem;font-weight:800;letter-spacing:.08em}.fixed-mic b{margin:5px 0;color:#17384e;font-size:.8rem}.fixed-mic em{color:#168ba2;font-size:.5rem;font-style:normal;font-weight:700}
+.interpret-branches{display:grid;gap:12px}.interpret-branches>div{display:grid;grid-template-columns:minmax(130px,1fr) auto minmax(95px,.7fr);align-items:center;gap:9px}.interpret-branches span,.interpret-branches strong{padding:10px;border:1px solid #cbdde5;border-radius:8px;background:#fff}.interpret-branches span small,.interpret-branches span b{display:block}.interpret-branches span small{color:#708494;font-size:.48rem;font-weight:800;letter-spacing:.05em}.interpret-branches span b{margin-top:3px;color:#17384e;font-size:.62rem}.interpret-branches i{color:#168ba2;font-style:normal}.interpret-branches strong{color:#17384e;font-size:.62rem;text-align:center}
+@media(max-width:800px){.breakpoint-compare{grid-template-columns:1fr}.interpret-branches>div{grid-template-columns:1fr auto 1fr}}
