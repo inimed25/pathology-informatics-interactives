@@ -199,3 +199,37 @@ That reasoning applies whether the laboratory is detecting a resistance gene, id
 ## Central Takeaway
 
 > **A microbial genomic result is not determined by sequence data alone. The clinical conclusion emerges from the sequence evidence, its quality and coverage, the computational workflow, reference resources, analytical rules, validation, and the context in which the result is interpreted.**
+
+---
+
+## Key Takeaways
+
+* Sequencing produces data that require computational processing before becoming clinically meaningful information.
+* Sequencing strategy, target enrichment, read technology, and bioinformatics analysis are separate choices that should match the intended application.
+* Short and long reads provide different kinds of genomic information; long reads can be particularly useful for resolving genomic context, repeats, plasmids, and structural features.
+* Base quality and mapping quality answer different questions about sequence confidence.
+* Depth, breadth, and uniformity describe different aspects of sequencing coverage.
+* High average depth does not guarantee that every important genomic region is adequately covered.
+* Reference choice can influence alignment, variant detection, genomic comparison, and interpretation.
+* Reference alignment and de novo assembly answer different computational questions.
+* Contigs and metrics such as N50 describe aspects of assembly but do not independently establish assembly accuracy.
+* Variant calls and consensus sequences are computational products created using sequence evidence and defined analytical rules.
+* VAF, mixtures, and phasing can provide information about microbial populations and genomic context.
+
+
+<div className="micro-visual phase-visual" role="img" aria-label="Variant allele fraction and phasing illustrated with two sequence populations">
+  <div className="micro-visual-copy"><small>Mixtures + phasing</small><strong>Frequency is not linkage</strong><span>VAF estimates how often a variant is observed among informative reads. Phasing asks whether features occur together on the same sequence background.</span></div>
+  <div className="phase-sketch"><div><span>A</span><span>A</span><span>A</span><span className="alt">G</span><span className="alt">G</span></div><p>VAF ≈ 40%</p><div className="haplotypes"><b>—●————●—</b><b>—○————○—</b></div></div>
+</div>
+* FASTQ, FASTA, SAM/BAM, and VCF represent different kinds or stages of genomic information.
+* Isolate WGS, broad-range sequencing, targeted sequencing, mNGS, and genomic epidemiology answer different microbiologic questions.
+* Validation characteristics such as LoD, sensitivity, specificity, and reproducibility should be evaluated in relation to the pipeline's intended use rather than treated as generic properties of sequencing.
+* Positive and negative genomic results must be interpreted within the assay's quality, coverage, detection, database, and reporting limitations.
+* Detection of microbial sequence does not automatically establish clinical significance.
+* Contamination, carryover, sample misassignment, and controls are important components of microbial genomic analysis.
+* References, databases, software, parameters, thresholds, and coordinate conventions are governed components of the analytical workflow.
+* Computational provenance and versioning support reproducibility and change control.
+* Genomic relatedness can support epidemiologic investigation but does not independently establish direct transmission.
+* Bioinformatics validation should include the computational workflow, not only the sequencing instrument.
+
+> **Clinical microbiology bioinformatics is not simply what happens after sequencing. The computational pipeline is part of the laboratory test.**
