@@ -48,6 +48,30 @@ export function LessonLens({ slug }: { slug: string }) {
   );
 }
 
+
+export function DataJourneyIllustration() {
+  const nodes = [
+    ["01", "Specimen", "identity + context"],
+    ["02", "Laboratory", "observation + interpretation"],
+    ["03", "Systems", "mapping + transmission"],
+    ["04", "Clinical use", "display + action"],
+  ];
+  return (
+    <figure className="data-journey" aria-labelledby="data-journey-title">
+      <figcaption>
+        <p className="eyebrow">Information has a journey</p>
+        <h2 id="data-journey-title">The result is only as reliable as the path that carries it.</h2>
+      </figcaption>
+      <div className="journey-visual" aria-label="Specimen to clinical action information pathway">
+        <div className="journey-signal" aria-hidden="true"><span/><span/><span/><span/><span/><span/><span/></div>
+        <div className="journey-nodes">
+          {nodes.map(([n,title,detail]) => <div key={n}><small>{n}</small><strong>{title}</strong><span>{detail}</span></div>)}
+        </div>
+      </div>
+    </figure>
+  );
+}
+
 export function LessonChapterRail() {
   const [chapters, setChapters] = useState<Array<{ id: string; label: string }>>([]);
 
