@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { lessons } from "../src/data/curriculum";
 import { validationResult } from "../src/data/validation";
+import { supplementalQuestions } from "../src/data/supplementalQuestions";
 
 test("the required curriculum contains 45 questions in the intended distribution", () => {
   const distribution = Object.fromEntries(
@@ -12,6 +13,12 @@ test("the required curriculum contains 45 questions in the intended distribution
     "1.5": 5, "1.6": 4, "1.7": 12,
   });
   assert.equal(lessons.reduce((sum, lesson) => sum + lesson.questions.length, 0), 45);
+});
+
+test("the optional bank remains separate from the 45 required questions", () => {
+  assert.equal(supplementalQuestions.length, 11);
+  assert.equal(lessons.reduce((sum, lesson) => sum + lesson.questions.length, 0), 45);
+  assert.equal(new Set(supplementalQuestions.map((question) => question.id)).size, 11);
 });
 
 test("every question has four choices, one valid answer, and feedback", () => {

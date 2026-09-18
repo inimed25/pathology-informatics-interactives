@@ -1,0 +1,163 @@
+import type { LessonQuestion } from "./types";
+
+export type SupplementalQuestion = LessonQuestion & {
+  module: string;
+  moduleTitle: string;
+};
+
+export const supplementalQuestions: SupplementalQuestion[] = [
+  {
+    id: "supplemental-1-2-breakpoint",
+    module: "1.2",
+    moduleTitle: "Antimicrobial Decision Support",
+    question: "A laboratory updates an antimicrobial breakpoint. The measured MIC for a stored organism-drug example remains unchanged, but its categorical interpretation changes. What best explains this?",
+    choices: [
+      "The organism developed resistance after testing",
+      "The AST instrument retrospectively changed its measurement",
+      "Breakpoints translate susceptibility measurements into interpretive categories, so a breakpoint change can alter the category without altering the MIC",
+      "MICs and categorical interpretations are independent laboratory tests",
+    ],
+    correctIndex: 2,
+    explanation: "The MIC is the analytical measurement, while the categorical interpretation depends on the breakpoint applied to that organism-drug combination. Informatics systems therefore need controlled and validated breakpoint updates.",
+  },
+  {
+    id: "supplemental-1-3-interface-function",
+    module: "1.3",
+    moduleTitle: "Interfaces and Automation",
+    question: "What is the primary function of an electronic interface between a microbiology instrument and the LIS?",
+    choices: [
+      "Store the laboratory's complete microbiology record independently of the LIS",
+      "Exchange laboratory information electronically between systems",
+      "Apply all clinical interpretation to instrument-generated results before they reach the LIS",
+      "Standardize all local instrument codes automatically without laboratory-defined mappings",
+    ],
+    correctIndex: 1,
+    explanation: "An interface enables electronic exchange of information between systems. It may also participate in mapping or transformation, but successful transmission alone does not establish that information was represented correctly downstream.",
+  },
+  {
+    id: "supplemental-1-3-new-organism-code",
+    module: "1.3",
+    moduleTitle: "Interfaces and Automation",
+    question: "A laboratory adds a new organism to an identification instrument's database. The instrument uses a new local organism code that has not previously been transmitted to the LIS. What should occur before routine clinical reporting?",
+    choices: [
+      "Allow the first patient result to determine whether the LIS can interpret the new code",
+      "Replace the local organism code with free text so that mapping is unnecessary",
+      "Confirm only that the interface connection remains online after the database update",
+      "Verify the new mapping and test representative transmission and downstream representation through the intended workflow",
+    ],
+    correctIndex: 3,
+    explanation: "A new local code introduces a translation dependency between systems. The laboratory should establish the intended mapping and verify that representative results are transmitted, translated, stored, and displayed appropriately.",
+  },
+  {
+    id: "supplemental-1-3-frameworks",
+    module: "1.3",
+    moduleTitle: "Interfaces and Automation",
+    question: "Which statement best distinguishes CLIA/CMS, CAP, and CLSI when evaluating a U.S. clinical laboratory informatics workflow?",
+    choices: [
+      "CLIA/CMS provides the federal regulatory framework, CAP provides accreditation requirements for CAP-accredited laboratories, and CLSI publishes professional standards and implementation guidance",
+      "CLIA/CMS and CAP establish laboratory requirements, while CLSI serves as the federal enforcement agency for technical standards",
+      "CAP establishes federal law, while CMS publishes optional professional standards",
+      "CLSI accredits clinical laboratories on behalf of CMS",
+    ],
+    correctIndex: 0,
+    explanation: "CLIA establishes the federal regulatory framework administered by CMS, CAP provides accreditation requirements for CAP-accredited laboratories, and CLSI develops professional standards and implementation guidance. Their roles are related but not interchangeable.",
+  },
+  {
+    id: "supplemental-1-3-maldi-database",
+    module: "1.3",
+    moduleTitle: "Interfaces and Automation",
+    question: "A laboratory updates the reference database used by its MALDI-TOF identification system. Why can this be an informatics and quality-management issue even though the hardware has not changed?",
+    choices: [
+      "The update primarily requires confirming that the database installs successfully and the instrument can access it",
+      "Only newly added organisms require review because existing database entries cannot be affected",
+      "Reference-database content and software can influence identification, so the change should be assessed within the validated workflow",
+      "Database changes require repeating hardware-performance verification because software does not affect identification",
+    ],
+    correctIndex: 2,
+    explanation: "MALDI-TOF identification depends on comparison with reference information and associated software. A database change can affect identification even when the physical instrument is unchanged, so its impact should be assessed and appropriately verified.",
+  },
+  {
+    id: "supplemental-1-3-resistance-marker",
+    module: "1.3",
+    moduleTitle: "Interfaces and Automation",
+    question: "A rapid multiplex blood-culture molecular panel detects an organism and a resistance gene. Which interpretation best reflects appropriate oversight?",
+    choices: [
+      "The marker can be used to infer the organism's complete susceptibility profile when the mechanism is well characterized",
+      "The marker should be represented accurately, but its meaning remains limited by the assay's validated targets and limitations",
+      "The organism and marker can be transmitted independently because each finding is analytically valid",
+      "The marker needs no interpretive context when downstream decision-support rules provide treatment guidance",
+    ],
+    correctIndex: 1,
+    explanation: "A detected marker does not establish a complete phenotypic susceptibility profile. The information system should preserve relevant relationships and context, and interpretation should remain within the assay's validated intended use.",
+  },
+  {
+    id: "supplemental-1-4-hybrid-terms",
+    module: "1.4",
+    moduleTitle: "Genomics and Bioinformatics",
+    question: "One workflow uses complementary probes to enrich selected resistance genes before sequencing. Another combines short- and long-read data computationally to improve genome reconstruction. Which description is correct?",
+    choices: [
+      "The first is hybrid assembly, while the second is hybrid capture",
+      "Both are hybrid capture because they combine different sources of genomic information",
+      "The first is hybrid capture, while the second is hybrid assembly",
+      "Both are hybrid assembly because they ultimately produce sequence data",
+    ],
+    correctIndex: 2,
+    explanation: "Hybrid capture is a laboratory enrichment strategy using complementary probes before sequencing. Hybrid assembly is a computational strategy that combines complementary sequencing data after data generation.",
+  },
+  {
+    id: "supplemental-1-4-database-update",
+    module: "1.4",
+    moduleTitle: "Genomics and Bioinformatics",
+    question: "A microbial-genomics pipeline uses a curated resistance-gene database. A new release adds determinants and revises annotations. What should occur before clinical implementation?",
+    choices: [
+      "Update immediately because a newer database is inherently more accurate",
+      "Keep the original database indefinitely to preserve longitudinal consistency",
+      "Install the update once the software confirms that it loads without errors",
+      "Treat it as a controlled change by documenting the version and evaluating effects on representative results and interpretation",
+    ],
+    correctIndex: 3,
+    explanation: "A reference database is part of the analytical system. Changes can alter detection and annotation, so version provenance and impact evaluation are required within the workflow's validated intended use.",
+  },
+  {
+    id: "supplemental-1-5-new-intended-use",
+    module: "1.5",
+    moduleTitle: "Digital Microbiology",
+    question: "An image-analysis algorithm was validated for detecting growth on respiratory blood-agar cultures. The laboratory wants to use it for urine cultures on chromogenic agar. How should it proceed?",
+    choices: [
+      "Evaluate performance for the new intended use because the specimen population, medium, visual characteristics, and workflow may affect performance",
+      "Use it without additional evaluation because visible growth is the same task across media and specimen types",
+      "Use it as long as the same camera and imaging hardware are retained",
+      "Use it if the original validation accuracy exceeded 90%",
+    ],
+    correctIndex: 0,
+    explanation: "Performance in one setting should not automatically be generalized to another. The laboratory should determine whether existing evidence supports the new intended use and perform additional evaluation when appropriate.",
+  },
+  {
+    id: "supplemental-1-6-semantic-mapping",
+    module: "1.6",
+    moduleTitle: "Public Health Surveillance",
+    question: "HL7 messages for a new molecular test are acknowledged successfully, but positive results are categorized under the wrong test because a local code was mapped incorrectly. What is the best interpretation?",
+    choices: [
+      "The interface functioned correctly, so the problem is primarily a public-health surveillance error",
+      "Technical exchange succeeded, but semantic interoperability failed because the mapping did not preserve meaning",
+      "HL7 should have prevented the error because messaging standards define the clinical meaning of every result",
+      "The laboratory must replace every local LIS code with standardized terminology",
+    ],
+    correctIndex: 1,
+    explanation: "Message transmission and acknowledgment demonstrate technical exchange, not correct representation of clinical concepts. The local-to-standard mapping successfully transported the wrong meaning.",
+  },
+  {
+    id: "supplemental-1-6-genomic-relatedness",
+    module: "1.6",
+    moduleTitle: "Public Health Surveillance",
+    question: "Public health identifies several bacterial isolates with highly similar WGS results collected over a short period. How should this finding be interpreted?",
+    choices: [
+      "Genomic similarity is useful evidence of potential relatedness, but it must be integrated with epidemiologic, temporal, geographic, and other information",
+      "Genomic similarity proves direct transmission among the affected patients",
+      "Genomic data should not inform surveillance because sequencing methods can change over time",
+      "A relatedness threshold makes traditional epidemiologic investigation unnecessary",
+    ],
+    correctIndex: 0,
+    explanation: "Genomic relatedness is one component of an outbreak investigation, not proof of direct transmission. Interpretation requires relevant epidemiologic and contextual evidence.",
+  },
+];

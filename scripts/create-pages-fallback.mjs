@@ -7,16 +7,16 @@ const coverage = JSON.parse(
   await readFile(resolve(outputDirectory, "curriculum-coverage.json"), "utf8"),
 );
 
-const routes = coverage.topics.flatMap((topic) => [
+const routes = ["supplemental-question-bank", ...coverage.topics.flatMap((topic) => [
   `topics/${topic.slug}`,
   ...topic.lessons.flatMap((lesson) => [
     `lessons/${lesson.slug}`,
     `faculty/${lesson.slug}`,
   ]),
-]);
+])];
 
 for (const route of routes) {
-  if (!/^(topics|lessons|faculty)\/[a-z0-9-]+$/.test(route)) {
+  if (route !== "supplemental-question-bank" && !/^(topics|lessons|faculty)\/[a-z0-9-]+$/.test(route)) {
     throw new Error(`Unsafe route in curriculum coverage: ${route}`);
   }
 

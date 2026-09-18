@@ -3,6 +3,7 @@ import test from "node:test";
 import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { GenericExperience } from "../src/components/GenericExperience";
+import { SupplementalQuestionBank } from "../src/components/SupplementalQuestionBank";
 import { lessons } from "../src/data/curriculum";
 
 test("knowledge checks expose labeled semantic controls", () => {
@@ -21,4 +22,12 @@ test("workflow traces expose tabs and a live panel", () => {
   assert.match(html, /role="tab"/);
   assert.match(html, /aria-selected="true"/);
   assert.match(html, /role="tabpanel"/);
+});
+
+test("supplemental questions use labeled radio groups and typed buttons", () => {
+  const html = renderToStaticMarkup(<SupplementalQuestionBank />);
+  assert.match(html, /aria-label="Optional question 1 choices"/);
+  assert.match(html, /role="radiogroup"/);
+  assert.match(html, /role="radio"/);
+  assert.doesNotMatch(html, /<button(?![^>]*type="button")/);
 });

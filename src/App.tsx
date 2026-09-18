@@ -11,6 +11,7 @@ import { OrganismMappingFigure } from "./components/OrganismMappingFigure";
 import { AntibiogramFigure } from "./components/AntibiogramFigure";
 import { LabEcosystemFigure } from "./components/LabEcosystemFigure";
 import { GenomicsConceptGallery } from "./components/GenomicsConceptGallery";
+import { SupplementalQuestionBank } from "./components/SupplementalQuestionBank";
 import { SiteChrome, href } from "./components/SiteChrome";
 import { lessonBySlug, lessons, topicBySlug, topics } from "./data/curriculum";
 import type { LessonDefinition } from "./data/types";
@@ -52,6 +53,10 @@ const routePath = () => {
 
             <a className="secondary-button" href="#topics">
               Browse all modules
+            </a>
+
+            <a className="secondary-button" href={href("supplemental-question-bank/")}>
+              Optional question bank
             </a>
           </div>
         </div>
@@ -364,6 +369,36 @@ function FacultyPage({ slug }: { slug: string }) {
   );
 }
 
+function SupplementalQuestionBankPage() {
+  return (
+    <main className="inner-main supplemental-main">
+      <nav className="breadcrumbs" aria-label="Breadcrumb">
+        <a href={href()}>Curriculum</a>
+        <span>→</span>
+        <span>Optional question bank</span>
+      </nav>
+      <header className="topic-hero">
+        <p className="eyebrow">Optional reinforcement · 11 questions</p>
+        <h1>Supplemental Question Bank</h1>
+        <p>
+          Practice secondary concepts from Modules 1.2–1.6 without adding to the
+          45-question required curriculum. Each response includes immediate feedback.
+        </p>
+      </header>
+      <section className="lesson-section decision-section" aria-labelledby="supplemental-title">
+        <div className="section-heading">
+          <span className="section-number">+</span>
+          <div>
+            <p className="eyebrow">Optional practice</p>
+            <h2 id="supplemental-title">Extend your understanding</h2>
+          </div>
+        </div>
+        <SupplementalQuestionBank />
+      </section>
+    </main>
+  );
+}
+
 function NotFound() { return <main className="not-found"><p className="eyebrow">404</p><h1>This curriculum route does not exist.</h1><a className="primary-button" href={href()}>Return to the catalog</a></main>; }
 
 export default function App() {
@@ -372,6 +407,7 @@ export default function App() {
   if (parts[0] === "topics" && parts[1]) page = <TopicPage slug={parts[1]}/>;
   else if (parts[0] === "lessons" && parts[1]) page = <LessonPage slug={parts[1]}/>;
   else if (parts[0] === "faculty" && parts[1]) page = <FacultyPage slug={parts[1]}/>;
+  else if (parts[0] === "supplemental-question-bank" && parts.length === 1) page = <SupplementalQuestionBankPage/>;
   else if (parts.length) page = <NotFound/>;
   return <SiteChrome>{page}</SiteChrome>;
 }

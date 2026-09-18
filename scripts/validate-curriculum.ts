@@ -1,6 +1,7 @@
 import { existsSync } from "node:fs";
 import { resolve } from "node:path";
 import { lessons, topics } from "../src/data/curriculum";
+import { supplementalQuestions } from "../src/data/supplementalQuestions";
 
 const fail = (message: string): never => {
   throw new Error(message);
@@ -62,6 +63,18 @@ for (const lesson of lessons) {
 }
 
 if (totalQuestions !== 45) fail(`Expected 45 required questions; found ${totalQuestions}`);
+if (supplementalQuestions.length !== 11) {
+  fail(`Expected 11 supplemental questions; found ${supplementalQuestions.length}`);
+}
+const supplementalIds = new Set(supplementalQuestions.map((question) => question.id));
+if (supplementalIds.size !== supplementalQuestions.length) fail("Supplemental question IDs must be unique");
+for (const question of supplementalQuestions) {
+  if (question.choices.length !== 4) fail(`${question.id} must have four choices`);
+  if (question.correctIndex < 0 || question.correctIndex >= question.choices.length) {
+    fail(`${question.id} has an invalid correct answer index`);
+  }
+  if (!question.explanation.trim()) fail(`${question.id} lacks an explanation`);
+}
 
 const capstone = lessons.find((lesson) => lesson.manifest.pierObjectives.includes("1.7"));
 if (!capstone) throw new Error("Capstone module 1.7 is missing");

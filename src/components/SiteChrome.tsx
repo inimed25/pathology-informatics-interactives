@@ -13,6 +13,7 @@ export function SiteChrome({ children }: { children: ReactNode }) {
         <nav aria-label="Primary navigation">
           <a href={href()}>Curriculum</a>
           <a href={href("#coverage")}>Coverage</a>
+          <a href={href("supplemental-question-bank/")}>Optional questions</a>
           <a href={href("#about")}>About</a>
         </nav>
       </header>

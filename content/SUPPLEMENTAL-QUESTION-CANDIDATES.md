@@ -1,6 +1,6 @@
-# Supplemental Question Bank Candidates
+# Supplemental Question Bank Provenance
 
-These 11 questions were removed from the required lesson flow during the 45-question redundancy audit. They remain candidates for a future optional question bank; removal from the core sequence does not indicate that the underlying content is unimportant.
+These 11 questions were removed from the required lesson flow during the 45-question redundancy audit and were subsequently restored in the optional supplemental question bank. They remain separate from required curriculum counts and completion.
 
 ## Module 1.2 — Antimicrobial Decision Support
 
@@ -28,4 +28,4 @@ These 11 questions were removed from the required lesson flow during the 45-ques
 - Successful HL7 acknowledgment despite incorrect local-to-standard test mapping. Strong semantic-interoperability scenario, but already assessed in Modules 1.1 and 1.7.
 - Genomic similarity as evidence requiring epidemiologic context. Important, but directly assessed in Module 1.4 and the capstone.
 
-When an optional bank is implemented, restore the full choices and explanations from repository history and review distractor quality before publication.
+The implemented versions are maintained in `src/data/supplementalQuestions.ts`; this document preserves the editorial rationale for keeping each item outside the required flow.
