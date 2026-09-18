@@ -337,7 +337,16 @@ At a simplified level:
 
 The instrument does not determine an organism identification from the spectrum alone.
 
-<div className="science-illustration maldi-image" role="img" aria-label="MALDI spectrum compared with a spectral library"><div className="science-copy"><small>MALDI-TOF</small><strong>The spectrum needs a reference library</strong><span>Peak patterns become an identification only after comparison with database content and interpretive software.</span></div><div className="maldi-art"><div className="spectrum"><i/><i/><i/><i/><i/><i/><i/></div><em>≈</em><div className="library-stack"><b/><b/><b/></div><em>→</em><span className="microbe-glyph"><i/><i/><i/></span></div></div> Identification depends on comparison with a **reference spectral database** and the software or algorithm used to interpret that comparison.
+<div className="science-illustration maldi-image" role="img" aria-label="MALDI-TOF workflow from measured spectrum through reference library comparison to a reported identification">
+  <div className="science-copy"><small>MALDI-TOF</small><strong>A spectrum becomes an identification through comparison</strong><span>The measured peak pattern is compared with reference spectra by software before an identification is reported.</span></div>
+  <div className="maldi-process-flow">
+    <div className="maldi-stage measured"><small>1 · MEASURE</small><div className="maldi-spectrum"><i/><i/><i/><i/><i/><i/></div><b>Sample spectrum</b></div>
+    <em>→</em>
+    <div className="maldi-stage compare"><small>2 · COMPARE</small><div className="maldi-library"><i/><i/><i/></div><b>Reference library</b></div>
+    <em>→</em>
+    <div className="maldi-stage identify"><small>3 · IDENTIFY</small><div className="maldi-result">ID</div><b>Reported identification</b></div>
+  </div>
+</div> Identification depends on comparison with a **reference spectral database** and the software or algorithm used to interpret that comparison.
 
 This creates several informatics considerations:
 
