@@ -1883,3 +1883,19 @@ body,.site-frame { background:#f7f9fc; color:#101d2f; }
 .control-context-art span{width:90px;padding:10px;border:1px solid #cbdde5;border-radius:8px;background:#fff}.control-context-art b,.control-context-art i{display:block}.control-context-art b{color:#17384e;font-size:.62rem}.control-context-art i{margin-top:4px;color:#6d8293;font-size:.5rem;font-style:normal}
 .relatedness-art>span{width:42px;height:42px;display:grid;place-items:center;border-radius:50%;background:#17384e;color:#fff;font-weight:800}.relatedness-art>i{min-width:100px;padding-bottom:5px;border-bottom:2px solid #41a8ba;color:#617a8b;font-size:.52rem;font-style:normal;text-align:center}.relatedness-art>div{display:grid;grid-template-columns:1fr 1fr;gap:4px}.relatedness-art>div b{padding:4px 6px;border-radius:4px;background:#fff;color:#31566a;font-size:.48rem}
 @media(max-width:800px){.paired-context-art i,.relatedness-art>i{min-width:80px}.plate-camera-art{gap:8px}}
+
+
+/* Screenshot QA: keep teaching figures self-contained and reduce oversized assessment emphasis */
+.question-card h3{font-size:clamp(1.08rem,1.45vw,1.26rem);line-height:1.48;font-weight:650}
+.choice-grid button strong,.choice-stack button strong{font-size:.94rem;font-weight:600}
+.concept-figure,.science-illustration,.micro-visual{box-sizing:border-box}
+.genomics-gallery .assembly-grid>div{overflow:hidden}
+.genomics-gallery .assembly-grid .gallery-reference-line{position:relative;margin-top:30px;padding:9px 10px;border-bottom:3px solid #9eb9c8;background:#e7dfbd;color:#1b3043;line-height:1.2;z-index:1}
+.genomics-gallery .assembly-grid .read{z-index:2}
+.genomics-gallery .assembly-grid .r1{top:68px}.genomics-gallery .assembly-grid .r2{top:88px}.genomics-gallery .assembly-grid .r3{top:108px}
+.plate-camera-art .visual-stage{min-width:86px}
+.plate-camera-art .petri,.plate-camera-art .camera-box,.plate-camera-art .pixel-grid{flex:0 0 auto}
+.mapping-art{flex-wrap:nowrap}
+.mapping-art>b,.mapping-art>.mapping-chip,.mapping-art>strong{min-width:74px;max-width:110px;box-sizing:border-box;text-align:center;overflow-wrap:normal;word-break:normal}
+.mapping-art>strong{white-space:nowrap}
+@media(max-width:800px){.mapping-art{flex-wrap:wrap}.mapping-art em{flex:0 0 auto}.question-card h3{font-size:1.08rem}}
