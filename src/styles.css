@@ -847,3 +847,8 @@ h3 { line-height: 1.2; }
  .mapping-stage b{right:50%;top:auto;bottom:-14px;transform:rotate(90deg)}.ecosystem-map{grid-template-columns:1fr}.ecosystem-map>b{transform:rotate(90deg);justify-self:center}
  .file-pipeline{flex-direction:column}.file-pipeline>b{transform:rotate(90deg)}.vaf-stack{grid-template-columns:repeat(5,1fr)}
 }
+
+/* Clarify candidate-context resolution in read-length explorer */
+.context-unique { position:absolute; z-index:2; padding:4px 7px; border:1px dashed var(--green); background:var(--green-pale); font-size:.68rem; font-weight:700; }
+.context-unique.unique-left { left:8%; }.context-unique.unique-right { right:8%; }
+.context-reads.long .resolved-long-read { background:var(--green); box-shadow:0 0 0 2px rgba(255,255,255,.7); }
