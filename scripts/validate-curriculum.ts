@@ -49,6 +49,11 @@ for (const lesson of lessons) {
     if (!question.explanation.trim()) fail(`${question.id} lacks an explanation`);
   }
 
+  const answerPositions = new Set(lesson.questions.map((question) => question.correctIndex));
+  if (lesson.questions.length >= 4 && answerPositions.size !== 4) {
+    fail(`${objective} should use all four correct-answer positions`);
+  }
+
   totalQuestions += lesson.questions.length;
   const folder = resolve("content", "lessons", manifest.slug);
   for (const file of ["introduction.mdx", "debrief.mdx", "faculty.mdx"]) {

@@ -35,6 +35,16 @@ test("the capstone has a balanced correct-answer distribution", () => {
   );
 });
 
+test("every module uses all four correct-answer positions", () => {
+  for (const lesson of lessons) {
+    assert.deepEqual(
+      new Set(lesson.questions.map((question) => question.correctIndex)),
+      new Set([0, 1, 2, 3]),
+      lesson.manifest.pierObjectives[0],
+    );
+  }
+});
+
 test("question scoring recognizes correct and unanswered responses", () => {
   const lesson = lessons[0];
   const answers = Object.fromEntries(
