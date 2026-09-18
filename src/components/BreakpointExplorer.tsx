@@ -23,6 +23,29 @@ export function BreakpointExplorer() {
         </p>
       </div>
 
+      <div className="mic-illustration" aria-label="Synthetic broth microdilution illustration">
+        <div>
+          <small>Synthetic AST illustration</small>
+          <strong>First, the laboratory measures an MIC</strong>
+          <p>
+            In this simplified broth microdilution-style row, visible growth
+            decreases as antimicrobial concentration increases. The MIC is the
+            lowest tested concentration without visible growth.
+          </p>
+        </div>
+        <div className="mic-well-panel">
+          <div className="mic-wells" aria-hidden="true">
+            {["0.25", "0.5", "1", "2", "4", "8"].map((value, index) => (
+              <div className="mic-well-wrap" key={value}>
+                <span className={index < 3 ? "mic-well growth" : "mic-well clear"} />
+                <small>{value}</small>
+              </div>
+            ))}
+          </div>
+          <div className="mic-marker"><span>↑</span><strong>MIC = 2 µg/mL</strong></div>
+        </div>
+      </div>
+
       <div className="breakpoint-flow" aria-label="AST measurement to interpretation">
         <div className="breakpoint-node">
           <small>Analytical measurement</small>
