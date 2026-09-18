@@ -9,7 +9,8 @@ export function GenericExperience({
   onAttempt?: (attempted: boolean) => void;
 }) {
   const [activeTrace, setActiveTrace] = useState(0);
-  const [answers, setAnswers] = useState<Record<string, number>>({});\n  const [activeEvidence, setActiveEvidence] = useState(0);
+  const [answers, setAnswers] = useState<Record<string, number>>({});
+  const [activeEvidence, setActiveEvidence] = useState(0);
   const answeredCount = Object.keys(answers).length;
   const score = lesson.questions.filter(
     (question) => answers[question.id] === question.correctIndex,
@@ -27,7 +28,8 @@ export function GenericExperience({
   };
 
   const reset = () => {
-    setActiveTrace(0);\n    setActiveEvidence(0);
+    setActiveTrace(0);
+    setActiveEvidence(0);
     setAnswers({});
     onAttempt?.(false);
   };
