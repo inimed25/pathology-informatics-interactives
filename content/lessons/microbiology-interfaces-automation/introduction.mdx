@@ -186,6 +186,11 @@ For example:
 
 An unmapped code may trigger an exception, fail to populate the expected structured field, or require manual review depending on the implementation. An incorrectly mapped code may be more difficult to detect because the message can transmit successfully while representing the wrong concept.
 
+<div className="science-illustration translation-image" role="img" aria-label="A local instrument code is translated through a mapping table to the intended LIS organism concept while a wrong mapping is flagged">
+ <div className="science-copy"><small>Translation table</small><strong>Connectivity can succeed while meaning fails</strong><span>The interface must map a source code to the intended destination concept. A valid-looking but incorrect mapping can travel downstream without a transport error.</span></div>
+ <div className="translation-art"><span>ORG_101</span><em>→</em><div><b>ORG_101</b><i>maps to</i><strong>intended concept</strong></div><em>→</em><span className="ok-result">LIS</span></div>
+</div>
+
 Mapping changes should therefore be treated as **controlled configuration changes**. When a translation table is modified, the laboratory should determine what workflows depend on that mapping and verify that representative results are handled correctly downstream.
 
 > **Informatics principle:** Successful transport answers “Did the message arrive?” Mapping validation asks “Did the receiving system understand and represent what the laboratory intended?”
