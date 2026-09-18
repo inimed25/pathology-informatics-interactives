@@ -7,6 +7,10 @@ import { BreakpointExplorer } from "./components/BreakpointExplorer";
 import { InterfaceRecoveryExplorer } from "./components/InterfaceRecoveryExplorer";
 import { DigitalWorkflowExplorer } from "./components/DigitalWorkflowExplorer";
 import { PublicHealthInteropExplorer } from "./components/PublicHealthInteropExplorer";
+import { OrganismMappingFigure } from "./components/OrganismMappingFigure";
+import { AntibiogramFigure } from "./components/AntibiogramFigure";
+import { LabEcosystemFigure } from "./components/LabEcosystemFigure";
+import { GenomicsConceptGallery } from "./components/GenomicsConceptGallery";
 import { PilotLab } from "./components/PilotLabs";
 import { SiteChrome, href } from "./components/SiteChrome";
 import { lessonBySlug, lessons, topicBySlug, topics } from "./data/curriculum";
@@ -234,14 +238,26 @@ function LessonPage({ slug }: { slug: string }) {
         </div>
       </header>
       <section className="mdx-content introduction-content">{Introduction ? <Introduction/> : <p>Introduction content is missing.</p>}</section>
-      {slug === "microbiology-decision-support" && <BreakpointExplorer />}
-      {slug === "microbiology-interfaces-automation" && <InterfaceRecoveryExplorer />}
+      {slug === "microbiology-informatics" && <OrganismMappingFigure />}
+      {slug === "microbiology-decision-support" && (
+        <div className="lesson-visual-stack">
+          <BreakpointExplorer />
+          <AntibiogramFigure />
+        </div>
+      )}
+      {slug === "microbiology-interfaces-automation" && (
+        <div className="lesson-visual-stack">
+          <LabEcosystemFigure />
+          <InterfaceRecoveryExplorer />
+        </div>
+      )}
       {slug === "microbiology-digital-imaging-telemicrobiology" && <DigitalWorkflowExplorer />}
       {slug === "microbiology-public-health-surveillance" && <PublicHealthInteropExplorer />}
       {slug === "microbiology-genomics-bioinformatics" && (
         <div className="genomics-concept-labs">
           <ReadContextExplorer />
           <CoverageExplorer />
+          <GenomicsConceptGallery />
         </div>
       )}
       <PilotLab kind={lesson.manifest.pilot}/>
