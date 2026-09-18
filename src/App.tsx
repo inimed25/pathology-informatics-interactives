@@ -11,7 +11,6 @@ import { OrganismMappingFigure } from "./components/OrganismMappingFigure";
 import { AntibiogramFigure } from "./components/AntibiogramFigure";
 import { LabEcosystemFigure } from "./components/LabEcosystemFigure";
 import { GenomicsConceptGallery } from "./components/GenomicsConceptGallery";
-import { PilotLab } from "./components/PilotLabs";
 import { SiteChrome, href } from "./components/SiteChrome";
 import { lessonBySlug, lessons, topicBySlug, topics } from "./data/curriculum";
 import type { LessonDefinition } from "./data/types";
@@ -260,7 +259,6 @@ function LessonPage({ slug }: { slug: string }) {
           <GenomicsConceptGallery />
         </div>
       )}
-      <PilotLab kind={lesson.manifest.pilot}/>
                           <GenericExperience lesson={lesson} onAttempt={setAttempted}/>
       {attempted ? (
         <section className="mdx-content debrief-content" id="lesson-debrief">
