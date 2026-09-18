@@ -38,7 +38,7 @@ export function BiotechHeroVisual() {
 export function LessonLens({ slug }: { slug: string }) {
   const lens = lenses[slug] ?? lenses["microbiology-informatics"];
   return (
-    <section className={`lesson-lens lens-${lens.accent}`} aria-label="Lesson orientation">
+    <section className={`lesson-lens lens-${lens.accent}`} aria-label="Lesson concept map">
       <p className="eyebrow">Conceptual frame</p>
       <h2>{lens.label}</h2>
       <p className="lens-summary">
