@@ -1954,3 +1954,11 @@ body,.site-frame { background:#f7f9fc; color:#101d2f; }
 .maldi-image .maldi-process-flow>em{justify-self:center}
 @media(max-width:1050px){.maldi-image{grid-template-columns:1fr}.maldi-image .maldi-process-flow{grid-template-columns:minmax(105px,1fr) 24px minmax(105px,1fr) 24px minmax(105px,1fr)}}
 @media(max-width:700px){.maldi-image .maldi-process-flow{grid-template-columns:1fr}.maldi-image .maldi-process-flow>em{transform:rotate(90deg);justify-self:center}}
+
+
+/* Image-analysis output: show detections in image context rather than abstract boxes */
+.candidate-output .detected-image{align-self:center;justify-self:center;display:block;position:relative;width:78px;height:78px;border-radius:50%;border:2px solid #64a9bb;background:#f2fafb}
+.candidate-output .detected-image i{position:absolute;width:8px;height:8px;border:0;border-radius:50%;background:#2b96ab}
+.candidate-output .detected-image i:nth-child(1){left:18px;top:20px}.candidate-output .detected-image i:nth-child(2){left:46px;top:29px}.candidate-output .detected-image i:nth-child(3){left:30px;top:50px}.candidate-output .detected-image i:nth-child(4){left:53px;top:54px}
+.candidate-output .detected-image b{position:absolute;width:18px;height:18px;border:2px solid #17384e;border-radius:4px;background:transparent;box-sizing:border-box}
+.candidate-output .detected-image b:nth-of-type(1){left:13px;top:15px}.candidate-output .detected-image b:nth-of-type(2){left:41px;top:24px}.candidate-output .detected-image b:nth-of-type(3){left:48px;top:49px}
