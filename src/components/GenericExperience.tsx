@@ -10,6 +10,12 @@ export function GenericExperience({
 }) {
   const [activeTrace, setActiveTrace] = useState(0);
   const [answers, setAnswers] = useState<Record<string, number>>({});
+  const answeredCount = Object.keys(answers).length;
+  const score = lesson.questions.filter(
+    (question) => answers[question.id] === question.correctIndex,
+  ).length;
+  const complete = answeredCount === lesson.questions.length;
+  const isCapstone = lesson.manifest.pierObjectives.includes("1.7");
 
   const answerQuestion = (questionId: string, choiceIndex: number) => {
     setAnswers((current) => ({
@@ -120,14 +126,29 @@ export function GenericExperience({
         <div className="section-heading">
           <span className="section-number">03</span>
           <div>
-            <p className="eyebrow">Knowledge check</p>
-            <h2 id="questions-title">Test your understanding</h2>
+            <p className="eyebrow">{isCapstone ? "Final assessment" : "Knowledge check"}</p>
+            <h2 id="questions-title">{isCapstone ? "Integrate your reasoning" : "Test your understanding"}</h2>
           </div>
         </div>
 
         <p className="section-guidance">
-          Select the best answer. Feedback appears after each response.
+          {isCapstone
+            ? "Apply concepts across the complete curriculum. Feedback appears after each response."
+            : "Select the best answer. Feedback appears after each response."}
         </p>
+
+        <div className="assessment-progress" aria-live="polite">
+          <div><strong>{answeredCount} of {lesson.questions.length} answered</strong><span>{complete ? `Score: ${score}/${lesson.questions.length}` : "Complete the set to see your score"}</span></div>
+          <progress max={lesson.questions.length} value={answeredCount}>{answeredCount} of {lesson.questions.length}</progress>
+        </div>
+
+        <nav className="question-nav" aria-label="Question navigation">
+          {lesson.questions.map((question, index) => (
+            <a className={answers[question.id] === undefined ? "" : "answered"} href={`#${question.id}-card`} key={question.id}>
+              <span className="sr-only">Question </span>{index + 1}
+            </a>
+          ))}
+        </nav>
 
         <div className="question-list">
           {lesson.questions.map((question, questionIndex) => {
@@ -139,6 +160,7 @@ export function GenericExperience({
             return (
               <article
                 className="question-card"
+                id={`${question.id}-card`}
                 key={question.id}
               >
                 <header>
@@ -196,6 +218,14 @@ export function GenericExperience({
             );
           })}
         </div>
+
+        {complete && (
+          <div className="assessment-summary" role="status">
+            <p className="eyebrow">{isCapstone ? "Capstone complete" : "Knowledge check complete"}</p>
+            <strong>{score} of {lesson.questions.length} correct</strong>
+            <p>Review the feedback above or reset the lesson to try the questions again.</p>
+          </div>
+        )}
       </section>
 
       <div className="reset-row">

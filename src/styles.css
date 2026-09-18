@@ -30,6 +30,7 @@
 }
 
 * { box-sizing: border-box; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 html { scroll-behavior: smooth; }
 body { margin: 0; min-width: 320px; min-height: 100vh; background: var(--cream); }
 button, input, select { font: inherit; }
@@ -224,6 +225,13 @@ h3 { line-height: 1.2; }
 .trace-panel aside strong { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; }
 
 .question-list { display: grid; gap: 34px; }
+.assessment-progress { display: grid; grid-template-columns: 1fr minmax(180px, .45fr); gap: 20px; align-items: center; margin: 0 0 16px; padding: 18px 20px; background: var(--green-pale); border: 1px solid #c7d4cd; }
+.assessment-progress strong, .assessment-progress span { display: block; }
+.assessment-progress span { margin-top: 3px; color: var(--muted); font-size: .83rem; }
+.assessment-progress progress { width: 100%; height: 12px; accent-color: var(--green); }
+.question-nav { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 34px; }
+.question-nav a { display: grid; place-items: center; width: 36px; height: 36px; border: 1px solid #aebbb4; border-radius: 8px; background: var(--paper); color: var(--muted); font-family: ui-monospace, monospace; font-size: .75rem; font-weight: 700; text-decoration: none; }
+.question-nav a.answered { border-color: var(--green); background: var(--mint); color: var(--green-dark); }
 .question-card { padding-top: 30px; border-top: 1px solid var(--line); }
 .question-card:first-child { padding-top: 0; border-top: 0; }
 .question-card header { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px 18px; margin-bottom: 14px; color: var(--muted); font-family: ui-monospace, monospace; font-size: 10px; text-transform: uppercase; letter-spacing: .07em; }
@@ -267,6 +275,10 @@ h3 { line-height: 1.2; }
 .feedback p { margin: 5px 0 0; }
 .feedback.correct { background: var(--mint); border-color: var(--green); }
 .feedback.incorrect { background: var(--red-soft); border-color: var(--red); }
+.assessment-summary { margin-top: 34px; padding: 26px; border-left: 5px solid var(--green); background: var(--mint); }
+.assessment-summary .eyebrow { margin-bottom: 4px; }
+.assessment-summary > strong { font-size: 1.55rem; }
+.assessment-summary p:last-child { margin: 7px 0 0; color: var(--muted); }
 .repair-layout { display: grid; grid-template-columns: .8fr 1.2fr; gap: 20px; }
 .choice-stack { display: grid; gap: 10px; }
 .test-console { border: 1px solid #c8cec7; background: #f8f8f4; }
@@ -497,6 +509,7 @@ h3 { line-height: 1.2; }
   .coverage-head { font-size: 9px; }
   .lesson-meta { align-items: flex-start; flex-direction: column; }
   .lesson-section, .pilot-lab { padding: 26px 20px; margin-left: -6px; margin-right: -6px; }
+  .assessment-progress { grid-template-columns: 1fr; gap: 12px; }
   .section-guidance { margin-left: 0; }
   .trace-panel { grid-template-columns: 1fr; }
   .trace-panel > div, .trace-panel aside { padding: 25px; }
